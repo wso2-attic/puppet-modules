@@ -21,7 +21,7 @@
 # Parameters:
 # version            => '5.2.0'
 # offset             => 1,
-# tribes_port        => 4100,
+# hazelcast_port     => 4100,
 # config_db          => 'as_config',
 # maintenance_mode   => 'zero',
 # depsync            => false,
@@ -45,7 +45,7 @@ class appserver (
   $sub_cluster_domain = undef,
   $members            = undef,
   $offset             = 0,
-  $tribes_port        = 4000,
+  $hazelcast_port     = 4000,
   $config_db          = 'governance',
   $maintenance_mode   = true,
   $depsync            = false,
