@@ -127,7 +127,7 @@ services {
       <% if service[2] == '*' %>
       wso2.<%= service[0] %>.domain {
         mgt {
-          hosts <%= management_subdomain %>.<%= service[0] %>.<%= @domain %>; 
+          hosts <%= @management_subdomain %>.<%= service[0] %>.<%= @domain %>; 
         }   
         worker {
           hosts <%= service[0] %>.<%= @domain %>; 
@@ -139,7 +139,7 @@ services {
       <% elsif service[2] == 'mgt' %>
       wso2.<%= service[0] %>.domain {
         mgt {
-          hosts  <%= management_subdomain %>.<%= service[0] %>.<%= @domain %>; 
+          hosts  <%= @management_subdomain %>.<%= service[0] %>.<%= @domain %>; 
         }   
         group_mgt_port     <%= service[3] %>; 
         members            <%= service[4] %>;
