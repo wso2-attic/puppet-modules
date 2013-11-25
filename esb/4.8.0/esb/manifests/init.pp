@@ -58,7 +58,21 @@ class esb (
   $owner              = 'root',
   $group              = 'root',
   $target             = '/mnt',
+  $monitoring         = false,
 ) inherits params {
+
+  if $monitoring {
+    include monitor::agent
+    include monitor::params
+
+    @@file { "${monitor::params::config_dir}/conf.d/wso2/${ipaddress}-esb.cfg":
+      ensure  => present,
+      mode    => '0644',
+      notify  => Service['nagios'],
+      content => template('monitor/master/esb.erb'),
+      tag     => 'nagios_check';
+    }   
+  }
 
   $deployment_code = 'esb'
   $carbon_version  = $version

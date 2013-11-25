@@ -54,7 +54,21 @@ class appserver (
   $owner              = 'root',
   $group              = 'root',
   $target             = '/mnt',
+  $monitoring         = false,
 ) inherits params {
+
+  if $monitoring {
+    include monitor::agent
+    include monitor::params
+
+    @@file { "${monitor::params::config_dir}/conf.d/wso2/${ipaddress}-appserver.cfg":
+      ensure  => present,
+      mode    => '0644',
+      notify  => Service['nagios'],
+      content => template('monitor/master/appserver.erb'),
+      tag     => 'nagios_check';
+    }   
+  }
 
   $deployment_code = 'appserver'
   $carbon_version  = $version
