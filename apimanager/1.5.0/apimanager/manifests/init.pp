@@ -44,11 +44,11 @@
 #
 
 class apimanager (
-  $version            = undef,
   $env                = undef,
   $sub_cluster_domain = undef,
   $members            = undef,
   $port_mapping       = undef,
+  $version            = '1.5.0',
   $offset             = 0,
   $hazelcast_port     = 4000,
   $config_db          = 'governance',

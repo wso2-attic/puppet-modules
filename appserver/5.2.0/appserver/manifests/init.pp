@@ -41,9 +41,9 @@
 #
 
 class appserver (
-  $version            = undef,
   $sub_cluster_domain = undef,
   $members            = undef,
+  $version            = '5.2.0',
   $offset             = 0,
   $hazelcast_port     = 4000,
   $config_db          = 'governance',

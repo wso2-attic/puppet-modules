@@ -20,7 +20,7 @@
 #
 # Parameters:
 #
-# Usage: Uncomment the variable and assign a value to override the wso2.pp value
+# Usage: Uncomment the variable and assign a value to override the nodes.pp value
 #
 #
 

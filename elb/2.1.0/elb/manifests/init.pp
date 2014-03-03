@@ -36,9 +36,9 @@
 #
 
 class elb (
-  $version            = undef,
   $services           = undef,
   $members            = undef,
+  $version            = '2.1.0',
   $maintenance_mode   = true,
   $cloud              = false,
   $owner              = 'root',
