@@ -550,7 +550,7 @@
             <property name="mgtConsoleURL" value="https://${hostName}:${httpsPort}/"/>
             <%- if @port_mapping -%> 
             <%- @port_mapping.each_pair do |elb_port,member_port| -%> 
-            <property name="port.mapping.<%= elb_port %>" value="<%= member_port %>"/>
+            <property name="port.mapping.<%= elb_port %>" value="<%= member_port.to_i + @offset.to_i %>"/>
             <%- end -%> 
             <%- end -%> 
             <%- if @sub_cluster_domain -%>
