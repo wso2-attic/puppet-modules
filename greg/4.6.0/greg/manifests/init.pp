@@ -42,7 +42,7 @@
 
 class greg (
   $sub_cluster_domain = undef,
-  $members            = undef,
+  $members            = {},
   $version            = '4.6.0',
   $offset             = 0,
   $hazelcast_port     = 4000,
@@ -78,13 +78,10 @@ class greg (
   $service_templates = [
       'conf/axis2/axis2.xml',
       'conf/carbon.xml',
-      'conf/datasources/master-datasources.xml',
       'conf/datasources/greg-datasources.xml',
-      'conf/registry.xml',
-      'conf/tomcat/catalina-server.xml',
+      'conf/datasources/master-datasources.xml',
       'conf/user-mgt.xml',
-      ],
-  }
+      ]
 
   $common_templates = [] 
 
