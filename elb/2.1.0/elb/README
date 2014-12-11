@@ -12,5 +12,5 @@ How to use:
 
 Sample Usage:
 
-  class { 'esb': }
+  class { 'elb': }
 
