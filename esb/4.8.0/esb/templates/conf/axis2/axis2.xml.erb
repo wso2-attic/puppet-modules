@@ -564,12 +564,17 @@
         -->
         <members>
           <%- if @members -%>
-          <%- @members.each_pair do |hostname,port| -%> 
-          <member>
-            <hostName><%= hostname %></hostName>
-            <port><%= port %></port>
-          </member>
-          <%- end -%> 
+            <%- @members.keys.sort.each do |hostname| -%> 
+              <member>
+                <hostName><%= hostname %></hostName>
+                <port><%= @members[hostname] %></port>
+              </member>
+            <%- end -%> 
+          <%- else -%> 
+            <member>
+              <hostName>127.0.0.1</hostName>
+              <port>4000</port>
+            </member>
           <%- end -%> 
         </members>
 
