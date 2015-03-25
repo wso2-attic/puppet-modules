@@ -20,6 +20,7 @@ define esb::initialize ($repo, $version, $service, $local_dir, $target, $mode, $
   exec {
     "creating_target_for_${name}":
       path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+      unless  => "test -d ${target}",
       command => "mkdir -p ${target}";
 
     "creating_local_package_repo_for_${name}":
@@ -45,15 +46,17 @@ define esb::initialize ($repo, $version, $service, $local_dir, $target, $mode, $
       logoutput => 'on_failure',
       creates   => "${target}/wso2${service}-${version}/repository",
       timeout   => 0,
+      notify    => Exec["setting_permission_for_${name}"],
       require   => Exec["downloading_wso2${service}-${version}.zip_for_${name}"];
 
     "setting_permission_for_${name}":
-      path      => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-      cwd       => $target,
-      command   => "chown -R ${owner}:${owner} ${target}/wso2${service}-${version} ;
+      path        => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+      cwd         => $target,
+      command     => "chown -R ${owner}:${owner} ${target}/wso2${service}-${version} ;
                     chmod -R 755 ${target}/wso2${service}-${version}",
-      logoutput => 'on_failure',
-      timeout   => 0,
-      require   => Exec["extracting_wso2${service}-${version}.zip_for_${name}"];
+      logoutput   => 'on_failure',
+      timeout     => 0,
+      refreshonly => true,
+      require     => Exec["extracting_wso2${service}-${version}.zip_for_${name}"];
   }
 }
