@@ -22,5 +22,6 @@ define esb::push_templates ($directory, $target) {
     group   => $esb::group,
     mode    => '0755',
     content => template("${directory}/${name}.erb"),
+    notify  => Service["wso2${esb::service_code}"],
   }
 }

@@ -132,6 +132,7 @@ class esb (
     group    => $group,
     target   => $carbon_home,
     require  => Esb::Initialize[$deployment_code],
+    notify   => Service["wso2${esb::service_code}"],
   }
 
   esb::push_templates {
@@ -146,14 +147,26 @@ class esb (
       require   => Esb::Deploy[$deployment_code],
   }
 
-  esb::start { $deployment_code:
-    owner   => $owner,
-    target  => $carbon_home,
-    require => [
-      Esb::Initialize[$deployment_code],
-      Esb::Deploy[$deployment_code],
-      Push_templates[$service_templates],
-      Push_templates[$common_templates],
-      ],
+  file { "/etc/init.d/wso2${service_code}":
+      ensure    => present,
+      owner     => 'root',
+      group     => 'root',
+      mode      => '0775',
+      content   => template("${deployment_code}/wso2${service_code}.erb"),
+  }
+
+  service { "wso2${service_code}":
+      ensure     => running,
+      hasstatus  => true,
+      hasrestart => true,
+      enable     => true,
+      require    => [
+            Initialize[$deployment_code],
+            Deploy[$deployment_code],
+            Push_templates[$service_templates],
+            File["${carbon_home}/bin/wso2server.sh"],
+            File["/etc/init.d/wso2${service_code}"],
+      ]
+
   }
 }
