@@ -17,7 +17,7 @@
 # Executes the deployment by pushing all necessary configurations and patches
 
 define esb::deploy ($security, $target, $owner, $group) {
-  file { "/tmp/${esb::deployment_code}":
+  file { $target:
     ensure       => present,
     owner        => $owner,
     group        => $group,
