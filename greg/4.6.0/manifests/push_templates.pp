@@ -1,4 +1,4 @@
-# ----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
 #  Copyright 2005-2013 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,14 +12,13 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-# ----------------------------------------------------------------------------
-#
-# Apply the templates
-define greg::push_templates ($directory, $target) {
+#----------------------------------------------------------------------------
+
+define registry::push_templates ($directory, $target, $owner, $group) {
   file { "${target}/repository/${name}":
     ensure  => present,
-    owner   => $greg::owner,
-    group   => $greg::group,
+    owner   => $owner,
+    group   => $group,
     mode    => '0755',
     content => template("${directory}/${name}.erb"),
   }

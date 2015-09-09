@@ -1,5 +1,5 @@
-# ----------------------------------------------------------------------------
-#  Copyright 2005-2013 WSO2, Inc. http://www.wso2.org
+#----------------------------------------------------------------------------
+#  Copyright 2005-2015 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -12,15 +12,14 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-# ----------------------------------------------------------------------------
-#
-# Initializing the deployment
+#----------------------------------------------------------------------------
 
-define greg::initialize ($repo, $version, $service, $local_dir, $target, $mode, $owner,) {
+define registry::initialize ($repo, $version, $service, $local_dir, $target, $mode, $owner,) {
   exec {
     "creating_target_for_${name}":
       path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-      command => "mkdir -p ${target}";
+      command => "mkdir -p ${target}",
+      unless  => "test -d ${target}";
 
     "creating_local_package_repo_for_${name}":
       path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/java/bin/',
@@ -45,15 +44,17 @@ define greg::initialize ($repo, $version, $service, $local_dir, $target, $mode, 
       logoutput => 'on_failure',
       creates   => "${target}/wso2${service}-${version}/repository",
       timeout   => 0,
+      notify    => Exec["setting_permission_for_${name}"],
       require   => Exec["downloading_wso2${service}-${version}.zip_for_${name}"];
 
     "setting_permission_for_${name}":
-      path      => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-      cwd       => $target,
-      command   => "chown -R ${owner}:${owner} ${target}/wso2${service}-${version} ;
-                    chmod -R 755 ${target}/wso2${service}-${version}",
-      logoutput => 'on_failure',
-      timeout   => 0,
-      require   => Exec["extracting_wso2${service}-${version}.zip_for_${name}"];
+      path        => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+      cwd         => $target,
+      command     => "chown -R ${owner}:${owner} ${target}/wso2${service}-${version} ;
+                      chmod -R 755 ${target}/wso2${service}-${version}",
+      logoutput   => 'on_failure',
+      timeout     => 0,
+      refreshonly => true,
+      require     => Exec["extracting_wso2${service}-${version}.zip_for_${name}"];
   }
 }
