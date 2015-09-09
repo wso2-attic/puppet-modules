@@ -1,0 +1,24 @@
+{
+	"name": "wso2-wso2base",
+	"version": "1.0.0",
+	"author": "WSO2 Inc.",
+	"summary": "Basic puppet module required by every other WSO2 puppet module.",
+	"tags": [],
+	"license": "Apache 2.0",
+	"source": "https://github.com/wso2/Puppet-Modules.git",
+	"project_page": "https://github.com/wso2/Puppet-Modules/",
+	"issues_url": "https://github.com/wso2/Puppet-Modules/issues",
+	"requirements": [{
+			"name": "puppet",
+			"version_requirement": "3.x"
+		}
+	],
+	"operatingsystem_support": [{
+			"operatingsystem": "Ubuntu",
+			"operatingsystemrelease": [ "12.04",
+				"14.04"
+			]
+		}
+	],
+	"dependencies": []
+}

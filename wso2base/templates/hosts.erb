@@ -1,0 +1,8 @@
+127.0.0.1 localhost
+
+<%- @hosts_mapping.each do |hosts| -%>
+<%- host = hosts.split (',') -%>
+<%= host[0]  %> <%= host[1] %>
+<%- end -%>
+
+<%= @ipaddress %>   <%= @fqdn %>  <%= @hostname %>
