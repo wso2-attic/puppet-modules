@@ -28,8 +28,8 @@
 # Sample Usage:
 #
 
-class identity (
-  $version            = undef,
+class wso2is (
+  $version            = '5.0.0',
   $offset             = 0,
   $identity_subdomain       = "cloudmgt",
   $localmember_port   = '4000',
@@ -43,9 +43,9 @@ class identity (
   ,
   $owner              = root,
   $group              = root,
-  $target             = '/mnt',
-  $monitoring         = false) inherits identity::params {
-  $deployment_code = 'identity'
+  $target             = '/home/gayan/wso2',
+  $monitoring         = false) inherits wso2is::params {
+  $deployment_code = 'wso2is'
   $service_code = 'is'
   $carbon_version = $version
   $carbon_home = "${target}/wso2${service_code}-${carbon_version}"
@@ -56,14 +56,14 @@ class identity (
 
   $securevault_templates = [ 'conf/security/secret-conf.properties', 'conf/security/cipher-text.properties', ]
 
-  tag('identity')
+  tag('wso2is')
 
-  identity::clean { $deployment_code:
+  wso2is::clean { $deployment_code:
     mode   => $maintenance_mode,
     target => $carbon_home;
   }
 
-  identity::initialize { $deployment_code:
+  wso2is::initialize { $deployment_code:
     repo      => $package_repo,
     version   => $carbon_version,
     mode      => $maintenance_mode,
@@ -74,7 +74,7 @@ class identity (
     require   => Clean[$deployment_code];
   }
 
-  identity::deploy { $deployment_code:
+  wso2is::deploy { $deployment_code:
     service  => $service_code,
     deployment_code => $deployment_code,
     security => true,
@@ -84,7 +84,7 @@ class identity (
     require  => Initialize[$deployment_code];
   }
 
-  identity::push_templates {
+  wso2is::push_templates {
     $service_templates:
       owner     => $owner,
       group     => $group,
@@ -101,7 +101,7 @@ class identity (
   }
 
   if $::securevault {
-    identity::push_templates { $securevault_templates:
+    wso2is::push_templates { $securevault_templates:
       target    => $carbon_home,
       directory => 'wso2base',
       require   => Deploy[$deployment_code];

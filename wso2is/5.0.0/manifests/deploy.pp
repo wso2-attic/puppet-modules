@@ -16,7 +16,7 @@
 #
 # Executes the deployment by pushing all necessary configurations and patches
 
-define identity::deploy ($service, $security, $target, $owner, $group, $deployment_code) {
+define wso2is::deploy ($service, $security, $target, $owner, $group, $deployment_code) {
   file { $target:
     ensure       => present,
     owner        => $owner,
@@ -28,10 +28,10 @@ define identity::deploy ($service, $security, $target, $owner, $group, $deployme
     source       => [
       "puppet:///modules/wso2base/configs/",
       "puppet:///modules/wso2base/patches/",
-      "puppet:///modules/{$deployment_code}/configs/",
-      "puppet:///modules/{$deployment_code}/patches/",
+      "puppet:///modules/${deployment_code}/configs/",
+      "puppet:///modules/${deployment_code}/patches/",
       ],
-    notify       => Service["wso2${identity::service_code}"],
+    notify       => Service["wso2${wso2is::service_code}"],
   }
 
 }

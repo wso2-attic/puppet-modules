@@ -31,8 +31,7 @@
 # -----------------------------------------------------------------------------
 
 # OS specific support.  $var _must_ be set to either true or false.
-
-JAVA_HOME=<%= @java_home %>
+#ulimit -n 100000
 
 cygwin=false;
 darwin=false;
@@ -137,6 +136,7 @@ if [ -e "$CARBON_HOME/wso2carbon.pid" ]; then
 fi
 
 # ----- Process the input command ----------------------------------------------
+args=""
 for c in $*
 do
     if [ "$c" = "--debug" ] || [ "$c" = "-debug" ] || [ "$c" = "debug" ]; then
@@ -156,6 +156,8 @@ do
           CMD="restart"
     elif [ "$c" = "--test" ] || [ "$c" = "-test" ] || [ "$c" = "test" ]; then
           CMD="test"
+    else
+        args="$args $c"
     fi
 done
 
@@ -179,7 +181,7 @@ elif [ "$CMD" = "start" ]; then
   fi
   export CARBON_HOME=$CARBON_HOME
 # using nohup bash to avoid erros in solaris OS.TODO
-  nohup bash $CARBON_HOME/bin/wso2server.sh > /dev/null 2>&1 &
+  nohup bash $CARBON_HOME/bin/wso2server.sh $args > /dev/null 2>&1 &
   exit 0
 elif [ "$CMD" = "stop" ]; then
   export CARBON_HOME=$CARBON_HOME
@@ -198,7 +200,7 @@ elif [ "$CMD" = "restart" ]; then
   done
 
 # using nohup bash to avoid erros in solaris OS.TODO
-  nohup bash $CARBON_HOME/bin/wso2server.sh > /dev/null 2>&1 &
+  nohup bash $CARBON_HOME/bin/wso2server.sh $args > /dev/null 2>&1 &
   exit 0
 elif [ "$CMD" = "test" ]; then
     JAVACMD="exec "$JAVACMD""
@@ -260,14 +262,17 @@ cd "$CARBON_HOME"
 START_EXIT_STATUS=121
 status=$START_EXIT_STATUS
 
+#To monitor a Carbon server in remote JMX mode on linux host machines, set the below system property.
+#   -Djava.rmi.server.hostname="your.IP.goes.here"
+
 while [ "$status" = "$START_EXIT_STATUS" ]
 do
-<%- if @sub_cluster_domain == 'worker' -%>
     $JAVACMD \
     -Xbootclasspath/a:"$CARBON_XBOOTCLASSPATH" \
-    -Xms256m -Xmx1024m -XX:MaxPermSize=256m \
+    -Xms256m -Xmx2048m -XX:MaxPermSize=256m \
+    -XX:+HeapDumpOnOutOfMemoryError \
+    -XX:HeapDumpPath="$CARBON_HOME/repository/logs/heap-dump.hprof" \
     $JAVA_OPTS \
-    -Djava.security.egd=file:/dev/./urandom \
     -Dcom.sun.management.jmxremote \
     -classpath "$CARBON_CLASSPATH" \
     -Djava.endorsed.dirs="$JAVA_ENDORSED_DIRS" \
@@ -277,8 +282,9 @@ do
     -Dcarbon.registry.root=/ \
     -Djava.command="$JAVACMD" \
     -Dcarbon.home="$CARBON_HOME" \
-    -Djava.util.logging.config.file="$CARBON_HOME/repository/conf/log4j.properties" \
+    -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager \
     -Dcarbon.config.dir.path="$CARBON_HOME/repository/conf" \
+    -Djava.util.logging.config.file="$CARBON_HOME/repository/conf/etc/logging-bridge.properties" \
     -Dcomponents.repo="$CARBON_HOME/repository/components/plugins" \
     -Dconf.location="$CARBON_HOME/repository/conf"\
     -Dcom.atomikos.icatch.file="$CARBON_HOME/lib/transactions.properties" \
@@ -287,43 +293,8 @@ do
     -Dcom.sun.jndi.ldap.connect.pool.authentication=simple  \
     -Dcom.sun.jndi.ldap.connect.pool.timeout=3000  \
     -Dorg.terracotta.quartz.skipUpdateCheck=true \
-    -DworkerNode=true \
-    -Dtenant.idle.time=10 \
-    -XX:+HeapDumpOnOutOfMemoryError \
-    -XX:HeapDumpPath="$CARBON_HOME/repository/logs/heap-dump.hprof" \
-    -DapplyPatches \
-    org.wso2.carbon.bootstrap.Bootstrap $*
-<%- else -%>
-    $JAVACMD \
-    -Xbootclasspath/a:"$CARBON_XBOOTCLASSPATH" \
-    -Xms256m -Xmx1024m -XX:MaxPermSize=256m \
-    $JAVA_OPTS \
     -Djava.security.egd=file:/dev/./urandom \
-    -Dcom.sun.management.jmxremote \
-    -classpath "$CARBON_CLASSPATH" \
-    -Djava.endorsed.dirs="$JAVA_ENDORSED_DIRS" \
-    -Djava.io.tmpdir="$CARBON_HOME/tmp" \
-    -Dcatalina.base="$CARBON_HOME/lib/tomcat" \
-    -Dwso2.server.standalone=true \
-    -Dcarbon.registry.root=/ \
-    -Djava.command="$JAVACMD" \
-    -Dcarbon.home="$CARBON_HOME" \
-    -Djava.util.logging.config.file="$CARBON_HOME/repository/conf/log4j.properties" \
-    -Dcarbon.config.dir.path="$CARBON_HOME/repository/conf" \
-    -Dcomponents.repo="$CARBON_HOME/repository/components/plugins" \
-    -Dconf.location="$CARBON_HOME/repository/conf"\
-    -Dcom.atomikos.icatch.file="$CARBON_HOME/lib/transactions.properties" \
-    -Dcom.atomikos.icatch.hide_init_file_path=true \
-    -Dorg.apache.jasper.runtime.BodyContentImpl.LIMIT_BUFFER=true \
-    -Dcom.sun.jndi.ldap.connect.pool.authentication=simple  \
-    -Dcom.sun.jndi.ldap.connect.pool.timeout=3000  \
-    -Dorg.terracotta.quartz.skipUpdateCheck=true \
-    -Dtenant.idle.time=10 \
-    -Ddisable.cassandra.server.startup=true \
-    -XX:+HeapDumpOnOutOfMemoryError \
-    -XX:HeapDumpPath="$CARBON_HOME/repository/logs/heap-dump.hprof" \
-    -DapplyPatches \
+    -Dfile.encoding=UTF8 \
     org.wso2.carbon.bootstrap.Bootstrap $*
-<%- end -%>
     status=$?
 done

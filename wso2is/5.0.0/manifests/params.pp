@@ -14,7 +14,7 @@
 #  limitations under the License.
 # ----------------------------------------------------------------------------
 
-class identity::params inherits wso2base::params {
+class wso2is::params inherits wso2base::params {
   
    $apimgt_database = hiera('apimgt_database', {
     'hostname'     => "$wso2base::params::mysql_server",
@@ -24,5 +24,5 @@ class identity::params inherits wso2base::params {
     'password_enc' => ""
   }
   )
-}
-
+  $java_home = '/home/gayan/app/jdk1.7.0_51'
+ }

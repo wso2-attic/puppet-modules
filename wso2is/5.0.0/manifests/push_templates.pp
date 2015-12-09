@@ -14,13 +14,13 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define identity::push_templates ($directory, $target, $owner, $group) {
+define wso2is::push_templates ($directory, $target, $owner, $group) {
   file { "${target}/repository/${name}":
     ensure  => present,
     owner   => $owner,
     group   => $group,
     mode    => '0755',
     content => template("${directory}/${name}.erb"),
-    notify  => Service["wso2${identity::service_code}"],
+    notify  => Service["wso2${wso2is::service_code}"],
   }
 }

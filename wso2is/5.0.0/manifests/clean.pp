@@ -16,7 +16,7 @@
 #
 # Cleans the previous deployment. If the maintenance mode is set to true, this will only kill the running service.
 
-define identity::clean ($mode, $target) {
+define wso2is::clean ($mode, $target) {
   if $mode == 'refresh' {
     exec{
       "Remove_lock_file_${name}":
@@ -39,7 +39,7 @@ define identity::clean ($mode, $target) {
   elsif $mode == 'zero' {
     exec { "Stop_process_remove_CARBON_HOME_and_pack_${name}":
         path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/java/bin/',
-        command => "kill -9 `cat ${target}/wso2carbon.pid` ; rm -rf ${target} ; rm -f ${::local_package_dir}/wso2${identity::service_code}-${identity::version}.zip";
+        command => "kill -9 `cat ${target}/wso2carbon.pid` ; rm -rf ${target} ; rm -f ${::local_package_dir}/wso2${wso2is::service_code}-${wso2is::version}.zip";
     }
   }
 }
