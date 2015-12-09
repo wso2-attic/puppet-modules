@@ -1,10 +1,10 @@
-name    'wso2-bam'
+name    'wso2-IS'
 version '0.1.0'
 source ''
 author 'WSO2 Inc'
 license 'Apache License Version 2.0'
 summary 'WSO2 BAM puppet module'
-description 'WSO2 BAM 2.4.0 version puppet module'
+description 'WSO2 IS 5.0.0 version puppet module'
 project_page ''
 
 ## Add dependencies, if any:
