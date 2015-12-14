@@ -60,10 +60,10 @@ class apimanager (
   $auto_scaler        = false,
   $auto_failover      = false,
   $securevault        = false,) inherits apimanager::params {
-  $deployment_code = 'apimanager'
-  $service_code = 'am'
-  $amtype = 'apimanager'
-  $carbon_home = "${target}/wso2${service_code}-${version}"
+  $deployment_code    = 'apimanager'
+  $service_code       = 'am'
+  $amtype             = 'apimanager'
+  $carbon_home        = "${target}/wso2${service_code}-${version}"
 
   $service_templates = [
     'conf/api-manager.xml',
@@ -157,6 +157,6 @@ class apimanager (
       Push_templates[$service_templates],
       File["${carbon_home}/bin/wso2server.sh"],
       File["/etc/init.d/wso2${amtype}"],
-      ],
+    ],
   }
 }
