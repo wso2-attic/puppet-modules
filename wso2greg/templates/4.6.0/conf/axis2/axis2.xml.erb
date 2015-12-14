@@ -588,7 +588,7 @@
     </phaseOrder>
 
     <clustering class="org.wso2.carbon.core.clustering.hazelcast.HazelcastClusteringAgent"
-                enable="<%= @clustering %>">
+                enable="<%= @clustering['enable'] %>">
 
         <!--
            This parameter indicates whether the cluster has to be automatically initalized
@@ -610,7 +610,7 @@
                     is deemed to have left the cluster, it will be detected by the Group Membership
                     Service (GMS) using a TCP ping mechanism.
         -->
-        <parameter name="membershipScheme">wka</parameter>
+        <parameter name="membershipScheme"><%= @clustering['membership_scheme'] %></parameter>
         <!--<parameter name="licenseKey">xxx</parameter>-->
         <!--<parameter name="mgtCenterURL">http://localhost:8081/mancenter/</parameter>-->
 
@@ -680,7 +680,7 @@
         -->
 
         <members>
-        <%- if @clustering['enable'] == true %>
+        <%- if @clustering['enable'] == true && @clustering['membership_scheme'] == 'wka' %>
         <%- @clustering['wka']['members'].each do |member| -%>
             <member>
                 <hostName><%= member['hostname'] %></hostName>

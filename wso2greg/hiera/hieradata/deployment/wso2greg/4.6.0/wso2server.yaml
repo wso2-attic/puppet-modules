@@ -37,7 +37,7 @@ datasources :
 
 clustering :
     enable : true
-    membership_schema : wka
+    membership_scheme : wka111
     wka : 
        members : 
          - 
