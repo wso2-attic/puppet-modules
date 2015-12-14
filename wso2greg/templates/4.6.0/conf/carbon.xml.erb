@@ -46,11 +46,6 @@
        services deployed on this server instance.
     -->
     <!--HostName>www.wso2.org</HostName-->
-    <HostName><%= @management_subdomain %>.<%= @domain %></HostName>
-
-    <% if @sub_cluster_domain == 'mgt' %>
-    <MgtHostName><%= @management_subdomain %>.<%= @domain %></MgtHostName>
-    <% end %>
 
     <!--
     Host name to be used for the Carbon management console
@@ -116,7 +111,11 @@
          the define value + Offset.
          e.g. Offset=2 and HTTPS port=9443 will set the effective HTTPS port to 9445
          -->
-        <Offset><%= @offset %></Offset>
+	<%- if @ports['offset'] -%>
+        <Offset><%= @ports['offset'] %></Offset>
+	<%- else -%>
+        <Offset>0</Offset>
+	<%- end -%>
 
         <!-- The JMX Ports -->
         <JMX>
@@ -501,17 +500,21 @@
 	and in  worker nodes set only AutoCheckout to true.
     -->
     <DeploymentSynchronizer>
-        <Enabled><%= @depsync %></Enabled>
-<%- if @sub_cluster_domain == 'worker' -%>
-	<AutoCommit>false</AutoCommit>
-<%- else -%>
-	<AutoCommit>true</AutoCommit>
-<%- end -%>
+	<%- if @dep_sync['enable'] == true -%>
+        <Enabled>true</Enabled>
+	<%- else -%>
+        <Enabled>false</Enabled>
+	<%- end -%>
+	<%- if @dep_sync['enable'] == true && @dep_sync['auto_commit'] == true -%>
+        <AutoCommit>true</AutoCommit>
+	<%- else -%>
+        <AutoCommit>false</AutoCommit>
+	<%- end -%>
         <AutoCheckout>true</AutoCheckout>
         <RepositoryType>svn</RepositoryType>
-        <SvnUrl><%= @depsync_svn_repo %>/greg</SvnUrl>
-        <SvnUser><%= @svn_user %></SvnUser>
-        <SvnPassword><%= @svn_password %></SvnPassword>
+        <SvnUrl>@dep_sync['svn']['url']</SvnUrl>
+        <SvnUser>@dep_sync['svn']['user']</SvnUser>
+        <SvnPassword>@dep_sync['svn']['password']</SvnPassword>
         <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
     </DeploymentSynchronizer>
 

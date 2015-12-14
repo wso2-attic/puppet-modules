@@ -8,6 +8,9 @@ basic_erase_package :
 gem_package :
   -
 
+ports :
+  offset : 0
+
 
 datasources :
   local_db :
@@ -64,3 +67,10 @@ clustering :
     k8s : 
     ppaas :
 
+dep_sync :
+    enable : false
+    auto_commit : false
+    svn :
+       url : http://svnrepo.example.com/repos/
+       user : username
+       password : password
