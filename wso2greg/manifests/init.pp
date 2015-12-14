@@ -61,6 +61,9 @@ class wso2greg (
   $service_code = 'wso2greg'
   $carbon_home = "${target}/${service_code}-${version}"
 
+  # hiera lookup
+  $datasources = hiera('datasources')
+
   $service_templates = [
     "${version}/conf/axis2/axis2.xml",
     "${version}/conf/carbon.xml",

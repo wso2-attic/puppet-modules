@@ -40,7 +40,7 @@
         <readOnly>false</readOnly>
         <registryRoot>/</registryRoot>
         <enableCache>true</enableCache>
-        <cacheId><%= @datasources['gov_db']['db_user'] %>@jdbc:mysql://<%= @gov_db['hostname'] %>:3306/<%= @gov_db['db_name'] %></cacheId>
+        <cacheId><%= @datasources['gov_db']['user'] %>@<%= @datasources['gov_db']['url'] %></cacheId>
     </remoteInstance>
     <mount path="/_system/governance" overwrite="virtual">
         <instanceId>governance</instanceId>
@@ -62,7 +62,7 @@
         <readOnly>false</readOnly>
         <registryRoot>/</registryRoot>
         <enableCache>true</enableCache>
-        <cacheId><%= @config_db['db_user'] %>@jdbc:mysql://<%= @config_db['hostname'] %>:3306/<%= @config_db['db_name'] %></cacheId>
+        <cacheId><%= @datasources['config_db']['user'] %>@<%= @datasources['config_db']['url'] %></cacheId>
     </remoteInstance>
     <mount path="/_system/config" overwrite="virtual">
         <instanceId>config</instanceId>
