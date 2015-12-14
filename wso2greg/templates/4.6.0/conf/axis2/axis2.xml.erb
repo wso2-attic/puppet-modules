@@ -680,11 +680,11 @@
         -->
 
         <members>
-        <%- if @members -%>
-        <%- @members.each_pair do |hostname,port| -%>
+        <%- if @clustering['enable'] == true %>
+        <%- @clustering['wka']['members'].each do |member| -%>
             <member>
-                <hostName><%= hostname %></hostName>
-                <port><%= port %></port>
+                <hostName><%= member['hostname'] %></hostName>
+                <port><%= member['port'] %></port>
             </member>
         <%- end -%>
         <%- else -%>

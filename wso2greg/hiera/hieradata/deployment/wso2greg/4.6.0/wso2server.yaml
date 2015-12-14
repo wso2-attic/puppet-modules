@@ -36,16 +36,16 @@ datasources :
     jndi_config : jdbc/apimgt_db
 
 clustering :
-    enable : false
+    enable : true
     membership_schema : wka
     wka : 
        members : 
-         - : 
-             hostname : localhost
-             port : 4000
-         - :
-             hostname : localhost
-             port : 4001
+         - 
+           hostname : localhost
+           port : 4000
+         -
+           hostname : localhost
+           port : 4001
     multicast : 
     k8s : 
     ppaas :
