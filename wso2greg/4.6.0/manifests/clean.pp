@@ -35,7 +35,7 @@ define registry::clean ($mode, $target) {
   } elsif $mode == 'zero' {
     exec { "Stop_process_remove_CARBON_HOME_and_pack_${name}":
       path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/java/bin/',
-      command => "kill -9 `cat ${target}/wso2carbon.pid` ; rm -rf ${target} ; rm -f ${::local_package_dir}/wso2${registry::service_code}-${registry::version}.zip"
+      command => "kill -9 `cat ${target}/wso2carbon.pid` ; rm -rf ${target} ; rm -f ${::local_package_dir}/${registry::service_code}-${registry::version}.zip"
     ;
     }
   }

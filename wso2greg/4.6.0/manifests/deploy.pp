@@ -23,7 +23,7 @@ define registry::deploy ($security, $target, $owner, $group) {
     sourceselect => all,
     ignore       => '.svn',
     recurse      => 'remote',
-    notify       => Service["wso2${registry::service_code}"],
+    notify       => Service["${registry::service_code}"],
     source       => [
       'puppet:///modules/registry/configs/',
       'puppet:///modules/registry/patches/',

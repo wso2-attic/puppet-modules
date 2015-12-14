@@ -56,9 +56,8 @@ class registry (
   $group              = 'root',
   $clustering         = true,
   $target             = '/mnt',
-  $auto_scaler        = false,
-  $auto_failover      = false,
   $securevault        = false,) inherits registry::params {
+
   $deployment_code = 'registry'
   $service_code = 'wso2greg'
   $carbon_home = "${target}/${service_code}-${version}"
@@ -147,7 +146,7 @@ class registry (
     owner   => $owner,
     group   => $group,
     mode    => '0755',
-    content => template("${deployment_code}/${service_code}.erb"),
+    content => template("${deployment_code}/${service_code}.erb")
   }
 
   service { "${service_code}":
@@ -160,7 +159,7 @@ class registry (
       Deploy[$deployment_code],
       Push_templates[$service_templates],
       File["${carbon_home}/bin/wso2server.sh"],
-      File["/etc/init.d/${service_code}"],
-      ],
+      File["/etc/init.d/${service_code}"]
+      ];
   }
 }
