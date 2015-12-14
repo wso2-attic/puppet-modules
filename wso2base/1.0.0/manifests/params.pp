@@ -90,5 +90,4 @@ class wso2base::params {
     'password_enc' => ""
   }
   )
-
 }

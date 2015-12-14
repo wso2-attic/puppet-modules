@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------
-#  Copyright 2005-2013 WSO2, Inc. http://www.wso2.org
+#  Copyright 2005-2015 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,34 +13,6 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #----------------------------------------------------------------------------
-#
-# Class: wso2base
-#
-# This class installs WSO2 API Manager
-#
-# Parameters:
-#  version            => '1.5.0',
-#  offset             => 0,
-#  config_database    => 'config',
-#  maintenance_mode   => 'zero',
-#  depsync            => false,
-#  sub_cluster_domain => 'mgt',
-#  clustering         => true,
-#  cloud              => true,
-#  amtype             => 'gateway',
-#  owner              => 'root',
-#  group              => 'root',
-#  target             => '/mnt',
-#  members            => {'192.168.18.122' => 4010 },
-#  port_mapping       => { 8280 => 9763, 8243 => 9443 }
-#
-# Actions:
-#   - Install WSO2 API Manager
-#
-# Requires:
-#
-# Sample Usage:
-#
 
 class wso2base inherits wso2base::params {
   file { '/etc/environment':
@@ -74,5 +46,7 @@ class wso2base inherits wso2base::params {
     source => 'puppet:///modules/wso2base/dbscripts',
   }
 
-  package { $packages: ensure => installed }
+  package {
+    $packages: ensure => installed
+  }
 }

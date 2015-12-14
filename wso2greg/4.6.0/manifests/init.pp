@@ -14,12 +14,12 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 #
-# Class: apimanager
+# Class: registry
 #
-# This class installs WSO2 API Manager
+# This class installs WSO2 Goverance Registry
 #
 # Parameters:
-#  version            => '1.9.1',
+#  version            => '4.6.0',
 #  offset             => 0,
 #  config_database    => 'config',
 #  maintenance_mode   => 'zero',
@@ -35,7 +35,7 @@
 #  port_mapping       => { 8280 => 9763, 8243 => 9443 }
 #
 # Actions:
-#   - Install WSO2 API Manager
+#   - Install WSO2 Goverance Registry
 #
 # Requires:
 #
@@ -60,16 +60,28 @@ class registry (
   $auto_failover      = false,
   $securevault        = false,) inherits registry::params {
   $deployment_code = 'registry'
-  $service_code = 'greg'
-  $carbon_home = "${target}/wso2${service_code}-${version}"
+  $service_code = 'wso2greg'
+  $carbon_home = "${target}/${service_code}-${version}"
 
-  $service_templates = ['conf/axis2/axis2.xml', 'conf/carbon.xml', 'conf/registry.xml', 'conf/datasources/greg-datasources.xml']
+  $service_templates = [
+    'conf/axis2/axis2.xml',
+    'conf/carbon.xml',
+    'conf/registry.xml',
+    'conf/datasources/greg-datasources.xml'
+  ]
 
-  $common_templates = ['conf/user-mgt.xml', 'conf/datasources/master-datasources.xml', 'conf/tomcat/catalina-server.xml',]
+  $common_templates = [
+    'conf/user-mgt.xml',
+    'conf/datasources/master-datasources.xml',
+    'conf/tomcat/catalina-server.xml'
+  ]
 
-  $securevault_templates = ["conf/security/secret-conf.properties", "conf/security/cipher-text.properties",]
+  $securevault_templates = [
+    'conf/security/secret-conf.properties',
+    'conf/security/cipher-text.properties'
+  ]
 
-  tag('registry')
+  tag($deployment_code)
 
   registry::clean { $deployment_code:
     mode   => $maintenance_mode,
@@ -101,7 +113,7 @@ class registry (
       group     => $group,
       target    => $carbon_home,
       directory => $deployment_code,
-      notify    => Service["wso2${service_code}"],
+      notify    => Service["${service_code}"],
       require   => Deploy[$deployment_code];
 
     $common_templates:
@@ -109,7 +121,7 @@ class registry (
       group     => $group,
       target    => $carbon_home,
       directory => 'wso2base',
-      notify    => Service["wso2${service_code}"],
+      notify    => Service["${service_code}"],
       require   => Deploy[$deployment_code];
   }
 
@@ -130,15 +142,15 @@ class registry (
     require => Deploy[$deployment_code];
   }
 
-  file { "/etc/init.d/wso2${service_code}":
+  file { "/etc/init.d/${service_code}":
     ensure  => present,
     owner   => $owner,
     group   => $group,
     mode    => '0755',
-    content => template("${deployment_code}/wso2${service_code}.erb"),
+    content => template("${deployment_code}/${service_code}.erb"),
   }
 
-  service { "wso2${service_code}":
+  service { "${service_code}":
     ensure     => running,
     hasstatus  => true,
     hasrestart => true,
@@ -148,7 +160,7 @@ class registry (
       Deploy[$deployment_code],
       Push_templates[$service_templates],
       File["${carbon_home}/bin/wso2server.sh"],
-      File["/etc/init.d/wso2${service_code}"],
+      File["/etc/init.d/${service_code}"],
       ],
   }
 }
