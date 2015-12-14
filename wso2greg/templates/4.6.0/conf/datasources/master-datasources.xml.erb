@@ -6,40 +6,23 @@
 
     <datasources>
 
+        <%- if @datasources['local_db']['url'] -%>
         <datasource>
             <name>WSO2_CARBON_DB</name>
             <description>The datasource used for registry and user manager</description>
             <jndiConfig>
-                <% if @datasources['local_db']['jndi_config'] %>
                 <name><%= @datasources['local_db']['jndi_config'] %></name>
-                <%- else -%>
-                <name>jdbc/WSO2CarbonDB</name>
-                <%- end -%>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <% if @datasources['local_db']['url'] %>
                     <url><%= @datasources['local_db']['url'] %></url>
-                    <%- else -%>
-                    <url>jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
-                    <%- end -%>
-                    <% if @datasources['local_db']['user'] %>
                     <username><%= @datasources['local_db']['user'] %></username>
-                    <%- else -%>
-                    <username>wso2carbon</username>
-                    <%- end -%>
                     <%- if @datasources['local_db']['securevault'] == true -%>
-                    <password svns:secretAlias="Datasources.WSO2AM_DB.Configuration.Password">password</password>
-                    <%- elseif @datasources['local_db']['password'] -%>
+                    <password svns:secretAlias="Datasources.WSO2_CARBON_DB.Configuration.Password">password</password>
+                    <%- else -%>
                     <password><%= @datasources['local_db']['password'] %></password>
-                    <%- else -%>
-                    <password>wso2carbon</password>
                     <%- end -%>
-                    <% if @datasources['local_db']['driver'] %>
                     <driverClassName><%= @datasources['local_db']['driver'] %></driverClassName>
-                    <%- else -%>
-                    <driverClassName>org.h2.Driver</driverClassName>
-                    <%- end -%>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
@@ -48,41 +31,46 @@
                 </configuration>
             </definition>
         </datasource>
+        <%- else -%>
+        <datasource>
+            <name>WSO2_CARBON_DB</name>
+            <description>The datasource used for registry and user manager</description>
+            <jndiConfig>
+                <name>jdbc/WSO2CarbonDB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver</driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        <%- end -%>
 
+        <%- if @datasources['apimgt_db']['url'] -%>
         <datasource>
             <name>WSO2AM_DB</name>
             <description>The datasource used for API Manager database</description>
             <jndiConfig>
-                <% if @datasources['apimgt_db']['jndi_config'] %>
                 <name><%= @datasources['apimgt_db']['jndi_config'] %></name>
-                <%- else -%>
-                <name>jdbc/WSO2AM_DB</name>
-                <%- end -%>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <% if @datasources['apimgt_db']['url'] %>
                     <url><%= @datasources['apimgt_db']['url'] %></url>
-                    <%- else -%>
-                    <url>jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
-                    <%- end -%>
-                    <% if @datasources['apimgt_db']['user'] %>
                     <username><%= @datasources['apimgt_db']['user'] %></username>
-                    <%- else -%>
-                    <username>wso2carbon</username>
-                    <%- end -%>
                     <%- if @datasources['apimgt_db']['securevault'] == true -%>
                     <password svns:secretAlias="Datasources.WSO2AM_DB.Configuration.Password">password</password>
-                    <%- elseif @datasources['apimgt_db']['password'] -%>
+                    <%- else -%>
                     <password><%= @datasources['apimgt_db']['password'] %></password>
-                    <%- else -%>
-                    <password>wso2carbon</password>
                     <%- end -%>
-                    <% if @datasources['apimgt_db']['driver'] %>
                     <driverClassName><%= @datasources['apimgt_db']['driver'] %></driverClassName>
-                    <%- else -%>
-                    <driverClassName>org.h2.Driver</driverClassName>
-                    <%- end -%>
                     <maxActive>50</maxActive>
                     <maxWait>60000</maxWait>
                     <testOnBorrow>true</testOnBorrow>
@@ -91,6 +79,28 @@
                 </configuration>
             </definition>
         </datasource>
+        <%- else -%>
+        <datasource>
+            <name>WSO2AM_DB</name>
+            <description>The datasource used for API Manager database</description>
+            <jndiConfig>
+                <name>jdbc/WSO2AM_DB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver</driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        <%- end -%>
 
     </datasources>
 
