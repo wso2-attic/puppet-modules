@@ -48,6 +48,8 @@ datasources :
 
 clustering :
     enable : true
+    local_member_host : 127.0.0.1
+    local_member_port : 4000
     membership_scheme : wka
     wka : 
        members : 
@@ -57,6 +59,8 @@ clustering :
          -
            hostname : localhost
            port : 4001
-    multicast : 
+    multicast :
+       domain : wso2.carbon.domain
     k8s : 
     ppaas :
+
