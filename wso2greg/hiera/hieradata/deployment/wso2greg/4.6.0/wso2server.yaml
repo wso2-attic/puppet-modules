@@ -1,0 +1,27 @@
+---
+classes :
+  - 'wso2greg'
+basic_package :
+  - 'unzip'
+basic_erase_package :
+  -
+gem_package :
+  -
+
+
+datasources :
+  config_db :
+    hostname : localhost
+    db_name : config_db
+    db_user : root
+    db_user_password : root
+  gov_db :
+    hostname : localhost
+    db_name : gov_db
+    db_user : root
+    db_user_password : root
+  user_db :
+    hostname : localhost
+    db_name : user_db
+    db_user : root
+    db_user_password : root
