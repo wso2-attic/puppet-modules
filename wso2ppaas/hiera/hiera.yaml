@@ -1,0 +1,11 @@
+---
+:hierarchy:
+    - "node/%{::clientcert}"
+    - "deployment/%{::product_name}/%{::product_version}/wso2server"
+    - "osfamily/%{::osfamily}"
+    - "vm_type/%{::vm_type}"
+    - common
+:backends:
+    - yaml
+:yaml:
+    :datadir: 'hieradata'
