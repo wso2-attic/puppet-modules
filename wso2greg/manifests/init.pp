@@ -14,117 +14,87 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 #
-# Class: wso2greg
 #
 # This class installs WSO2 Goverance Registry
-#
 
 class wso2greg {
 
-  $service_code = 'wso2greg'
-  $carbon_home = "${target}/${service_code}-${version}"
+  require wso2base
 
-  # hiera lookup
-  $datasources = hiera('datasources')
+  $maintenance_mode   = hiera("maintenance_mode")
+  $install_mode       = hiera("install_mode")
+  $install_dir        = hiera("install_dir")
+  $pack_dir           = hiera("pack_dir")
+  $pack_filename      = hiera("pack_filename")
+  $pack_extracted_dir = hiera("pack_extracted_dir")
+  $ports              = hiera("ports")
+  $datasources        = hiera("datasources")
+  $clustering         = hiera("clustering")
+  $dep_sync           = hiera("dep_sync")
+  $owner              = hiera("owner")
+  $group              = hiera("group")
+  $securevault        = hiera("securevault")
+  $template_list      = hiera("template_list")
+  $file_list          = hiera("file_list")
+  $patches_dir        = hiera("patches_dir")
 
-  $service_templates = [
-    "${version}/conf/axis2/axis2.xml",
-    "${version}/conf/carbon.xml",
-    "${version}/conf/registry.xml",
-    "${version}/conf/datasources/greg-datasources.xml"
-  ]
+  $service_name       = "${product_name}-${product_version}"
+  $carbon_home        = "${install_dir}/${pack_extracted_dir}"
+  $patches_abs_dir    = "${carbon_home}/${patches_dir}"
 
-  $common_templates = [
-    "${version}/conf/user-mgt.xml",
-    "${version}/conf/datasources/master-datasources.xml",
-    "${version}/conf/tomcat/catalina-server.xml"
-  ]
 
-  $securevault_templates = [
-    "${version}/conf/security/secret-conf.properties",
-    "${version}/conf/security/cipher-text.properties"
-  ]
-
-  tag($service_code)
-
-  wso2greg::clean { $service_code:
-    mode   => $maintenance_mode,
-    target => $carbon_home,
+  wso2base::clean { $carbon_home:
+    mode              => $maintenance_mode,
+    pack_filename     => $pack_filename,
+    pack_dir          => $pack_dir
   }
 
-  wso2greg::initialize { $service_code:
-    repo      => $package_repo,
-    version   => $version,
-    mode      => $maintenance_mode,
-    service   => $service_code,
-    local_dir => $local_package_dir,
-    owner     => $owner,
-    target    => $target,
-    require   => Clean[$service_code],
+  wso2base::install { $carbon_home:
+    mode              => $install_mode,
+    install_dir       => $install_dir,
+    pack_filename     => $pack_filename,
+    pack_dir          => $pack_dir,
+    owner             => $owner,
+    group             => $group,
+    product_name      => $product_name,
+    require           => Wso2base::Clean[$carbon_home]
   }
 
-  wso2greg::deploy { $service_code:
-    security => true,
-    owner    => $owner,
-    group    => $group,
-    target   => $carbon_home,
-    require  => Initialize[$service_code],
+  wso2base::patch { $carbon_home:
+    patches_abs_dir   => $patches_abs_dir,
+    patches_dir       => $patches_dir,
+    owner             => $owner,
+    group             => $group,
+    product_name      => $product_name,
+    product_version   => $product_version,
+    notify            => Service["${service_name}"],
+    require           => Wso2base::Install[$carbon_home]
   }
 
-  wso2greg::push_templates {
-    $service_templates:
-      owner     => $owner,
-      group     => $group,
-      target    => $carbon_home,
-      directory => $service_code,
-      notify    => Service["${service_code}"],
-      require   => Deploy[$service_code];
-
-    $common_templates:
-      owner     => $owner,
-      group     => $group,
-      target    => $carbon_home,
-      directory => 'wso2base',
-      notify    => Service["${service_code}"],
-      require   => Deploy[$service_code];
+  wso2base::configure { $carbon_home:
+    template_list     => $template_list,
+    file_list         => $file_list,
+    owner             => $owner,
+    group             => $group,
+    product_name      => $product_name,
+    product_version   => $product_version,
+    notify            => Service["${service_name}"],
+    require           => Wso2base::Patch[$carbon_home]
   }
 
-  if $securevault {
-    wso2greg::push_templates { $securevault_templates:
-      target    => $carbon_home,
-      directory => 'wso2base',
-      require   => Deploy[$service_code];
-    }
+  wso2base::deploy { $carbon_home:
+    owner             => $owner,
+    group             => $group,
+    product_name      => $product_name,
+    product_version   => $product_version,
+    require           => Wso2base::Configure[$carbon_home]
   }
 
-  file { "${carbon_home}/bin/wso2server.sh":
-    ensure  => present,
-    owner   => $owner,
-    group   => $group,
-    mode    => '0755',
-    content => template("${service_code}/${version}/wso2server.sh.erb"),
-    require => Deploy[$service_code];
-  }
-
-  file { "/etc/init.d/${service_code}":
-    ensure  => present,
-    owner   => $owner,
-    group   => $group,
-    mode    => '0755',
-    content => template("${service_code}/${version}/${service_code}.erb")
-  }
-
-  service { "${service_code}":
-    ensure     => running,
-    hasstatus  => true,
-    hasrestart => true,
-    enable     => true,
-    require    => [
-      Initialize[$service_code],
-      Deploy[$service_code],
-      Push_templates[$service_templates],
-      File["${carbon_home}/bin/wso2server.sh"],
-      File["/etc/init.d/${service_code}"]
-      ];
+  service { $service_name:
+    ensure           => running,
+    hasstatus        => true,
+    hasrestart       => true,
+    enable           => true,
+    require          => [Wso2base::Deploy[$carbon_home]]
   }
 }

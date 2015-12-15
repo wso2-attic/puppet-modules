@@ -1,12 +1,16 @@
 ---
-classes :
-  - 'wso2greg'
-basic_package :
-  - 'unzip'
-basic_erase_package :
-  -
-gem_package :
-  -
+classes:
+  - wso2greg
+pack_extracted_dir:
+pack_filename:
+template_list :
+  - repository/conf/axis2/axis2.xml
+  - repository/conf/carbon.xml
+  - repository/conf/registry.xml
+  - repository/conf/datasources/master-datasources.xml
+file_list: []
+pack_filename: "%{::product_name}-%{::product_version}.zip"
+pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 ports :
   offset : 0
