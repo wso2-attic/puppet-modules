@@ -11,7 +11,6 @@ gem_package :
 ports :
   offset : 0
 
-
 datasources :
   local_db :
     driver : org.h2.Driver
