@@ -14,49 +14,12 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 #
-# Class: registry
+# Class: wso2greg
 #
 # This class installs WSO2 Goverance Registry
 #
-# Parameters:
-#  version            => '4.6.0',
-#  offset             => 0,
-#  config_database    => 'config',
-#  maintenance_mode   => 'zero',
-#  depsync            => false,
-#  sub_cluster_domain => 'mgt',
-#  clustering         => true,
-#  cloud              => true,
-#  service_code       => 'wso2greg',
-#  owner              => 'root',
-#  group              => 'root',
-#  target             => '/mnt',
-#  members            => {'192.168.18.122' => 4010 },
-#  port_mapping       => { 8280 => 9763, 8243 => 9443 }
-#
-# Actions:
-#   - Install WSO2 Goverance Registry
-#
-# Requires:
-#
-# Sample Usage:
-#
 
-class wso2greg (
-  $version            = '4.6.0',
-  $offset             = 0,
-  $members            = undef,
-  $greg_subdomain     = 'registry',
-  $localmember_port   = 4100,
-  $config_db          = governance,
-  $maintenance_mode   = 'refresh',
-  $depsync            = false,
-  $sub_cluster_domain = 'mgt',
-  $owner              = 'root',
-  $group              = 'root',
-  $clustering         = true,
-  $target             = '/mnt',
-  $securevault        = false) {
+class wso2greg {
 
   $service_code = 'wso2greg'
   $carbon_home = "${target}/${service_code}-${version}"
