@@ -8,6 +8,8 @@ template_list :
   - repository/conf/carbon.xml
   - repository/conf/registry.xml
   - repository/conf/datasources/master-datasources.xml
+  - bin/wso2server.sh
+service_name: wso2greg
 file_list: []
 pack_filename: "%{::product_name}-%{::product_version}.zip"
 pack_extracted_dir: "%{::product_name}-%{::product_version}"

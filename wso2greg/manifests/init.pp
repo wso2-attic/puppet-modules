@@ -37,8 +37,8 @@ class wso2greg {
   $template_list      = hiera("template_list")
   $file_list          = hiera("file_list")
   $patches_dir        = hiera("patches_dir")
+  $service_name       = hiera("service_name")
 
-  $service_name       = "${product_name}-${product_version}"
   $carbon_home        = "${install_dir}/${pack_extracted_dir}"
   $patches_abs_dir    = "${carbon_home}/${patches_dir}"
 
@@ -76,6 +76,7 @@ class wso2greg {
     file_list         => $file_list,
     owner             => $owner,
     group             => $group,
+    service_name      => $service_name,
     product_name      => $product_name,
     product_version   => $product_version,
     notify            => Service["${service_name}"],
