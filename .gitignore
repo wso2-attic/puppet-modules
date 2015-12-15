@@ -14,4 +14,5 @@
 #Backup files
 *~
 
-
+# Zip archives
+*.zip
