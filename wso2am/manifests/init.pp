@@ -22,7 +22,7 @@ class wso2am {
 
   $maintenance_mode   = hiera("maintenance_mode")
   $install_mode       = hiera("install_mode")
-  $install_dir        = hiera("install_dir")
+  $install_dir        = hiera("wso2_install_dir")
   $pack_dir           = hiera("pack_dir")
   $pack_filename      = hiera("pack_filename")
   $pack_extracted_dir = hiera("pack_extracted_dir")
@@ -35,11 +35,11 @@ class wso2am {
   $file_list          = hiera("file_list")
   $patches_dir        = hiera("patches_dir")
   $service_name       = hiera("service_name")
+  $service_template   = hiera("service_template")
   $java_home          = hiera("java_home")
 
   $carbon_home        = "${install_dir}/${pack_extracted_dir}"
   $patches_abs_dir    = "${carbon_home}/${patches_dir}"
-
 
   wso2base::clean { $carbon_home:
     mode              => $maintenance_mode,
@@ -75,6 +75,7 @@ class wso2am {
     owner             => $owner,
     group             => $group,
     service_name      => $service_name,
+    service_template  => $service_template,
     product_name      => $product_name,
     product_version   => $product_version,
     notify            => Service["${service_name}"],
