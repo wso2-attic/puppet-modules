@@ -35,9 +35,10 @@ class wso2am {
   $file_list          = hiera("file_list")
   $patches_dir        = hiera("patches_dir")
   $service_name       = hiera("service_name")
+  $java_home          = hiera("java_home")
 
   $carbon_home        = "${install_dir}/${pack_extracted_dir}"
-  $patches_abs_dir        = "${carbon_home}/${patches_dir}"
+  $patches_abs_dir    = "${carbon_home}/${patches_dir}"
 
 
   wso2base::clean { $carbon_home:
@@ -89,10 +90,10 @@ class wso2am {
   }
 
   service { $service_name:
-    ensure           => running,
-    hasstatus        => true,
-    hasrestart       => true,
-    enable           => true,
-    require          => [Wso2base::Deploy[$carbon_home]]
+    ensure            => running,
+    hasstatus         => true,
+    hasrestart        => true,
+    enable            => true,
+    require           => [Wso2base::Deploy[$carbon_home]]
   }
 }
