@@ -19,7 +19,7 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $owner
   $pack_file_abs_path = "${pack_dir}/${pack_filename}"
 
   # create directories for installation if they do not exist
-  ensure_resource('file', $pack_dir, { ensure => 'directory' })
+  ensure_resource('file', [$install_dir, $pack_dir], { ensure => 'directory' })
 
   # download wso2 product pack archive
   case $mode {
