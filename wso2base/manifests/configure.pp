@@ -40,10 +40,10 @@ define wso2base::configure ($template_list, $file_list, $owner, $group, $service
   }
 
   file { "/etc/init.d/${service_name}":
-    ensure  => present,
-    owner   => $owner,
-    group   => $group,
-    mode    => '0755',
-    content => template("${product_name}/${product_version}/${service_name}.erb"),
+    ensure               => present,
+    owner                => $owner,
+    group                => $group,
+    mode                 => '0755',
+    content              => template("${product_name}/${product_version}/${service_name}.erb"),
   }
 }
