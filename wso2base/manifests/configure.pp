@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::configure ($template_list, $file_list, $owner, $group, $service_name, $product_name, $product_version) {
+define wso2base::configure ($template_list, $file_list, $owner, $group, $service_name, $service_template, $product_name, $product_version) {
   $carbon_home  = $name
 
   if ($template_list != undef and size($template_list) > 0) {
@@ -44,6 +44,6 @@ define wso2base::configure ($template_list, $file_list, $owner, $group, $service
     owner                => $owner,
     group                => $group,
     mode                 => '0755',
-    content              => template("${product_name}/${product_version}/${service_name}.erb"),
+    content              => template("${service_template}"),
   }
 }
