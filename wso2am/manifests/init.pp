@@ -54,7 +54,7 @@ class wso2am {
     pack_dir          => $pack_dir,
     owner             => $owner,
     group             => $group,
-    product_name      => $product_name,
+    product_name      => $::product_name,
     require           => Wso2base::Clean[$carbon_home]
   }
 
@@ -63,8 +63,8 @@ class wso2am {
     patches_dir       => $patches_dir,
     owner             => $owner,
     group             => $group,
-    product_name      => $product_name,
-    product_version   => $product_version,
+    product_name      => $::product_name,
+    product_version   => $::product_version,
     notify            => Service["${service_name}"],
     require           => Wso2base::Install[$carbon_home]
   }
@@ -76,8 +76,8 @@ class wso2am {
     group             => $group,
     service_name      => $service_name,
     service_template  => $service_template,
-    product_name      => $product_name,
-    product_version   => $product_version,
+    product_name      => $::product_name,
+    product_version   => $::product_version,
     notify            => Service["${service_name}"],
     require           => Wso2base::Patch[$carbon_home]
   }
@@ -85,8 +85,8 @@ class wso2am {
   wso2base::deploy { $carbon_home:
     owner             => $owner,
     group             => $group,
-    product_name      => $product_name,
-    product_version   => $product_version,
+    product_name      => $::product_name,
+    product_version   => $::product_version,
     require           => Wso2base::Configure[$carbon_home]
   }
 
