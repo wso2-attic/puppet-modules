@@ -1,7 +1,0 @@
-# Check esb echo service
-define service {
-    host_name           <%= @fqdn %>
-    service_description ESB ECHO SERVICE
-    check_command       check_https_url!8243!/services/echo%3Fwsdl2
-    use                 generic-service
-}

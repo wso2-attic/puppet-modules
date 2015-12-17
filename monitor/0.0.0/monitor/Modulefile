@@ -1,9 +1,0 @@
-name    'monitor'
-version '0.1.0'
-source ''
-author 'WSO2 Inc'
-license 'Apache License Version 2.0'
-summary 'Monitoring module'
-description 'Install monitoring services'
-project_page ''
-

@@ -1,2 +1,0 @@
-1. Change the value of monitoring_server_ip in params.pp
-2. Change the nagios_checks in monitor/files and monitor/templates as required

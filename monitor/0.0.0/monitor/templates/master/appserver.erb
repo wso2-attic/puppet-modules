@@ -1,7 +1,0 @@
-# Check example app 
-define service {
-    host_name           <%= @fqdn %>
-    service_description WEB SERVICE
-    check_command       check_https_url!9443!/example/servlets/servlet/HelloWorldExample
-    use                 generic-service
-}
