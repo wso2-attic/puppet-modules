@@ -14,6 +14,6 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::deploy ($owner, $group, $product_name, $product_version) {
+define wso2base::deploy ($user, $group, $product_name, $product_version) {
   $carbon_home = $name
 }

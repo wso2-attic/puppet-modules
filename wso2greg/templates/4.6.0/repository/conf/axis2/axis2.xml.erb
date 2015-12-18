@@ -615,11 +615,11 @@
                     is deemed to have left the cluster, it will be detected by the Group Membership
                     Service (GMS) using a TCP ping mechanism.
         -->
-        <%- if @clustering['enable'] == true && @clustering['membership_scheme'] -%>
+  <%- if @clustering['enable'] == true && @clustering['membership_scheme'] -%>
         <parameter name="membershipScheme"><%= @clustering['membership_scheme'] %></parameter>
 	<%- else -%>
         <parameter name="membershipScheme">multicast</parameter>
-	<%- end -%>	
+	<%- end -%>
         <!--<parameter name="licenseKey">xxx</parameter>-->
         <!--<parameter name="mgtCenterURL">http://localhost:8081/mancenter/</parameter>-->
 
@@ -627,7 +627,7 @@
          The clustering domain/group. Nodes in the same group will belong to the same multicast
          domain. There will not be interference between nodes in different groups.
         -->
-        <%- if @clustering['enable'] == true && @clustering['membership_scheme'] == 'multicast' -%>
+  <%- if @clustering['enable'] == true && @clustering['membership_scheme'] == 'multicast' -%>
         <parameter name="domain"><%= @clustering['multicast']['domain'] %></parameter>
 	<%- else -%>
         <parameter name="domain">wso2.carbon.domain</parameter>
@@ -652,7 +652,7 @@
         -->
         <!-- The host name or IP address of this member -->
 
-        <%- if @clustering['enable'] == true && @clustering['local_member_host'] -%>
+  <%- if @clustering['enable'] == true && @clustering['local_member_host'] -%>
         <parameter name="localMemberHost"><%= @clustering['local_member_host'] %></parameter>
 	<%- else -%>
         <parameter name="localMemberHost">127.0.0.1</parameter>
@@ -672,7 +672,7 @@
         contact this member
          -->
 
-        <%- if @clustering['enable'] == true && @clustering['local_member_port'] -%>
+  <%- if @clustering['enable'] == true && @clustering['local_member_port'] -%>
         <parameter name="localMemberPort"><%= @clustering['local_member_port'] %></parameter>
 	<%- else -%>
         <parameter name="localMemberPort">4000</parameter>

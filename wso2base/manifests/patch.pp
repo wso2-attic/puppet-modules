@@ -14,10 +14,10 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::patch ($patches_abs_dir, $patches_dir, $owner, $group, $product_name, $product_version) {
+define wso2base::patch ($patches_abs_dir, $patches_dir, $user, $group, $product_name, $product_version) {
   file { $patches_abs_dir:
     ensure       => present,
-    owner        => $owner,
+    owner        => $user,
     group        => $group,
     mode         => '0754',
     ignore       => '.svn',
