@@ -1,0 +1,38 @@
+---
+wso2::maintenance_mode : zero
+wso2::install_mode : file_bucket
+wso2::patches_dir : repository/components/patches
+wso2::install_mode : file_bucket
+wso2::install_dir : "/mnt/%{::ipaddress}"
+wso2::user : wso2user
+wso2::group : wso2
+wso2::pack_dir : /mnt/packs
+wso2::ports:
+  offset : 0
+wso2::hostname : "%{::clientcert}"
+wso2::mgt_hostname : "%{::clientcert}"
+
+wso2::dep_sync :
+    enabled : no
+    auto_checkout : false
+    auto_commit : false
+    repository_type : svn
+    svn :
+       url : http://svnrepo.example.com/repos/
+       user : username
+       password : password
+       append_tenant_id: false
+
+# Common packages to be installed to support WSO2 products
+packages:
+  - unzip
+  - tree
+
+# Common datasources configuration
+wso2::datasources::common::maxActive : '50'
+wso2::datasources::common::maxWait: '60000'
+wso2::datasources::common::testOnBorrow: 'true'
+wso2::datasources::common::validationInterval: '30000'
+
+# MySQL datasources configuration
+wso2::datasources::mysql::validationQuery : 'SELECT 1'

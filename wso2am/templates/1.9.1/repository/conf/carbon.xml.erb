@@ -42,23 +42,20 @@
        This is will become part of the End Point Reference of the
        services deployed on this server instance.
     -->
-    <% if @amtype == 'gateway' %>
-    <HostName>gateway.<%= @am_subdomain %>.<%= @domain %></HostName>
-    <% elsif @amtype == 'keymanager' %>
-    <HostName>keymanager.<%= @am_subdomain %>.<%= @domain %></HostName>
-    <% elsif @amtype == 'pubstore' %>
-    <HostName><%= @am_subdomain %>.<%= @domain %></HostName>
-    <% end %>
+<% if @hostname %>
+    <HostName><%= @hostname %></HostName>
+<%- else -%>
+    <!--HostName>www.wso2.org</HostName-->
+<% end %>
 
-    <% if @amtype == 'gateway' %>
-    <MgtHostName>gatewaymgt.<%= @am_subdomain %>.<%= @domain %></MgtHostName>
-    <% elsif @amtype == 'keymanager' %>
-    <MgtHostName>keymanager.<%= @am_subdomain %>.<%= @domain %></MgtHostName>
-    <% elsif @amtype == 'pubstore' %>
-    <MgtHostName><%= @am_subdomain %>.<%= @domain %></MgtHostName>
-    <% elsif @amtype == 'apimanager' %>
-    <MgtHostName>apimanager.<%= @domain %></MgtHostName>
-    <% end %>
+    <!--
+    Host name to be used for the Carbon management console
+    -->
+<% if @mgt_hostname %>
+    <MgtHostName><%= @mgt_hostname %></MgtHostName>
+<%- else -%>
+    <!--MgtHostName>mgt.wso2.org</MgtHostName-->
+<% end %>
 
 
     <!--
@@ -121,7 +118,11 @@
          the define value + Offset.
          e.g. Offset=2 and HTTPS port=9443 will set the effective HTTPS port to 9445
          -->
-        <Offset><%= @offset %></Offset>
+<%- if @ports['offset'] -%>
+        <Offset><%= @ports['offset'] %></Offset>
+<%- else -%>
+        <Offset>0</Offset>
+<%- end -%>
 
         <!-- The JMX Ports -->
         <JMX>
@@ -538,47 +539,20 @@
 	In master nodes you need to set both AutoCommit and AutoCheckout to true
 	and in  worker nodes set only AutoCheckout to true.
     -->
-      <%- if @clustering -%>
-      <%- if @amtype == 'gateway' -%>
-      <DeploymentSynchronizer>
-          <Enabled>true</Enabled>
-        <%- if @sub_cluster_domain == 'mgt' -%>
-          <AutoCommit>true</AutoCommit>
-        <%- else -%>
-          <AutoCommit>false</AutoCommit>
-        <%- end -%>
-          <AutoCheckout>true</AutoCheckout>
-          <RepositoryType>svn</RepositoryType>
-          <SvnUrl><%= @depsync_svn_repo %>/api-gateway</SvnUrl>
-          <SvnUser><%= @svn_user %></SvnUser>
-          <SvnPassword><%= @svn_password %></SvnPassword>
-          <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
-      </DeploymentSynchronizer>
-      <%- elsif @amtype == 'pubstore' -%>
-      <DeploymentSynchronizer>
-          <Enabled>true</Enabled>
-          <AutoCommit>true</AutoCommit>
-          <AutoCheckout>true</AutoCheckout>
-          <RepositoryType>svn</RepositoryType>
-          <SvnUrl><%= @depsync_svn_repo %>/api-pubstore</SvnUrl>
-          <SvnUser><%= @svn_user %></SvnUser>
-          <SvnPassword><%= @svn_password %></SvnPassword>
-          <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
-      </DeploymentSynchronizer>
-      <%- elsif @amtype == 'keymanager' -%>
-      <DeploymentSynchronizer>
-          <Enabled>true</Enabled>
-          <AutoCommit>true</AutoCommit>
-          <AutoCheckout>true</AutoCheckout>
-          <RepositoryType>svn</RepositoryType>
-          <SvnUrl><%= @depsync_svn_repo %>/api-keymanager</SvnUrl>
-          <SvnUser><%= @svn_user %></SvnUser>
-          <SvnPassword><%= @svn_password %></SvnPassword>
-          <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
-      </DeploymentSynchronizer>
-      <%- end -%>
-      <%- end -%>
-
+<%- if scope.function_str2bool([@dep_sync['enabled']]) -%>
+    <DeploymentSynchronizer>
+        <Enabled>true</Enabled>
+        <AutoCommit><%= @dep_sync['auto_commit'] -%></AutoCommit>
+        <AutoCheckout><%= @dep_sync['auto_checkout'] -%></AutoCheckout>
+        <RepositoryType><%= @dep_sync['repository_type'] -%></RepositoryType>
+   <%- if (@dep_sync['repository_type'] == "svn") -%>
+        <SvnUrl><%= @dep_sync['svn']['url'] -%></SvnUrl>
+        <SvnUser><%= @dep_sync['svn']['user'] -%></SvnUser>
+        <SvnPassword><%= @dep_sync['svn']['password'] -%></SvnPassword>
+        <SvnUrlAppendTenantId><%= @dep_sync['svn']['append_tenant_id'] -%></SvnUrlAppendTenantId>
+   <%- end -%>
+    </DeploymentSynchronizer>
+<%- end -%>
     <!-- Deployment Synchronizer Configuration. Uncomment the following section when running with "registry based" dep sync.
         In master nodes you need to set both AutoCommit and AutoCheckout to true
         and in  worker nodes set only AutoCheckout to true.

@@ -14,13 +14,13 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::configure ($template_list, $file_list, $owner, $group, $service_name, $service_template, $product_name, $product_version) {
+define wso2base::configure ($template_list, $file_list, $user, $group, $service_name, $service_template, $product_name, $product_version) {
   $carbon_home  = $name
 
   if ($template_list != undef and size($template_list) > 0) {
     wso2base::push_templates {
       $template_list:
-        owner            => $owner,
+        owner            => $user,
         group            => $group,
         carbon_home      => $carbon_home,
         product_name     => $product_name,
@@ -31,7 +31,7 @@ define wso2base::configure ($template_list, $file_list, $owner, $group, $service
   if ($file_list != undef and size($file_list) > 0) {
     wso2base::push_files {
       $file_list:
-        owner            => $owner,
+        owner            => $user,
         group            => $group,
         carbon_home      => $carbon_home,
         product_name     => $product_name,
@@ -41,7 +41,7 @@ define wso2base::configure ($template_list, $file_list, $owner, $group, $service
 
   file { "/etc/init.d/${service_name}":
     ensure               => present,
-    owner                => $owner,
+    owner                => $user,
     group                => $group,
     mode                 => '0755',
     content              => template("${service_template}"),

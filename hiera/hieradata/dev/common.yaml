@@ -1,0 +1,6 @@
+---
+java_install_dir: /mnt/jdk-7u80
+java_source_file: jdk-7u80-linux-x64.tar.gz
+
+# symlink to Java install directory
+java_home: /opt/java

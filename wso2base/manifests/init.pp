@@ -22,8 +22,8 @@ class wso2base {
   $packages           = hiera_array("packages")
   $java_install_dir   = hiera("java_install_dir")
   $java_source_file   = hiera("java_source_file")
-  $wso2_user          = hiera("wso2_user")
-  $wso2_group         = hiera("wso2_group")
+  $wso2_user          = hiera("wso2::user")
+  $wso2_group         = hiera("wso2::group")
 
   # symlink to Java install directory
   $java_home_sym_link = hiera("java_home")

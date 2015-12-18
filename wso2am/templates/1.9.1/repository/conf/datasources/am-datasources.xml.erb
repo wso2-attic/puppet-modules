@@ -3,81 +3,34 @@
         <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
     </providers>
     <datasources>
+
+<%- @datasources.each do |datasource| -%>
+
         <datasource>
-            <name>WSO2_CONFIG_DB</name>
-            <description>The datasource used for config registry</description>
+            <name><%= datasource['name'] %></name>
+            <description><%= datasource['description'] %></description>
             <jndiConfig>
-                <name>jdbc/<%= @config_db %></name>
+                <name><%= datasource['jndi_config'] %></name>
             </jndiConfig>
             <definition type="RDBMS">
                 <configuration>
-                    <url>jdbc:mysql://<%= @config_database['hostname'] %>:3306/<%= @config_db %>?autoReconnect=true</url>
-                    <username><%= @config_database['username'] %></username>
-                    <%- if @securevault -%>
-                    <password svns:secretAlias="Datasources.WSO2_CONFIG_DB.Configuration.Password">password</password>
-                    <%- else -%>
-                    <password><%= @config_database['password'] %></password>
-                    <%- end -%>
-                    <driverClassName>com.mysql.jdbc.Driver</driverClassName>
-                    <maxActive>200</maxActive>
-                    <maxWait>60000</maxWait>
-                    <testOnBorrow>true</testOnBorrow>
-                    <validationQuery>SELECT 1</validationQuery>
-                    <validationInterval>30000</validationInterval>
+                    <url><%= datasource['url'] %></url>
+                    <username><%= datasource['username'] %></username>
+   <%- if datasource['secretAlias'] -%>
+                    <password svns:secretAlias="<%= datasource['secretAlias'] %>">password</password>
+      <%- else -%>
+                    <password><%= datasource['password'] %></password>
+   <%- end -%>
+                    <driverClassName><%= datasource['driverClass'] %></driverClassName>
+                    <maxActive><%= datasource['maxActive'] %></maxActive>
+                    <maxWait><%= datasource['maxWait'] %></maxWait>
+                    <testOnBorrow><%= datasource['testOnBorrow'] %></testOnBorrow>
+                    <validationQuery><%= datasource['validationQuery'] %></validationQuery>
+                    <validationInterval><%= datasource['validationInterval'] %></validationInterval>
                 </configuration>
             </definition>
         </datasource>
+<%- end -%>
 
-        <datasource>
-            <name>WSO2AM_DB</name>
-            <description>The datasource used for API Manager database</description>
-            <jndiConfig>
-                <name>jdbc/WSO2AM_DB</name>
-            </jndiConfig>
-            <definition type="RDBMS">
-                <configuration>
-                    <url>jdbc:mysql://<%= @apimgt_database['hostname'] %>:3306/<%= @apimgt_database['database'] %>?autoReconnect=true&amp;relaxAutoCommit=true</url>
-                    <username><%= @apimgt_database['username'] %></username>
-                    <%- if @securevault -%>
-                    <password svns:secretAlias="Datasources.WSO2_APIMGT_DB.Configuration.Password">password</password>
-                    <%- else -%>
-                    <password><%= @apimgt_database['password'] %></password>
-                    <%- end -%>
-                    <driverClassName>com.mysql.jdbc.Driver</driverClassName>
-                    <maxActive>50</maxActive>
-                    <maxWait>60000</maxWait>
-                    <testOnBorrow>true</testOnBorrow>
-                    <validationQuery>SELECT 1</validationQuery>
-                    <validationInterval>30000</validationInterval>
-                </configuration>
-            </definition>
-        </datasource>
-        <datasource>
-          <name>WSO2AM_STATS_DB</name>
-          <description>The datasource used to store stats of API Manager</description>
-          <jndiConfig>
-            <name>jdbc/WSO2AM_STATS_DB</name>
-          </jndiConfig>
-          <definition type="RDBMS">
-            <configuration>
-              <%- database = @apistats_database -%>
-              <url>jdbc:mysql://<%= @apistats_database['hostname'] %>:3306/<%= @apistats_database['database'] %>?autoReconnect=true&amp;relaxAutoCommit=true</url>
-              <username><%= @apistats_database['username'] %></username>
-              <%- if @securevault -%>
-              <password svns:secretAlias="Datasources.WSO2_APISTATS_DB.Configuration.Password">password</password>
-              <%- else -%>
-              <password><%= @apistats_database['password'] %></password>
-              <%- end -%>
-              <driverClassName>com.mysql.jdbc.Driver</driverClassName>
-              <maxActive>50</maxActive>
-              <maxWait>60000</maxWait>
-              <testOnBorrow>true</testOnBorrow>
-              <validationQuery>SELECT 1</validationQuery>
-              <validationInterval>30000</validationInterval>
-            </configuration>
-          </definition>
-        </datasource>
-
-      </datasources>
+     </datasources>
 </datasources-configuration>
-

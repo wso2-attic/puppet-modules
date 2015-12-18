@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $owner, $group, $product_name) {
+define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user, $group, $product_name) {
   $carbon_home = $name
   $pack_file_abs_path = "${pack_dir}/${pack_filename}"
 
@@ -42,7 +42,7 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $owner
     'file_bucket' : {
       ensure_resource('file', "$pack_file_abs_path", {
         mode           => 750,
-        owner          => $owner,
+        owner          => $user,
         group          => $group,
         source         => ["puppet:///modules/${product_name}/${pack_filename}", "puppet:///files/packs/${pack_filename}"],
         notify         => Exec["extract_${pack_file_abs_path}"],

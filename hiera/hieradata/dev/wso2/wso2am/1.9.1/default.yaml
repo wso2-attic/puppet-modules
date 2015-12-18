@@ -1,0 +1,61 @@
+---
+classes:
+  - wso2am
+wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
+wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+wso2::template_list :
+  - repository/conf/carbon.xml
+  - repository/conf/datasources/am-datasources.xml
+  - repository/conf/axis2/axis2.xml
+  - bin/wso2server.sh
+wso2::service_name: wso2am
+wso2::service_template: wso2base/wso2service.erb
+wso2::file_list: []
+wso2::clustering :
+    enable : true
+    local_member_host : 127.0.0.1
+    local_member_port : 4000
+    membership_scheme : wka
+    wka :
+       members :
+         -
+           hostname : localhost
+           port : 4000
+         -
+           hostname : localhost
+           port : 4001
+    multicast :
+       domain : wso2.carbon.domain
+    k8s :
+    ppaas :
+
+
+wso2::datasources :
+  -
+    name: WSO2_CONFIG_DB
+    description: The datasource used for registry and user manager
+    driver : org.h2.Driver
+    url : jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    user : wso2carbon
+    password : wso2carbon
+    #securevault :
+    jndi_config : jdbc/WSO2CarbonDB
+    maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait: "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow: "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    validationQuery: "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval: "%{hiera('wso2::datasources::common::validationInterval')}"
+  -
+    name : WSO2AM_DB
+    description: The datasource used for API Manager database
+    driver : com.mysql.jdbc.Driver
+    url : jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE
+    user : wso2carbon
+    password : wso2carbon
+    #securevault : false
+    jndi_config : jdbc/config_db
+    maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait: "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow: "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    validationQuery: "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval: "%{hiera('wso2::datasources::common::validationInterval')}"
