@@ -1,0 +1,18 @@
+---
+classes :
+    - 'yum_repos'
+# bool - enable/disable administering epel repos, default disable
+# 1/0 - enable/disable choosen repo, default value is 0
+adm_epel_repos : yes
+enabled_epel : 1
+enabled_epel_debuginfo : 0
+enabled_epel_source : 0
+enabled_epel_testing : 0
+enabled_epel_testing_debuginfo : 0
+enabled_epel_testing_source : 0
+# bool - enable/disable administering puppetlabs repos, default disable
+# 1/0 - enable/disable choosen repo, default value is 0
+adm_puppetlabs_repos : yes
+enabled_puppetlabs_products : 1
+enabled_puppetlabs_deps : 1 
+enabled_puppetlabs_devel : 0
