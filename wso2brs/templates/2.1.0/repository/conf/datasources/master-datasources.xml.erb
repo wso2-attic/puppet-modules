@@ -1,0 +1,57 @@
+<datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
+
+    <providers>
+        <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
+    </providers>
+
+    <datasources>
+        <%- if @datasources['local_db']['url'] -%>
+        <datasource>
+            <name>WSO2_CARBON_DB</name>
+            <description>The datasource used for registry and user manager</description>
+            <jndiConfig>
+                <name><%= @datasources['local_db']['jndi_config'] %></name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url><%= @datasources['local_db']['url'] %></url>
+                    <username><%= @datasources['local_db']['user'] %></username>
+                    <%- if @datasources['local_db']['securevault'] == true -%>
+                    <password svns:secretAlias="Datasources.WSO2_CARBON_DB.Configuration.Password">password</password>
+                    <%- else -%>
+                    <password><%= @datasources['local_db']['password'] %></password>
+                    <%- end -%>
+                    <driverClassName><%= @datasources['local_db']['driver'] %></driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        <%- else -%>
+        <datasource>
+            <name>WSO2_CARBON_DB</name>
+            <description>The datasource used for registry and user manager</description>
+            <jndiConfig>
+                <name>jdbc/WSO2CarbonDB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver</driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        <%- end -%>
+    </datasources>
+
+</datasources-configuration>
