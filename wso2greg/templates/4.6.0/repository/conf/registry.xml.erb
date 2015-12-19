@@ -16,9 +16,10 @@
 
     <!-- This handler provides the feature to add a simlink to a given resource -->
 
-    <%- if @datasources['gov_db']['url'] -%>
+    <%- @datasources.each do |datasource| -%>
+    <%- if datasource['name'] == "WSO2_GOV_DB" -%>
     <dbConfig name="governance">
-	<dataSource><%= @datasources['gov_db']['jndi_config'] %></dataSource>
+	<dataSource><%= datasource['jndi_config'] %></dataSource>
     </dbConfig>
     <remoteInstance url="https://localhost:9443/registry">
         <id>governance</id>
@@ -26,17 +27,19 @@
         <readOnly>false</readOnly>
         <registryRoot>/</registryRoot>
         <enableCache>true</enableCache>
-        <cacheId><%= @datasources['gov_db']['user'] %>@<%= @datasources['gov_db']['url'] %></cacheId>
+        <cacheId><%= datasource['user'] %>@<%= datasource['url'] %></cacheId>
     </remoteInstance>
     <mount path="/_system/governance" overwrite="virtual">
         <instanceId>governance</instanceId>
         <targetPath>/_system/governance</targetPath>
     </mount>
     <%- end -%>
+    <%- end -%>
 
-    <%- if @datasources['config_db']['url'] -%>
+    <%- @datasources.each do |datasource| -%>
+    <%- if datasource['name'] == "WSO2_CONFIG_DB" -%>
     <dbConfig name="config">
-    	<dataSource><%= @datasources['config_db']['jndi_config'] %></dataSource>
+    	<dataSource><%= datasource['jndi_config'] %></dataSource>
     </dbConfig>
     <remoteInstance url="https://localhost:9443/registry">
         <id>config</id>
@@ -44,12 +47,13 @@
         <readOnly>false</readOnly>
         <registryRoot>/</registryRoot>
         <enableCache>true</enableCache>
-        <cacheId><%= @datasources['config_db']['user'] %>@<%= @datasources['config_db']['url'] %></cacheId>
+        <cacheId><%= datasource['user'] %>@<%= datasource['url'] %></cacheId>
     </remoteInstance>
-    <mount path="/_system/config/greg" overwrite="virtual">
+    <mount path="/_system/config" overwrite="virtual">
         <instanceId>config</instanceId>
-        <targetPath>/_system/config/greg</targetPath>
+        <targetPath>/_system/config</targetPath>
     </mount>
+    <%- end -%>
     <%- end -%>
 
     <handler class="org.wso2.carbon.registry.extensions.handlers.ExtensionsSymLinkHandler" profiles="default,uddi-registry">

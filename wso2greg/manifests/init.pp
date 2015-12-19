@@ -15,87 +15,97 @@
 #----------------------------------------------------------------------------
 #
 #
-# This class installs WSO2 Goverance Registry
+# This class installs WSO2 Governance Registry
 
 class wso2greg {
-
   require wso2base
 
-  $maintenance_mode   = hiera("maintenance_mode")
-  $install_mode       = hiera("install_mode")
-  $install_dir        = hiera("install_dir")
-  $pack_dir           = hiera("pack_dir")
-  $pack_filename      = hiera("pack_filename")
-  $pack_extracted_dir = hiera("pack_extracted_dir")
-  $ports              = hiera("ports")
-  $datasources        = hiera("datasources")
-  $clustering         = hiera("clustering")
-  $dep_sync           = hiera("dep_sync")
-  $owner              = hiera("owner")
-  $group              = hiera("group")
-  $securevault        = hiera("securevault")
-  $template_list      = hiera("template_list")
-  $file_list          = hiera("file_list")
-  $patches_dir        = hiera("patches_dir")
-  $service_name       = hiera("service_name")
+  $maintenance_mode   = hiera("wso2::maintenance_mode")
+  $install_mode       = hiera("wso2::install_mode")
+  $install_dir        = hiera("wso2::install_dir")
+  $pack_dir           = hiera("wso2::pack_dir")
+  $pack_filename      = hiera("wso2::pack_filename")
+  $pack_extracted_dir = hiera("wso2::pack_extracted_dir")
+  $hostname           = hiera("wso2::hostname")
+  $mgt_hostname       = hiera("wso2::mgt_hostname")
+  $datasources        = hiera("wso2::datasources")
+  $clustering         = hiera("wso2::clustering")
+  $dep_sync           = hiera("wso2::dep_sync")
+  $ports              = hiera("wso2::ports")
+  $wso2_user          = hiera("wso2::user")
+  $wso2_group         = hiera("wso2::group")
+  $template_list      = hiera("wso2::template_list")
+  $file_list          = hiera("wso2::file_list")
+  $patches_dir        = hiera("wso2::patches_dir")
+  $service_name       = hiera("wso2::service_name")
+  $service_template   = hiera("wso2::service_template")
+  $java_home          = hiera("java_home")
 
   $carbon_home        = "${install_dir}/${pack_extracted_dir}"
   $patches_abs_dir    = "${carbon_home}/${patches_dir}"
 
+  notice("Installing WSO2 Product: ${::product_name} Version: ${::product_version}")
 
+  # Remove any existing installations
   wso2base::clean { $carbon_home:
     mode              => $maintenance_mode,
     pack_filename     => $pack_filename,
     pack_dir          => $pack_dir
   }
 
+  # Copy the WSO2 product pack, extract and set permissions
   wso2base::install { $carbon_home:
     mode              => $install_mode,
     install_dir       => $install_dir,
     pack_filename     => $pack_filename,
     pack_dir          => $pack_dir,
-    owner             => $owner,
-    group             => $group,
-    product_name      => $product_name,
+    user              => $wso2_user,
+    group             => $wso2_group,
+    product_name      => $::product_name,
     require           => Wso2base::Clean[$carbon_home]
   }
 
+  # Copy any patches to patch directory
   wso2base::patch { $carbon_home:
     patches_abs_dir   => $patches_abs_dir,
     patches_dir       => $patches_dir,
-    owner             => $owner,
-    group             => $group,
-    product_name      => $product_name,
-    product_version   => $product_version,
+    user              => $wso2_user,
+    group             => $wso2_group,
+    product_name      => $::product_name,
+    product_version   => $::product_version,
     notify            => Service["${service_name}"],
     require           => Wso2base::Install[$carbon_home]
   }
 
+  # Populate templates and copy files provided
   wso2base::configure { $carbon_home:
     template_list     => $template_list,
     file_list         => $file_list,
-    owner             => $owner,
-    group             => $group,
+    user              => $wso2_user,
+    group             => $wso2_group,
     service_name      => $service_name,
-    product_name      => $product_name,
-    product_version   => $product_version,
+    service_template  => $service_template,
+    product_name      => $::product_name,
+    product_version   => $::product_version,
     notify            => Service["${service_name}"],
     require           => Wso2base::Patch[$carbon_home]
   }
 
+  # Deploy product artifacts
   wso2base::deploy { $carbon_home:
-    owner             => $owner,
-    group             => $group,
-    product_name      => $product_name,
-    product_version   => $product_version,
+    user              => $wso2_user,
+    group             => $wso2_group,
+    product_name      => $::product_name,
+    product_version   => $::product_version,
     require           => Wso2base::Configure[$carbon_home]
   }
 
+  # Start the service
   service { $service_name:
-    ensure           => running,
-    hasstatus        => true,
-    hasrestart       => true,
-    enable           => true,
-    require          => [Wso2base::Deploy[$carbon_home]]
+    ensure            => running,
+    hasstatus         => true,
+    hasrestart        => true,
+    enable            => true,
+    require           => [Wso2base::Deploy[$carbon_home]]
   }
 }
