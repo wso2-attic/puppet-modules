@@ -1,0 +1,104 @@
+---
+classes:
+  - wso2bps
+pack_filename: "%{::product_name}-%{::product_version}.zip"
+pack_extracted_dir: "%{::product_name}-%{::product_version}"
+template_list :
+  - bin/wso2server.sh
+  - repository/conf/axis2/axis2.xml
+  - repository/conf/datasources/activiti-datasources.xml
+  - repository/conf/datasources/bps-datasources.xml
+  - repository/conf/datasources/master-datasources.xml
+  - repository/conf/tomcat/catalina-server.xml
+  - repository/conf/activiti.xml
+  - repository/conf/bps.xml
+  - repository/conf/carbon.xml
+  - repository/conf/humantask.xml
+  - repository/conf/jndi.properties
+  - repository/conf/registry.xml
+  - repository/conf/user-mgt.xml
+service_name: wso2bps
+service_template: wso2base/wso2service.erb
+file_list: []
+
+jvm:
+  jvm_memory_xms: 256m
+  jvm_memory_xmx: 1024m
+  jvm_memory_max_perm_size: 256m
+
+so_timeout: 600000
+connection_timeout: 600000
+
+clustering:
+  enable: false
+  membership_scheme: multicast
+  local_member_host: 127.0.0.1
+  local_member_port: 4000
+  wka :
+         members :
+           -
+             hostname : localhost
+             port : 4000
+           -
+             hostname : localhost
+             port : 4001
+
+
+domain: wso2.carbon.domain
+sub_domain: worker
+
+mex_timeout: 600000
+external_service_timeout: 600000
+max_connections_per_host: 350
+max_total_connections: 400
+ode_scheduler_thread_pool_size: 50
+scheduler_config_max_thread_pool_size: 50
+enable_humantask_caching: false
+http_proxy_port: "%{::http_proxy_port}"
+https_proxy_port: "%{::https_proxy_port}"
+
+datasources :
+  config_db :
+    driver :
+    url :
+    user : root
+    password : root
+    securevault : false
+    jndi_config :
+  gov_db :
+    driver :
+    url :
+    user : root
+    password : root
+    securevault : false
+    jndi_config :
+  user_db :
+    driver :
+    url :
+    user : root
+    password : root
+    securevault : false
+    jndi_config :
+  local_db :
+    driver :
+    url :
+    user :
+    password :
+    securevault: false
+    jndi_config :
+  bps_ds_db :
+    driver :
+    url :
+    user :
+    password :
+    securevault: false
+    jndi_config : bpsds
+  activiti_db :
+    driver :
+    url :
+    user :
+    password :
+    securevault: false
+    jndi_config :
+
+

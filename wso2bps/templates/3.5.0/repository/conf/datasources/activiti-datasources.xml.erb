@@ -1,0 +1,57 @@
+<datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
+  
+    <providers>
+        <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
+    </providers>
+  
+    <datasources>
+        <%- if @datasources['activiti_db']['url']  != nil -%>
+      	<datasource>
+            <name>ACTIVITI_DB</name>
+            <description>The datasource used for activiti engine</description>
+            <jndiConfig>
+                <name><%= @datasources['activiti_db']['jndi_config'] %></name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url><%= @datasources['activiti_db']['url'] %></url>
+                    <username><%= @datasources['activiti_db']['user'] %></username>
+                    <%- if @datasources['activiti_db']['securevault'] == true -%>
+                    <password svns:secretAlias="Datasources.WSO2_CARBON_DB.Configuration.Password">password</password>
+                    <%- else -%>
+                    <password><%= @datasources['activiti_db']['password'] %></password>
+                    <%- end -%>
+                    <driverClassName><%= @datasources['activiti_db']['driver'] %></driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+  		<%- else -%>
+        <datasource>
+            <name>ACTIVITI_DB</name>
+            <description>The datasource used for activiti engine</description>
+            <jndiConfig>
+                <name>jdbc/ActivitiDB</name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url>jdbc:h2:repository/database/activiti;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000</url>
+                    <username>wso2carbon</username>
+                    <password>wso2carbon</password>
+                    <driverClassName>org.h2.Driver</driverClassName>
+                    <maxActive>50</maxActive>
+                    <maxWait>60000</maxWait>
+                    <testOnBorrow>true</testOnBorrow>
+                    <validationQuery>SELECT 1</validationQuery>
+                    <validationInterval>30000</validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+		<%- end -%>
+    </datasources>
+
+</datasources-configuration>

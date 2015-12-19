@@ -1,0 +1,16 @@
+---
+classes :
+    - 'basic_package'
+    - 'java'
+basic_package : - 'wget'
+                - 'openssh-clients'
+                - 'mc'
+                - 'vim-common'
+                - 'git'
+                - 'tmux'
+                - 'iptables'
+                - 'ruby'
+                - 'ruby-devel'
+                - 'rubygems'
+basic_erase_package : -
+gem_package : -
