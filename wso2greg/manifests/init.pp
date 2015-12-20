@@ -30,7 +30,7 @@ class wso2greg {
   $mgt_hostname       = hiera("wso2::mgt_hostname")
   $datasources        = hiera("wso2::datasources")
   $clustering         = hiera("wso2::clustering")
-  $dep_sync           = hiera("wso2::dep_sync")
+  $dep_sync           = hiera_hash("wso2::dep_sync")
   $ports              = hiera("wso2::ports")
   $wso2_user          = hiera("wso2::user")
   $wso2_group         = hiera("wso2::group")

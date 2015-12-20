@@ -30,11 +30,38 @@ wso2::clustering :
     k8s :
     ppaas :
 
-
 wso2::datasources :
   -
-    name: WSO2_CONFIG_DB
+    name: WSO2_CARBON_DB
     description: The datasource used for registry and user manager
+    driver : org.h2.Driver
+    url : jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    user : wso2carbon
+    password : wso2carbon
+    #securevault :
+    jndi_config : jdbc/WSO2CarbonDB
+    maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait: "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow: "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    validationQuery: "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval: "%{hiera('wso2::datasources::common::validationInterval')}"
+  -
+    name: WSO2AM_DB
+    description: The datasource used for API Manager database
+    driver : org.h2.Driver
+    url : jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    user : wso2carbon
+    password : wso2carbon
+    #securevault :
+    jndi_config : jdbc/WSO2AM_DB
+    maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait: "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow: "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    validationQuery: "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval: "%{hiera('wso2::datasources::common::validationInterval')}"
+  -
+    name: WSO2_CONFIG_DB
+    description: The datasource used for config registry
     driver : org.h2.Driver
     url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     user : wso2carbon
@@ -51,7 +78,7 @@ wso2::datasources :
     mount_target_path : /_system/config
   -
     name : WSO2_GOV_DB
-    description: The datasource used for API Manager database
+    description: The datasource used for gov registry
     driver : org.h2.Driver
     url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     user : wso2carbon
@@ -63,6 +90,6 @@ wso2::datasources :
     testOnBorrow: "%{hiera('wso2::datasources::common::testOnBorrow')}"
     validationQuery: "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval: "%{hiera('wso2::datasources::common::validationInterval')}"
-    mount : true
+    mount : false
     mount_path : /_system/gov
     mount_target_path : /_system/gov

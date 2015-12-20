@@ -45,12 +45,21 @@
        This is will become part of the End Point Reference of the
        services deployed on this server instance.
     -->
+<% if @hostname %>
+    <HostName><%= @hostname %></HostName>
+<%- else -%>
     <!--HostName>www.wso2.org</HostName-->
+<% end %>
 
     <!--
     Host name to be used for the Carbon management console
     -->
+<% if @mgt_hostname %>
+    <MgtHostName><%= @mgt_hostname %></MgtHostName>
+<%- else -%>
     <!--MgtHostName>mgt.wso2.org</MgtHostName-->
+<% end %>
+
 
     <!--
         The URL of the back end server. This is where the admin services are hosted and
@@ -499,24 +508,28 @@
 	In master nodes you need to set both AutoCommit and AutoCheckout to true
 	and in  worker nodes set only AutoCheckout to true.
     -->
+    <%- if @dep_sync['enabled'] && @dep_sync['enabled'] == true -%>
     <DeploymentSynchronizer>
-	<%- if @dep_sync['enable'] == true -%>
         <Enabled>true</Enabled>
-	<%- else -%>
-        <Enabled>false</Enabled>
-	<%- end -%>
-	<%- if @dep_sync['enable'] == true && @dep_sync['auto_commit'] == true -%>
+	<%- if @dep_sync['auto_commit'] == true -%>
         <AutoCommit>true</AutoCommit>
 	<%- else -%>
         <AutoCommit>false</AutoCommit>
 	<%- end -%>
+	<%- if @dep_sync['auto_checkout'] == false -%>
+        <AutoCheckout>false</AutoCheckout>
+	<%- else -%>
         <AutoCheckout>true</AutoCheckout>
-        <RepositoryType>svn</RepositoryType>
-        <SvnUrl>@dep_sync['svn']['url']</SvnUrl>
-        <SvnUser>@dep_sync['svn']['user']</SvnUser>
-        <SvnPassword>@dep_sync['svn']['password']</SvnPassword>
-        <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
+	<%- end -%>
+        <RepositoryType><%= @dep_sync['repository_type'] -%></RepositoryType>
+        <%- if @dep_sync['repository_type'] == "svn" -%>
+        <SvnUrl><%= @dep_sync['svn']['url'] -%></SvnUrl>
+        <SvnUser><%= @dep_sync['svn']['user'] -%></SvnUser>
+        <SvnPassword><%= @dep_sync['svn']['password'] -%></SvnPassword>
+        <SvnUrlAppendTenantId><%= @dep_sync['svn']['append_tenant_id'] -%></SvnUrlAppendTenantId>
+        <%- end -%>
     </DeploymentSynchronizer>
+    <%- end -%>
 
     <!-- Deployment Synchronizer Configuration. Uncomment the following section when running with "registry based" dep sync.
         In master nodes you need to set both AutoCommit and AutoCheckout to true
