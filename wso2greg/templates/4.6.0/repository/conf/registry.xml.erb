@@ -17,41 +17,21 @@
     <!-- This handler provides the feature to add a simlink to a given resource -->
 
     <%- @datasources.each do |datasource| -%>
-    <%- if datasource['name'] == "WSO2_GOV_DB" -%>
-    <dbConfig name="governance">
+    <%- if datasource['mount'] && datasource['mount'] == true -%>
+    <dbConfig name="<%= datasource['name'] %>">
 	<dataSource><%= datasource['jndi_config'] %></dataSource>
     </dbConfig>
     <remoteInstance url="https://localhost:9443/registry">
-        <id>governance</id>
-        <dbConfig>governance</dbConfig>
+        <id><%= datasource['name'] %></id>
+        <dbConfig><%= datasource['name'] %></dbConfig>
         <readOnly>false</readOnly>
         <registryRoot>/</registryRoot>
         <enableCache>true</enableCache>
         <cacheId><%= datasource['user'] %>@<%= datasource['url'] %></cacheId>
     </remoteInstance>
-    <mount path="/_system/governance" overwrite="virtual">
-        <instanceId>governance</instanceId>
-        <targetPath>/_system/governance</targetPath>
-    </mount>
-    <%- end -%>
-    <%- end -%>
-
-    <%- @datasources.each do |datasource| -%>
-    <%- if datasource['name'] == "WSO2_CONFIG_DB" -%>
-    <dbConfig name="config">
-    	<dataSource><%= datasource['jndi_config'] %></dataSource>
-    </dbConfig>
-    <remoteInstance url="https://localhost:9443/registry">
-        <id>config</id>
-        <dbConfig>config</dbConfig>
-        <readOnly>false</readOnly>
-        <registryRoot>/</registryRoot>
-        <enableCache>true</enableCache>
-        <cacheId><%= datasource['user'] %>@<%= datasource['url'] %></cacheId>
-    </remoteInstance>
-    <mount path="/_system/config" overwrite="virtual">
-        <instanceId>config</instanceId>
-        <targetPath>/_system/config</targetPath>
+    <mount path="<%= datasource['mount_path'] %>" overwrite="virtual">
+        <instanceId><%= datasource['name'] %></instanceId>
+        <targetPath><%= datasource['mount_target_path'] %></targetPath>
     </mount>
     <%- end -%>
     <%- end -%>
