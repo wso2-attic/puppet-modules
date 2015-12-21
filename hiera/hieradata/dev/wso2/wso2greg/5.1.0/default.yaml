@@ -7,12 +7,15 @@ wso2::template_list :
   - repository/conf/axis2/axis2.xml
   - repository/conf/carbon.xml
   - repository/conf/registry.xml
+  - repository/conf/user-mgt.xml
   - repository/conf/datasources/master-datasources.xml
   - repository/conf/tomcat/catalina-server.xml
   - bin/wso2server.sh
 wso2::service_name: wso2greg
 wso2::service_template: wso2base/wso2service.erb
-wso2::file_list: []
+
+wso2::file_list :
+  - repository/components/lib/mysql-connector-java-5.1.38.jar
 
 wso2::clustering :
     enable : false
@@ -75,39 +78,23 @@ wso2::master_datasources :
     validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
     defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
     validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
-  WSO2_CONFIG_DB :
-    description : The datasource used for config registry
-    driverClassName : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username : wso2carbon
-    password : wso2carbon
+  WSO2USER_DB :
+    description : The datasource is used for user mangement and userstore
+    driverClassName : com.mysql.jdbc.Driver
+    url : jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
+    username : root
+    password : root
     #securevault :
-    jndi_config : jdbc/WSO2_CONFIG_DB
+    jndi_config : jdbc/WSO2USER_DB
     maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
     maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
     testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
     defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
     validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
-    mount :
-     enabled : false
-     path : /_system/config
-     target_path : /_system/config
-  WSO2_GOV_DB :
-    description : The datasource used for gov registry
-    driverClassName : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username : wso2carbon
-    password : wso2carbon
-    #securevault : false
-    jndi_config : jdbc/WSO2_GOV_DB
-    maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
-    maxWait: "%{hiera('wso2::datasources::common::maxWait')}"
-    testOnBorrow: "%{hiera('wso2::datasources::common::testOnBorrow')}"
-    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
-    validationQuery: "%{hiera('wso2::datasources::mysql::validationQuery')}"
-    validationInterval: "%{hiera('wso2::datasources::common::validationInterval')}"
-    mount :
-     enabled : false
-     path : /_system/gov
-     target_path : /_system/gov
+  WSO2_CARBON_DB :
+    driverClassName : com.mysql.jdbc.Driver
+    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+    username : root
+    password : root
+    jndi_config : jdbc/WSO2CarbonDB
