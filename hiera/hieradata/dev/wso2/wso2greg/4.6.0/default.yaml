@@ -14,12 +14,6 @@ wso2::service_name: wso2greg
 wso2::service_template: wso2base/wso2service.erb
 wso2::file_list: []
 
-wso2::ports:
-  offset : 0
-  mapping :
-    "9763" : 8280
-    "9443" : 8243
-
 wso2::clustering :
     enable : false
     local_member_host : 127.0.0.1

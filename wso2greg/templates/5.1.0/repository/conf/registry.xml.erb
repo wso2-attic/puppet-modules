@@ -14,10 +14,10 @@
         <dataSource>jdbc/WSO2CarbonDB</dataSource>
     </dbConfig>
 
-<%- @master_datasources.each do |datasource| -%>
-   <%- if datasource['mount'] && datasource['mount'] == true -%>
-    <dbConfig name="<%= datasource['name'] %>">
-	      <dataSource><%= datasource['jndi_config'] %></dataSource>
+<%- @master_datasources.each do |datasource_name, datasource| -%>
+  <%- if datasource['mount'] && datasource['mount'] == true -%>
+    <dbConfig name="<%= datasource_name %>">
+	<dataSource><%= datasource['jndi_config'] %></dataSource>
     </dbConfig>
     <remoteInstance url="https://localhost:9443/registry">
         <id><%= datasource_name %></id>
@@ -31,8 +31,7 @@
         <instanceId><%= datasource_name %></instanceId>
         <targetPath><%= datasource['mount_target_path'] %></targetPath>
     </mount>
-
-   <%- end -%>
+  <%- end -%>
 <%- end -%>
 
 
