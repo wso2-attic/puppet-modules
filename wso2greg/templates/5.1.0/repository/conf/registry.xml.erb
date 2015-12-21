@@ -17,9 +17,9 @@
     <!-- This handler provides the feature to add a simlink to a given resource -->
 
 <%- @datasources.each do |datasource| -%>
-   <%- if datasource['mount'] && datasource['mount'] == true -%>
+  <%- if datasource['mount'] && datasource['mount'] == true -%>
     <dbConfig name="<%= datasource['name'] %>">
-	      <dataSource><%= datasource['jndi_config'] %></dataSource>
+	<dataSource><%= datasource['jndi_config'] %></dataSource>
     </dbConfig>
     <remoteInstance url="https://localhost:9443/registry">
         <id><%= datasource['name'] %></id>
@@ -33,7 +33,7 @@
         <instanceId><%= datasource['name'] %></instanceId>
         <targetPath><%= datasource['mount_target_path'] %></targetPath>
     </mount>
-   <%- end -%>
+  <%- end -%>
 <%- end -%>
 
     <handler class="org.wso2.carbon.registry.extensions.handlers.ExtensionsSymLinkHandler" profiles="default,uddi-registry">

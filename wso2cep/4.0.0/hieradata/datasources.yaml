@@ -1,0 +1,11 @@
+---
+datasources:
+ registry_db_connection_url : jdbc:mysql://192.168.57.170:3306/regdb?autoReconnect=true
+ registry_db_user : root
+ registry_db_password : root
+ registry_db_driver_name : com.mysql.jdbc.Driver
+ userstore_db_connection_url : jdbc:mysql://192.168.57.170:3306/userdb?autoReconnect=true
+ userstore_db_user : root
+ userstore_db_password : root
+ userstore_db_driver_name : com.mysql.jdbc.Driver
+

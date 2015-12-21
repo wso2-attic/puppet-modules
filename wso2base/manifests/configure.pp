@@ -16,6 +16,7 @@
 
 define wso2base::configure ($template_list, $file_list, $user, $group, $service_name, $service_template, $product_name, $product_version) {
   $carbon_home  = $name
+  notice("Configuring WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 
   if ($template_list != undef and size($template_list) > 0) {
     wso2base::push_templates {

@@ -22,13 +22,42 @@ class wso2base {
   $packages           = hiera_array("packages")
   $java_install_dir   = hiera("java_install_dir")
   $java_source_file   = hiera("java_source_file")
-  $wso2_user          = hiera("wso2::user")
-  $wso2_group         = hiera("wso2::group")
 
-  # symlink to Java install directory
+  # symlink path to Java install directory
   $java_home_sym_link = hiera("java_home")
 
-  ensure_resource('file', $java_install_dir, { ensure => 'directory' })
+  $wso2_user          = hiera("wso2::user")
+  $wso2_group         = hiera("wso2::group")
+  $maintenance_mode   = hiera("wso2::maintenance_mode")
+  $install_mode       = hiera("wso2::install_mode")
+  $install_dir        = hiera("wso2::install_dir")
+  $pack_dir           = hiera("wso2::pack_dir")
+  $pack_filename      = hiera("wso2::pack_filename")
+  $pack_extracted_dir = hiera("wso2::pack_extracted_dir")
+  $hostname           = hiera("wso2::hostname")
+  $mgt_hostname       = hiera("wso2::mgt_hostname")
+  $common_datasources = hiera("wso2::datasources::common")
+  $datasources        = hiera("wso2::datasources")
+  $clustering         = hiera("wso2::clustering")
+  $dep_sync           = hiera("wso2::dep_sync")
+  $ports              = hiera("wso2::ports")
+  $template_list      = hiera("wso2::template_list")
+  $file_list          = hiera("wso2::file_list")
+  $patches_dir        = hiera("wso2::patches_dir")
+  $service_name       = hiera("wso2::service_name")
+  $service_template   = hiera("wso2::service_template")
+
+  $carbon_home        = "${install_dir}/${pack_extracted_dir}"
+  $patches_abs_dir    = "${carbon_home}/${patches_dir}"
+  $java_home          = $java_home_sym_link
+
+  # Install system packages
+  package { $packages: ensure => installed }
+
+  ensure_resource('file', $java_install_dir, {
+    ensure  => 'directory',
+    require => Package[$packages]
+  })
 
   file { '/etc/environment':
     ensure            => present,
@@ -64,17 +93,17 @@ class wso2base {
     require           => [User[$wso2_user], File[$java_install_dir]]
   }
 
+  # create a symlink for Java deployment
   file { $java_home_sym_link:
     ensure            => 'link',
     target            => $java_install_dir,
     require           => Java::Setup[$java_source_file]
   }
 
+  # set JAVA_HOME environment variable and include JAVA_HOME/bin in PATH for all users
   file { "/etc/profile.d/set_java_home.sh":
     ensure            => present,
     content           => inline_template("JAVA_HOME=${java_home_sym_link}\nPATH=${java_home_sym_link}/bin:\$PATH"),
     require           => File[$java_home_sym_link]
   }
-
-  package { $packages: ensure => installed }
 }
