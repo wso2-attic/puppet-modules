@@ -8,7 +8,7 @@ wso2::user : wso2user
 wso2::group : wso2
 wso2::pack_dir : /mnt/packs
 wso2::ports:
-  offset : 0
+  offset : 1
 wso2::hostname : "%{::clientcert}"
 wso2::mgt_hostname : "%{::clientcert}"
 

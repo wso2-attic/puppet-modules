@@ -31,7 +31,7 @@ class wso2greg {
   $datasources        = hiera("wso2::datasources")
   $clustering         = hiera("wso2::clustering")
   $dep_sync           = hiera_hash("wso2::dep_sync")
-  $ports              = hiera("wso2::ports")
+  $ports              = hiera_hash("wso2::ports")
   $wso2_user          = hiera("wso2::user")
   $wso2_group         = hiera("wso2::group")
   $template_list      = hiera("wso2::template_list")
@@ -45,6 +45,7 @@ class wso2greg {
   $patches_abs_dir    = "${carbon_home}/${patches_dir}"
 
   notice("Installing WSO2 Product: ${::product_name} Version: ${::product_version}")
+  notice($ports)
 
   # Remove any existing installations
   wso2base::clean { $carbon_home:
