@@ -1,0 +1,23 @@
+--- 
+hanode: 
+  cluster_domain: wso2.cep.ha.domain
+  clustering: true
+  depsync: true
+  ha_eventsynch_port: 11224
+  ha_mgt_port: 10005
+  local_member_port: 4000
+  members: 
+    - 
+      name: hanodeworker1
+      port: 4000
+    - 
+      name: hanodeworker2
+      port: 4000
+    - 
+      name: hanodepresenter
+      port: 4000
+  membership_scheme: wka
+  offset: 0
+  presenter: false
+  presenter_port: 11000
+  worker: true
