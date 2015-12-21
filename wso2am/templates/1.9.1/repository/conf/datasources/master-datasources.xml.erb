@@ -4,7 +4,7 @@
     </providers>
 
     <datasources>
-<%- @datasources.each do |datasource| -%>
+<%- @common_datasources.each do |datasource| -%>
         <datasource>
             <name><%= datasource['name'] %></name>
             <description><%= datasource['description'] %></description>

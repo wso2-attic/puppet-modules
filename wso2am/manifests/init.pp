@@ -28,6 +28,7 @@ class wso2am {
   $pack_extracted_dir = hiera("wso2::pack_extracted_dir")
   $hostname           = hiera("wso2::hostname")
   $mgt_hostname       = hiera("wso2::mgt_hostname")
+  $common_datasources = hiera("wso2::datasources::common")
   $datasources        = hiera("wso2::datasources")
   $clustering         = hiera("wso2::clustering")
   $dep_sync           = hiera("wso2::dep_sync")
