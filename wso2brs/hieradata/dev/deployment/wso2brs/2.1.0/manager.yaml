@@ -1,0 +1,33 @@
+
+sub_domain: mgt
+mgt_hostname:
+
+hostname: %{::hostname}
+
+
+mb_host: %{::mb_host}
+mb_port: %{::mb_port}
+
+
+clustering:
+  enable: true
+  membership_scheme: multicast
+  local_member_host: %{::local_member_host}
+  local_member_port: 4000
+  wka :
+         members :
+           -
+             hostname : localhost
+             port : 4000
+           -
+             hostname : localhost
+             port : 4001
+  private_paas:
+    cluster_ids:  %{::cluster_ids}
+  k8:
+    k8_master:
+    k8_namespace:
+    k8_services:
+
+http_proxy_port: %{::http_proxy_port}
+https_proxy_port: %{::https_proxy_port}

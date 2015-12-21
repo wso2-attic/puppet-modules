@@ -4,8 +4,14 @@ classes:
 pack_filename: "%{::product_name}-%{::product_version}.zip"
 pack_extracted_dir: "%{::product_name}-%{::product_version}"
 template_list :
-  - repository/conf/carbon.xml
   - bin/wso2server.sh
+  - repository/conf/axis2/axis2.xml
+  - repository/conf/datasources/master-datasources.xml
+  - repository/conf/tomcat/catalina-server.xml
+  - repository/conf/carbon.xml
+  - repository/conf/jndi.properties
+  - repository/conf/registry.xml
+  - repository/conf/user-mgt.xml
 service_name: wso2brs
 service_template: wso2base/wso2service.erb
 file_list: []
@@ -42,31 +48,32 @@ datasources :
     password : root
     securevault : false
     jndi_config : jdbc/user_db
-  apimgt_db :
-    driver : com.mysql.jdbc.Driver
-    url : jdbc:mysql://localhost:3306/apimgt_db?autoReconnect=true&amp;relaxAutoCommit=true
-    user : root
-    password : root
-    securevault : false
-    jndi_config : jdbc/WSO2AM_DB
 
-clustering :
-    enable : false
-    local_member_host : 127.0.0.1
-    local_member_port : 4000
-    membership_scheme : wka
-    wka : 
-       members : 
-         - 
-           hostname : localhost
-           port : 4000
-         -
-           hostname : localhost
-           port : 4001
-    multicast :
-       domain : wso2.carbon.domain
-    k8s : 
-    ppaas :
+jvm:
+  jvm_memory_xms: 256m
+  jvm_memory_xmx: 1024m
+  jvm_memory_max_perm_size: 256m
+
+so_timeout: 600000
+connection_timeout: 600000
+
+clustering:
+  enable: false
+  membership_scheme: multicast
+  local_member_host: 127.0.0.1
+  local_member_port: 4000
+  wka :
+         members :
+           -
+             hostname : localhost
+             port : 4000
+           -
+             hostname : localhost
+             port : 4001
+
+
+domain: wso2.carbon.domain
+sub_domain: worker
 
 dep_sync :
     enable : false
