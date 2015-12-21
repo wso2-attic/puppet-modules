@@ -582,28 +582,50 @@
 	In master nodes you need to set both AutoCommit and AutoCheckout to true
 	and in  worker nodes set only AutoCheckout to true.
     -->
-    <%- if @dep_sync['enabled'] && @dep_sync['enabled'] == true -%>
     <DeploymentSynchronizer>
+    <%- if @dep_sync['enabled'] && @dep_sync['enabled'] == true -%>
         <Enabled>true</Enabled>
-	<%- if @dep_sync['auto_commit'] == true -%>
+    <%- else -%>
+        <Enabled>false</Enabled>
+    <%- end -%>
+	<%- if @dep_sync['enabled'] && @dep_sync['auto_commit'] == true -%>
         <AutoCommit>true</AutoCommit>
 	<%- else -%>
         <AutoCommit>false</AutoCommit>
 	<%- end -%>
-	<%- if @dep_sync['auto_checkout'] == false -%>
+	<%- if @dep_sync['enabled'] && @dep_sync['auto_checkout'] == false -%>
         <AutoCheckout>false</AutoCheckout>
 	<%- else -%>
         <AutoCheckout>true</AutoCheckout>
 	<%- end -%>
+	<%- if @dep_sync['enabled'] && @dep_sync['repository_type'] != "svn" -%>
         <RepositoryType><%= @dep_sync['repository_type'] -%></RepositoryType>
-        <%- if @dep_sync['repository_type'] == "svn" -%>
-        <SvnUrl><%= @dep_sync['svn']['url'] -%></SvnUrl>
-        <SvnUser><%= @dep_sync['svn']['user'] -%></SvnUser>
-        <SvnPassword><%= @dep_sync['svn']['password'] -%></SvnPassword>
-        <SvnUrlAppendTenantId><%= @dep_sync['svn']['append_tenant_id'] -%></SvnUrlAppendTenantId>
+	<%- else -%>
+        <RepositoryType>svn</RepositoryType>
+	<%- end -%>
+    <%- if @dep_sync['enabled'] && @dep_sync['repository_type'] == "svn" -%>
+        <%- if dep_sync['svn']['url'] -%>
+            <SvnUrl><%= @dep_sync['svn']['url'] -%></SvnUrl>
+        <%- else -%>
+            <SvnUrl>http://svnrepo.example.com/repos/</SvnUrl>
         <%- end -%>
-    </DeploymentSynchronizer>
+        <%- if @dep_sync['svn']['user'] -%>
+            <SvnUser><%= @dep_sync['svn']['user'] -%></SvnUser>
+        <%- else -%>
+            <SvnUser>username</SvnUser>
+        <%- end -%>
+            <%- if @dep_sync['svn']['password'] -%>
+            <SvnPassword><%= @dep_sync['svn']['password'] -%></SvnPassword>
+        <%- else -%>
+            <SvnPassword>password</SvnPassword>
+        <%- end -%>
+            <%- if @dep_sync['svn']['append_tenant_id'] && @dep_sync['svn']['append_tenant_id'] == false-%>
+            <SvnUrlAppendTenantId>false</SvnUrlAppendTenantId>
+        <%- else -%>
+            <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
+        <%- end -%>
     <%- end -%>
+    </DeploymentSynchronizer>
 
     <!-- Deployment Synchronizer Configuration. Uncomment the following section when running with "registry based" dep sync.
         In master nodes you need to set both AutoCommit and AutoCheckout to true

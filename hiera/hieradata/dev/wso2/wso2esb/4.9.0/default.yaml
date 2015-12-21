@@ -14,12 +14,6 @@ wso2::service_name: wso2greg
 wso2::service_template: wso2base/wso2service.erb
 wso2::file_list: []
 
-wso2::ports:
-  offset : 0
-  mapping :
-    "9763" : 8280
-    "9443" : 8243
-
 wso2::clustering :
     enable : false
     local_member_host : 127.0.0.1
@@ -48,20 +42,6 @@ wso2::datasources :
     password : wso2carbon
     #securevault :
     jndi_config : jdbc/WSO2CarbonDB
-    maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
-    maxWait: "%{hiera('wso2::datasources::common::maxWait')}"
-    testOnBorrow: "%{hiera('wso2::datasources::common::testOnBorrow')}"
-    validationQuery: "%{hiera('wso2::datasources::mysql::validationQuery')}"
-    validationInterval: "%{hiera('wso2::datasources::common::validationInterval')}"
-  -
-    name: WSO2AM_DB
-    description: The datasource used for API Manager database
-    driver : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    user : wso2carbon
-    password : wso2carbon
-    #securevault :
-    jndi_config : jdbc/WSO2AM_DB
     maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
     maxWait: "%{hiera('wso2::datasources::common::maxWait')}"
     testOnBorrow: "%{hiera('wso2::datasources::common::testOnBorrow')}"
