@@ -2,10 +2,9 @@
     <providers>
         <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
     </providers>
+
     <datasources>
-
 <%- @datasources.each do |datasource| -%>
-
         <datasource>
             <name><%= datasource['name'] %></name>
             <description><%= datasource['description'] %></description>
@@ -18,10 +17,11 @@
                     <username><%= datasource['username'] %></username>
    <%- if datasource['secretAlias'] -%>
                     <password svns:secretAlias="<%= datasource['secretAlias'] %>">password</password>
-      <%- else -%>
+   <%- else -%>
                     <password><%= datasource['password'] %></password>
    <%- end -%>
-                    <driverClassName><%= datasource['driverClass'] %></driverClassName>
+                    <driverClassName><%= datasource['driverClassName'] %></driverClassName>
+                    <defaultAutoCommit><%= datasource['defaultAutoCommit'] %></defaultAutoCommit>
                     <maxActive><%= datasource['maxActive'] %></maxActive>
                     <maxWait><%= datasource['maxWait'] %></maxWait>
                     <testOnBorrow><%= datasource['testOnBorrow'] %></testOnBorrow>
@@ -30,7 +30,7 @@
                 </configuration>
             </definition>
         </datasource>
-<%- end -%>
 
-     </datasources>
+<%- end -%>
+    </datasources>
 </datasources-configuration>

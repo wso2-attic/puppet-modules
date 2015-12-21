@@ -1,0 +1,37 @@
+--- 
+distributednode: 
+  cluster_domain: wso2.cep.ha.domain
+  clustering: true
+  depsync: true
+  local_member_port: 4000
+  members: 
+    - 
+      name: distributednode_manager
+      port: 4000
+    - 
+      name: distributednode_managerworker
+      port: 4000
+    - 
+      name: distributednode_worker
+      port: 4000
+    - 
+      name: distributednode_presenterworker
+      port: 4000
+    - 
+      name: distributednode_presenter
+      port: 4000
+  managers: 
+    - 
+      name: distributednode_manager
+      port: 4000
+    - 
+      name: distributednode_managerworker
+      port: 4000
+  membership_scheme: wka
+  offset: 0
+  presenter: true
+  presenter_port: 11000
+  worker: true
+  manager: false
+  manager_port: 8904
+  topology_workers: 2
