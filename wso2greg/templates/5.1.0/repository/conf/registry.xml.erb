@@ -14,7 +14,7 @@
         <dataSource>jdbc/WSO2CarbonDB</dataSource>
     </dbConfig>
 
-<%- @datasources.each do |datasource| -%>
+<%- @master_datasources.each do |datasource| -%>
    <%- if datasource['mount'] && datasource['mount'] == true -%>
     <dbConfig name="<%= datasource['name'] %>">
 	      <dataSource><%= datasource['jndi_config'] %></dataSource>
@@ -25,7 +25,7 @@
         <readOnly>false</readOnly>
         <registryRoot>/</registryRoot>
         <enableCache>true</enableCache>
-        <cacheId><%= datasource['user'] %>@<%= datasource['url'] %></cacheId>
+        <cacheId><%= datasource['username'] %>@<%= datasource['url'] %></cacheId>
     </remoteInstance>
     <mount path="<%= datasource['mount_path'] %>" overwrite="virtual">
         <instanceId><%= datasource_name %></instanceId>

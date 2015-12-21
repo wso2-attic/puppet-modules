@@ -38,50 +38,39 @@ wso2::clustering :
     ppaas :
 
 wso2::datasources :
-  WSO2_CARBON_DB :
-    description : The datasource used for registry and user manager
-    driver : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    user : wso2carbon
-    password : wso2carbon
-    #securevault :
-    jndi_config : jdbc/WSO2CarbonDB
-    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
-    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
-    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
-    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
-    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
   WSO2AM_DB :
     description : The datasource used for API Manager database
-    driver : org.h2.Driver
+    driverClassName : org.h2.Driver
     url : jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    user : wso2carbon
+    username : wso2carbon
     password : wso2carbon
     #securevault :
     jndi_config : jdbc/WSO2AM_DB
     maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
     maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
     testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
     validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
   WSO2BAM_DATASOURCE :
     description : The datasource used for analyzer data
-    driver : org.h2.Driver
+    driverClassName : org.h2.Driver
     url : jdbc:h2:repository/database/samples/BAM_STATS_DB;AUTO_SERVER=TRUE
-    user : wso2carbon
+    username : wso2carbon
     password : wso2carbon
     #securevault :
     jndi_config : jdbc/WSO2BAM_DATASOURCE
     maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
     maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
     testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
     validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
   JAGH2 :
     description : The datasource used for by the Jaggery Storage Manager
-    driver : org.h2.Driver
+    driverClassName : org.h2.Driver
     url : jdbc:h2:repository/database/ES_STORAGE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    user : sa
+    username : sa
     password : 
     #securevault :
     jndi_config : jdbc/test
@@ -89,37 +78,41 @@ wso2::datasources :
     maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
     testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
     validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
     validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
   WSO2_CONFIG_DB :
     description : The datasource used for config registry
-    driver : org.h2.Driver
+    driverClassName : org.h2.Driver
     url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    user : wso2carbon
+    username : wso2carbon
     password : wso2carbon
     #securevault :
     jndi_config : jdbc/WSO2_CONFIG_DB
     maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
     maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
     testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
     validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
-    mount : false
-    mount_path : /_system/config
-    mount_target_path : /_system/config
+    mount :
+     enabled : false
+     path : /_system/config
+     target_path : /_system/config
   WSO2_GOV_DB :
     description : The datasource used for gov registry
-    driver : org.h2.Driver
+    driverClassName : org.h2.Driver
     url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    user : wso2carbon
+    username : wso2carbon
     password : wso2carbon
     #securevault : false
     jndi_config : jdbc/WSO2_GOV_DB
     maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
     maxWait: "%{hiera('wso2::datasources::common::maxWait')}"
     testOnBorrow: "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
     validationQuery: "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval: "%{hiera('wso2::datasources::common::validationInterval')}"
     mount :
-     enaled: false
+     enabled : false
      path : /_system/gov
      target_path : /_system/gov

@@ -16,7 +16,7 @@
 
     <!-- This handler provides the feature to add a simlink to a given resource -->
 
-<%- @datasources.each do |datasource_name, datasource| -%>
+<%- @master_datasources.each do |datasource_name, datasource| -%>
   <%- if datasource['mount'] && datasource['mount'] == true -%>
     <dbConfig name="<%= datasource_name %>">
 	<dataSource><%= datasource['jndi_config'] %></dataSource>
@@ -27,7 +27,7 @@
         <readOnly>false</readOnly>
         <registryRoot>/</registryRoot>
         <enableCache>true</enableCache>
-        <cacheId><%= datasource['user'] %>@<%= datasource['url'] %></cacheId>
+        <cacheId><%= datasource['username'] %>@<%= datasource['url'] %></cacheId>
     </remoteInstance>
     <mount path="<%= datasource['mount_path'] %>" overwrite="virtual">
         <instanceId><%= datasource_name %></instanceId>

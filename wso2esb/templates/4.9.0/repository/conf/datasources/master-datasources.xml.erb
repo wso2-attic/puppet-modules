@@ -5,7 +5,7 @@
     </providers>
     <datasources>
 
-        <%- @datasources.each do |datasource_name, datasource| -%>
+        <%- @master_datasources.each do |datasource_name, datasource| -%>
         <datasource>
             <name><%= datasource_name %></name>
             <description><%= datasource['description'] %></description>
@@ -15,13 +15,13 @@
             <definition type="RDBMS">
                 <configuration>
                     <url><%= datasource['url'] %></url>
-                    <username><%= datasource['user'] %></username>
+                    <username><%= datasource['username'] %></username>
                     <%- if datasource['secretAlias'] -%>
                     <password svns:secretAlias="<%= datasource['secretAlias'] %>">password</password>
                     <%- else -%>
                     <password><%= datasource['password'] %></password>
                     <%- end -%>
-                    <driverClassName><%= datasource['driver'] %></driverClassName>
+                    <driverClassName><%= datasource['driverClassName'] %></driverClassName>
                     <maxActive><%= datasource['maxActive'] %></maxActive>
                     <maxWait><%= datasource['maxWait'] %></maxWait>
                     <testOnBorrow><%= datasource['testOnBorrow'] %></testOnBorrow>
