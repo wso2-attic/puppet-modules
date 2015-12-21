@@ -36,16 +36,16 @@ class wso2base {
   $pack_extracted_dir = hiera("wso2::pack_extracted_dir")
   $hostname           = hiera("wso2::hostname")
   $mgt_hostname       = hiera("wso2::mgt_hostname")
-  $common_datasources = hiera("wso2::datasources::common")
-  $datasources        = hiera("wso2::datasources")
-  $clustering         = hiera("wso2::clustering")
-  $dep_sync           = hiera("wso2::dep_sync")
-  $ports              = hiera("wso2::ports")
   $template_list      = hiera("wso2::template_list")
   $file_list          = hiera("wso2::file_list")
   $patches_dir        = hiera("wso2::patches_dir")
   $service_name       = hiera("wso2::service_name")
   $service_template   = hiera("wso2::service_template")
+
+  $master_datasources = hiera_hash("wso2::master_datasources")
+  $clustering         = hiera_hash("wso2::clustering")
+  $dep_sync           = hiera_hash("wso2::dep_sync")
+  $ports              = hiera_hash("wso2::ports")
 
   $carbon_home        = "${install_dir}/${pack_extracted_dir}"
   $patches_abs_dir    = "${carbon_home}/${patches_dir}"

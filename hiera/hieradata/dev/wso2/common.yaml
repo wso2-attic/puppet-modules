@@ -33,9 +33,8 @@ packages:
   - unzip
   - tree
 
-wso2::datasources::common :
-  -
-    name: WSO2_CARBON_DB
+wso2::master_datasources :
+  WSO2_CARBON_DB:
     description: The datasource used for registry and user manager
     driverClassName : org.h2.Driver
     url : jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
@@ -49,6 +48,7 @@ wso2::datasources::common :
     defaultAutoCommit: "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
     validationQuery: "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval: "%{hiera('wso2::datasources::common::validationInterval')}"
+
 
 # Common datasources configuration
 wso2::datasources::common::username : 'wso2carbon'

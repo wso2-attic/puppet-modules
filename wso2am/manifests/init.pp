@@ -20,6 +20,9 @@
 class wso2am inherits wso2base {
   notice("Starting WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 
+  # Product specific Hiera lookups and overrides
+  $am_datasources     = hiera_hash("wso2::am_datasources")
+
   # Remove any existing installations
   wso2base::clean { $carbon_home:
     mode              => $maintenance_mode,
