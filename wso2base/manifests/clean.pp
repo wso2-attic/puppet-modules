@@ -15,6 +15,7 @@
 #----------------------------------------------------------------------------
 
 define wso2base::clean ($mode, $pack_filename, $pack_dir) {
+  notice("Cleaning WSO2 product [name] ${::product_name}, [version] ${::product_version}, [mode] ${mode}")
   if $mode == 'refresh' {
     exec {
       "Remove_lock_file_${name}":

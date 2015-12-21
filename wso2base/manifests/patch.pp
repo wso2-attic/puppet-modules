@@ -15,6 +15,7 @@
 #----------------------------------------------------------------------------
 
 define wso2base::patch ($patches_abs_dir, $patches_dir, $user, $group, $product_name, $product_version) {
+  notice("Patching WSO2 product [name] ${::product_name}, [version] ${::product_version}, [PATCH_DIR] ${patches_abs_dir}")
   file { $patches_abs_dir:
     ensure       => present,
     owner        => $user,
