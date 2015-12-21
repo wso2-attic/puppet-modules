@@ -18,6 +18,8 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
   $carbon_home = $name
   $pack_file_abs_path = "${pack_dir}/${pack_filename}"
 
+  notice("Installing WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
+
   # create directories for installation if they do not exist
   ensure_resource('file', [$install_dir, $pack_dir], { ensure => 'directory' })
 
