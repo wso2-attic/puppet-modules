@@ -5,9 +5,9 @@
     </providers>
     <datasources>
 
-        <%- @datasources.each do |datasource| -%>
+        <%- @datasources.each do |datasource_name, datasource| -%>
         <datasource>
-            <name><%= datasource['name'] %></name>
+            <name><%= datasource_name %></name>
             <description><%= datasource['description'] %></description>
             <jndiConfig>
                 <name><%= datasource['jndi_config'] %></name>
