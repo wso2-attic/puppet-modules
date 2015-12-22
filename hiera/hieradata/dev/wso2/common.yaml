@@ -49,6 +49,8 @@ wso2::master_datasources :
     validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
 
+# User management datasource defaults to local h2 db
+wso2::usermgt_datasource: WSO2_CARBON_DB
 
 # Common datasources configuration
 wso2::datasources::common::username : 'wso2carbon'

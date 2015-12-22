@@ -5,6 +5,7 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::template_list :
   - repository/conf/carbon.xml
+  - repository/conf/user-mgt.xml
   - repository/conf/datasources/am-datasources.xml
   - repository/conf/datasources/master-datasources.xml
   - repository/conf/axis2/axis2.xml
@@ -30,6 +31,7 @@ wso2::clustering :
     k8s :
     ppaas :
 
+wso2::usermgt_datasource: WSO2USER_DB
 
 wso2::am_datasources :
   WSO2AM_DB:
@@ -50,10 +52,10 @@ wso2::am_datasources :
 wso2::master_datasources :
   WSO2_CONFIG_DB:
     description: The datasource used for config registry
-    driver : org.h2.Driver
+    driverClassName : org.h2.Driver
     url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    user : wso2carbon
-    password : wso2carbon
+    username : "%{hiera('wso2::datasources::common::username')}"
+    password : "%{hiera('wso2::datasources::common::password')}"
     #securevault :
     jndi_config : jdbc/WSO2_CONFIG_DB
     maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
@@ -68,10 +70,10 @@ wso2::master_datasources :
 
   WSO2_GOV_DB:
     description: The datasource used for gov registry
-    driver : org.h2.Driver
+    driverClassName : org.h2.Driver
     url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    user : wso2carbon
-    password : wso2carbon
+    username : "%{hiera('wso2::datasources::common::username')}"
+    password : "%{hiera('wso2::datasources::common::password')}"
     #securevault : false
     jndi_config : jdbc/WSO2_GOV_DB
     maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
@@ -83,3 +85,18 @@ wso2::master_datasources :
      enabled: false
      path : /_system/gov
      target_path : /_system/gov
+
+  WSO2USER_DB :
+    description : The datasource is used for user mangement and userstore
+    driverClassName : com.mysql.jdbc.Driver
+    url : jdbc:h2:repository/database/WSO2USER_DB?autoReconnect=true
+    username : "%{hiera('wso2::datasources::common::username')}"
+    password : "%{hiera('wso2::datasources::common::password')}"
+    #securevault :
+    jndi_config : jdbc/WSO2USER_DB
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"

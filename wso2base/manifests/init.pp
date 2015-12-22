@@ -41,6 +41,7 @@ class wso2base {
   $patches_dir        = hiera("wso2::patches_dir")
   $service_name       = hiera("wso2::service_name")
   $service_template   = hiera("wso2::service_template")
+  $usermgt_datasource = hiera("wso2::usermgt_datasource")
 
   $master_datasources = hiera_hash("wso2::master_datasources")
   $clustering         = hiera_hash("wso2::clustering")
