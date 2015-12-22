@@ -32,6 +32,8 @@ wso2::clustering :
     k8s :
     ppaas :
 
+wso2::usermgt_datasource: WSO2USER_DB
+
 wso2::master_datasources :
   WSO2AM_DB :
     description : The datasource used for API Manager database
