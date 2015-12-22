@@ -15,7 +15,7 @@
     </dbConfig>
 
 <%- @master_datasources.each do |datasource_name, datasource| -%>
-   <%- if scope.str2bool(master_datasources['mount']['enabled']) -%>
+   <%- if datasource['mount'] and datasource['mount']['enabled'] -%>
     <dbConfig name="<%= datasource_name %>">
 	      <dataSource><%= datasource['jndi_config'] %></dataSource>
     </dbConfig>
