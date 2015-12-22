@@ -11,6 +11,7 @@ wso2::template_list :
   - repository/conf/tomcat/catalina-server.xml
   - bin/wso2server.sh
 wso2::service_name: wso2greg
+wso2::hostname : esb.wso2.com
 wso2::service_template: wso2base/wso2service.erb
 
 wso2::file_list :
@@ -21,6 +22,8 @@ wso2::clustering :
     local_member_host : 127.0.0.1
     local_member_port : 4000
     membership_scheme : wka
+    domain : wso2.esb.domain
+    subDomain :
     wka :
        members :
          -
@@ -30,7 +33,6 @@ wso2::clustering :
            hostname : localhost
            port : 4001
     multicast :
-       domain : wso2.carbon.domain
     k8s :
     ppaas :
 
