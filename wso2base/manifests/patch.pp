@@ -23,6 +23,6 @@ define wso2base::patch ($patches_abs_dir, $patches_dir, $user, $group, $product_
     mode         => '0754',
     ignore       => '.svn',
     recurse      => 'remote',
-    source       => ["puppet:///modules/${product_name}/${$patches_dir}"]
+    source       => ["puppet:///modules/${product_name}/patches/${$patches_dir}"]
   }
 }

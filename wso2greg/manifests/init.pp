@@ -83,4 +83,9 @@ class wso2greg inherits wso2base {
     enable            => true,
     require           => [Wso2base::Deploy[$carbon_home]]
   }
+
+  notify{ "Successfully started WSO2 service [name] ${service_name}, [CARBON_HOME] ${carbon_home}":
+    withpath => true,
+    require  => Service[$service_name]
+  }
 }
