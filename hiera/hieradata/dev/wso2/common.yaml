@@ -10,9 +10,6 @@ wso2::pack_dir : /mnt/packs
 
 wso2::ports:
   offset : 0
-  mapping :
-   9763 :
-   9443 :
 
 wso2::hostname : "%{::clientcert}"
 wso2::mgt_hostname : "%{::clientcert}"
