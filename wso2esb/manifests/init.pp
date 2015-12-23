@@ -17,35 +17,9 @@
 #
 # This class installs WSO2 ESB
 
-class wso2esb {
-  require wso2base
+class wso2esb inherits wso2base {
 
-  $maintenance_mode   = hiera("wso2::maintenance_mode")
-  $install_mode       = hiera("wso2::install_mode")
-  $install_dir        = hiera("wso2::install_dir")
-  $pack_dir           = hiera("wso2::pack_dir")
-  $pack_filename      = hiera("wso2::pack_filename")
-  $pack_extracted_dir = hiera("wso2::pack_extracted_dir")
-  $hostname           = hiera("wso2::hostname")
-  $mgt_hostname       = hiera("wso2::mgt_hostname")
-  $datasources        = hiera("wso2::datasources")
-  $clustering         = hiera("wso2::clustering")
-  $dep_sync           = hiera_hash("wso2::dep_sync")
-  $ports              = hiera_hash("wso2::ports")
-  $wso2_user          = hiera("wso2::user")
-  $wso2_group         = hiera("wso2::group")
-  $template_list      = hiera("wso2::template_list")
-  $file_list          = hiera("wso2::file_list")
-  $patches_dir        = hiera("wso2::patches_dir")
-  $service_name       = hiera("wso2::service_name")
-  $service_template   = hiera("wso2::service_template")
-  $java_home          = hiera("java_home")
-
-  $carbon_home        = "${install_dir}/${pack_extracted_dir}"
-  $patches_abs_dir    = "${carbon_home}/${patches_dir}"
-
-  notice("Installing WSO2 Product: ${::product_name} Version: ${::product_version}")
-  notice($ports)
+  notice("Starting WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 
   # Remove any existing installations
   wso2base::clean { $carbon_home:

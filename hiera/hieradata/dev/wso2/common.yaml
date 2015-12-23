@@ -10,9 +10,6 @@ wso2::pack_dir : /mnt/packs
 
 wso2::ports:
   offset : 0
-  mapping :
-   9763 :
-   9443 :
 
 wso2::hostname : "%{::clientcert}"
 wso2::mgt_hostname : "%{::clientcert}"
@@ -29,35 +26,37 @@ wso2::dep_sync :
        append_tenant_id: true
 
 # Common packages to be installed to support WSO2 products
-packages:
+packages :
   - unzip
   - tree
 
-wso2::datasources::common :
-  -
-    name: WSO2_CARBON_DB
-    description: The datasource used for registry and user manager
+wso2::master_datasources :
+  WSO2_CARBON_DB :
+    description : The datasource used for registry and user manager
     driverClassName : org.h2.Driver
     url : jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
     #securevault :
     jndi_config : jdbc/WSO2CarbonDB
-    maxActive: "%{hiera('wso2::datasources::common::maxActive')}"
-    maxWait: "%{hiera('wso2::datasources::common::maxWait')}"
-    testOnBorrow: "%{hiera('wso2::datasources::common::testOnBorrow')}"
-    defaultAutoCommit: "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
-    validationQuery: "%{hiera('wso2::datasources::mysql::validationQuery')}"
-    validationInterval: "%{hiera('wso2::datasources::common::validationInterval')}"
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+
+# User management datasource defaults to local h2 db
+wso2::usermgt_datasource: WSO2_CARBON_DB
 
 # Common datasources configuration
 wso2::datasources::common::username : 'wso2carbon'
 wso2::datasources::common::password : 'wso2carbon'
 wso2::datasources::common::maxActive : '50'
-wso2::datasources::common::maxWait: '60000'
-wso2::datasources::common::defaultAutoCommit: 'false'
-wso2::datasources::common::testOnBorrow: 'true'
-wso2::datasources::common::validationInterval: '30000'
+wso2::datasources::common::maxWait : '60000'
+wso2::datasources::common::defaultAutoCommit : 'false'
+wso2::datasources::common::testOnBorrow : 'true'
+wso2::datasources::common::validationInterval : '30000'
 
 # MySQL datasources configuration
 wso2::datasources::mysql::validationQuery : 'SELECT 1'

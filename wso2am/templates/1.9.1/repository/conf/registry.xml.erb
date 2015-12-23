@@ -14,6 +14,28 @@
         <dataSource>jdbc/WSO2CarbonDB</dataSource>
     </dbConfig>
 
+<%- @master_datasources.each do |datasource_name, datasource| -%>
+   <%- if datasource['mount'] and datasource['mount']['enabled'] -%>
+    <dbConfig name="<%= datasource_name %>">
+	      <dataSource><%= datasource['jndi_config'] %></dataSource>
+    </dbConfig>
+    <remoteInstance url="https://localhost:9443/registry">
+        <id><%= datasource_name %></id>
+        <dbConfig><%= datasource_name %></dbConfig>
+        <readOnly>false</readOnly>
+        <registryRoot>/</registryRoot>
+        <enableCache>true</enableCache>
+        <cacheId><%= datasource['username'] %>@<%= datasource['url'] %></cacheId>
+    </remoteInstance>
+    <mount path="<%= datasource['mount']['path'] %>" overwrite="virtual">
+        <instanceId><%= datasource_name %></instanceId>
+        <targetPath><%= datasource['mount']['target_path'] %></targetPath>
+    </mount>
+
+   <%- end -%>
+<%- end -%>
+
+
     <!-- This handler provides the feature to add a simlink to a given resource -->
 
     <handler class="org.wso2.carbon.registry.extensions.handlers.ExtensionsSymLinkHandler">
@@ -269,44 +291,9 @@
         </exclusions>
     </indexingConfiguration>
 
-    <dbConfig name="config">
-      <dataSource>jdbc/<%= @config_db %></dataSource>
-    </dbConfig>
-
-    <remoteInstance url="https://registryernance.cloud-test.wso2.com">
-      <id>config</id>
-      <dbConfig>config</dbConfig>
-      <readOnly>false</readOnly>
-      <registryRoot>/</registryRoot>
-      <enableCache>true</enableCache>
-    </remoteInstance>
-
-    <mount path="/_system/config" overwrite="true">
-      <instanceId>config</instanceId>
-      <targetPath>/_system/<%= @config_db %></targetPath>
-    </mount>
-
-    <dbConfig name="governance">
-      <dataSource>jdbc/governance</dataSource>
-    </dbConfig>
-
-    <%- database = @registry_database -%>
-    <remoteInstance url="https://registryernance.cloud-test.wso2.com">
-      <id>governance</id>
-      <dbConfig>governance</dbConfig>
-      <readOnly>false</readOnly>
-      <registryRoot>/</registryRoot>
-      <enableCache>true</enableCache>
-    </remoteInstance>
-
-    <mount path="/_system/governance" overwrite="true">
-      <instanceId>governance</instanceId>
-      <targetPath>/_system/governance</targetPath>
-    </mount>
-
 
     <!-- This static configuration is suppose to be modified before any data being loaded to the registry (i.e.: before the first startup) -->
-    
+
     <staticConfiguration>
         <versioningProperties>true</versioningProperties>
         <versioningComments>true</versioningComments>
@@ -317,11 +304,11 @@
     </staticConfiguration>
 
     <!-- This enables auto-versioning of resources (non-collection). Whenever a resource is updated a new version will be created -->
-  
+
     <versionResourcesOnChange>false</versionResourcesOnChange>
-    
+
     <!-- This enables JMX management for G-Reg -->
-    
+
     <jmx enabled="false">
         <service name="InvocationStatistics" enabled="true"/>
         <service name="Activities" enabled="true"/>
@@ -329,30 +316,30 @@
         <service name="Subscriptions" enabled="true"/>
         <service name="Events" enabled="true"/>
     </jmx>
-    
+
     <!-- If you need to use a Remote Human Task to provide the Work List functionality instead of the Embedded Human Task or if you want
-         to use Work List notifications, uncomment the following configuration. Please note that you need to provide the credentials 
+         to use Work List notifications, uncomment the following configuration. Please note that you need to provide the credentials
          and URL to connect to the remote instance (ex:- remote BPS server) if you are planning to use a Remote Human Task. You should
          provide credentials and URL to connect to the local instance if you simply want to use Work List notifications. -->
-    
+
     <!--workList serverURL="local://services/" remote="false">
         <username>admin</username>
         <password>admin</password>
     </workList-->
-    
-    <!-- Sample SCM configuration. Please note that checkOutURL, workingDir, and mountPoint are mandatory for each connection. 
+
+    <!-- Sample SCM configuration. Please note that checkOutURL, workingDir, and mountPoint are mandatory for each connection.
          The update frequency is in minutes. Setting readOnly would disable checkIn even if the checkInURL is set. The credentials
          are to connect to the corresponding repository and must be provided if required. -->
-    
+
     <!--scm>
         <connection checkOutURL="scm:svn:http://svn.wso2.org/repos/wso2" workingDir="/valid/filesystem/path" mountPoint="/_system/foo" checkInURL="" readOnly="" updateFrequency="">
         	<username>admin</username>
         	<password>admin</password>
         </connection>
     </scm-->
-    
+
     <!-- This defines the list of scheduled tasks for the registry -->
-    
+
     <!--tasks>
         <task name="TaskName" class="com.foo.TaskClass">
             <trigger cron="cronExpr"/>
