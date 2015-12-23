@@ -1,7 +1,7 @@
 ---
 wso2::clustering :
     enable : true
-    local_member_host : 192.168.100.23
+    local_member_host : 127.0.0.1
     local_member_port : 4000
     membership_scheme : wka
     subDomain : worker
