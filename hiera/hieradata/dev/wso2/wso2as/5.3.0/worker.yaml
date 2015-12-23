@@ -1,0 +1,32 @@
+---
+wso2::clustering :
+    enable : true
+    local_member_host : 192.168.100.23
+    local_member_port : 4000
+    membership_scheme : wka
+    subDomain : worker
+    wka :
+       members :
+         -
+           hostname : 192.168.100.13
+           port : 4000
+         -
+           hostname : 192.168.100.23
+           port : 4000
+    private_paas:
+       cluster_ids:
+    k8:
+       k8_master:
+       k8_namespace:
+       k8_services:
+
+wso2::dep_sync :
+    enabled : false
+    auto_checkout : true
+    auto_commit : false
+    repository_type : svn
+    svn :
+       url : http://svnrepo.example.com/repos/
+       user : username
+       password : password
+       append_tenant_id: true
