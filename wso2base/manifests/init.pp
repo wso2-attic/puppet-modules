@@ -44,6 +44,7 @@ class wso2base {
   $usermgt_datasource = hiera("wso2::usermgt_datasource")
 
   $master_datasources = hiera_hash("wso2::master_datasources")
+  $registry_mounts    = hiera_hash("wso2::registry_mounts", {})
   $clustering         = hiera_hash("wso2::clustering")
   $dep_sync           = hiera_hash("wso2::dep_sync")
   $ports              = hiera_hash("wso2::ports")
