@@ -623,13 +623,8 @@
      corresponding to the "class" attribute of the "clustering" element. It is also responsible for
      getting this node to join the cluster.
      -->
-<%- if @clustering['enable'] == true -%>
     <clustering class="org.wso2.carbon.core.clustering.hazelcast.HazelcastClusteringAgent"
-                enable="true">
-<%- else -%>
-    <clustering class="org.wso2.carbon.core.clustering.hazelcast.HazelcastClusteringAgent"
-                enable="false">
-<%- end -%>
+                enable="<%= @clustering['enabled'] %>">
 
         <!--
            This parameter indicates whether the cluster has to be automatically initalized
@@ -651,11 +646,7 @@
                     is deemed to have left the cluster, it will be detected by the Group Membership
                     Service (GMS) using a TCP ping mechanism.
         -->
-<%- if @clustering['enable'] == true && @clustering['membership_scheme'] -%>
         <parameter name="membershipScheme"><%= @clustering['membership_scheme'] %></parameter>
-<%- else -%>
-        <parameter name="membershipScheme">multicast</parameter>
-<%- end -%>
         <!--<parameter name="licenseKey">xxx</parameter>-->
         <!--<parameter name="mgtCenterURL">http://localhost:8081/mancenter/</parameter>-->
 
@@ -663,11 +654,7 @@
          The clustering domain/group. Nodes in the same group will belong to the same multicast
          domain. There will not be interference between nodes in different groups.
         -->
-<%- if @clustering['enable'] == true && @clustering['membership_scheme'] == 'multicast' -%>
-        <parameter name="domain"><%= @clustering['multicast']['domain'] %></parameter>
-<%- else -%>
-        <parameter name="domain">wso2.carbon.domain</parameter>
-<%- end -%>
+        <parameter name="domain"><%= @clustering['domain'] %></parameter>
 
         <!-- The multicast address to be used -->
         <!--<parameter name="mcastAddress">228.0.0.4</parameter>-->
@@ -688,11 +675,7 @@
         -->
         <!-- The host name or IP address of this member -->
 
-<%- if @clustering['enable'] == true && @clustering['local_member_host'] -%>
         <parameter name="localMemberHost"><%= @clustering['local_member_host'] %></parameter>
-<%- else -%>
-        <parameter name="localMemberHost">127.0.0.1</parameter>
-<%- end -%>
 
         <!--
             The bind adress of this member. The difference between localMemberHost & localMemberBindAddress
@@ -707,11 +690,7 @@
         The TCP port used by this member. This is the port through which other nodes will
         contact this member
          -->
-<%- if @clustering['enable'] == true && @clustering['local_member_port'] -%>
         <parameter name="localMemberPort"><%= @clustering['local_member_port'] %></parameter>
-<%- else -%>
-        <parameter name="localMemberPort">4000</parameter>
-<%- end -%>
 
         <!--
             The bind port of this member. The difference between localMemberPort & localMemberBindPort
@@ -736,19 +715,12 @@
            "membershipScheme" above is set to "wka"
         -->
         <members>
-<%- if @clustering['enable'] == true && @clustering['membership_scheme'] == 'wka' -%>
-      <%- @clustering['wka']['members'].each do |member| -%>
+<%- @clustering['wka']['members'].each do |member| -%>
             <member>
                 <hostName><%= member['hostname'] %></hostName>
                 <port><%= member['port'] %></port>
             </member>
-      <%- end -%>
-   <%- else -%>
-            <member>
-                <hostName>127.0.0.1</hostName>
-                <port>4000</port>
-            </member>
-   <%- end -%>
+<%- end -%>
         </members>
 
         <!--

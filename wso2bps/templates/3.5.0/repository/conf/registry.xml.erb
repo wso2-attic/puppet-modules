@@ -28,69 +28,28 @@
     <registryRoot>/</registryRoot>
 
     <dbConfig name="wso2registry">
-        <%- if @datasources['local_db']['jndi_config'] != nil -%>
-        <dataSource><%= @datasources['local_db']['jndi_config'] %></dataSource>
-        <%- else -%>
         <dataSource>jdbc/WSO2CarbonDB</dataSource>
-        <%- end -%>
     </dbConfig>
 
-    <%- if @datasources['gov_db']['url'] != nil -%>
-    <dbConfig name="governance">
-        <%- if @datasources['gov_db']['jndi_config'] != nil -%>
-        <dataSource><%= @datasources['gov_db']['jndi_config'] %></dataSource>
-        <%- else -%>
-        <dataSource>jdbc/WSO2RegistryDB</dataSource>
-        <%- end -%>
+<%- @master_datasources.each do |datasource_name, datasource| -%>
+  <%- if datasource['mount'] && datasource['mount']['enabled'] == true -%>
+    <dbConfig name="<%= datasource_name %>">
+	<dataSource><%= datasource['jndi_config'] %></dataSource>
     </dbConfig>
-
     <remoteInstance url="https://localhost:9443/registry">
-        <id>governance</id>
-        <dbConfig>governance</dbConfig>
+        <id><%= datasource_name %></id>
+        <dbConfig><%= datasource_name %></dbConfig>
         <readOnly>false</readOnly>
+        <registryRoot>/</registryRoot>
         <enableCache>true</enableCache>
-        <registryRoot>/</registryRoot>
-        <cacheId><%= @registry_db_username %>@<%= @registry_db_url %></cacheId>
+        <cacheId><%= datasource['username'] %>@<%= datasource['url'] %></cacheId>
     </remoteInstance>
-    
-    <mount path="/_system/governance" overwrite="true">
-        <instanceId>governance</instanceId>
-        <targetPath>/_system/governance</targetPath>
+    <mount path="<%= datasource['mount']['path'] %>" overwrite="virtual">
+        <instanceId><%= datasource_name %></instanceId>
+        <targetPath><%= datasource['mount']['target_path'] %></targetPath>
     </mount>
-    <%- end -%>
-
-    <%- if @datasources['config_db']['url'] != nil -%>
-    <dbConfig name="config">
-        <%- if @datasources['config_db']['jndi_config'] != nil -%>
-        <dataSource><%= @datasources['config_db']['jndi_config'] %></dataSource>
-        <%- else -%>
-        <dataSource>jdbc/WSO2ConfigDB</dataSource>
-        <%- end -%>
-    </dbConfig>
-
-
-    <remoteInstance url="https://localhost:9443/registry">
-        <id>config</id>
-        <dbConfig>config</dbConfig>
-     <%- if @sub_domain != nil -%>
-        <%- if @sub_domain == 'worker' -%>
-        <readOnly>true</readOnly>
-        <%- else -%>
-        <readOnly>false</readOnly>
-        <%- end -%>
-    <%- else -%>
-        <readOnly>false</readOnly>
-    <%- end -%>
-        <registryRoot>/</registryRoot>
- 	<enableCache>true</enableCache>
-        <cacheId><%= @datasources['config_db']['user'] %>@<%= @datasources['config_db']['url'] %></cacheId>
-    </remoteInstance>
-
-    <mount path="/_system/config" overwrite="true">
-        <instanceId>config</instanceId>
-        <targetPath>/_system/config</targetPath>
-    </mount>
-    <%- end -%>
+  <%- end -%>
+<%- end -%>
 
    <!--<handler class="org.wso2.carbon.registry.extensions.handlers.SynapseRepositoryHandler">
         <filter class="org.wso2.carbon.registry.core.jdbc.handlers.filters.MediaTypeMatcher">

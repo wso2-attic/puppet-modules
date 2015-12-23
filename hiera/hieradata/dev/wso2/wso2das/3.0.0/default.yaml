@@ -1,0 +1,126 @@
+---
+classes:
+  - wso2das
+wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
+wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+wso2::template_list :
+        - bin/wso2server.sh
+        - repository/conf/axis2/axis2.xml
+        - repository/conf/datasources/analytics-datasources.xml
+        - repository/conf/datasources/master-datasources.xml
+        - repository/conf/tomcat/catalina-server.xml
+        - repository/conf/carbon.xml
+        - repository/conf/jndi.properties
+        - repository/conf/registry.xml
+        - repository/conf/user-mgt.xml
+wso2::service_name: wso2das
+wso2::service_template: wso2base/wso2service.erb
+wso2::file_list :
+  - repository/components/lib/mysql-connector-java-5.1.36.jar
+
+wso2::usermgt_datasource: WSO2USER_DB
+
+wso2::master_datasources :
+  WSO2_CONFIG_DB :
+    description : The datasource used for config registry
+    driverClassName : com.mysql.jdbc.Driver
+    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+    username : root
+    password : root
+    #securevault :
+    jndi_config : jdbc/WSO2_CONFIG_DB
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+    mount :
+     enabled : true
+     path : /_system/config/esb
+     target_path : /_system/config/bps
+  WSO2_GOV_DB :
+    description : The datasource used for gov registry
+    driverClassName : com.mysql.jdbc.Driver
+    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+    username : root
+    password : root
+    #securevault : false
+    jndi_config : jdbc/WSO2_GOV_DB
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+    mount :
+     enabled : true
+     path : /_system/governance
+     target_path : /_system/governance
+  WSO2USER_DB :
+    description : The datasource is used for user mangement and userstore
+    driverClassName : com.mysql.jdbc.Driver
+    url : jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
+    username : root
+    password : root
+    #securevault :
+    jndi_config : jdbc/WSO2USER_DB
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+
+wso2::analytics_datasources :
+  WSO2_ANALYTICS_FS_DB :
+    description : The datasource used for analytics file system
+    driverClassName : org.h2.Driver
+    url : jdbc:h2:repository/database/ANALYTICS_FS_DB;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    username : wso2carbon
+    password : wso2carbon
+    #securevault :
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+    defaultAutoCommit : false
+    initialSize : 0
+    testWhileIdle : true
+    minEvictableIdleTimeMillis : 4000
+  WSO2_ANALYTICS_EVENT_STORE_DB :
+    description : The datasource used for analytics record store
+    driverClassName : org.h2.Driver
+    url : jdbc:h2:repository/database/ANALYTICS_EVENT_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    username : wso2carbon
+    password : wso2carbon
+    #securevault :
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+    defaultAutoCommit : false
+    initialSize : 0
+    testWhileIdle : true
+    minEvictableIdleTimeMillis : 4000
+  WSO2_ANALYTICS_PROCESSED_DATA_STORE_DB :
+    description : The datasource used for analytics record store
+    driverClassName : org.h2.Driver
+    url : jdbc:h2:repository/database/ANALYTICS_PROCESSED_DATA_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    username : wso2carbon
+    password : wso2carbon
+    #securevault :
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+    defaultAutoCommit : false
+    initialSize : 0
+    testWhileIdle : true
+    minEvictableIdleTimeMillis : 4000

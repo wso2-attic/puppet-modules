@@ -10,31 +10,12 @@ wso2::template_list :
   - repository/conf/datasources/master-datasources.xml
   - repository/conf/tomcat/catalina-server.xml
   - bin/wso2server.sh
+
 wso2::service_name: wso2esb
 wso2::hostname : esb.wso2.com
 wso2::service_template: wso2base/wso2service.erb
-
 wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.38.jar
-
-wso2::clustering :
-    enable : false
-    local_member_host : 127.0.0.1
-    local_member_port : 4000
-    membership_scheme : wka
-    domain : wso2.esb.domain
-    subDomain :
-    wka :
-       members :
-         -
-           hostname : localhost
-           port : 4000
-         -
-           hostname : localhost
-           port : 4001
-    multicast :
-    k8s :
-    ppaas :
 
 wso2::master_datasources :
   WSO2_CONFIG_DB :
@@ -55,6 +36,7 @@ wso2::master_datasources :
      enabled : true
      path : /_system/config/esb
      target_path : /_system/config/esb
+     readonly : true
   WSO2_GOV_DB :
     description : The datasource used for gov registry
     driverClassName : com.mysql.jdbc.Driver
@@ -73,3 +55,4 @@ wso2::master_datasources :
      enabled : true
      path : /_system/governance
      target_path : /_system/governance
+     readonly : true

@@ -8,12 +8,54 @@ wso2::user : wso2user
 wso2::group : wso2
 wso2::pack_dir : /mnt/packs
 
+# System service name
+wso2::service_template: wso2base/wso2service.erb
+
+# Puppet template list to be populated
+wso2::template_list :
+  - repository/conf/carbon.xml
+  - repository/conf/user-mgt.xml
+  - repository/conf/registry.xml
+  - repository/conf/datasources/master-datasources.xml
+  - repository/conf/tomcat/catalina-server.xml
+  - repository/conf/axis2/axis2.xml
+  - bin/wso2server.sh
+
+# File list to be copied to the server
+wso2::file_list : []
+
+# JVM settings
+wso2::jvm_xms: 256m
+wso2::jvm_xmx: 1024m
+wso2::jvm_perm: 256m
+
+# Server ports configuration
 wso2::ports:
   offset : 0
 
+# Hostname configuration
 wso2::hostname : "%{::clientcert}"
 wso2::mgt_hostname : "%{::clientcert}"
 
+# Clustering configuration
+wso2::worker_node: false
+wso2::clustering :
+    enabled : false
+    membership_scheme : wka
+    domain : wso2.carbon.domain
+    local_member_host : 127.0.0.1
+    local_member_port : 4000
+    subDomain : worker
+    wka :
+       members :
+         -
+           hostname : 127.0.0.1
+           port : 4000
+    multicast :
+    k8s :
+    ppaas :
+
+# Deployment synchronization configuration
 wso2::dep_sync :
     enabled : false
     auto_checkout : true
@@ -30,6 +72,7 @@ packages :
   - unzip
   - tree
 
+# WSO2 datasources
 wso2::master_datasources :
   WSO2_CARBON_DB :
     description : The datasource used for registry and user manager
@@ -37,7 +80,7 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #securevault :
+    #secretAlias :
     jndi_config : jdbc/WSO2CarbonDB
     maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
     maxWait : "%{hiera('wso2::datasources::common::maxWait')}"

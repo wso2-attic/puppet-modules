@@ -268,7 +268,7 @@ while [ "$status" = "$START_EXIT_STATUS" ]
 do
     $JAVACMD \
     -Xbootclasspath/a:"$CARBON_XBOOTCLASSPATH" \
-    -Xms256m -Xmx1024m -XX:MaxPermSize=256m \
+    -Xms<%= @jvm_xms %> -Xmx<%= @jvm_xmx %> -XX:MaxPermSize=<%= @jvm_perm %> \
     -XX:+HeapDumpOnOutOfMemoryError \
     -XX:HeapDumpPath="$CARBON_HOME/repository/logs/heap-dump.hprof" \
     $JAVA_OPTS \
@@ -295,6 +295,10 @@ do
     -Djava.security.egd=file:/dev/./urandom \
     -Dfile.encoding=UTF8 \
     -DapplyPatches \
+<%- if @worker_node -%>
+    -DworkerNode=true \
+<%- end -%>
+    -Dprofile=<%= @product_profile %> \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done

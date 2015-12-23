@@ -20,8 +20,15 @@
 
 class wso2base {
   $packages           = hiera_array("packages")
+  $template_list      = hiera_array("wso2::template_list")
+  $file_list          = hiera_array("wso2::file_list")
+
   $java_install_dir   = hiera("java_install_dir")
   $java_source_file   = hiera("java_source_file")
+  $jvm_xms            = hiera("wso2::jvm_xms")
+  $jvm_xmx            = hiera("wso2::jvm_xmx")
+  $jvm_perm           = hiera("wso2::jvm_perm")
+  $worker_node        = hiera("wso2::worker_node")
 
   # symlink path to Java install directory
   $java_home_sym_link = hiera("java_home")
@@ -36,14 +43,13 @@ class wso2base {
   $pack_extracted_dir = hiera("wso2::pack_extracted_dir")
   $hostname           = hiera("wso2::hostname")
   $mgt_hostname       = hiera("wso2::mgt_hostname")
-  $template_list      = hiera("wso2::template_list")
-  $file_list          = hiera("wso2::file_list")
   $patches_dir        = hiera("wso2::patches_dir")
   $service_name       = hiera("wso2::service_name")
   $service_template   = hiera("wso2::service_template")
   $usermgt_datasource = hiera("wso2::usermgt_datasource")
 
   $master_datasources = hiera_hash("wso2::master_datasources")
+  $registry_mounts    = hiera_hash("wso2::registry_mounts", {})
   $clustering         = hiera_hash("wso2::clustering")
   $dep_sync           = hiera_hash("wso2::dep_sync")
   $ports              = hiera_hash("wso2::ports")

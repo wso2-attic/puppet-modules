@@ -6,25 +6,25 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::template_list :
         - bin/wso2server.sh
         - repository/conf/axis2/axis2.xml
-#        - repository/conf/datasources/activiti-datasources.xml
-#        - repository/conf/datasources/bps-datasources.xml
-#        - repository/conf/datasources/master-datasources.xml
+        - repository/conf/datasources/activiti-datasources.xml
+        - repository/conf/datasources/bps-datasources.xml
+        - repository/conf/datasources/master-datasources.xml
         - repository/conf/tomcat/catalina-server.xml
-#        - repository/conf/activiti.xml
         - repository/conf/bps.xml
         - repository/conf/carbon.xml
         - repository/conf/humantask.xml
         - repository/conf/jndi.properties
-#        - repository/conf/registry.xml
-#        - repository/conf/user-mgt.xml
+        - repository/conf/registry.xml
+        - repository/conf/user-mgt.xml
 wso2::service_name: wso2bps
 wso2::service_template: wso2base/wso2service.erb
-wso2::file_list: []
+wso2::file_list :
+  - repository/components/lib/mysql-connector-java-5.1.36.jar
 
 wso2::jvm:
-  jvm_memory_xms: 256m
-  jvm_memory_xmx: 1024m
-  jvm_memory_max_perm_size: 256m
+  memory_xms: 256m
+  memory_xmx: 1024m
+  memory_max_perm_size: 256m
 
 wso2::so_timeout: 600000
 wso2::connection_timeout: 600000
@@ -44,9 +44,6 @@ wso2::clustering:
              port : 4001
 
 
-wso2::domain: wso2.carbon.domain
-wso2::sub_domain: worker
-
 wso2::mex_timeout: 600000
 wso2::external_service_timeout: 600000
 wso2::max_connections_per_host: 350
@@ -54,49 +51,89 @@ wso2::max_total_connections: 400
 wso2::ode_scheduler_thread_pool_size: 50
 wso2::scheduler_config_max_thread_pool_size: 50
 wso2::enable_humantask_caching: false
-wso2::http_proxy_port: "%{::http_proxy_port}"
-wso2::https_proxy_port: "%{::https_proxy_port}"
 
-wso2::datasources :
-  config_db :
-      driver :
-      url :
-      user :
-      password :
-      securevault :
-      jndi_config :
-  gov_db :
-      driver :
-      url :
-      user :
-      password :
-      securevault :
-      jndi_config :
-  user_db :
-      driver :
-      url :
-      user :
-      password :
-      securevault :
-      jndi_config :
-  local_db :
-      driver :
-      url :
-      user :
-      password :
-      securevault:
-      jndi_config :
-  bps_ds_db :
-      driver :
-      url :
-      user :
-      password :
-      securevault:
-      jndi_config :
-  activiti_db :
-      driver :
-      url :
-      user :
-      password :
-      securevault:
-      jndi_config :
+wso2::usermgt_datasource: WSO2USER_DB
+
+wso2::master_datasources :
+  WSO2_CONFIG_DB :
+    description : The datasource used for config registry
+    driverClassName : com.mysql.jdbc.Driver
+    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+    username : root
+    password : root
+    #securevault :
+    jndi_config : jdbc/WSO2_CONFIG_DB
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+    mount :
+     enabled : true
+     path : /_system/config/esb
+     target_path : /_system/config/bps
+  WSO2_GOV_DB :
+    description : The datasource used for gov registry
+    driverClassName : com.mysql.jdbc.Driver
+    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+    username : root
+    password : root
+    #securevault : false
+    jndi_config : jdbc/WSO2_GOV_DB
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+    mount :
+     enabled : true
+     path : /_system/governance
+     target_path : /_system/governance
+  WSO2USER_DB :
+    description : The datasource is used for user mangement and userstore
+    driverClassName : com.mysql.jdbc.Driver
+    url : jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
+    username : root
+    password : root
+    #securevault :
+    jndi_config : jdbc/WSO2USER_DB
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+
+wso2::activiti_datasources :
+  ACTIVITI_DB :
+    description : The datasource used for activiti engine
+    driverClassName : org.h2.Driver
+    url : jdbc:h2:repository/database/activiti;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    username : wso2carbon
+    password : wso2carbon
+    #securevault :
+    jndi_config : jdbc/ActivitiDB
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+
+wso2::bps_datasources :
+  BPS_DS :
+    description : The datasource used for bps
+    driverClassName : org.h2.Driver
+    url : jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
+    username : wso2carbon
+    password : wso2carbon
+    #securevault :
+    jndi_config : bpsds
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"

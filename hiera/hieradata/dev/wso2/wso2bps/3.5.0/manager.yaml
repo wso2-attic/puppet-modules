@@ -1,34 +1,18 @@
+---
+wso2::mgt_hostname : mgt.esb.wso2.com
 
-sub_domain: mgt
-clustering: true
-mgt_hostname:
+wso2::clustering :
+    enable : true
+    local_member_host : 192.168.100.10
+    local_member_port : 4000
+    membership_scheme : wka
+    subDomain : mgt
+    wka :
+       members :
+         -
+           hostname : 192.168.100.10
+           port : 4000
+         -
+           hostname : 192.168.100.20
+           port : 4000
 
-hostname: %{::hostname}
-
-
-mb_host: %{::mb_host}
-mb_port: %{::mb_port}
-
-
-clustering:
-  enable: false
-  membership_scheme: multicast
-  local_member_host: %{::local_member_host}
-  local_member_port: 4000
-  wka :
-         members :
-           -
-             hostname : localhost
-             port : 4000
-           -
-             hostname : localhost
-             port : 4001
-  private_paas:
-    cluster_ids:  %{::cluster_ids}
-  k8:
-    k8_master:
-    k8_namespace:
-    k8_services:
-
-http_proxy_port: %{::http_proxy_port}
-https_proxy_port: %{::https_proxy_port}

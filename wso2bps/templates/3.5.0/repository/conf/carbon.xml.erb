@@ -584,14 +584,16 @@
 	and in  worker nodes set only AutoCheckout to true.
     -->
     <DeploymentSynchronizer>
-        <Enabled>false</Enabled>
-        <AutoCommit>false</AutoCommit>
-        <AutoCheckout>true</AutoCheckout>
-        <RepositoryType>svn</RepositoryType>
-        <SvnUrl>http://svnrepo.example.com/repos/</SvnUrl>
-        <SvnUser>username</SvnUser>
-        <SvnPassword>password</SvnPassword>
-        <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
+        <Enabled><%= @dep_sync['enabled'] %></Enabled>
+        <AutoCommit><%= @dep_sync['auto_commit'] %></AutoCommit>
+        <AutoCheckout><%= @dep_sync['auto_checkout'] %></AutoCheckout>
+        <RepositoryType><%= @dep_sync['repository_type'] %></RepositoryType>
+    <%- if @dep_sync['repository_type'] == "svn" -%>
+        <SvnUrl><%= @dep_sync['svn']['url'] -%></SvnUrl>
+        <SvnUser><%= @dep_sync['svn']['user'] -%></SvnUser>
+        <SvnPassword><%= @dep_sync['svn']['password'] -%></SvnPassword>
+        <SvnUrlAppendTenantId><%= @dep_sync['svn']['append_tenant_id'] -%></SvnUrlAppendTenantId>
+    <%- end -%>
     </DeploymentSynchronizer>
 
     <!-- Deployment Synchronizer Configuration. Uncomment the following section when running with "registry based" dep sync.
