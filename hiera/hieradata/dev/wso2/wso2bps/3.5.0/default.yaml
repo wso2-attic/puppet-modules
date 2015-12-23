@@ -21,11 +21,6 @@ wso2::service_template: wso2base/wso2service.erb
 wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.36.jar
 
-wso2::jvm:
-  memory_xms: 256m
-  memory_xmx: 1024m
-  memory_max_perm_size: 256m
-
 wso2::so_timeout: 600000
 wso2::connection_timeout: 600000
 

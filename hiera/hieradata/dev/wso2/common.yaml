@@ -25,9 +25,10 @@ wso2::template_list :
 wso2::file_list : []
 
 # JVM settings
-wso2::jvm_xms: 256m
-wso2::jvm_xmx: 1024m
-wso2::jvm_perm: 256m
+wso2::jvm :
+    xms: 256m
+    xmx: 1024m
+    max_perm_size: 256m
 
 # Server ports configuration
 wso2::ports:
