@@ -56,7 +56,7 @@ wso2::clustering :
 
 #wso2::usermgt_datasource: WSO2USER_DB
 
-wso2::am_datasources :
+wso2::is_datasources :
   WSO2AM_DB:
     description: The datasource used for IS as Key Manager database
     driverClassName : org.h2.Driver
