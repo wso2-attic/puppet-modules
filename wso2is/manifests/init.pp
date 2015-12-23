@@ -17,7 +17,7 @@
 #
 # This class installs WSO2 IS as Key Manager
 
-class wso2am inherits wso2base {
+class wso2is inherits wso2base {
   notice("Starting WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 
   # Product specific Hiera lookups and overrides
