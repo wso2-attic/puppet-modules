@@ -7,6 +7,18 @@ wso2::install_dir : "/mnt/%{::ipaddress}"
 wso2::user : wso2user
 wso2::group : wso2
 wso2::pack_dir : /mnt/packs
+wso2::service_template: wso2base/wso2service.erb
+
+wso2::template_list :
+  - repository/conf/carbon.xml
+  - repository/conf/user-mgt.xml
+  - repository/conf/registry.xml
+  - repository/conf/datasources/master-datasources.xml
+  - repository/conf/tomcat/catalina-server.xml
+  - repository/conf/axis2/axis2.xml
+  - bin/wso2server.sh
+
+wso2::file_list : []
 
 wso2::ports:
   offset : 0
@@ -15,7 +27,7 @@ wso2::hostname : "%{::clientcert}"
 wso2::mgt_hostname : "%{::clientcert}"
 
 wso2::clustering :
-    enable : false
+    enabled : false
     membership_scheme : wka
     domain : wso2.carbon.domain
     local_member_host : 127.0.0.1
