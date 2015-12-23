@@ -650,7 +650,7 @@
          The clustering domain/group. Nodes in the same group will belong to the same multicast
          domain. There will not be interference between nodes in different groups.
         -->
-        <parameter name="domain"><%= @domain %></parameter>
+        <parameter name="domain"><%= @clustering['domain'] %></parameter>
 
         <!-- The multicast address to be used -->
         <!--<parameter name="mcastAddress">228.0.0.4</parameter>-->
@@ -702,9 +702,9 @@
         <parameter name="properties">
             <property name="backendServerURL" value="https://${hostName}:${httpsPort}/services/"/>
             <property name="mgtConsoleURL" value="https://${hostName}:${httpsPort}/"/>
-            <%- if @sub_domain == 'mgt' -%>
+            <%- if @clustering['enable'] == true && @clustering['subDomain'] == 'mgt' -%>
             <property name="subDomain" value="mgt"/>
-             <%- elsif @sub_domain == 'worker' -%>
+            <%- elsif @clustering['enable'] == true && @clustering['subDomain'] == 'worker' -%>
             <property name="subDomain" value="worker"/>
             <%- end -%>
         </parameter>
