@@ -14,6 +14,22 @@ wso2::ports:
 wso2::hostname : "%{::clientcert}"
 wso2::mgt_hostname : "%{::clientcert}"
 
+wso2::clustering :
+    enable : false
+    membership_scheme : wka
+    domain : wso2.carbon.domain
+    local_member_host : 127.0.0.1
+    local_member_port : 4000
+    subDomain : worker
+    wka :
+       members :
+         -
+           hostname : 127.0.0.1
+           port : 4000
+    multicast :
+    k8s :
+    ppaas :
+
 wso2::dep_sync :
     enabled : false
     auto_checkout : true
