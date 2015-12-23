@@ -583,47 +583,15 @@
 	and in  worker nodes set only AutoCheckout to true.
     -->
     <DeploymentSynchronizer>
-    <%- if @dep_sync['enabled'] && @dep_sync['enabled'] == true -%>
-        <Enabled>true</Enabled>
-    <%- else -%>
-        <Enabled>false</Enabled>
-    <%- end -%>
-	<%- if @dep_sync['enabled'] && @dep_sync['auto_commit'] == true -%>
-        <AutoCommit>true</AutoCommit>
-	<%- else -%>
-        <AutoCommit>false</AutoCommit>
-	<%- end -%>
-	<%- if @dep_sync['enabled'] && @dep_sync['auto_checkout'] == false -%>
-        <AutoCheckout>false</AutoCheckout>
-	<%- else -%>
-        <AutoCheckout>true</AutoCheckout>
-	<%- end -%>
-	<%- if @dep_sync['enabled'] && @dep_sync['repository_type'] != "svn" -%>
-        <RepositoryType><%= @dep_sync['repository_type'] -%></RepositoryType>
-	<%- else -%>
-        <RepositoryType>svn</RepositoryType>
-	<%- end -%>
-    <%- if @dep_sync['enabled'] && @dep_sync['repository_type'] == "svn" -%>
-        <%- if dep_sync['svn']['url'] -%>
+        <Enabled><%= @dep_sync['enabled'] %></Enabled>
+        <AutoCommit><%= @dep_sync['auto_commit'] %></AutoCommit>
+        <AutoCheckout><%= @dep_sync['auto_checkout'] %></AutoCheckout>
+        <RepositoryType><%= @dep_sync['repository_type'] %></RepositoryType>
+    <%- if @dep_sync['repository_type'] == "svn" -%>
             <SvnUrl><%= @dep_sync['svn']['url'] -%></SvnUrl>
-        <%- else -%>
-            <SvnUrl>http://svnrepo.example.com/repos/</SvnUrl>
-        <%- end -%>
-        <%- if @dep_sync['svn']['user'] -%>
             <SvnUser><%= @dep_sync['svn']['user'] -%></SvnUser>
-        <%- else -%>
-            <SvnUser>username</SvnUser>
-        <%- end -%>
-            <%- if @dep_sync['svn']['password'] -%>
             <SvnPassword><%= @dep_sync['svn']['password'] -%></SvnPassword>
-        <%- else -%>
-            <SvnPassword>password</SvnPassword>
-        <%- end -%>
-            <%- if @dep_sync['svn']['append_tenant_id'] && @dep_sync['svn']['append_tenant_id'] == false-%>
-            <SvnUrlAppendTenantId>false</SvnUrlAppendTenantId>
-        <%- else -%>
-            <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
-        <%- end -%>
+            <SvnUrlAppendTenantId><%= @dep_sync['svn']['append_tenant_id'] -%></SvnUrlAppendTenantId>
     <%- end -%>
     </DeploymentSynchronizer>
 
