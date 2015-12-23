@@ -27,17 +27,17 @@
     <!--
        Product Name
     -->
-    <Name>WSO2 Governance Registry</Name>
+    <Name>WSO2 Business Rule Server</Name>
 
     <!--
        machine readable unique key to identify each product
     -->
-    <ServerKey>Greg</ServerKey>
+    <ServerKey>BRS</ServerKey>
 
     <!--
        Product Version
     -->
-    <Version>4.6.0</Version>
+    <Version>2.1.0</Version>
 
     <!--
        Host name or IP address of the machine hosting this server
@@ -45,13 +45,21 @@
        This is will become part of the End Point Reference of the
        services deployed on this server instance.
     -->
-    <!--HostName>www.wso2.org</HostName-->
-
+    <%- if @hostname != nil -%>
+		<HostName><%= @hostname %></HostName>
+    <%- else -%>
+        <!--HostName>www.wso2.org</HostName-->
+    <%- end -%>
     <!--
     Host name to be used for the Carbon management console
     -->
-    <!--MgtHostName>mgt.wso2.org</MgtHostName-->
-
+    <%- if @mgt_hostname != nil -%>
+        <%- if @sub_domain == 'mgt' -%>
+         <MgtHostName><%= @mgt_hostname %></MgtHostName>
+        <%- end -%>
+    <%- else -%>
+        <!--MgtHostName>mgt.wso2.org</MgtHostName-->
+    <%- end -%>
     <!--
         The URL of the back end server. This is where the admin services are hosted and
         will be used by the clients in the front end server.
@@ -74,7 +82,7 @@
     Ex : <Role>.*</Role> means this server can act any role
     -->
     <ServerRoles>
-        <Role>GovernanceRegistry</Role>
+        <Role>BusinessRulesServer</Role>
     </ServerRoles>
 
     <!-- uncommnet this line to subscribe to a bam instance automatically -->
@@ -111,7 +119,9 @@
          the define value + Offset.
          e.g. Offset=2 and HTTPS port=9443 will set the effective HTTPS port to 9445
          -->
-	<%- if @ports['offset'] -%>
+
+
+  <%- if @ports['offset'] -%>
         <Offset><%= @ports['offset'] %></Offset>
 	<%- else -%>
         <Offset>0</Offset>
@@ -321,6 +331,22 @@
             <!-- Private Key password-->
             <KeyPassword>wso2carbon</KeyPassword>
         </KeyStore>
+		
+		 <!--
+			Encrypt Decrypt Store will be used for encrypting and decrypting
+		-->
+        <RegistryKeyStore>
+            <!-- Keystore file location-->
+            <Location>${carbon.home}/repository/resources/security/wso2carbon.jks</Location>
+            <!-- Keystore type (JKS/PKCS12 etc.)-->
+            <Type>JKS</Type>
+            <!-- Keystore password-->
+            <Password>wso2carbon</Password>
+            <!-- Private Key alias-->
+            <KeyAlias>wso2carbon</KeyAlias>
+            <!-- Private Key password-->
+            <KeyPassword>wso2carbon</KeyPassword>
+        </RegistryKeyStore>
 
         <!--
             System wide trust-store which is used to maintain the certificates of all
@@ -500,22 +526,48 @@
 	and in  worker nodes set only AutoCheckout to true.
     -->
     <DeploymentSynchronizer>
-	<%- if @dep_sync['enable'] == true -%>
+    <%- if @dep_sync['enabled'] && @dep_sync['enabled'] == true -%>
         <Enabled>true</Enabled>
-	<%- else -%>
+    <%- else -%>
         <Enabled>false</Enabled>
-	<%- end -%>
-	<%- if @dep_sync['enable'] == true && @dep_sync['auto_commit'] == true -%>
+    <%- end -%>
+	<%- if @dep_sync['enabled'] && @dep_sync['auto_commit'] == true -%>
         <AutoCommit>true</AutoCommit>
 	<%- else -%>
         <AutoCommit>false</AutoCommit>
 	<%- end -%>
+	<%- if @dep_sync['enabled'] && @dep_sync['auto_checkout'] == false -%>
+        <AutoCheckout>false</AutoCheckout>
+	<%- else -%>
         <AutoCheckout>true</AutoCheckout>
+	<%- end -%>
+	<%- if @dep_sync['enabled'] && @dep_sync['repository_type'] != "svn" -%>
+        <RepositoryType><%= @dep_sync['repository_type'] -%></RepositoryType>
+	<%- else -%>
         <RepositoryType>svn</RepositoryType>
-        <SvnUrl>@dep_sync['svn']['url']</SvnUrl>
-        <SvnUser>@dep_sync['svn']['user']</SvnUser>
-        <SvnPassword>@dep_sync['svn']['password']</SvnPassword>
-        <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
+	<%- end -%>
+    <%- if @dep_sync['enabled'] && @dep_sync['repository_type'] == "svn" -%>
+        <%- if @dep_sync['svn']['url'] -%>
+            <SvnUrl><%= @dep_sync['svn']['url'] -%></SvnUrl>
+        <%- else -%>
+            <SvnUrl>http://svnrepo.example.com/repos/</SvnUrl>
+        <%- end -%>
+        <%- if @dep_sync['svn']['user'] -%>
+            <SvnUser><%= @dep_sync['svn']['user'] -%></SvnUser>
+        <%- else -%>
+            <SvnUser>username</SvnUser>
+        <%- end -%>
+            <%- if @dep_sync['svn']['password'] -%>
+            <SvnPassword><%= @dep_sync['svn']['password'] -%></SvnPassword>
+        <%- else -%>
+            <SvnPassword>password</SvnPassword>
+        <%- end -%>
+            <%- if @dep_sync['svn']['append_tenant_id'] && @dep_sync['svn']['append_tenant_id'] == false-%>
+            <SvnUrlAppendTenantId>false</SvnUrlAppendTenantId>
+        <%- else -%>
+            <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
+        <%- end -%>
+    <%- end -%>
     </DeploymentSynchronizer>
 
     <!-- Deployment Synchronizer Configuration. Uncomment the following section when running with "registry based" dep sync.
@@ -593,7 +645,7 @@
     -->
     <FeatureRepository>
 	<RepositoryName>default repository</RepositoryName>
-	<RepositoryURL>http://dist.wso2.org/p2/carbon/releases/4.2.0</RepositoryURL>
+	<RepositoryURL>${p2.repo.url}</RepositoryURL>
     </FeatureRepository>
 
     <!--

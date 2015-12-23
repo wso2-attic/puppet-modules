@@ -17,64 +17,48 @@
 #
 # This class installs WSO2 Business Rules Server
 
-class wso2brs {
 
-  require wso2base
+class wso2brs inherits wso2base {
 
-  $maintenance_mode   = hiera("maintenance_mode")
-  $install_mode       = hiera("install_mode")
-  $install_dir        = hiera("wso2_install_dir")
-  $pack_dir           = hiera("pack_dir")
-  $pack_filename      = hiera("pack_filename")
-  $pack_extracted_dir = hiera("pack_extracted_dir")
-  $ports              = hiera("ports")
-  $dep_sync           = hiera("dep_sync")
-  $owner              = hiera("owner")
-  $group              = hiera("group")
-  $securevault        = hiera("securevault")
-  $template_list      = hiera("template_list")
-  $file_list          = hiera("file_list")
-  $patches_dir        = hiera("patches_dir")
-  $service_name       = hiera("service_name")
-  $service_template   = hiera("service_template")
-  $java_home          = hiera("java_home")
+  notice("Starting WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 
-  $carbon_home        = "${install_dir}/${pack_extracted_dir}"
-  $patches_abs_dir    = "${carbon_home}/${patches_dir}"
-
+  # Remove any existing installations
   wso2base::clean { $carbon_home:
     mode              => $maintenance_mode,
     pack_filename     => $pack_filename,
     pack_dir          => $pack_dir
   }
 
+  # Copy the WSO2 product pack, extract and set permissions
   wso2base::install { $carbon_home:
     mode              => $install_mode,
     install_dir       => $install_dir,
     pack_filename     => $pack_filename,
     pack_dir          => $pack_dir,
-    owner             => $owner,
-    group             => $group,
+    user              => $wso2_user,
+    group             => $wso2_group,
     product_name      => $::product_name,
     require           => Wso2base::Clean[$carbon_home]
   }
 
+  # Copy any patches to patch directory
   wso2base::patch { $carbon_home:
     patches_abs_dir   => $patches_abs_dir,
     patches_dir       => $patches_dir,
-    owner             => $owner,
-    group             => $group,
+    user              => $wso2_user,
+    group             => $wso2_group,
     product_name      => $::product_name,
     product_version   => $::product_version,
     notify            => Service["${service_name}"],
     require           => Wso2base::Install[$carbon_home]
   }
 
+  # Populate templates and copy files provided
   wso2base::configure { $carbon_home:
     template_list     => $template_list,
     file_list         => $file_list,
-    owner             => $owner,
-    group             => $group,
+    user              => $wso2_user,
+    group             => $wso2_group,
     service_name      => $service_name,
     service_template  => $service_template,
     product_name      => $::product_name,
@@ -83,14 +67,16 @@ class wso2brs {
     require           => Wso2base::Patch[$carbon_home]
   }
 
+  # Deploy product artifacts
   wso2base::deploy { $carbon_home:
-    owner             => $owner,
-    group             => $group,
+    user              => $wso2_user,
+    group             => $wso2_group,
     product_name      => $::product_name,
     product_version   => $::product_version,
     require           => Wso2base::Configure[$carbon_home]
   }
 
+  # Start the service
   service { $service_name:
     ensure            => running,
     hasstatus         => true,

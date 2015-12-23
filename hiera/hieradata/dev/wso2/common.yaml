@@ -27,8 +27,15 @@ wso2::dep_sync :
 
 # Common packages to be installed to support WSO2 products
 packages :
+  - zip
   - unzip
   - tree
+
+# JVM params
+wso2::jvm:
+  jvm_memory_xms: 256m
+  jvm_memory_xmx: 1024m
+  jvm_memory_max_perm_size: 256m
 
 wso2::master_datasources :
   WSO2_CARBON_DB :

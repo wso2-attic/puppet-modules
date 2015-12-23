@@ -27,10 +27,9 @@
     -->
     <Connector  protocol="org.apache.coyote.http11.Http11NioProtocol"
                 port="9763"
-		<%- if @http_proxy_port != nil -%>
-				proxyPort="<%= @http_proxy_port %>"
-        <%- end -%>
-                proxyPort1="fds"
+              <%- if @ports['mapping'] && @ports['mapping'][9763] -%>
+                proxyPort="<%= @ports['mapping'][9763] %>"
+              <%- end -%>
                 redirectPort="9443" 
                 bindOnInit="false"
                 maxHttpHeaderSize="8192"
@@ -55,11 +54,11 @@
     -->
     <Connector  protocol="org.apache.coyote.http11.Http11NioProtocol"
                 port="9443"
-        <%- if @https_proxy_port != nil -%>
-				proxyPort="<%= @https_proxy_port %>"
-        <%- end -%>
+              <%- if @ports['mapping'] && @ports['mapping'][9443] -%>
+                proxyPort="<%= @ports['mapping'][9443] %>"
+              <%- end -%>
                 bindOnInit="false"
-                sslEnabledProtocols="TLSv1,TLSv1.1,TLSv1.2"
+                sslProtocol="TLS"
                 maxHttpHeaderSize="8192"
                 acceptorThreadCount="2"
                 maxThreads="250"
@@ -78,9 +77,6 @@
                 compressionMinSize="2048"
                 noCompressionUserAgents="gozilla, traviata"
                 compressableMimeType="text/html,text/javascript,application/x-javascript,application/javascript,application/xml,text/css,application/xslt+xml,text/xsl,image/gif,image/jpg,image/jpeg"
-                keystoreFile="${carbon.home}/repository/resources/security/wso2carbon.jks"
-                keystorePass="wso2carbon"
-                ciphers="SSL_RSA_WITH_RC4_128_MD5,SSL_RSA_WITH_RC4_128_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA"
                 URIEncoding="UTF-8"/>
 
 
