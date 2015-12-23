@@ -599,7 +599,7 @@
     </phaseOrder>
 
     <clustering class="org.wso2.carbon.core.clustering.hazelcast.HazelcastClusteringAgent"
-                enable="<%= @clustering['enable'] %>">
+                enable="<%= @clustering['enabled'] %>">
 
         <!--
            This parameter indicates whether the cluster has to be automatically initalized
@@ -702,19 +702,12 @@
            "membershipScheme" above is set to "wka"
         -->
         <members>
-        <%- if @clustering['membership_scheme'] == 'wka' -%>
-        <%- @clustering['wka']['members'].each do |member| -%>
+<%- @clustering['wka']['members'].each do |member| -%>
             <member>
                 <hostName><%= member['hostname'] %></hostName>
                 <port><%= member['port'] %></port>
             </member>
-        <%- end -%>
-        <%- else -%>
-            <member>
-                <hostName>127.0.0.1</hostName>
-                <port>4000</port>
-            </member>
-        <%- end -%>
+<%- end -%>
         </members>
 
         <!--
