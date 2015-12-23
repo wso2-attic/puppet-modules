@@ -1,56 +1,22 @@
 ---
 classes:
-  - wso2bps
+  - wso2das
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::template_list :
         - bin/wso2server.sh
         - repository/conf/axis2/axis2.xml
-        - repository/conf/datasources/activiti-datasources.xml
-        - repository/conf/datasources/bps-datasources.xml
+        - repository/conf/datasources/analytics-datasources.xml
         - repository/conf/datasources/master-datasources.xml
         - repository/conf/tomcat/catalina-server.xml
-        - repository/conf/bps.xml
         - repository/conf/carbon.xml
-        - repository/conf/humantask.xml
         - repository/conf/jndi.properties
         - repository/conf/registry.xml
         - repository/conf/user-mgt.xml
-wso2::service_name: wso2bps
+wso2::service_name: wso2das
 wso2::service_template: wso2base/wso2service.erb
 wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.36.jar
-
-wso2::jvm:
-  memory_xms: 256m
-  memory_xmx: 1024m
-  memory_max_perm_size: 256m
-
-wso2::so_timeout: 600000
-wso2::connection_timeout: 600000
-
-wso2::clustering:
-  enable: false
-  membership_scheme: multicast
-  local_member_host: 127.0.0.1
-  local_member_port: 4000
-  wka :
-         members :
-           -
-             hostname : localhost
-             port : 4000
-           -
-             hostname : localhost
-             port : 4001
-
-
-wso2::mex_timeout: 600000
-wso2::external_service_timeout: 600000
-wso2::max_connections_per_host: 350
-wso2::max_total_connections: 400
-wso2::ode_scheduler_thread_pool_size: 50
-wso2::scheduler_config_max_thread_pool_size: 50
-wso2::enable_humantask_caching: false
 
 wso2::usermgt_datasource: WSO2USER_DB
 
@@ -106,34 +72,55 @@ wso2::master_datasources :
     validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
 
-wso2::activiti_datasources :
-  ACTIVITI_DB :
-    description : The datasource used for activiti engine
+wso2::analytics_datasources :
+  WSO2_ANALYTICS_FS_DB :
+    description : The datasource used for analytics file system
     driverClassName : org.h2.Driver
-    url : jdbc:h2:repository/database/activiti;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    url : jdbc:h2:repository/database/ANALYTICS_FS_DB;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : wso2carbon
     password : wso2carbon
     #securevault :
-    jndi_config : jdbc/ActivitiDB
     maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
     maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
     testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
     defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
     validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
-
-wso2::bps_datasources :
-  BPS_DS :
-    description : The datasource used for bps
+    defaultAutoCommit : false
+    initialSize : 0
+    testWhileIdle : true
+    minEvictableIdleTimeMillis : 4000
+  WSO2_ANALYTICS_EVENT_STORE_DB :
+    description : The datasource used for analytics record store
     driverClassName : org.h2.Driver
-    url : jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
+    url : jdbc:h2:repository/database/ANALYTICS_EVENT_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : wso2carbon
     password : wso2carbon
     #securevault :
-    jndi_config : bpsds
     maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
     maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
     testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
     defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
     validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
     validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+    defaultAutoCommit : false
+    initialSize : 0
+    testWhileIdle : true
+    minEvictableIdleTimeMillis : 4000
+  WSO2_ANALYTICS_PROCESSED_DATA_STORE_DB :
+    description : The datasource used for analytics record store
+    driverClassName : org.h2.Driver
+    url : jdbc:h2:repository/database/ANALYTICS_PROCESSED_DATA_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    username : wso2carbon
+    password : wso2carbon
+    #securevault :
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+    defaultAutoCommit : false
+    initialSize : 0
+    testWhileIdle : true
+    minEvictableIdleTimeMillis : 4000
