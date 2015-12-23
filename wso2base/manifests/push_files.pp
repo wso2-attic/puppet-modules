@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::push_files ($carbon_home, $owner, $group, $module_name, $product_version) {
+define wso2base::push_files ($carbon_home, $owner, $group, $module_name) {
   ensure_resource('file', "${carbon_home}/${name}", {
     ensure  => present,
     owner   => $owner,
