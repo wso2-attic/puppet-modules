@@ -25,6 +25,10 @@ class wso2base {
 
   $java_install_dir   = hiera("java_install_dir")
   $java_source_file   = hiera("java_source_file")
+  $jvm_xms            = hiera("wso2::jvm_xms")
+  $jvm_xmx            = hiera("wso2::jvm_xmx")
+  $jvm_perm           = hiera("wso2::jvm_perm")
+  $worker_node        = hiera("wso2::worker_node")
 
   # symlink path to Java install directory
   $java_home_sym_link = hiera("java_home")
