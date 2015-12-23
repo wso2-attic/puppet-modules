@@ -69,6 +69,7 @@ wso2::dep_sync :
 
 # Common packages to be installed to support WSO2 products
 packages :
+  - zip
   - unzip
   - tree
 

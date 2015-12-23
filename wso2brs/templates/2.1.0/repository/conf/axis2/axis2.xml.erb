@@ -44,6 +44,10 @@
     -->
     <parameter name="exposeServiceMetadata">true</parameter>
 
+    <!--If turned on with use the Accept header of the request to determine the contentType of the
+    response-->
+    <parameter name="httpContentNegotiation">true</parameter>
+
     <!--
     Defines how the persistence of WS-ReliableMessaging is handled
 
@@ -69,10 +73,10 @@
     <parameter name="ModulesDirectory">axis2modules</parameter>
 
     <parameter name="userAgent" locked="true">
-        WSO2 Governance Registry-4.6.0
+        WSO2 Business Rule Server-2.1.0
     </parameter>
     <parameter name="server" locked="true">
-        WSO2 Governance Registry-4.6.0
+        WSO2 Business Rule Server-2.1.0
     </parameter>
 
     <!-- ========================================================================-->
@@ -109,7 +113,7 @@
     <!--policies etc.. to AxisService, it doesn't appear in the WSDL. By setting the following property-->
     <!--to true, you can create the AxisService using the generated WSDL and remove the need for a-->
     <!--WSDL generator. When ?wsdl is called, WSDL is generated in the normal way.-->
-    <parameter name="useGeneratedWSDLinJAXWS">false</parameter>
+    <parameter name="useGeneratedWSDLinJAXWS">${jaxwsparam}</parameter>
 
     <!-- Deployer for the dataservice. -->
     <!--<deployer extension="dbs" directory="dataservices" class="org.wso2.dataservices.DBDeployer"/>-->
@@ -155,12 +159,16 @@
                           class="org.apache.axis2.transport.http.SOAPMessageFormatter"/>
 
         <!--JSON Message Formatters-->
+        <!--messageFormatter contentType="application/json"
+                          class="org.apache.axis2.json.JSONMessageFormatter"/-->
         <messageFormatter contentType="application/json"
-                          class="org.apache.axis2.json.JSONMessageFormatter"/>
+                                  class="org.apache.axis2.json.gson.JsonFormatter" />
         <messageFormatter contentType="application/json/badgerfish"
                           class="org.apache.axis2.json.JSONBadgerfishMessageFormatter"/>
+        <!--messageFormatter contentType="text/javascript"
+                          class="org.apache.axis2.json.JSONMessageFormatter"/-->
         <messageFormatter contentType="text/javascript"
-                          class="org.apache.axis2.json.JSONMessageFormatter"/>
+                                  class="org.apache.axis2.json.gson.JsonFormatter" />
 
         <!--messageFormatter contentType="application/x-www-form-urlencoded"
                         class="org.wso2.carbon.relay.ExpandingMessageFormatter"/-->
@@ -187,12 +195,16 @@
                         class="org.apache.axis2.builder.MultipartFormDataBuilder"/>
 
         <!--JSON Message Builders-->
+        <!--messageBuilder contentType="application/json"
+                        class="org.apache.axis2.json.JSONOMBuilder"/-->
         <messageBuilder contentType="application/json"
-                        class="org.apache.axis2.json.JSONOMBuilder"/>
+                                class="org.apache.axis2.json.gson.JsonBuilder" />
         <messageBuilder contentType="application/json/badgerfish"
                         class="org.apache.axis2.json.JSONBadgerfishOMBuilder"/>
+        <!--messageBuilder contentType="text/javascript"
+                        class="org.apache.axis2.json.JSONOMBuilder"/-->
         <messageBuilder contentType="text/javascript"
-                        class="org.apache.axis2.json.JSONOMBuilder"/>
+                                class="org.apache.axis2.json.gson.JsonBuilder" />
 
         <!--messageBuilder contentType="application/xml"
      		        class="org.wso2.carbon.relay.BinaryRelayBuilder"/-->
@@ -457,6 +469,10 @@
                      class="org.apache.axis2.dispatchers.SOAPActionBasedDispatcher">
                 <order phase="Transport"/>
             </handler>
+            <handler name="RequestURIOperationDispatcher"
+                     class="org.apache.axis2.dispatchers.RequestURIOperationDispatcher" />
+            <handler name="JSONMessageHandler"
+                     class="org.apache.axis2.json.gson.JSONMessageHandler" />
         </phase>
         <phase name="Addressing">
             <handler name="AddressingBasedDispatcher"
@@ -475,8 +491,6 @@
                      class="org.apache.axis2.dispatchers.RequestURIBasedDispatcher"/>
             <handler name="SOAPActionBasedDispatcher"
                      class="org.apache.axis2.dispatchers.SOAPActionBasedDispatcher"/>
-            <handler name="RequestURIOperationDispatcher"
-                     class="org.apache.axis2.dispatchers.RequestURIOperationDispatcher"/>
             <handler name="SOAPMessageBodyBasedDispatcher"
                      class="org.apache.axis2.dispatchers.SOAPMessageBodyBasedDispatcher"/>
 
@@ -553,8 +567,6 @@
                      class="org.apache.axis2.dispatchers.RequestURIBasedDispatcher"/>
             <handler name="SOAPActionBasedDispatcher"
                      class="org.apache.axis2.dispatchers.SOAPActionBasedDispatcher"/>
-            <handler name="RequestURIOperationDispatcher"
-                     class="org.apache.axis2.dispatchers.RequestURIOperationDispatcher"/>
             <handler name="SOAPMessageBodyBasedDispatcher"
                      class="org.apache.axis2.dispatchers.SOAPMessageBodyBasedDispatcher"/>
 
@@ -575,6 +587,7 @@
         <phase name="PolicyDetermination"/>
         <phase name="MessageOut"/>
         <phase name="Security"/>
+	<phase name="Transport"/>
         <!--
            The MsgOutObservation phase is used to observe messages just before the
            responses are sent out. In this phase, we could do some things such as SOAP message
@@ -587,13 +600,8 @@
         <phase name="StatReporting"/>
     </phaseOrder>
 
-    <%- if @clustering['enable'] == true -%>
     <clustering class="org.wso2.carbon.core.clustering.hazelcast.HazelcastClusteringAgent"
-                enable="true">
-    <%- else -%>
-    <clustering class="org.wso2.carbon.core.clustering.hazelcast.HazelcastClusteringAgent"
-                enable="false">
-    <%- end -%>
+                enable="<%= @clustering['enable'] %>">
 
         <!--
            This parameter indicates whether the cluster has to be automatically initalized
@@ -615,11 +623,22 @@
                     is deemed to have left the cluster, it will be detected by the Group Membership
                     Service (GMS) using a TCP ping mechanism.
         -->
-        <%- if @clustering['enable'] == true && @clustering['membership_scheme'] -%>
         <parameter name="membershipScheme"><%= @clustering['membership_scheme'] %></parameter>
-	<%- else -%>
-        <parameter name="membershipScheme">multicast</parameter>
-	<%- end -%>	
+
+        <%- if @clustering['membership_scheme'] == 'private-paas' -%>
+        <!-- private-paas membership scheme specific parameters -->
+        <parameter name="membershipSchemeClassName">org.wso2.carbon.ppaas.PrivatePaaSBasedMembershipScheme</parameter>
+        <parameter name="clusterIds"><%= @clustering['private_paas'] %></parameter>
+        <%- end -%>
+
+        <%- if @clustering['membership_scheme'] == 'kubernetes' -%>
+        <!-- kubernetes membership scheme specific parameters -->
+        <parameter name="membershipSchemeClassName">org.wso2.carbon.membership.scheme.kubernetes.KubernetesMembershipScheme</parameter>
+        <parameter name="KUBERNETES_MASTER"><%= @clustering['k8']['k8_master'] %></parameter>
+        <parameter name="KUBERNETES_NAMESPACE"><%= @clustering['k8']['k8_namespace'] %></parameter>
+        <parameter name="KUBERNETES_SERVICES"><%= @clustering['k8']['k8_services'] %></parameter>
+        <%- end -%>
+
         <!--<parameter name="licenseKey">xxx</parameter>-->
         <!--<parameter name="mgtCenterURL">http://localhost:8081/mancenter/</parameter>-->
 
@@ -627,11 +646,11 @@
          The clustering domain/group. Nodes in the same group will belong to the same multicast
          domain. There will not be interference between nodes in different groups.
         -->
-        <%- if @clustering['enable'] == true && @clustering['membership_scheme'] == 'multicast' -%>
-        <parameter name="domain"><%= @clustering['multicast']['domain'] %></parameter>
-	<%- else -%>
+    <%- if @clustering['enable'] == true && @clustering['domain'] -%>
+        <parameter name="domain"><%= @clustering['domain'] %></parameter>
+	  <%- else -%>
         <parameter name="domain">wso2.carbon.domain</parameter>
-	<%- end -%>
+	  <%- end -%>
 
         <!-- The multicast address to be used -->
         <!--<parameter name="mcastAddress">228.0.0.4</parameter>-->
@@ -652,11 +671,7 @@
         -->
         <!-- The host name or IP address of this member -->
 
-        <%- if @clustering['enable'] == true && @clustering['local_member_host'] -%>
         <parameter name="localMemberHost"><%= @clustering['local_member_host'] %></parameter>
-	<%- else -%>
-        <parameter name="localMemberHost">127.0.0.1</parameter>
-	<%- end -%>
 
         <!--
             The bind adress of this member. The difference between localMemberHost & localMemberBindAddress
@@ -671,13 +686,7 @@
         The TCP port used by this member. This is the port through which other nodes will
         contact this member
          -->
-
-        <%- if @clustering['enable'] == true && @clustering['local_member_port'] -%>
-        <parameter name="localMemberPort"><%= @clustering['local_member_port'] %></parameter>
-	<%- else -%>
-        <parameter name="localMemberPort">4000</parameter>
-	<%- end -%>
-
+            <parameter name="localMemberPort"><%= @clustering['local_member_port'] %></parameter>
         <!--
             The bind port of this member. The difference between localMemberPort & localMemberBindPort
             is that localMemberPort is the one that is advertised by this member, while localMemberBindPort
@@ -693,7 +702,11 @@
         <parameter name="properties">
             <property name="backendServerURL" value="https://${hostName}:${httpsPort}/services/"/>
             <property name="mgtConsoleURL" value="https://${hostName}:${httpsPort}/"/>
-            <property name="subDomain" value="worker"/>
+ 	<%- if @clustering['enable'] == true && @clustering['subDomain'] == 'mgt' -%>
+        <property name="subDomain" value="mgt"/>
+    <%- elsif @clustering['enable'] == true && @clustering['subDomain'] == 'worker' -%>
+        <property name="subDomain" value="worker"/>
+    <%- end -%>
         </parameter>
 
         <!--

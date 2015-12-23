@@ -1,7 +1,0 @@
-Requirements:
-  Java, unzip, wget, mysql-connector jar (If connecting to a mysql database)
-
-How to use:
-1. Copy the tar compressed JDK file to wso2base/files directory and update the parameters 
-   'java_source_file' and 'java_install_dir' in the relevant hiera data source (ex:. common.yaml)
-2. Download the WSO2 Business Rules Server pack to wso2brs/files location.
