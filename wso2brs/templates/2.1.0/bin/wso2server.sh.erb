@@ -276,7 +276,7 @@ while [ "$status" = "$START_EXIT_STATUS" ]
 do
     $JAVACMD \
     -Xbootclasspath/a:"$CARBON_XBOOTCLASSPATH" \
-    -Xms<%= @wso2::jvm_xms %> -Xmx<%= @wso2::jvm_xmx %> -XX:MaxPermSize=<%= @wso2::jvm_perm %> \
+    -Xms<%= @jvm_xms %> -Xmx<%= @jvm_xmx %> -XX:MaxPermSize=<%= @jvm_perm %> \
     -XX:+HeapDumpOnOutOfMemoryError \
     -XX:HeapDumpPath="$CARBON_HOME/repository/logs/heap-dump.hprof" \
     $JAVA_OPTS \

@@ -45,17 +45,17 @@
        This is will become part of the End Point Reference of the
        services deployed on this server instance.
     -->
-    <%- if @wso2::hostname != nil -%>
-		<HostName><%= @wso2::hostname %></HostName>
+    <%- if @hostname != nil -%>
+		<HostName><%= @hostname %></HostName>
     <%- else -%>
         <HostName>brs.wso2.org</HostName>
     <%- end -%>
     <!--
     Host name to be used for the Carbon management console
     -->
-    <%- if @wso2::mgt_hostname != nil -%>
+    <%- if @mgt_hostname != nil -%>
         <%- if @sub_domain == 'mgt' -%>
-         <MgtHostName><%= @wso2::mgt_hostname %></MgtHostName>
+         <MgtHostName><%= @mgt_hostname %></MgtHostName>
         <%- end -%>
     <%- else -%>
         <MgtHostName>mgt.brs.wso2.org</MgtHostName>

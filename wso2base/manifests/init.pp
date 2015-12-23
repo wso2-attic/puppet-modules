@@ -57,7 +57,6 @@ class wso2base {
   $carbon_home        = "${install_dir}/${pack_extracted_dir}"
   $patches_abs_dir    = "${carbon_home}/${patches_dir}"
   $java_home          = $java_home_sym_link
-  $jvm                = hiera("wso2::jvm")
 
   # Install system packages
   package { $packages: ensure => installed }
