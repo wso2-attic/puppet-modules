@@ -60,8 +60,6 @@ class wso2greg inherits wso2base {
     group             => $wso2_group,
     service_name      => $service_name,
     service_template  => $service_template,
-    product_name      => $::product_name,
-    product_version   => $::product_version,
     notify            => Service["${service_name}"],
     require           => Wso2base::Patch[$carbon_home]
   }
