@@ -646,11 +646,7 @@
          The clustering domain/group. Nodes in the same group will belong to the same multicast
          domain. There will not be interference between nodes in different groups.
         -->
-    <%- if @clustering['enable'] == true && @clustering['domain'] -%>
         <parameter name="domain"><%= @clustering['domain'] %></parameter>
-	  <%- else -%>
-        <parameter name="domain">wso2.carbon.domain</parameter>
-	  <%- end -%>
 
         <!-- The multicast address to be used -->
         <!--<parameter name="mcastAddress">228.0.0.4</parameter>-->
@@ -714,19 +710,12 @@
            "membershipScheme" above is set to "wka"
         -->
         <members>
-        <%- if @clustering['enable'] == true && @clustering['membership_scheme'] == 'wka' -%>
-        <%- @clustering['wka']['members'].each do |member| -%>
+<%- @clustering['wka']['members'].each do |member| -%>
             <member>
                 <hostName><%= member['hostname'] %></hostName>
                 <port><%= member['port'] %></port>
             </member>
-        <%- end -%>
-        <%- else -%>
-            <member>
-                <hostName>127.0.0.1</hostName>
-                <port>4000</port>
-            </member>
-        <%- end -%>
+<%- end -%>
         </members>
 
         <!--
