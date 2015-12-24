@@ -3,21 +3,17 @@ classes:
   - wso2bps
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+
 wso2::template_list :
-        - bin/wso2server.sh
-        - repository/conf/axis2/axis2.xml
         - repository/conf/datasources/activiti-datasources.xml
         - repository/conf/datasources/bps-datasources.xml
-        - repository/conf/datasources/master-datasources.xml
-        - repository/conf/tomcat/catalina-server.xml
         - repository/conf/bps.xml
         - repository/conf/carbon.xml
         - repository/conf/humantask.xml
         - repository/conf/jndi.properties
-        - repository/conf/registry.xml
-        - repository/conf/user-mgt.xml
+
 wso2::service_name: wso2bps
-wso2::service_template: wso2base/wso2service.erb
+
 wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.36.jar
 

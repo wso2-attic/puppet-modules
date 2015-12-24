@@ -4,18 +4,10 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::template_list :
-  - repository/conf/carbon.xml
-  - repository/conf/user-mgt.xml
-  - repository/conf/registry.xml
   - repository/conf/datasources/am-datasources.xml
-  - repository/conf/datasources/master-datasources.xml
-  - repository/conf/tomcat/catalina-server.xml
-  - repository/conf/axis2/axis2.xml
-  - bin/wso2server.sh
 
 wso2::service_name: wso2is
-wso2::service_template: wso2base/wso2service.erb
-wso2::file_list : []
+
 wso2::clustering :
     enabled : false
     local_member_host : 127.0.0.1
