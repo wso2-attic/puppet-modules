@@ -702,11 +702,7 @@
         <parameter name="properties">
             <property name="backendServerURL" value="https://${hostName}:${httpsPort}/services/"/>
             <property name="mgtConsoleURL" value="https://${hostName}:${httpsPort}/"/>
-            <%- if @clustering['enable'] == true && @clustering['subDomain'] == 'mgt' -%>
-            <property name="subDomain" value="mgt"/>
-            <%- elsif @clustering['enable'] == true && @clustering['subDomain'] == 'worker' -%>
-            <property name="subDomain" value="worker"/>
-            <%- end -%>
+            <property name="subDomain" value="<%= @clustering['subDomain'] %>"/>
         </parameter>
 
         <!--

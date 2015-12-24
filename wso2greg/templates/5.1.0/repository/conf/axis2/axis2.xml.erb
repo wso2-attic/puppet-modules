@@ -683,7 +683,7 @@
         <parameter name="properties">
             <property name="backendServerURL" value="https://${hostName}:${httpsPort}/services/"/>
             <property name="mgtConsoleURL" value="https://${hostName}:${httpsPort}/"/>
-            <property name="subDomain" value="worker"/>
+            <property name="subDomain" value="<%= @clustering['subDomain'] %>"/>
         </parameter>
 
         <!--
