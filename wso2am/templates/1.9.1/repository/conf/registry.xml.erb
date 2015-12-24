@@ -14,7 +14,6 @@
         <dataSource>jdbc/WSO2CarbonDB</dataSource>
     </dbConfig>
 
-
 <%- @registry_mounts.each do |datasource_name, registry_mount| -%>
     <dbConfig name="<%= datasource_name %>">
         <dataSource><%= @master_datasources[datasource_name]['jndi_config'] %></dataSource>
@@ -31,10 +30,7 @@
         <instanceId><%= datasource_name %></instanceId>
         <targetPath><%= registry_mount['target_path'] %></targetPath>
     </mount>
-
-
 <%- end -%>
-
 
     <!-- This handler provides the feature to add a simlink to a given resource -->
 

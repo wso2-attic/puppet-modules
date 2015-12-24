@@ -31,25 +31,23 @@
         <dataSource>jdbc/WSO2CarbonDB</dataSource>
     </dbConfig>
 
-    <%- @master_datasources.each do |datasource_name, datasource| -%>
-    <%- if datasource['mount'] && datasource['mount'] == true -%>
+<%- @registry_mounts.each do |datasource_name, registry_mount| -%>
     <dbConfig name="<%= datasource_name %>">
-        <dataSource><%= datasource['jndi_config'] %></dataSource>
+        <dataSource><%= @master_datasources[datasource_name]['jndi_config'] %></dataSource>
     </dbConfig>
     <remoteInstance url="https://localhost:9443/registry">
         <id><%= datasource_name %></id>
         <dbConfig><%= datasource_name %></dbConfig>
-        <readOnly>false</readOnly>
-        <registryRoot>/</registryRoot>
-        <enableCache>true</enableCache>
-        <cacheId><%= datasource['username'] %>@<%= datasource['url'] %></cacheId>
+        <readOnly><%= registry_mount['readOnly'] %></readOnly>
+        <registryRoot><%= registry_mount['registryRoot'] %></registryRoot>
+        <enableCache><%= registry_mount['enableCache'] %></enableCache>
+        <cacheId><%= @master_datasources[datasource_name]['username'] %>@<%= @master_datasources[datasource_name]['url'] %></cacheId>
     </remoteInstance>
-    <mount path="<%= datasource['mount_path'] %>" overwrite="virtual">
+    <mount path="<%= registry_mount['path'] %>" overwrite="virtual">
         <instanceId><%= datasource_name %></instanceId>
-        <targetPath><%= datasource['mount_target_path'] %></targetPath>
+        <targetPath><%= registry_mount['target_path'] %></targetPath>
     </mount>
-    <%- end -%>
-    <%- end -%>
+<%- end -%>
 
    <!--<handler class="org.wso2.carbon.registry.extensions.handlers.SynapseRepositoryHandler">
         <filter class="org.wso2.carbon.registry.core.jdbc.handlers.filters.MediaTypeMatcher">
