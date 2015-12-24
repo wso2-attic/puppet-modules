@@ -21,7 +21,7 @@ wso2::so_timeout: 600000
 wso2::connection_timeout: 600000
 
 wso2::clustering:
-  enable: false
+  enabled: false
   membership_scheme: multicast
   local_member_host: 127.0.0.1
   local_member_port: 4000

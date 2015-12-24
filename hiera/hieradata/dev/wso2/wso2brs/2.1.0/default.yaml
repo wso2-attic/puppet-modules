@@ -11,7 +11,7 @@ wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
 wso2::clustering :
-    enable : false
+    enabled : false
     local_member_host : 127.0.0.1
     local_member_port : 4000
     membership_scheme : wka
