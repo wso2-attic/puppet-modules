@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::configure ($template_list, $file_list, $user, $group, $service_name, $service_template) {
+define wso2base::configure ($template_list, $file_list, $user, $group, $service_name, $service_template, $wso2_module) {
   $carbon_home  = $name
   notice("Configuring WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 
@@ -24,7 +24,7 @@ define wso2base::configure ($template_list, $file_list, $user, $group, $service_
         owner            => $user,
         group            => $group,
         carbon_home      => $carbon_home,
-        module_name      => $caller_module_name
+        wso2_module      => $wso2_module
     }
   }
 
@@ -34,7 +34,7 @@ define wso2base::configure ($template_list, $file_list, $user, $group, $service_
         owner            => $user,
         group            => $group,
         carbon_home      => $carbon_home,
-        module_name      => $caller_module_name
+        wso2_module      => $wso2_module
     }
   }
 
