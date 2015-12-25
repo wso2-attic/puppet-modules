@@ -14,12 +14,12 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::push_templates ($carbon_home, $owner, $group, $module_name) {
+define wso2base::push_templates ($carbon_home, $owner, $group, $wso2_module) {
   ensure_resource('file', "${carbon_home}/${name}", {
     ensure  => file,
     owner   => $owner,
     group   => $group,
     mode    => '0754',
-    content => template("${module_name}/${::product_version}/${name}.erb")
+    content => template("${wso2_module}/${::product_version}/${name}.erb")
   })
 }

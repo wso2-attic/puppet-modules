@@ -14,13 +14,13 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::push_files ($carbon_home, $owner, $group, $module_name) {
+define wso2base::push_files ($carbon_home, $owner, $group, $wso2_module) {
   ensure_resource('file', "${carbon_home}/${name}", {
     ensure  => present,
     owner   => $owner,
     group   => $group,
     recurse => remote,
     mode    => '0754',
-    source  => ["puppet:///modules/${module_name}/configs/${name}"]
+    source  => ["puppet:///modules/${wso2_module}/configs/${name}"]
   })
 }
