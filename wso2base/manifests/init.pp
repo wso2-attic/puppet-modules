@@ -25,11 +25,10 @@ class wso2base {
 
   $java_install_dir   = hiera("java_install_dir")
   $java_source_file   = hiera("java_source_file")
-  $jvm                = hiera_hash("wso2::jvm")
   $worker_node        = hiera("wso2::worker_node")
 
   # symlink path to Java install directory
-  $java_home_sym_link = hiera("java_home")
+  $java_home          = hiera("java_home")
 
   $wso2_user          = hiera("wso2::user")
   $wso2_group         = hiera("wso2::group")
@@ -47,68 +46,26 @@ class wso2base {
   $usermgt_datasource = hiera("wso2::usermgt_datasource")
 
   $master_datasources = hiera_hash("wso2::master_datasources")
-  $registry_mounts    = hiera_hash("wso2::registry_mounts", {})
+  $registry_mounts    = hiera_hash("wso2::registry_mounts", { })
   $clustering         = hiera_hash("wso2::clustering")
   $dep_sync           = hiera_hash("wso2::dep_sync")
   $ports              = hiera_hash("wso2::ports")
+  $jvm                = hiera_hash("wso2::jvm")
 
   $carbon_home        = "${install_dir}/${pack_extracted_dir}"
-  $patches_abs_dir    = "${carbon_home}/${patches_dir}"
-  $java_home          = $java_home_sym_link
 
-  # Install system packages
-  package { $packages: ensure => installed }
-
-  ensure_resource('file', $java_install_dir, {
-    ensure  => 'directory',
-    require => Package[$packages]
-  })
-
-  file { '/etc/environment':
-    ensure            => present,
-    source            => "puppet:///modules/${module_name}/environment",
+  class { '::wso2base::system':
+    packages          => $packages,
+    wso2_group        => $wso2_group,
+    wso2_user         => $wso2_user
+  } ->
+  class { '::wso2base::java':
+    java_install_dir  => $java_install_dir,
+    java_source_file  => $java_source_file,
+    wso2_user         => $wso2_user,
+    java_home         => $java_home
   }
 
-  cron { 'ntpdate':
-    command           => "/usr/sbin/ntpdate pool.ntp.org",
-    user              => 'root',
-    minute            => '*/50'
-  }
-
-  group { $wso2_group:
-    ensure            => 'present',
-    gid               => '502',
-  }
-
-  user { $wso2_user:
-    password          => $wso2_user,
-    gid               => $wso2_group,
-    ensure            => present,
-    managehome        => true,
-    shell             => '/bin/bash',
-    require           => Group[$wso2_group]
-  }
-
-  java::setup { $java_source_file :
-    ensure            => 'present',
-    source            => $java_source_file,
-    deploymentdir     => $java_install_dir,
-    user              => 'root',
-    cachedir          => "/home/${wso2_user}/java-setup-${name}",
-    require           => [User[$wso2_user], File[$java_install_dir]]
-  }
-
-  # create a symlink for Java deployment
-  file { $java_home_sym_link:
-    ensure            => 'link',
-    target            => $java_install_dir,
-    require           => Java::Setup[$java_source_file]
-  }
-
-  # set JAVA_HOME environment variable and include JAVA_HOME/bin in PATH for all users
-  file { "/etc/profile.d/set_java_home.sh":
-    ensure            => present,
-    content           => inline_template("JAVA_HOME=${java_home_sym_link}\nPATH=${java_home_sym_link}/bin:\$PATH"),
-    require           => File[$java_home_sym_link]
-  }
+  contain wso2base::system
+  contain wso2base::java
 }
