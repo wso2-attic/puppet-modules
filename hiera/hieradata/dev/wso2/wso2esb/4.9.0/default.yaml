@@ -10,21 +10,6 @@ wso2::hostname : esb.wso2.com
 wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.38.jar
 
-wso2::registry_mounts:
-  WSO2_CONFIG_DB:
-    path: /_system/config/esb
-    target_path: /_system/config/esb
-    readOnly: true
-    registryRoot: /
-    enableCache: true
-
-  WSO2_GOV_DB:
-    path: /_system/governance
-    target_path: /_system/governance
-    readOnly: true
-    registryRoot: /
-    enableCache: true
-
 wso2::master_datasources :
   WSO2_CONFIG_DB :
     description : The datasource used for config registry
