@@ -8,7 +8,6 @@ wso2::template_list :
         - repository/conf/datasources/activiti-datasources.xml
         - repository/conf/datasources/bps-datasources.xml
         - repository/conf/bps.xml
-        - repository/conf/carbon.xml
         - repository/conf/humantask.xml
         - repository/conf/jndi.properties
 
