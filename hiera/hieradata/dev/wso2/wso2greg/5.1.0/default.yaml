@@ -74,3 +74,35 @@ wso2::master_datasources :
     username : root
     password : root
     jndi_config : jdbc/WSO2CarbonDB
+
+wso2::bps_datasources
+  BPS_DS :
+    description : The datasource used for BPS database
+    driverClassName : org.h2.Driver
+    url : jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
+    username : wso2carbon
+    password : wso2carbon
+    #securevault :
+    jndi_config : bpsds
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+
+wso2::social_datasources
+  WSO2_SOCIAL_DB :
+    description : The datasource used for social framework
+    driverClassName : org.h2.Driver
+    url : jdbc:h2:repository/database/WSO2SOCIAL_DB;DB_CLOSE_ON_EXIT=FALSE;MVCC=true
+    username : wso2carbon
+    password : wso2carbon
+    #securevault :
+    jndi_config : jdbc/WSO2SocialDB
+    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
