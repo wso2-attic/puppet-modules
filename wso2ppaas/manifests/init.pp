@@ -20,6 +20,9 @@
 #
 
 class wso2ppaas inherits wso2base {
+
+  $mb_url = hiera("wso2::mb_url")
+
   wso2base::server { "${carbon_home}" :
     maintenance_mode   => $maintenance_mode,
     pack_filename      => $pack_filename,
