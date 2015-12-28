@@ -31,10 +31,10 @@
             <!-- SM client timeout in ms -->
             <clientTimeout><%= @stratos_manager['client_timeout'] %></clientTimeout>
         </stratosManager>
-	    <identity>
-                <hostname><%= @stratos_manager['identity'] %></hostname>
-                <port><%= @stratos_manager['port'] %></port>
-                <clientTimeout><%= @stratos_manager['client_timeout'] %></clientTimeout>
+	      <identity>
+            <hostname><%= @identity['host'] %></hostname>
+            <port><%= @identity['port'] %></port>
+            <clientTimeout><%= @identity['client_timeout'] %></clientTimeout>
         </identity>
         <member>
             <spinAfterTerminate><%= @autoscaler['member']['spin_after_terminate'] %></spinAfterTerminate>
