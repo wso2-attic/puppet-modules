@@ -9,8 +9,112 @@ wso2::hostname : ppaas.wso2.com
 
 wso2::template_list :
         - repository/conf/jndi.properties
+        - repository/conf/autoscaler.xml
+        - repository/conf/cartridge-config.properties
+        - repository/conf/cloud-controller.xml
+        - repository/conf/mqtttopic.properties
 
 wso2::mb_url : tcp://192.168.100.1:61616
+wso2::mqtturl : tcp://192.168.100.1:1883
+
+wso2::ppaas::autoscaler :
+  host : localhost
+  port : 9443
+  member :
+    spin_after_terminate : false
+    pending_member_expiry_timeout : 900000
+    obsoleted_member_expiry_timeout : 86400000
+    pending_termination_member_expiry_timeout : 1800000
+  cluster :
+    monitor_interval : 90000
+
+wso2::ppaas::cloud_controller :
+  host : localhost
+  port : 9443
+  client_timeout : 300000
+
+wso2::ppaas::stratos_manager :
+  host : localhost
+  port : 9443
+  client_timeout : 300000
+
+wso2::ppaas::identity :
+  host : localhost
+  port : 9443
+  client_timeout : 300000
+
+wso2::ppaas::das :
+  host : localhost
+  port : 9444
+
+wso2::ppaas::cep :
+  host : localhost
+  port : 9443
+
+wso2::ppaas::iaas_providers :
+  openstack :
+    enabled : false
+    class_name : org.apache.stratos.cloud.controller.iaases.openstack.OpenstackIaas
+    provider : openstack-nova
+    identity : project:username
+    credential : credential
+    properties :
+      -
+        name  : jclouds.endpoint
+        value : http://192.168.16.99:5000/v2.0
+      -
+        name  : jclouds.openstack-nova.auto-create-floating-ips
+        value : false
+      -
+        name  : jclouds.api-version
+        value : 2.0/
+      -
+        name  : openstack.networking.provider
+        value : nova
+      -
+        name  : keyPair
+        value : keypair-name
+      -
+        name  : securityGroups
+        value : default
+  ec2 :
+    enabled : false
+    class_name : org.apache.stratos.cloud.controller.iaases.ec2.EC2Iaas
+    provider : aws-ec2
+    identity : identity
+    credential : credential
+    properties :
+      -
+        name  : jclouds.ec2.ami-query
+        value : owner-id=owner-id;state=available;image-type=machine
+      -
+        name  : availabilityZone
+        value : ap-southeast-1b
+      -
+        name  : securityGroups
+        value : default
+      -
+        name  : autoAssignIp
+        value : true
+      -
+        name  : keyPair
+        value : keypair-name
+  kubernetes :
+    enabled : true
+    class_name : org.apache.stratos.cloud.controller.iaases.kubernetes.KubernetesIaas
+    provider : kubernetes
+    identity : identity
+    credential : credential
+  mock :
+    enabled : true
+    class_name : org.apache.stratos.cloud.controller.iaases.mock.MockIaas
+    provider : mock
+    identity : identity
+    credential : credential
+    properties :
+      -
+        name  : api.endpoint
+        value : https://localhost:9443/mock-iaas/api
 
 #wso2::ports:
 #  proxyPort :
@@ -62,7 +166,7 @@ wso2::mb_url : tcp://192.168.100.1:61616
 #    readOnly: false
 #    registryRoot: /
 #    enableCache: true
-#
+
 #wso2::dep_sync :
 #    enabled : false
 #    auto_checkout : true

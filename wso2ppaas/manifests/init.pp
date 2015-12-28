@@ -22,6 +22,14 @@
 class wso2ppaas inherits wso2base {
 
   $mb_url = hiera("wso2::mb_url")
+  $mqtturl = hiera("wso2::mqtturl")
+  $autoscaler = hiera_hash("wso2::ppaas::autoscaler")
+  $cloud_controller = hiera_hash("wso2::ppaas::cloud_controller")
+  $stratos_manager = hiera_hash("wso2::ppaas::stratos_manager")
+  $identity = hiera_hash("wso2::ppaas::identity")
+  $das = hiera_hash("wso2::ppaas::das")
+  $cep = hiera_hash("wso2::ppaas::cep")
+  $iaas_providers = hiera_hash("wso2::ppaas::iaas_providers")
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode   => $maintenance_mode,
