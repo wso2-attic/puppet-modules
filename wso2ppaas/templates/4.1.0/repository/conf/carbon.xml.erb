@@ -44,12 +44,21 @@
        This is will become part of the End Point Reference of the
        services deployed on this server instance.
     -->
+<% if @hostname %>
+    <HostName><%= @hostname %></HostName>
+<%- else -%>
     <!--HostName>www.wso2.org</HostName-->
+<% end %>
 
     <!--
     Host name to be used for the Carbon management console
     -->
+<% if @mgt_hostname %>
+    <MgtHostName><%= @mgt_hostname %></MgtHostName>
+<%- else -%>
     <!--MgtHostName>mgt.wso2.org</MgtHostName-->
+<% end %>
+
 
     <!--
         The URL of the back end server. This is where the admin services are hosted and
@@ -124,7 +133,11 @@
          the define value + Offset.
          e.g. Offset=2 and HTTPS port=9443 will set the effective HTTPS port to 9445
          -->
+	<%- if @ports['offset'] -%>
+        <Offset><%= @ports['offset'] %></Offset>
+	<%- else -%>
         <Offset>0</Offset>
+	<%- end -%>
 
         <!-- The JMX Ports -->
         <JMX>
@@ -517,14 +530,16 @@
 	and in  worker nodes set only AutoCheckout to true.
     -->
     <DeploymentSynchronizer>
-        <Enabled>false</Enabled>
-        <AutoCommit>false</AutoCommit>
-        <AutoCheckout>true</AutoCheckout>
-        <RepositoryType>svn</RepositoryType>
-        <SvnUrl>http://svnrepo.example.com/repos/</SvnUrl>
-        <SvnUser>username</SvnUser>
-        <SvnPassword>password</SvnPassword>
-        <SvnUrlAppendTenantId>true</SvnUrlAppendTenantId>
+        <Enabled><%= @dep_sync['enabled'] %></Enabled>
+        <AutoCommit><%= @dep_sync['auto_commit'] %></AutoCommit>
+        <AutoCheckout><%= @dep_sync['auto_checkout'] %></AutoCheckout>
+        <RepositoryType><%= @dep_sync['repository_type'] %></RepositoryType>
+    <%- if @dep_sync['repository_type'] == "svn" -%>
+            <SvnUrl><%= @dep_sync['svn']['url'] -%></SvnUrl>
+            <SvnUser><%= @dep_sync['svn']['user'] -%></SvnUser>
+            <SvnPassword><%= @dep_sync['svn']['password'] -%></SvnPassword>
+            <SvnUrlAppendTenantId><%= @dep_sync['svn']['append_tenant_id'] -%></SvnUrlAppendTenantId>
+    <%- end -%>
     </DeploymentSynchronizer>
 
     <!-- Deployment Synchronizer Configuration. Uncomment the following section when running with "registry based" dep sync.

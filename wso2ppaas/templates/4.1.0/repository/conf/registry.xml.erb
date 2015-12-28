@@ -31,6 +31,24 @@
         <dataSource>jdbc/WSO2CarbonDB</dataSource>
     </dbConfig>
 
+<%- @registry_mounts.each do |datasource_name, registry_mount| -%>
+    <dbConfig name="<%= datasource_name %>">
+        <dataSource><%= @master_datasources[datasource_name]['jndi_config'] %></dataSource>
+    </dbConfig>
+    <remoteInstance url="https://localhost:9443/registry">
+        <id><%= datasource_name %></id>
+        <dbConfig><%= datasource_name %></dbConfig>
+        <readOnly><%= registry_mount['readOnly'] %></readOnly>
+        <registryRoot><%= registry_mount['registryRoot'] %></registryRoot>
+        <enableCache><%= registry_mount['enableCache'] %></enableCache>
+        <cacheId><%= @master_datasources[datasource_name]['username'] %>@<%= @master_datasources[datasource_name]['url'] %></cacheId>
+    </remoteInstance>
+    <mount path="<%= registry_mount['path'] %>" overwrite="virtual">
+        <instanceId><%= datasource_name %></instanceId>
+        <targetPath><%= registry_mount['target_path'] %></targetPath>
+    </mount>
+<%- end -%>
+
    <!--<handler class="org.wso2.carbon.registry.extensions.handlers.SynapseRepositoryHandler">
         <filter class="org.wso2.carbon.registry.core.jdbc.handlers.filters.MediaTypeMatcher">
             <property name="mediaType">application/vnd.apache.synapse</property>
