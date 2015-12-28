@@ -201,19 +201,19 @@
                 "/permission/admin/stratos/applications/view"],
             "description": "Manage applications."
         },
-	{
-		"link": "https://<%= @das['host'] %>:<%= @das['port'] %>/portal/dashboards/ppaas-monitoring-dashboard",
-   		"linkexternal": true,
-   		"context": "/",
-   		"title": "Monitoring",
-   		"icon": "fa-laptop",
-   		"block-color":"#f1c40f",
-   		"permissionPaths": [
-       			"/permission",
-       			"/permission/admin"
-   		],
-   		"description": "Monitor health statistics of clusters and members."
-	},
+        {
+            "link": "https://<%= @das['nodes'][0]['host'] %>:<%= @das['nodes'][0]['ports']['management'] %>/portal/dashboards/ppaas-monitoring-dashboard",
+            "linkexternal": true,
+            "context": "/",
+            "title": "Monitoring",
+            "icon": "fa-laptop",
+            "block-color":"#f1c40f",
+            "permissionPaths": [
+                "/permission",
+                "/permission/admin"
+            ],
+            "description": "Monitor health statistics of clusters and members."
+        },
         {
             "link": "https://wso2.org/jira/browse/PAAS",
             "linkexternal": true,

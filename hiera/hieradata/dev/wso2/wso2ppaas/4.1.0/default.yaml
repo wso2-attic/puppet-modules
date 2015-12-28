@@ -13,13 +13,18 @@ wso2::template_list :
         - repository/conf/cartridge-config.properties
         - repository/conf/cloud-controller.xml
         - repository/conf/mqtttopic.properties
+        - repository/conf/thrift-client-config.xml
+        - repository/deployment/server/jaggeryapps/console/controllers/menu/menu.json
+        - repository/deployment/server/outputeventadaptors/JMSOutputAdaptor.xml
+
 
 wso2::mb_url : tcp://192.168.100.1:61616
 wso2::mqtturl : tcp://192.168.100.1:1883
 
 wso2::ppaas::autoscaler :
   host : localhost
-  port : 9443
+  ports :
+    management : 9443
   member :
     spin_after_terminate : false
     pending_member_expiry_timeout : 900000
@@ -30,26 +35,45 @@ wso2::ppaas::autoscaler :
 
 wso2::ppaas::cloud_controller :
   host : localhost
-  port : 9443
+  ports :
+    management : 9443
   client_timeout : 300000
 
 wso2::ppaas::stratos_manager :
   host : localhost
-  port : 9443
+  ports :
+    management : 9443
   client_timeout : 300000
 
 wso2::ppaas::identity :
   host : localhost
-  port : 9443
+  ports :
+    management : 9443
   client_timeout : 300000
 
 wso2::ppaas::das :
-  host : localhost
-  port : 9444
+  nodes :
+    -
+      id : node-01
+      host : localhost
+      ports :
+        management : 9444
+        thrift : 7612
+      stats_publisher_enabled : false
+      username : admin
+      password : admin
 
 wso2::ppaas::cep :
-  host : localhost
-  port : 9443
+  nodes :
+    -
+      id : node-01
+      host : localhost
+      ports :
+        management : 9443
+        thrift : 7611
+      stats_publisher_enabled : true
+      username : admin
+      password : admin
 
 wso2::ppaas::iaas_providers :
   openstack :

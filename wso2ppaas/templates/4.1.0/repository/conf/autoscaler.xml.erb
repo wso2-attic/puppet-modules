@@ -21,19 +21,19 @@
     <autoscaler>
         <cloudController>
             <hostname><%= @cloud_controller['host'] %></hostname>
-            <port><%= @cloud_controller['port'] %></port>
+            <port><%= @cloud_controller['ports']['management'] %></port>
             <!-- CC client timout in ms -->
             <clientTimeout><%= @cloud_controller['client_timeout'] %></clientTimeout>
         </cloudController>
         <stratosManager>
             <hostname><%= @stratos_manager['host'] %></hostname>
-            <port><%= @stratos_manager['port'] %></port>
+            <port><%= @stratos_manager['ports']['management'] %></port>
             <!-- SM client timeout in ms -->
             <clientTimeout><%= @stratos_manager['client_timeout'] %></clientTimeout>
         </stratosManager>
 	      <identity>
             <hostname><%= @identity['host'] %></hostname>
-            <port><%= @identity['port'] %></port>
+            <port><%= @identity['ports']['management'] %></port>
             <clientTimeout><%= @identity['client_timeout'] %></clientTimeout>
         </identity>
         <member>

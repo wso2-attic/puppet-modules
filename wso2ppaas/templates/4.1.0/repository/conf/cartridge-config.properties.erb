@@ -19,10 +19,10 @@
 #
 #
 
-autoscaler.service.url=https://<%= @autoscaler['host'] %>:<%= @autoscaler['port'] %>/services/AutoscalerService/
-cloud.controller.service.url=https://<%= @cloud_controller['host'] %>:<%= @cloud_controller['port'] %>/services/CloudControllerService/
-stratos.manager.service.url=https://<%= @stratos_manager['host'] %>:<%= @stratos_manager['port'] %>/services/StratosManagerService/
-das.metering.dashboard.url=https://<%= @das['host'] %>:<%= @das['port'] %>/portal/dashboards/ppaas-metering-dashboard
+autoscaler.service.url=https://<%= @autoscaler['host'] %>:<%= @autoscaler['ports']['management'] %>/services/AutoscalerService/
+cloud.controller.service.url=https://<%= @cloud_controller['host'] %>:<%= @cloud_controller['ports']['management'] %>/services/CloudControllerService/
+stratos.manager.service.url=https://<%= @stratos_manager['host'] %>:<%= @stratos_manager['ports']['management'] %>/services/StratosManagerService/
+das.metering.dashboard.url=https://<%= @das['nodes'][0]['host'] %>:<%= @das['nodes'][0]['ports']['management'] %>/portal/dashboards/ppaas-metering-dashboard
 puppet.ip=127.0.0.1
 puppet.hostname=puppet.apache.stratos.org
 puppet.dns.available=false
