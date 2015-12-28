@@ -1,0 +1,75 @@
+---
+classes:
+  - wso2esb
+wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
+wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+
+wso2::service_name: wso2ppaas
+wso2::hostname : ppaas.wso2.com
+
+wso2::file_list :
+
+wso2::template_list :
+        - repository/conf/jndi.properties
+
+#wso2::ports:
+#  proxyPort :
+#    http: 80
+#    https: 443
+
+
+#wso2::master_datasources :
+#  WSO2_CONFIG_DB :
+#    description : The datasource used for config registry
+#    driverClassName : com.mysql.jdbc.Driver
+#    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+#    username : root
+#    password : root
+#    #securevault :
+#    jndi_config : jdbc/WSO2_CONFIG_DB
+#    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+#    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+#    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+#    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+#    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+#    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+#  WSO2_GOV_DB :
+#    description : The datasource used for gov registry
+#    driverClassName : com.mysql.jdbc.Driver
+#    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+#    username : root
+#    password : root
+#    #securevault : false
+#    jndi_config : jdbc/WSO2_GOV_DB
+#    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+#    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+#    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+#    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+#    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+#    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+
+#wso2::registry_mounts:
+#  WSO2_CONFIG_DB:
+#    path: /_system/config/esb
+#    target_path: /_system/config/esb
+#    readOnly: false
+#    registryRoot: /
+#    enableCache: true
+#
+#  WSO2_GOV_DB:
+#    path: /_system/governance
+#    target_path: /_system/governance
+#    readOnly: false
+#    registryRoot: /
+#    enableCache: true
+#
+#wso2::dep_sync :
+#    enabled : false
+#    auto_checkout : true
+#    auto_commit : true
+#    repository_type : svn
+#    svn :
+#       url : http://svnrepo.example.com/repos/
+#       user : username
+#       password : password
+#       append_tenant_id: true
