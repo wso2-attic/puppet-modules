@@ -21,8 +21,7 @@
 
 class wso2ppaas inherits wso2base {
 
-  $mb_url = hiera("wso2::mb_url")
-  $mqtturl = hiera("wso2::mqtturl")
+  $mb = hiera("wso2::mb")
   $autoscaler = hiera_hash("wso2::ppaas::autoscaler")
   $cloud_controller = hiera_hash("wso2::ppaas::cloud_controller")
   $stratos_manager = hiera_hash("wso2::ppaas::stratos_manager")

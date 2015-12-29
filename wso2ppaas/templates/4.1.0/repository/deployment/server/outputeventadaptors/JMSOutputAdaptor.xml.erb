@@ -18,8 +18,10 @@
 <outputEventAdaptor name="JMSOutputAdaptor" statistics="disable"
   trace="enable" type="jms" xmlns="http://wso2.org/carbon/eventadaptormanager">
   <!--property name="java.naming.provider.url">CEP_HOME/repository/conf/jndi.properties</property-->
-  <property name="java.naming.provider.url"><%= @mb_url %></property>
+  <property name="java.naming.provider.url"><%= @mb['amqp_url'] %></property>
   <property name="java.naming.factory.initial">org.apache.activemq.jndi.ActiveMQInitialContextFactory</property>
   <property name="transport.jms.ConnectionFactoryJNDIName">TopicConnectionFactory</property>
   <property name="transport.jms.DestinationType">topic</property>
+  <!--<property name="transport.jms.UserName"><%= @mb['username'] %></property>-->
+  <!--<property name="transport.jms.Password"><%= @mb['password'] %></property>-->
 </outputEventAdaptor>

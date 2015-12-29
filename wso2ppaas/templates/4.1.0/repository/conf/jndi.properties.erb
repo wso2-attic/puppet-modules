@@ -18,5 +18,7 @@
 #
 
 connectionfactoryName=TopicConnectionFactory
-java.naming.provider.url=<%= @mb_url %>
+java.naming.provider.url=<%= @mb['amqp_url'] %>
 java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory
+#java.naming.security.principal=<%= @mb['username'] %>
+#java.naming.security.credentials=<%= @mb['password'] %>

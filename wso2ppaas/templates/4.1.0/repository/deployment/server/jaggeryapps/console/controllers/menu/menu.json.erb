@@ -201,6 +201,7 @@
                 "/permission/admin/stratos/applications/view"],
             "description": "Manage applications."
         },
+<%- if @das['nodes'][0]['stats_publisher_enabled'] == true -%>
         {
             "link": "https://<%= @das['nodes'][0]['host'] %>:<%= @das['nodes'][0]['ports']['management'] %>/portal/dashboards/ppaas-monitoring-dashboard",
             "linkexternal": true,
@@ -214,6 +215,7 @@
             ],
             "description": "Monitor health statistics of clusters and members."
         },
+<%- end -%>
         {
             "link": "https://wso2.org/jira/browse/PAAS",
             "linkexternal": true,
