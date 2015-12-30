@@ -1,0 +1,206 @@
+---
+classes:
+  - wso2ppaas
+wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
+wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+
+wso2::service_name: wso2ppaas
+wso2::hostname : ppaas.wso2.com
+
+wso2::template_list :
+        - repository/conf/jndi.properties
+        - repository/conf/autoscaler.xml
+        - repository/conf/cartridge-config.properties
+        - repository/conf/cloud-controller.xml
+        - repository/conf/mqtttopic.properties
+        - repository/conf/thrift-client-config.xml
+        - repository/deployment/server/jaggeryapps/console/controllers/menu/menu.json
+        - repository/deployment/server/outputeventadaptors/JMSOutputAdaptor.xml
+
+
+wso2::mb :
+  amqp_url : tcp://192.168.100.1:61616
+  mqtt_url : tcp://192.168.100.1:1883
+  username : username
+  password : password
+
+wso2::ppaas::autoscaler :
+  host : localhost
+  ports :
+    management : 9443
+  member :
+    spin_after_terminate : false
+    pending_member_expiry_timeout : 900000
+    obsoleted_member_expiry_timeout : 86400000
+    pending_termination_member_expiry_timeout : 1800000
+  cluster :
+    monitor_interval : 90000
+
+wso2::ppaas::cloud_controller :
+  host : localhost
+  ports :
+    management : 9443
+  client_timeout : 300000
+
+wso2::ppaas::stratos_manager :
+  host : localhost
+  ports :
+    management : 9443
+  client_timeout : 300000
+
+wso2::ppaas::identity :
+  host : localhost
+  ports :
+    management : 9443
+  client_timeout : 300000
+
+wso2::ppaas::das :
+  nodes :
+    -
+      id : node-01
+      host : localhost
+      ports :
+        management : 9444
+        thrift : 7612
+      stats_publisher_enabled : false
+      username : admin
+      password : admin
+
+wso2::ppaas::cep :
+  nodes :
+    -
+      id : node-01
+      host : localhost
+      ports :
+        management : 9443
+        thrift : 7611
+      stats_publisher_enabled : true
+      username : admin
+      password : admin
+
+wso2::ppaas::iaas_providers :
+  openstack :
+    enabled : false
+    class_name : org.apache.stratos.cloud.controller.iaases.openstack.OpenstackIaas
+    provider : openstack-nova
+    identity : project:username
+    credential : credential
+    properties :
+      -
+        name  : jclouds.endpoint
+        value : http://192.168.16.99:5000/v2.0
+      -
+        name  : jclouds.openstack-nova.auto-create-floating-ips
+        value : false
+      -
+        name  : jclouds.api-version
+        value : 2.0/
+      -
+        name  : openstack.networking.provider
+        value : nova
+      -
+        name  : keyPair
+        value : keypair-name
+      -
+        name  : securityGroups
+        value : default
+  ec2 :
+    enabled : false
+    class_name : org.apache.stratos.cloud.controller.iaases.ec2.EC2Iaas
+    provider : aws-ec2
+    identity : identity
+    credential : credential
+    properties :
+      -
+        name  : jclouds.ec2.ami-query
+        value : owner-id=owner-id;state=available;image-type=machine
+      -
+        name  : availabilityZone
+        value : ap-southeast-1b
+      -
+        name  : securityGroups
+        value : default
+      -
+        name  : autoAssignIp
+        value : true
+      -
+        name  : keyPair
+        value : keypair-name
+  kubernetes :
+    enabled : true
+    class_name : org.apache.stratos.cloud.controller.iaases.kubernetes.KubernetesIaas
+    provider : kubernetes
+    identity : identity
+    credential : credential
+  mock :
+    enabled : true
+    class_name : org.apache.stratos.cloud.controller.iaases.mock.MockIaas
+    provider : mock
+    identity : identity
+    credential : credential
+    properties :
+      -
+        name  : api.endpoint
+        value : https://localhost:9443/mock-iaas/api
+
+#wso2::ports:
+#  proxyPort :
+#    http: 80
+#    https: 443
+
+
+#wso2::master_datasources :
+#  WSO2_CONFIG_DB :
+#    description : The datasource used for config registry
+#    driverClassName : com.mysql.jdbc.Driver
+#    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+#    username : root
+#    password : root
+#    #securevault :
+#    jndi_config : jdbc/WSO2_CONFIG_DB
+#    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+#    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+#    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+#    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+#    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+#    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+#  WSO2_GOV_DB :
+#    description : The datasource used for gov registry
+#    driverClassName : com.mysql.jdbc.Driver
+#    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+#    username : root
+#    password : root
+#    #securevault : false
+#    jndi_config : jdbc/WSO2_GOV_DB
+#    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
+#    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
+#    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
+#    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
+#    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
+#    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+
+#wso2::registry_mounts:
+#  WSO2_CONFIG_DB:
+#    path: /_system/config/esb
+#    target_path: /_system/config/esb
+#    readOnly: false
+#    registryRoot: /
+#    enableCache: true
+#
+#  WSO2_GOV_DB:
+#    path: /_system/governance
+#    target_path: /_system/governance
+#    readOnly: false
+#    registryRoot: /
+#    enableCache: true
+
+#wso2::dep_sync :
+#    enabled : false
+#    auto_checkout : true
+#    auto_commit : true
+#    repository_type : svn
+#    svn :
+#       url : http://svnrepo.example.com/repos/
+#       user : username
+#       password : password
+#       append_tenant_id: true
