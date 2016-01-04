@@ -55,7 +55,7 @@
     Host name to be used for the Carbon management console
     -->
 <%- if @mgt_hostname -%>
-  <%- if @clustering['subDomain'] == 'mgt' -%>
+  <%- if @clustering['sub_domain'] == 'mgt' -%>
     <MgtHostName><%= @mgt_hostname %></MgtHostName>
   <%- end -%>
 <%- else -%>
@@ -587,12 +587,11 @@
         <Enabled><%= @dep_sync['enabled'] %></Enabled>
         <AutoCommit><%=  @dep_sync['auto_commit'] %></AutoCommit>
         <AutoCheckout><%= @dep_sync['auto_checkout'] %></AutoCheckout>
-        <RepositoryType><%= @dep_sync['repository_type'] -%></RepositoryType>
+        <RepositoryType><%= @dep_sync['repository_type'] %></RepositoryType>
      <%- if @dep_sync['repository_type'] == "svn" -%>
-        <SvnUrl><%= @dep_sync['svn']['url'] -%></SvnUrl>
-        <SvnUser><%= @dep_sync['svn']['user'] -%></SvnUser>
-        <SvnPassword><%= @dep_sync['svn']['password'] -%></SvnPassword>
-        <SvnPassword>password</SvnPassword>
+        <SvnUrl><%= @dep_sync['svn']['url'] %></SvnUrl>
+        <SvnUser><%= @dep_sync['svn']['user'] %></SvnUser>
+        <SvnPassword><%= @dep_sync['svn']['password'] %></SvnPassword>
         <SvnUrlAppendTenantId><%= @dep_sync['svn']['append_tenant_id'] %></SvnUrlAppendTenantId>
      <%- end -%>
     </DeploymentSynchronizer>
