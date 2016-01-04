@@ -76,32 +76,33 @@ packages :
 
 # WSO2 datasources
 wso2::master_datasources :
-  WSO2_CARBON_DB :
+  wso2_carbon_db :
+    name : WSO2_CARBON_DB
     description : The datasource used for registry and user manager
-    driverClassName : org.h2.Driver
+    driver_class_name : org.h2.Driver
     url : jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
     #secretAlias :
     jndi_config : jdbc/WSO2CarbonDB
-    maxActive : "%{hiera('wso2::datasources::common::maxActive')}"
-    maxWait : "%{hiera('wso2::datasources::common::maxWait')}"
-    testOnBorrow : "%{hiera('wso2::datasources::common::testOnBorrow')}"
-    defaultAutoCommit : "%{hiera('wso2::datasources::common::defaultAutoCommit')}"
-    validationQuery : "%{hiera('wso2::datasources::mysql::validationQuery')}"
-    validationInterval : "%{hiera('wso2::datasources::common::validationInterval')}"
+    max_active : "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # User management datasource defaults to local h2 db
-wso2::usermgt_datasource: WSO2_CARBON_DB
+wso2::usermgt_datasource: wso2_carbon_db
 
 # Common datasources configuration
 wso2::datasources::common::username : 'wso2carbon'
 wso2::datasources::common::password : 'wso2carbon'
-wso2::datasources::common::maxActive : '50'
-wso2::datasources::common::maxWait : '60000'
-wso2::datasources::common::defaultAutoCommit : 'false'
-wso2::datasources::common::testOnBorrow : 'true'
-wso2::datasources::common::validationInterval : '30000'
+wso2::datasources::common::max_active : '50'
+wso2::datasources::common::max_wait : '60000'
+wso2::datasources::common::default_auto_commit : 'false'
+wso2::datasources::common::test_on_borrow : 'true'
+wso2::datasources::common::validation_interval : '30000'
 
 # MySQL datasources configuration
-wso2::datasources::mysql::validationQuery : 'SELECT 1'
+wso2::datasources::mysql::validation_query : 'SELECT 1'

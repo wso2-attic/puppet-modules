@@ -32,66 +32,19 @@ class wso2bps inherits wso2base {
   $activiti_datasources                       = hiera("wso2::activiti_datasources")
   $bps_datasources                            = hiera("wso2::bps_datasources")
 
-  notice("Starting WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
-
-  # Remove any existing installations
-  wso2base::clean { $carbon_home:
-    mode              => $maintenance_mode,
-    pack_filename     => $pack_filename,
-    pack_dir          => $pack_dir
-  }
-
-  # Copy the WSO2 product pack, extract and set permissions
-  wso2base::install { $carbon_home:
-    mode              => $install_mode,
-    install_dir       => $install_dir,
-    pack_filename     => $pack_filename,
-    pack_dir          => $pack_dir,
-    user              => $wso2_user,
-    group             => $wso2_group,
-    product_name      => $::product_name,
-    require           => Wso2base::Clean[$carbon_home]
-  }
-
-  # Copy any patches to patch directory
-  wso2base::patch { $carbon_home:
-    patches_abs_dir   => $patches_abs_dir,
-    patches_dir       => $patches_dir,
-    user              => $wso2_user,
-    group             => $wso2_group,
-    product_name      => $::product_name,
-    product_version   => $::product_version,
-    notify            => Service["${service_name}"],
-    require           => Wso2base::Install[$carbon_home]
-  }
-
-  # Populate templates and copy files provided
-  wso2base::configure { $carbon_home:
-    template_list     => $template_list,
-    file_list         => $file_list,
-    user              => $wso2_user,
-    group             => $wso2_group,
-    service_name      => $service_name,
-    service_template  => $service_template,
-    notify            => Service["${service_name}"],
-    require           => Wso2base::Patch[$carbon_home]
-  }
-
-  # Deploy product artifacts
-  wso2base::deploy { $carbon_home:
-    user              => $wso2_user,
-    group             => $wso2_group,
-    product_name      => $::product_name,
-    product_version   => $::product_version,
-    require           => Wso2base::Configure[$carbon_home]
-  }
-
-  # Start the service
-  service { $service_name:
-    ensure            => running,
-    hasstatus         => true,
-    hasrestart        => true,
-    enable            => true,
-    require           => [Wso2base::Deploy[$carbon_home]]
+  wso2base::server { "${carbon_home}" :
+    maintenance_mode   => $maintenance_mode,
+    pack_filename      => $pack_filename,
+    pack_dir           => $pack_dir,
+    install_mode       => $install_mode,
+    install_dir        => $install_dir,
+    pack_extracted_dir => $pack_extracted_dir,
+    wso2_user          => $wso2_user,
+    wso2_group         => $wso2_group,
+    patches_dir        => $patches_dir,
+    service_name       => $service_name,
+    service_template   => $service_template,
+    template_list      => $template_list,
+    file_list          => $file_list
   }
 }
