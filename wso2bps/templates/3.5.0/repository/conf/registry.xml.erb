@@ -32,19 +32,19 @@
     </dbConfig>
 
 <%- @registry_mounts.each do |datasource_name, registry_mount| -%>
-    <dbConfig name="<%= datasource_name %>">
+    <dbConfig name="<%= registry_mount['name'] %>">
         <dataSource><%= @master_datasources[datasource_name]['jndi_config'] %></dataSource>
     </dbConfig>
     <remoteInstance url="https://localhost:9443/registry">
-        <id><%= datasource_name %></id>
-        <dbConfig><%= datasource_name %></dbConfig>
+        <id><%= registry_mount['name'] %></id>
+        <dbConfig><%= registry_mount['name'] %></dbConfig>
         <readOnly><%= registry_mount['readOnly'] %></readOnly>
         <registryRoot><%= registry_mount['registryRoot'] %></registryRoot>
         <enableCache><%= registry_mount['enableCache'] %></enableCache>
         <cacheId><%= @master_datasources[datasource_name]['username'] %>@<%= @master_datasources[datasource_name]['url'] %></cacheId>
     </remoteInstance>
     <mount path="<%= registry_mount['path'] %>" overwrite="virtual">
-        <instanceId><%= datasource_name %></instanceId>
+        <instanceId><%= registry_mount['name'] %></instanceId>
         <targetPath><%= registry_mount['target_path'] %></targetPath>
     </mount>
 <%- end -%>

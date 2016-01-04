@@ -5,8 +5,8 @@
 
     <datasources>
 <%- @am_datasources.each do |datasource_name, datasource| -%>
-        <datasource>
-            <name><%= datasource_name %></name>
+                <datasource>
+            <name><%= datasource['name'] %></name>
             <description><%= datasource['description'] %></description>
             <jndiConfig>
                 <name><%= datasource['jndi_config'] %></name>
@@ -15,22 +15,21 @@
                 <configuration>
                     <url><%= datasource['url'] %></url>
                     <username><%= datasource['username'] %></username>
-   <%- if datasource['secretAlias'] -%>
-                    <password svns:secretAlias="<%= datasource['secretAlias'] %>">password</password>
-   <%- else -%>
+                     <%- if datasource['secret_alias'] -%>
+                    <password svns:secretAlias="<%= datasource['secret_alias'] %>">password</password>
+                    <%- else -%>
                     <password><%= datasource['password'] %></password>
-   <%- end -%>
-                    <driverClassName><%= datasource['driverClassName'] %></driverClassName>
+                    <%- end -%>
+                    <driverClassName><%= datasource['driver_class_name'] %></driverClassName>
                     <defaultAutoCommit><%= datasource['defaultAutoCommit'] %></defaultAutoCommit>
-                    <maxActive><%= datasource['maxActive'] %></maxActive>
-                    <maxWait><%= datasource['maxWait'] %></maxWait>
-                    <testOnBorrow><%= datasource['testOnBorrow'] %></testOnBorrow>
-                    <validationQuery><%= datasource['validationQuery'] %></validationQuery>
-                    <validationInterval><%= datasource['validationInterval'] %></validationInterval>
+                    <maxActive><%= datasource['max_active'] %></maxActive>
+                    <maxWait><%= datasource['max_wait'] %></maxWait>
+                    <testOnBorrow><%= datasource['test_on_borrow'] %></testOnBorrow>
+                    <validationQuery><%= datasource['validation_query'] %></validationQuery>
+                    <validationInterval><%= datasource['validation_interval'] %></validationInterval>
                 </configuration>
             </definition>
         </datasource>
-
 <%- end -%>
     </datasources>
 </datasources-configuration>
