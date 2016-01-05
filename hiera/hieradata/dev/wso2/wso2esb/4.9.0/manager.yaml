@@ -6,7 +6,7 @@ wso2::clustering :
     local_member_host : 192.168.100.10
     local_member_port : 4000
     membership_scheme : wka
-    subDomain : mgt
+    sub_domain : mgt
     wka :
        members :
          -
@@ -20,16 +20,16 @@ wso2::registry_mounts:
   WSO2_CONFIG_DB:
     path: /_system/config/esb
     target_path: /_system/config/esb
-    readOnly: false
-    registryRoot: /
-    enableCache: true
+    read_only: false
+    registry_root: /
+    enable_cache: true
 
   WSO2_GOV_DB:
     path: /_system/governance
     target_path: /_system/governance
-    readOnly: false
-    registryRoot: /
-    enableCache: true
+    read_only: false
+    registry_root: /
+    enable_cache: true
 
 wso2::dep_sync :
     enabled : false

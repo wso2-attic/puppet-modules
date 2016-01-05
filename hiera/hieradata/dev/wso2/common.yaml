@@ -46,7 +46,7 @@ wso2::clustering :
     domain : wso2.carbon.domain
     local_member_host : 127.0.0.1
     local_member_port : 4000
-    subDomain : worker
+    sub_domain : worker
     wka :
        members :
          -

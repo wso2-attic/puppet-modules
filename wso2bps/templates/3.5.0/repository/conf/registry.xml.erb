@@ -38,9 +38,9 @@
     <remoteInstance url="https://localhost:9443/registry">
         <id><%= registry_mount['name'] %></id>
         <dbConfig><%= registry_mount['name'] %></dbConfig>
-        <readOnly><%= registry_mount['readOnly'] %></readOnly>
-        <registryRoot><%= registry_mount['registryRoot'] %></registryRoot>
-        <enableCache><%= registry_mount['enableCache'] %></enableCache>
+        <readOnly><%= registry_mount['read_only'] %></readOnly>
+        <registryRoot><%= registry_mount['registry_root'] %></registryRoot>
+        <enableCache><%= registry_mount['enable_cache'] %></enableCache>
         <cacheId><%= @master_datasources[datasource_name]['username'] %>@<%= @master_datasources[datasource_name]['url'] %></cacheId>
     </remoteInstance>
     <mount path="<%= registry_mount['path'] %>" overwrite="virtual">

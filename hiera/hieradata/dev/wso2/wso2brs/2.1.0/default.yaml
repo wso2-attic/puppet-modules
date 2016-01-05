@@ -16,7 +16,7 @@ wso2::clustering :
     local_member_port : 4000
     membership_scheme : wka
     domain : wso2.brs.domain
-    subDomain :
+    sub_domain :
     wka :
        members :
          -

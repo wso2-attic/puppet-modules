@@ -7,13 +7,15 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::template_list :
         - repository/conf/datasources/analytics-datasources.xml
         - repository/conf/jndi.properties
+        - repository/conf/analytics/spark/spark-defaults.conf
 
 wso2::service_name: wso2das
 
 wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.36.jar
 
-wso2::usermgt_datasource: wso2user_db
+wso2::usermgt_datasource : wso2user_db
+wso2::spark_master_count : 1
 
 wso2::master_datasources :
   wso2_config_db :
