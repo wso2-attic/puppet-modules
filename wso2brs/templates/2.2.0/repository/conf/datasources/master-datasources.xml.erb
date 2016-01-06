@@ -1,0 +1,73 @@
+<datasources-configuration xmlns:svns="http://org.wso2.securevault/configuration">
+  
+    <providers>
+        <provider>org.wso2.carbon.ndatasource.rdbms.RDBMSDataSourceReader</provider>
+    </providers>
+  
+    <datasources>
+        <%- @master_datasources.each do |datasource_name, datasource| -%>
+        <datasource>
+            <name><%= datasource['name'] %></name>
+            <description><%= datasource['description'] %></description>
+            <jndiConfig>
+                <name><%= datasource['jndi_config'] %></name>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+                    <url><%= datasource['url'] %></url>
+                    <username><%= datasource['username'] %></username>
+                    <%- if datasource['secret_alias'] -%>
+                    <password svns:secretAlias="<%= datasource['secret_alias'] %>">password</password>
+                    <%- else -%>
+                    <password><%= datasource['password'] %></password>
+                    <%- end -%>
+                    <driverClassName><%= datasource['driver_class_name'] %></driverClassName>
+                    <defaultAutoCommit><%= datasource['default_auto_commit'] %></defaultAutoCommit>
+                    <maxActive><%= datasource['max_active'] %></maxActive>
+                    <maxWait><%= datasource['max_wait'] %></maxWait>
+                    <testOnBorrow><%= datasource['test_on_borrow'] %></testOnBorrow>
+                    <validationQuery><%= datasource['validation_query'] %></validationQuery>
+                    <validationInterval><%= datasource['validation_interval'] %></validationInterval>
+                </configuration>
+            </definition>
+        </datasource>
+        <%- end -%>
+
+        <!-- For an explanation of the properties, see: http://people.apache.org/~fhanik/jdbc-pool/jdbc-pool.html -->
+        <!--datasource>
+            <name>SAMPLE_DATA_SOURCE</name>
+            <jndiConfig>
+                <name></name>
+                <environment>
+                    <property name="java.naming.factory.initial"></property>
+                    <property name="java.naming.provider.url"></property>
+                </environment>
+            </jndiConfig>
+            <definition type="RDBMS">
+                <configuration>
+
+                    <defaultAutoCommit></defaultAutoCommit>
+                    <defaultReadOnly></defaultReadOnly>
+                    <defaultTransactionIsolation>NONE|READ_COMMITTED|READ_UNCOMMITTED|REPEATABLE_READ|SERIALIZABLE</defaultTransactionIsolation>
+                    <defaultCatalog></defaultCatalog>
+                    <username></username>
+                    <password svns:secretAlias="WSO2.DB.Password"></password>
+                    <maxActive></maxActive>
+                    <maxIdle></maxIdle>
+                    <initialSize></initialSize>
+                    <maxWait></maxWait>
+
+                    <dataSourceClassName>com.mysql.jdbc.jdbc2.optional.MysqlXADataSource</dataSourceClassName>
+                    <dataSourceProps>
+                        <property name="url">jdbc:mysql://localhost:3306/Test1</property>
+                        <property name="user">root</property>
+                        <property name="password">123</property>
+                    </dataSourceProps>
+
+                </configuration>
+            </definition>
+        </datasource-->
+
+    </datasources>
+
+</datasources-configuration>

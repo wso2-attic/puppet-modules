@@ -1,0 +1,28 @@
+---
+wso2::mgt_hostname : mgt.brs.wso2.com
+
+wso2::clustering :
+    enabled : true
+    local_member_host : 192.168.100.10
+    local_member_port : 4000
+    membership_scheme : wka
+    sub_domain : mgt
+    wka :
+       members :
+         -
+           hostname : 192.168.100.10
+           port : 4000
+         -
+           hostname : 192.168.100.20
+           port : 4000
+
+wso2::dep_sync :
+    enabled : false
+    auto_checkout : true
+    auto_commit : true
+    repository_type : svn
+    svn :
+       url : http://svnrepo.example.com/repos/
+       user : username
+       password : password
+       append_tenant_id: true
