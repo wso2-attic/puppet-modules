@@ -4,8 +4,8 @@
     </providers>
 
     <datasources>
-<%- @am_datasources.each do |datasource_name, datasource| -%>
-                <datasource>
+            <%- @am_datasources.each do |datasource_name, datasource| -%>
+            <datasource>
             <name><%= datasource['name'] %></name>
             <description><%= datasource['description'] %></description>
             <jndiConfig>
@@ -30,6 +30,6 @@
                 </configuration>
             </definition>
         </datasource>
-<%- end -%>
+        <%- end -%>
     </datasources>
 </datasources-configuration>
