@@ -11,8 +11,8 @@ wso2::template_list :
 
 wso2::service_name: wso2das
 
-wso2::file_list :
-  - repository/components/lib/mysql-connector-java-5.1.36.jar
+#wso2::file_list :
+#  - repository/components/lib/mysql-connector-java-5.1.36.jar
 
 wso2::usermgt_datasource : wso2user_db
 wso2::spark_master_count : 1

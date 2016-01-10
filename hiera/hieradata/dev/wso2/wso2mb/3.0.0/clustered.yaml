@@ -1,7 +1,7 @@
 ---
 
-wso2::file_list :
-  - repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+#wso2::file_list :
+#  - repository/components/lib/mysql-connector-java-5.1.38-bin.jar
 
 wso2::mgt_hostname : mgt.mb.wso2.com
 

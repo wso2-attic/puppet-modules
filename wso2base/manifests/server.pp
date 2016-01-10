@@ -103,5 +103,4 @@ define wso2base::server (
     withpath => true,
     require  => Service[$service_name]
   }
-
 }
