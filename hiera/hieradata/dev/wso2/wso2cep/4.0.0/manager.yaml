@@ -1,0 +1,18 @@
+---
+wso2::mgt_hostname : mgt.esb.wso2.com
+
+wso2::clustering :
+    enabled : true
+    local_member_host : 192.168.100.10
+    local_member_port : 4000
+    membership_scheme : wka
+    subDomain : mgt
+    wka :
+       members :
+         -
+           hostname : 192.168.100.10
+           port : 4000
+         -
+           hostname : 192.168.100.20
+           port : 4000
+
