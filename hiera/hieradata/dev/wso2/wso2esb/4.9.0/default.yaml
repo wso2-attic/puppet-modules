@@ -7,8 +7,8 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::service_name: wso2esb
 wso2::hostname : esb.wso2.com
 
-wso2::file_list :
-  - repository/components/lib/mysql-connector-java-5.1.38.jar
+#wso2::file_list :
+#  - repository/components/lib/mysql-connector-java-5.1.38.jar
 
 wso2::master_datasources :
   wso2_config_db :

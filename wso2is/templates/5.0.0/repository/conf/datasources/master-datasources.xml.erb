@@ -4,7 +4,7 @@
     </providers>
 
     <datasources>
-<%- @master_datasources.each do |datasource_name, datasource| -%>
+        <%- @master_datasources.each do |datasource_name, datasource| -%>
         <datasource>
             <name><%= datasource['name'] %></name>
             <description><%= datasource['description'] %></description>
@@ -15,7 +15,7 @@
                 <configuration>
                     <url><%= datasource['url'] %></url>
                     <username><%= datasource['username'] %></username>
-                     <%- if datasource['secret_alias'] -%>
+                    <%- if datasource['secret_alias'] -%>
                     <password svns:secretAlias="<%= datasource['secret_alias'] %>">password</password>
                     <%- else -%>
                     <password><%= datasource['password'] %></password>
@@ -29,6 +29,6 @@
                 </configuration>
             </definition>
         </datasource>
-<%- end -%>
+        <%- end -%>
     </datasources>
 </datasources-configuration>

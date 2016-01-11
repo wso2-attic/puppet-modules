@@ -15,14 +15,14 @@ wso2::clustering :
            port : 4000
 
 wso2::registry_mounts:
-  WSO2_CONFIG_DB:
+  wso2_config_db:
     path: /_system/config/esb
     target_path: /_system/config/esb
     read_only: true
     registry_root: /
     enable_cache: true
 
-  WSO2_GOV_DB:
+  wso2_gov_db:
     path: /_system/governance
     target_path: /_system/governance
     read_only: true

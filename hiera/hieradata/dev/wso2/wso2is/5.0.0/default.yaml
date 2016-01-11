@@ -50,7 +50,7 @@ wso2::clustering :
 
 #wso2::usermgt_datasource: WSO2USER_DB
 
-wso2::is_datasources :
+wso2::am_datasources :
   wso2am_db:
     name : WSO2AM_DB
     description: The datasource used for IS as Key Manager database
@@ -75,7 +75,7 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #secretAlias :
+    #secret_alias :
     jndi_config : jdbc/WSO2_CONFIG_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -90,7 +90,7 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #secretAlias :
+    #secret_alias :
     jndi_config : jdbc/WSO2_GOV_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -105,8 +105,42 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/WSO2USER_DB?autoReconnect=true
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #secretAlias :
+    #secret_alias :
     jndi_config : jdbc/WSO2USER_DB
+    max_active : "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+
+wso2::bps_datasources :
+  bps_ds :
+    name : BPS_DS
+    description : The datasource used for bps
+    driver_class_name : org.h2.Driver
+    url : jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
+    username : wso2carbon
+    password : wso2carbon
+    #secret_alias :
+    jndi_config : bpsds
+    max_active : "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+
+wso2::metrics_datasources :
+  metrics_ds :
+    name : WSO2_METRICS_DB
+    description : The default datasource used for WSO2 Carbon Metrics
+    driver_class_name : org.h2.Driver
+    url : jdbc:h2:repository/database/WSO2METRICS_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+    username : wso2carbon
+    password : wso2carbon
+    #securevault :
+    jndi_config : WSO2MetricsDB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
