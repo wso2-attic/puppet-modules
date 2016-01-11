@@ -69,7 +69,7 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
   ensure_resource('exec', "set_ownership_${carbon_home}", {
     path               => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     cwd                => $carbon_home,
-    command            => "chown -R ${owner}:${group} ./",
+    command            => "chown -R ${user}:${group} ./",
     logoutput          => 'on_failure',
     timeout            => 0,
     refreshonly        => true,

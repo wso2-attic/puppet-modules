@@ -20,14 +20,14 @@ fi
 
 
 #set the configuration settings for the service
-USER="<%= @owner %>"
-PRODUCT_CODE="<%= @amtype %>"
+USER="<%= @wso2_user %>"
+PRODUCT_CODE="<%= @service_name %>"
 CARBON_HOME="<%= @carbon_home %>"
 LOCK_FILE="${CARBON_HOME}/wso2carbon.lck"
 PID_FILE="${CARBON_HOME}/wso2carbon.pid"
 CMD="${CARBON_HOME}/bin/wso2server.sh"
 
-#Get the status details of idenetity service
+#Get the status details of identity service
 status() {
      if [ -f $PID_FILE ]; then
         PID=`cat $PID_FILE`
@@ -81,7 +81,7 @@ start() {
      return $PIDVAL
 }
 
-#Restart the idenetity service
+#Restart the identity service
 restart() {
     echo -n "Restarting WSO2 $PRODUCT_CODE server: "
     touch $LOCK_FILE
@@ -104,7 +104,7 @@ restart() {
     return $PIDVAL
 }
 
-#Stop the idenetity service
+#Stop the identity service
 stop() {
     if [ -f $PID_FILE ]; then
         PID=`cat $PID_FILE`
