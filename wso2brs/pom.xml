@@ -28,5 +28,6 @@
     </parent>
 
     <artifactId>wso2brs-puppet-module</artifactId>
+    <name>WSO2 Business Rules Server Puppet Module</name>
 
 </project>
