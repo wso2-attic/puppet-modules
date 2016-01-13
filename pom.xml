@@ -37,6 +37,7 @@
         <module>wso2base</module>
         <module>wso2brs</module>
         <module>wso2bps</module>
+        <module>wso2am</module>
     </modules>
 
     <build>
