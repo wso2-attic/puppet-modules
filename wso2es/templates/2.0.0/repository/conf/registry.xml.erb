@@ -32,22 +32,22 @@
     </dbConfig>
 
     <%- @registry_mounts.each do |datasource_name, registry_mount| -%>
-        <dbConfig name="<%= datasource_name %>">
-            <dataSource><%= @master_datasources[datasource_name]['jndi_config'] %></dataSource>
-        </dbConfig>
-        <remoteInstance url="https://localhost:9443/registry">
-            <id><%= datasource_name %></id>
-            <dbConfig><%= datasource_name %></dbConfig>
-            <readOnly><%= registry_mount['readOnly'] %></readOnly>
-            <registryRoot><%= registry_mount['registryRoot'] %></registryRoot>
-            <enableCache><%= registry_mount['enableCache'] %></enableCache>
-            <cacheId><%= @master_datasources[datasource_name]['username'] %>@<%= @master_datasources[datasource_name]['url'] %></cacheId>
-        </remoteInstance>
-        <mount path="<%= registry_mount['path'] %>" overwrite="virtual">
-            <instanceId><%= datasource_name %></instanceId>
-            <targetPath><%= registry_mount['target_path'] %></targetPath>
-        </mount>
-    <%- end -%>
+    <dbConfig name="<%= @master_datasources[datasource_name]['name'] %>">
+        <dataSource><%= @master_datasources[datasource_name]['jndi_config'] %></dataSource>
+    </dbConfig>
+    <remoteInstance url="https://localhost:9443/registry">
+        <id><%= @master_datasources[datasource_name]['name'] %></id>
+        <dbConfig><%= @master_datasources[datasource_name]['name'] %></dbConfig>
+        <readOnly><%= registry_mount['read_only'] %></readOnly>
+        <registryRoot><%= registry_mount['registry_root'] %></registryRoot>
+        <enableCache><%= registry_mount['enable_cache'] %></enableCache>
+        <cacheId><%= @master_datasources[datasource_name]['username'] %>@<%= @master_datasources[datasource_name]['url'] %></cacheId>
+    </remoteInstance>
+    <mount path="<%= registry_mount['path'] %>" overwrite="virtual">
+        <instanceId><%= @master_datasources[datasource_name]['name'] %></instanceId>
+        <targetPath><%= registry_mount['target_path'] %></targetPath>
+    </mount>
+<%- end -%>
 
     <!--aspect name="SecondLifeCycle" class="org.wso2.carbon.governance.registry.extensions.aspects.DefaultLifeCycle">
         <configuration type="literal">

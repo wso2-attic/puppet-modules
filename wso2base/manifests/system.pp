@@ -24,10 +24,12 @@ class wso2base::system (
   # Install system packages
   package { $packages: ensure => installed }
 
-  cron { 'ntpdate':
-    command           => "/usr/sbin/ntpdate pool.ntp.org",
-    user              => 'root',
-    minute            => '*/50'
+  if $vm_type != 'docker' {
+    cron { 'ntpdate':
+      command           => "/usr/sbin/ntpdate pool.ntp.org",
+      user              => 'root',
+      minute            => '*/50'
+    }
   }
 
   group { $wso2_group:

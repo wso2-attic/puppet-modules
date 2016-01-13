@@ -38,11 +38,13 @@ define wso2base::configure ($template_list, $file_list, $user, $group, $service_
     }
   }
 
-  file { "/etc/init.d/${service_name}":
-    ensure               => present,
-    owner                => $user,
-    group                => $group,
-    mode                 => '0755',
-    content              => template("${service_template}"),
+  if $vm_type != 'docker' {
+    file { "/etc/init.d/${service_name}":
+      ensure               => present,
+      owner                => $user,
+      group                => $group,
+      mode                 => '0755',
+      content              => template("${service_template}"),
+    }
   }
 }

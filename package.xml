@@ -1,0 +1,58 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>package</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <!-- modules -->
+        <fileSet>
+            <directory>${project.basedir}/</directory>
+            <outputDirectory>./modules/</outputDirectory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <excludes>
+                <exclude>manifests/**</exclude>
+                <exclude>**/hiera/**</exclude>
+                <exclude>**/*.zip</exclude>
+                <exclude>**/*.jar</exclude>
+                <exclude>**/*.tar.gz</exclude>
+                <exclude>**/target/**</exclude>
+                <exclude>**/pom.xml</exclude>
+                <exclude>**/*.iml</exclude>
+                <exclude>**/*.ipr</exclude>
+                <exclude>**/.idea/**</exclude>
+                <exclude>**/.gitignore</exclude>
+                <exclude>**/.gitkeep</exclude>
+            </excludes>
+        </fileSet>
+
+        <!-- hiera files -->
+        <fileSet>
+            <directory>${project.basedir}/hiera/hieradata</directory>
+            <outputDirectory>./hieradata/</outputDirectory>
+            <includes>
+                <include>**/*.yaml</include>
+                <include>**/*.json</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+
+    <files>
+        <!-- site.pp file -->
+        <file>
+            <source>${project.basedir}/manifests/site.pp</source>
+            <outputDirectory>./manifests/</outputDirectory>
+        </file>
+
+        <!-- hiera.yaml file -->
+        <file>
+            <source>${project.basedir}/hiera/hiera.yaml</source>
+            <outputDirectory>./</outputDirectory>
+        </file>
+    </files>
+
+</assembly>

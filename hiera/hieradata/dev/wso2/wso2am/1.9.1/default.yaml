@@ -15,7 +15,6 @@ wso2::service_name: wso2am
 
 #wso2::registry_mounts:
 #  wso2_config_db:
-#    name: WSO2_CONFIG_DB
 #    path: /_system/config
 #    target_path: /_system/config
 #    read_only: true
@@ -23,7 +22,6 @@ wso2::service_name: wso2am
 #    enable_cache: true
 #
 #  wso2_gov_db:
-#    name: WSO2_GOV_DB
 #    path: /_system/gov
 #    target_path: /_system/gov
 #    read_only: true

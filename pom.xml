@@ -18,16 +18,11 @@
   -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.wso2</groupId>
-        <artifactId>wso2</artifactId>
-        <version>1</version>
-    </parent>
 
     <groupId>org.wso2.puppet</groupId>
-    <artifactId>puppet-modules</artifactId>
+    <artifactId>wso2-puppet-modules</artifactId>
     <packaging>pom</packaging>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>${puppet.module.version}</version>
     <name>WSO2 Puppet Modules</name>
     <description>WSO2 Puppet Modules</description>
 
@@ -39,10 +34,72 @@
     </licenses>
 
     <modules>
+        <module>wso2base</module>
+        <module>wso2brs</module>
+        <module>wso2bps</module>
         <module>wso2am</module>
+        <module>wso2as</module>
+        <module>wso2cep</module>
+        <module>wso2das</module>
+        <module>wso2dss</module>
+        <module>wso2esb</module>
+        <module>wso2es</module>
+        <module>wso2greg</module>
+        <module>wso2is</module>
+        <module>wso2mb</module>
+        <module>wso2ppaas</module>
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <inherited>true</inherited>
+                <version>2.5.3</version>
+                <configuration>
+                    <descriptor>package.xml</descriptor>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-archive</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central Repository</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+        <repository>
+            <id>wso2-nexus</id>
+            <name>WSO2 Internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
+
+
     <properties>
+        <puppet.module.version>1.0.0-SNAPSHOT</puppet.module.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>

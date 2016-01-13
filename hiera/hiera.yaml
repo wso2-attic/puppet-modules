@@ -3,9 +3,9 @@
     - "node/%{::clientcert}"
     - "wso2/%{::product_name}/%{::product_version}/%{::product_profile}"
     - "wso2/%{::product_name}/%{::product_version}/default"
-    - wso2/common
     - "osfamily/%{::osfamily}"
     - "vm_type/%{::vm_type}"
+    - wso2/common
     - common
 :backends:
     - yaml
