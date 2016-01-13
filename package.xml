@@ -10,7 +10,7 @@
         <!-- modules -->
         <fileSet>
             <directory>${project.basedir}/</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/modules/</outputDirectory>
+            <outputDirectory>./modules/</outputDirectory>
             <includes>
                 <include>**/*</include>
             </includes>
@@ -33,7 +33,7 @@
         <!-- hiera files -->
         <fileSet>
             <directory>${project.basedir}/hiera/hieradata</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/hieradata/</outputDirectory>
+            <outputDirectory>./hieradata/</outputDirectory>
             <includes>
                 <include>**/*.yaml</include>
                 <include>**/*.json</include>
@@ -45,13 +45,13 @@
         <!-- site.pp file -->
         <file>
             <source>${project.basedir}/manifests/site.pp</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/manifests/</outputDirectory>
+            <outputDirectory>./manifests/</outputDirectory>
         </file>
 
         <!-- hiera.yaml file -->
         <file>
             <source>${project.basedir}/hiera/hiera.yaml</source>
-            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
+            <outputDirectory>./</outputDirectory>
         </file>
     </files>
 
