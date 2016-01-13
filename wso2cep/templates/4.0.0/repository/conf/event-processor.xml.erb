@@ -18,7 +18,6 @@
 
 <eventProcessorConfiguration>
 
-<!-- Test <%= @single_node_deployment['enabled'] %> -->
    <%- if @single_node_deployment['enabled'] == true -%>
    <mode name="SingleNode" enable="true">
         <persistence enable="false">
@@ -73,9 +72,8 @@
         </presentation>
     </mode>
     <%- end -%>
-
-    <!-- Distributed Mode Config -->
-    <%- if @distributed_deployment['enabled'] == true -%>
+    
+    <%- if @distributed_deployment['enabled'] == true -%>    
     <mode name="Distributed" enable="true">
         <nodeType>
             <worker enable="<%= @distributed_deployment['nodeType']['worker'] %>"/>

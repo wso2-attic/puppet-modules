@@ -26,17 +26,17 @@ wso2::file_list :
 #    name: WSO2_CONFIG_DB
 #    path: /_system/config
 #    target_path: /_system/config
-#    readOnly: true
-#    registryRoot: /
-#    enableCache: true
-#
+#    read_only: false
+#    registry_root: /
+#    enable_cache: true
+
 #  wso2_gov_db:
 #    name: WSO2_GOV_DB
 #    path: /_system/gov
 #    target_path: /_system/gov
-#    readOnly: true
-#    registryRoot: /
-#    enableCache: true
+#    read_only: false
+#    registry_root: /
+#    enable_cache: true
 
 #wso2::usermgt_datasource: wso2user_db
 
@@ -109,9 +109,9 @@ wso2::data_bridge :
 
 wso2::single_node_deployment : 
  enabled : true
-
+ 
 wso2::ha_deployment :
- enabled : false 
+ enabled : false
 
 wso2::distributed_deployment :
  enabled : false 	
