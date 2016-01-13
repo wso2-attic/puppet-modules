@@ -42,6 +42,9 @@
         <module>wso2cep</module>
         <module>wso2das</module>
         <module>wso2dss</module>
+        <module>wso2esb</module>
+        <module>wso2es</module>
+        <module>wso2greg</module>
     </modules>
 
     <build>

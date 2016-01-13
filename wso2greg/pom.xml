@@ -27,7 +27,7 @@
         <version>${puppet.module.version}</version>
     </parent>
 
-    <artifactId>wso2es-puppet-module</artifactId>
-    <name>WSO2 Enterprise Store Puppet Module</name>
+    <artifactId>wso2greg-puppet-module</artifactId>
+    <name>WSO2 Governance Registry Puppet Module</name>
 
 </project>
