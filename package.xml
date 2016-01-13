@@ -7,13 +7,16 @@
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
     <fileSets>
+        <!-- modules -->
         <fileSet>
             <directory>${project.basedir}/</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/modules/</outputDirectory>
             <includes>
                 <include>**/*</include>
             </includes>
             <excludes>
+                <exclude>manifests/**</exclude>
+                <exclude>**/hiera/**</exclude>
                 <exclude>**/*.zip</exclude>
                 <exclude>**/*.jar</exclude>
                 <exclude>**/*.tar.gz</exclude>
@@ -26,6 +29,30 @@
                 <exclude>**/.gitkeep</exclude>
             </excludes>
         </fileSet>
+
+        <!-- hiera files -->
+        <fileSet>
+            <directory>${project.basedir}/hiera/hieradata</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/hieradata/</outputDirectory>
+            <includes>
+                <include>**/*.yaml</include>
+                <include>**/*.json</include>
+            </includes>
+        </fileSet>
     </fileSets>
+
+    <files>
+        <!-- site.pp file -->
+        <file>
+            <source>${project.basedir}/manifests/site.pp</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/manifests/</outputDirectory>
+        </file>
+
+        <!-- hiera.yaml file -->
+        <file>
+            <source>${project.basedir}/hiera/hiera.yaml</source>
+            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
+        </file>
+    </files>
 
 </assembly>
