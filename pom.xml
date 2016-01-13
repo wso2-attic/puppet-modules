@@ -38,6 +38,10 @@
         <module>wso2brs</module>
         <module>wso2bps</module>
         <module>wso2am</module>
+        <module>wso2as</module>
+        <module>wso2cep</module>
+        <module>wso2das</module>
+        <module>wso2dss</module>
     </modules>
 
     <build>
