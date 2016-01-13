@@ -23,7 +23,7 @@
     <packaging>pom</packaging>
     <parent>
         <groupId>org.wso2.puppet</groupId>
-        <artifactId>puppet-modules</artifactId>
+        <artifactId>wso2-puppet-modules</artifactId>
         <version>${puppet.module.version}</version>
     </parent>
 

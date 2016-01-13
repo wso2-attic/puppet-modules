@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.wso2.puppet</groupId>
-    <artifactId>puppet-modules</artifactId>
+    <artifactId>wso2-puppet-modules</artifactId>
     <packaging>pom</packaging>
     <version>${puppet.module.version}</version>
     <name>WSO2 Puppet Modules</name>
@@ -61,8 +61,33 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central Repository</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+        <repository>
+            <id>wso2-nexus</id>
+            <name>WSO2 Internal Repository</name>
+            <url>http://maven.wso2.org/nexus/content/groups/wso2-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>ignore</checksumPolicy>
+            </releases>
+        </repository>
+    </repositories>
+
+
     <properties>
-        <puppet.module.version>1.0.4-SNAPSHOT</puppet.module.version>
+        <puppet.module.version>1.0.0-SNAPSHOT</puppet.module.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 </project>
