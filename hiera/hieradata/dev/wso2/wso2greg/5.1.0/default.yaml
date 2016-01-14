@@ -97,7 +97,7 @@ wso2::bps_datasources :
     validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::social_datasources
+wso2::social_datasources :
   wso2_social_db :
     name : WSO2_SOCIAL_DB
     description : The datasource used for social framework
