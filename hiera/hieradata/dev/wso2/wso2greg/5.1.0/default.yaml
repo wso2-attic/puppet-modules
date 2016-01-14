@@ -48,7 +48,7 @@ wso2::master_datasources :
     driver_class_name : org.h2.Driver
     url : jdbc:h2:repository/database/ES_STORAGE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : sa
-    password : 
+    password :
     #securevault :
     jndi_config : jdbc/test
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
@@ -80,7 +80,7 @@ wso2::master_datasources :
 #    password : root
 #    jndi_config : jdbc/WSO2CarbonDB
 
-wso2::bps_datasources
+wso2::bps_datasources :
   bps_ds :
     name : BPS_DS
     description : The datasource used for BPS database
