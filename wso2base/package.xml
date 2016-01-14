@@ -26,18 +26,16 @@
             <directory>${project.basedir}/files</directory>
             <outputDirectory>${pom.artifactId}-${pom.version}/files/</outputDirectory>
             <includes>
-                <include>**/*</include>
+                <include>files/**</include>
+                <include>manifests/**</include>
+                <include>templates/**</include>
+                <include>metadata.json</include>
             </includes>
             <excludes>
                 <exclude>**/*.zip</exclude>
                 <exclude>**/*.jar</exclude>
                 <exclude>**/*.tar.gz</exclude>
-                <exclude>**/pom.xml</exclude>
-                <exclude>**/*.iml</exclude>
-                <exclude>**/*.ipr</exclude>
-                <exclude>**/.idea/**</exclude>
-                <exclude>**/.gitignore</exclude>
-                <exclude>**/.gitkeep</exclude>
+                <exclude>**/.git*</exclude>
             </excludes>
         </fileSet>
 
