@@ -88,8 +88,6 @@ define wso2base::server (
       file_list         => $file_list,
       user              => $wso2_user,
       group             => $wso2_group,
-      service_name      => $service_name,
-      service_template  => $service_template,
       wso2_module       => $caller_module_name,
       require           => Wso2base::Patch[$carbon_home]
     }
@@ -100,8 +98,6 @@ define wso2base::server (
       file_list         => $file_list,
       user              => $wso2_user,
       group             => $wso2_group,
-      service_name      => $service_name,
-      service_template  => $service_template,
       wso2_module       => $caller_module_name,
       notify            => Service["${service_name}"],
       require           => Wso2base::Patch[$carbon_home]

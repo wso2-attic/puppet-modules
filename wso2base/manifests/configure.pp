@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::configure ($template_list, $file_list, $user, $group, $service_name, $service_template, $wso2_module) {
+define wso2base::configure ($template_list, $file_list, $user, $group, $wso2_module) {
   $carbon_home  = $name
   notice("Configuring WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 
@@ -35,16 +35,6 @@ define wso2base::configure ($template_list, $file_list, $user, $group, $service_
         group            => $group,
         carbon_home      => $carbon_home,
         wso2_module      => $wso2_module
-    }
-  }
-
-  if $vm_type != 'docker' {
-    file { "/etc/init.d/${service_name}":
-      ensure               => present,
-      owner                => $user,
-      group                => $group,
-      mode                 => '0755',
-      content              => template("${service_template}"),
     }
   }
 }

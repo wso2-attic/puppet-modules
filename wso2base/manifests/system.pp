@@ -19,7 +19,9 @@
 class wso2base::system (
   $packages,
   $wso2_group,
-  $wso2_user
+  $wso2_user,
+  $service_name,
+  $service_template,
 ) {
   # Install system packages
   package { $packages: ensure => installed }
@@ -44,5 +46,15 @@ class wso2base::system (
     managehome        => true,
     shell             => '/bin/bash',
     require           => Group[$wso2_group]
+  }
+
+  if $vm_type != 'docker' {
+    file { "/etc/init.d/${service_name}":
+      ensure               => present,
+      owner                => $user,
+      group                => $group,
+      mode                 => '0755',
+      content              => template("${service_template}"),
+    }
   }
 }
