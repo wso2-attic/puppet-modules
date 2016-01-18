@@ -31,7 +31,7 @@
 
         <!-- hiera files -->
         <fileSet>
-            <directory>${project.basedir}/hiera/hieradata</directory>
+            <directory>${project.basedir}/hieradata</directory>
             <outputDirectory>./hieradata/</outputDirectory>
             <includes>
                 <include>**/*.yaml</include>
@@ -49,7 +49,7 @@
 
         <!-- hiera.yaml file -->
         <file>
-            <source>${project.basedir}/hiera/hiera.yaml</source>
+            <source>${project.basedir}/hiera.yaml</source>
             <outputDirectory>./</outputDirectory>
         </file>
     </files>
