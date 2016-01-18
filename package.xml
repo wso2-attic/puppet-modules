@@ -12,22 +12,21 @@
             <directory>${project.basedir}/</directory>
             <outputDirectory>./modules/</outputDirectory>
             <includes>
-                <include>**/*</include>
+                <include>wso2*/files/**</include>
+                <include>wso2*/manifests/**</include>
+                <include>wso2*/templates/**</include>
+                <include>wso2*/metadata.json**</include>
+                <include>LICENSE</include>
+                <include>README.md</include>
             </includes>
             <excludes>
-                <exclude>manifests/**</exclude>
-                <exclude>**/hiera/**</exclude>
                 <exclude>**/*.zip</exclude>
                 <exclude>**/*.jar</exclude>
                 <exclude>**/*.tar.gz</exclude>
-                <exclude>**/target/**</exclude>
-                <exclude>**/pom.xml</exclude>
-                <exclude>**/*.iml</exclude>
-                <exclude>**/*.ipr</exclude>
-                <exclude>**/.idea/**</exclude>
-                <exclude>**/.gitignore</exclude>
-                <exclude>**/.gitkeep</exclude>
+                <exclude>**/.git*</exclude>
             </excludes>
+
+
         </fileSet>
 
         <!-- hiera files -->

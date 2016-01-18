@@ -2,7 +2,8 @@
 classes :
     - 'basic_package'
     - 'java'
-basic_package : - 'wget'
+basic_package :
+                - 'wget'
                 - 'openssh-clients'
                 - 'mc'
                 - 'vim-common'
@@ -12,5 +13,7 @@ basic_package : - 'wget'
                 - 'ruby'
                 - 'ruby-devel'
                 - 'rubygems'
-basic_erase_package : -
-gem_package : -
+basic_erase_package :
+       -
+gem_package : 
+       -

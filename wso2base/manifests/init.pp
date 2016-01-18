@@ -56,7 +56,9 @@ class wso2base {
   class { '::wso2base::system':
     packages          => $packages,
     wso2_group        => $wso2_group,
-    wso2_user         => $wso2_user
+    wso2_user         => $wso2_user,
+    service_name      => $service_name,
+    service_template  => $service_template
   } ->
   class { '::wso2base::java':
     java_install_dir  => $java_install_dir,
