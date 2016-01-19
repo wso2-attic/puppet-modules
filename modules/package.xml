@@ -1,0 +1,42 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>package</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <!-- modules -->
+        <fileSet>
+            <directory>${project.basedir}</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>wso2*/files/**</include>
+                <include>wso2*/manifests/**</include>
+                <include>wso2*/templates/**</include>
+                <include>wso2*/metadata.json**</include>
+            </includes>
+            <excludes>
+                <exclude>**/*.zip</exclude>
+                <exclude>**/*.jar</exclude>
+                <exclude>**/*.tar.gz</exclude>
+                <exclude>**/.git*</exclude>
+            </excludes>
+        </fileSet>
+    </fileSets>
+    <files>
+        <file>
+            <source>${project.basedir}/../LICENSE</source>
+            <outputDirectory>/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>${project.basedir}/../README.md</source>
+            <outputDirectory>/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+    </files>
+</assembly>
