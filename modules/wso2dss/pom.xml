@@ -31,4 +31,8 @@
     <artifactId>wso2dss-puppet-module</artifactId>
     <name>WSO2 Data Services Server Puppet Module</name>
 
+    <properties>
+        <validation.script.dir>${project.basedir}/../../</validation.script.dir>
+    </properties>
+
 </project>

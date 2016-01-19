@@ -31,4 +31,8 @@
     <name>WSO2 Base Puppet Module</name>
     <packaging>pom</packaging>
 
+    <properties>
+        <validation.script.dir>${project.basedir}/../../</validation.script.dir>
+    </properties>
+
 </project>

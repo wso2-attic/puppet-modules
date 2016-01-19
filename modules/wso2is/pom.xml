@@ -31,4 +31,8 @@
     <artifactId>wso2is-puppet-module</artifactId>
     <name>WSO2 Identity Server Puppet Module</name>
 
+    <properties>
+        <validation.script.dir>${project.basedir}/../../</validation.script.dir>
+    </properties>
+
 </project>

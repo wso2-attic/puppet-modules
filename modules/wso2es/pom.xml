@@ -31,4 +31,8 @@
     <artifactId>wso2es-puppet-module</artifactId>
     <name>WSO2 Enterprise Store Puppet Module</name>
 
+    <properties>
+        <validation.script.dir>${project.basedir}/../../</validation.script.dir>
+    </properties>
+
 </project>

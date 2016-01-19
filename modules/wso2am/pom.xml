@@ -31,4 +31,9 @@
     <artifactId>wso2am-puppet-module</artifactId>
     <name>WSO2 API Manager Puppet Module</name>
 
+    <properties>
+        <validation.script.dir>${project.basedir}/../../</validation.script.dir>
+    </properties>
+
+
 </project>

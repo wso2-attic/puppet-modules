@@ -31,4 +31,8 @@
     <artifactId>wso2mb-puppet-module</artifactId>
     <name>WSO2 Message Broker Puppet Module</name>
 
+    <properties>
+        <validation.script.dir>${project.basedir}/../../</validation.script.dir>
+    </properties>
+
 </project>

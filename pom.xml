@@ -70,6 +70,27 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+	        <groupId>org.codehaus.mojo</groupId>
+	        <artifactId>exec-maven-plugin</artifactId>
+	        <version>1.2</version>
+	        <executions>
+	            <execution>
+	                <id>compile</id>
+	                <configuration>
+                        <executable>ruby</executable>
+	                 <workingDirectory>${validation.script.dir}</workingDirectory>
+	                    <arguments>
+	                        <argument>validate-yaml.rb</argument>
+	                    </arguments>
+	                </configuration>                    
+	                <phase>compile</phase>
+	                <goals>
+	                    <goal>exec</goal>
+	                </goals>
+        	    </execution>
+	        </executions>
+	    </plugin> 
         </plugins>
     </build>
 
@@ -101,5 +122,6 @@
     <properties>
         <puppet.module.version>1.0.0-SNAPSHOT</puppet.module.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <validation.script.dir>${project.basedir}</validation.script.dir>
     </properties>
 </project>

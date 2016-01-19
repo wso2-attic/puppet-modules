@@ -31,4 +31,8 @@
     <artifactId>wso2greg-puppet-module</artifactId>
     <name>WSO2 Governance Registry Puppet Module</name>
 
+    <properties>
+        <validation.script.dir>${project.basedir}/../../</validation.script.dir>
+    </properties>
+
 </project>
