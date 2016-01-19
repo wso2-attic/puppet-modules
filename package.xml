@@ -9,7 +9,7 @@
     <fileSets>
         <!-- modules -->
         <fileSet>
-            <directory>${project.basedir}/</directory>
+            <directory>${project.basedir}/modules/</directory>
             <outputDirectory>./modules/</outputDirectory>
             <includes>
                 <include>wso2*/files/**</include>
