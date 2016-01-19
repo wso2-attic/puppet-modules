@@ -12,8 +12,8 @@ wso2::template_list :
 
 wso2::service_name: wso2cep
 
-wso2::file_list :
-  - repository/components/lib/mysql-connector-java-5.1.34-bin.jar
+#wso2::file_list :
+#  - repository/components/lib/mysql-connector-java-5.1.34-bin.jar
   
 #wso2::ports:
 #  proxyPort :
