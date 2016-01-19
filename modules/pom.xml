@@ -31,4 +31,8 @@
     <artifactId>wso2-puppet-module-dist</artifactId>
     <name>Modules distribution of WSO2 Puppet Modules</name>
 
+    <properties>
+        <validation.script.dir>${project.basedir}/../</validation.script.dir>
+    </properties>
+
 </project>
