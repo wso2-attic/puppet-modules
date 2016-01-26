@@ -7,6 +7,7 @@ wso2::template_list :
   - repository/conf/datasources/am-datasources.xml
 
 wso2::service_name: wso2is
+wso2::hostname : is.wso2.com
 
 wso2::clustering :
     enabled : false

@@ -14,9 +14,13 @@ wso2::hosts_mapping :
     ip_address : 127.0.0.1
     hostname : localhost
 
+wso2::ipaddress : "%{::ipaddress}"
+wso2::fqdn : "%{::fqdn}"
+
 # System service name
 wso2::service_template: wso2base/wso2service.erb
 
+# Host entry template
 wso2::hosts_template: wso2base/hosts.erb
 
 # Puppet template list to be populated
