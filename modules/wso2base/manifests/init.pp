@@ -43,6 +43,7 @@ class wso2base {
   $patches_dir        = hiera("wso2::patches_dir")
   $service_name       = hiera("wso2::service_name")
   $service_template   = hiera("wso2::service_template")
+  $hosts_template     = hiera("wso2::hosts_template")
   $usermgt_datasource = hiera("wso2::usermgt_datasource")
   $master_datasources = hiera_hash("wso2::master_datasources")
   $registry_mounts    = hiera_hash("wso2::registry_mounts", { })
@@ -50,6 +51,9 @@ class wso2base {
   $dep_sync           = hiera_hash("wso2::dep_sync")
   $ports              = hiera_hash("wso2::ports")
   $jvm                = hiera_hash("wso2::jvm")
+  $hosts_mapping      = hiera_hash("wso2::hosts_mapping")
+  $ipaddress          = hiera("wso2::ipaddress")
+  $fqdn               = hiera("wso2::fqdn")
 
   $carbon_home        = "${install_dir}/${pack_extracted_dir}"
 
@@ -58,7 +62,8 @@ class wso2base {
     wso2_group        => $wso2_group,
     wso2_user         => $wso2_user,
     service_name      => $service_name,
-    service_template  => $service_template
+    service_template  => $service_template,
+    hosts_template    => $hosts_template,
   } ->
   class { '::wso2base::java':
     java_install_dir  => $java_install_dir,
