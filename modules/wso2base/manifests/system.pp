@@ -22,6 +22,7 @@ class wso2base::system (
   $wso2_user,
   $service_name,
   $service_template,
+  $hosts_template,
 ) {
   # Install system packages
   package { $packages: ensure => installed }
@@ -57,4 +58,15 @@ class wso2base::system (
       content              => template("${service_template}"),
     }
   }
+
+  if $vm_type != 'docker' {
+    file { "/etc/hosts":
+      ensure               => present,
+      owner                => $user,
+      group                => $group,
+      mode                 => '0755',
+      content              => template("${hosts_template}"),
+    }
+  }
+
 }

@@ -8,8 +8,16 @@ wso2::user : wso2user
 wso2::group : wso2
 wso2::pack_dir : /mnt/packs
 
+# Host mapping to be made in etc/hosts
+wso2::hosts_mapping :
+  localhost :
+    ip_address : 127.0.0.1
+    hostname : localhost
+
 # System service name
 wso2::service_template: wso2base/wso2service.erb
+
+wso2::hosts_template: wso2base/hosts.erb
 
 # Puppet template list to be populated
 wso2::template_list :
