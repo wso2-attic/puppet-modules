@@ -44,6 +44,7 @@ class wso2bps inherits wso2base {
     patches_dir        => $patches_dir,
     service_name       => $service_name,
     service_template   => $service_template,
+    hosts_template     => $hosts_template,
     template_list      => $template_list,
     file_list          => $file_list
   }
