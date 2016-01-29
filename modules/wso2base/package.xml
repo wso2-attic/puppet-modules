@@ -86,5 +86,17 @@
             <source>${project.basedir}/../../hieradata/dev/common.yaml</source>
             <outputDirectory>${pom.artifactId}-${pom.version}/hieradata/dev/</outputDirectory>
         </file>
+        <file>
+            <source>${project.basedir}/../../LICENSE</source>
+            <outputDirectory>/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
+        <file>
+            <source>${project.basedir}/../../README.md</source>
+            <outputDirectory>/</outputDirectory>
+            <filtered>true</filtered>
+            <fileMode>644</fileMode>
+        </file>
     </files>
 </assembly>
