@@ -1,11 +1,18 @@
 ---
 wso2::mgt_hostname : mgt.es.wso2.com
+wso2::hostname : es.wso2.com
 
 wso2::clustering :
     enabled : true
-    local_member_host : 192.168.100.10
+    local_member_host : local.es.wso2.com
     local_member_port : 4000
-    membership_scheme : wka
+    membership_scheme : kubernetes
+    k8 :
+       k8_master : https://10.245.1.2
+       k8_namespace : default
+       k8_services : wso2es-worker,wso2es-manager
+       k8_master_username : vagrant
+       k8_master_password : vagrant
     subDomain : mgt
     wka :
        members :
@@ -15,6 +22,20 @@ wso2::clustering :
          -
            hostname : 192.168.100.20
            port : 4000
+
+wso2::ports:
+    proxyPort :
+        http : 32001
+        https : 32002
+
+wso2::file_list :
+  - lib/org.wso2.carbon.server-4.2.0.jar
+  - repository/components/lib/jackson-annotations-2.5.4.jar
+  - repository/components/lib/jackson-core-2.5.4.jar
+  - repository/components/lib/jackson-databind-2.5.4.jar
+  - repository/components/lib/wso2ppaas-membership-scheme-4.1.0.zip
+  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+  - repository/resources/security/client-truststore.jks
 
 #wso2::registry_mounts:
 #  wso2_config_db:
