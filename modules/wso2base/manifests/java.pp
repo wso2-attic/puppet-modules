@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------
-#  Copyright 2005-2013 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2015 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -29,12 +29,15 @@ class wso2base::java (
 
   # Module 7terminals-java is used to install Java at Puppet Forge
   # Puppet Forge URL: https://forge.puppetlabs.com/7terminals/java
+
+  $cachedir = "/home/${wso2_user}/java-setup-${name}"
+
   java::setup { $java_source_file :
     ensure            => 'present',
     source            => $java_source_file,
     deploymentdir     => $java_install_dir,
     user              => 'root',
-    cachedir          => "/home/${wso2_user}/java-setup-${name}",
+    cachedir          => $cachedir,
     require           => File[$java_install_dir]
   }
 
@@ -51,4 +54,12 @@ class wso2base::java (
     content           => inline_template("JAVA_HOME=${java_home}\nPATH=${java_home}/bin:\$PATH"),
     require           => File[$java_home]
   }
+
+  # Clean up content in cachedir as 7terminals-java module doesn't clean the cachedir
+  exec {'remove_java_cache':
+    command => "/bin/rm -rf ${cachedir}",
+    require => File['/etc/profile.d/set_java_home.sh'],
+  }
+
+
 }

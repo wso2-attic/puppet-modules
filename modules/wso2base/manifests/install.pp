@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------
-#  Copyright 2005-2015 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2015 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -83,6 +83,16 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
     command            => "chmod -R 754 ./",
     logoutput          => 'on_failure',
     timeout            => 0,
-    refreshonly        => true
+    refreshonly        => true,
+    notify             => Exec["remove_product_pack"]
   })
+
+
+  # Remove wso2 product pack archive
+  exec { "remove_product_pack":
+    path               => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    command            => "rm -rf ${pack_file_abs_path}",
+  }
+
+
 }

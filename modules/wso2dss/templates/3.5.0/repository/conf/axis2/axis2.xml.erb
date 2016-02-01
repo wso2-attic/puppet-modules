@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2005-2011 WSO2, Inc. (http://wso2.com)
+  ~ Copyright (c) 2015 WSO2, Inc. (http://wso2.com)
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -637,6 +637,8 @@
         <parameter name="KUBERNETES_MASTER"><%= @clustering['k8']['k8_master'] %></parameter>
         <parameter name="KUBERNETES_NAMESPACE"><%= @clustering['k8']['k8_namespace'] %></parameter>
         <parameter name="KUBERNETES_SERVICES"><%= @clustering['k8']['k8_services'] %></parameter>
+        <parameter name="KUBERNETES_MASTER_USERNAME"><%= @clustering['k8']['k8_master_username'] %></parameter>
+        <parameter name="KUBERNETES_MASTER_PASSWORD"><%= @clustering['k8']['k8_master_password']%></parameter>
 <%- end -%>
 
         <!--<parameter name="licenseKey">xxx</parameter>-->

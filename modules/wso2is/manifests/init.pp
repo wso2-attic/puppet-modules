@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------
-#  Copyright 2005-2015 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2015 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ class wso2is inherits wso2base {
     patches_dir        => $patches_dir,
     service_name       => $service_name,
     service_template   => $service_template,
+    hosts_template     => $hosts_template,
     template_list      => $template_list,
     file_list          => $file_list
   }
