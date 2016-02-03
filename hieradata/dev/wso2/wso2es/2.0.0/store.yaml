@@ -21,63 +21,63 @@ wso2::template_list :
         - repository/conf/datasources/social-datasources.xml
 
 wso2::service_name: wso2es
-wso2::hostname : es.wso2.com
-wso2::mgt_hostname : es.wso2.com
+wso2::hostname : wso2es-store
+wso2::mgt_hostname : wso2es-store
 
 wso2::file_list :
   - lib/org.wso2.carbon.server-4.2.0.jar
   - repository/components/lib/jackson-annotations-2.5.4.jar
   - repository/components/lib/jackson-core-2.5.4.jar
   - repository/components/lib/jackson-databind-2.5.4.jar
+  - repository/components/lib/wso2ppaas-membership-scheme-4.1.0.zip
   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
   - repository/resources/security/client-truststore.jks
   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
 wso2::clustering :
     enabled : true
-    subDomain : mgt
     local_member_host : local.es.wso2.com
     local_member_port : 4000
     membership_scheme : kubernetes
     k8 :
        k8_master : http://172.17.8.101:8080
        k8_namespace : default
-       k8_services : wso2es-default
-       k8_master_username : vagrant
-       k8_master_password : vagrant
+       k8_services : wso2es-store
+       k8_master_username :
+       k8_master_password :
 
-#wso2::master_datasources :
-#  wso2_config_db :
-#    name : WSO2_CONFIG_DB
-#    description : The datasource used for config registry
-#    driver_class_name : com.mysql.jdbc.Driver
-#    url : jdbc:mysql://10.100.0.168:3306/ES_CONFIG_DB?autoReconnect=true
-#    username : root
-#    password : root
-#    #securevault :
-#    jndi_config : jdbc/WSO2_CONFIG_DB
-#    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-#
-#  wso2_gov_db :
-#    name : WSO2_GOV_DB
-#    description : The datasource used for gov registry
-#    driver_class_name : com.mysql.jdbc.Driver
-#    url : jdbc:mysql://10.100.0.168:3306/WSO2REG_DB?autoReconnect=true
-#    username : root
-#    password : root
-#    #securevault : false
-#    jndi_config : jdbc/WSO2_GOV_DB
-#    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+wso2::master_datasources :
+  wso2_config_db :
+    name : WSO2_CONFIG_DB
+    description : The datasource used for config registry
+    driver_class_name : com.mysql.jdbc.Driver
+    url : jdbc:mysql://172.17.8.1:3306/ES_CONFIG_DB?autoReconnect=true
+    username : root
+    password : root
+    #securevault :
+    jndi_config : jdbc/WSO2_CONFIG_DB
+    max_active : "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+
+  wso2_gov_db :
+    name : WSO2_GOV_DB
+    description : The datasource used for gov registry
+    driver_class_name : com.mysql.jdbc.Driver
+    url : jdbc:mysql://172.17.8.1:3306/WSO2REG_DB?autoReconnect=true
+    username : root
+    password : root
+    #securevault : false
+    jndi_config : jdbc/WSO2_GOV_DB
+    max_active : "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 #
 #  wso2user_db :
 #    name : WSO2USER_DB
@@ -99,10 +99,10 @@ wso2::social_datasources :
   wso2_social_db :
     name : WSO2_SOCIAL_DB
     description : The datasource used for social framework
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2SOCIAL_DB;DB_CLOSE_ON_EXIT=FALSE;MVCC=true
-    username : wso2carbon
-    password : wso2carbon
+    driver_class_name : com.mysql.jdbc.Driver
+    url : jdbc:mysql://172.17.8.1:3306/SOCIAL_DB?autoReconnect=true
+    username : root
+    password : root
     #securevault :
     jndi_config : jdbc/WSO2SocialDB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
@@ -112,17 +112,17 @@ wso2::social_datasources :
     default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
-#wso2::registry_mounts:
-#  wso2_config_db:
-#    path: /_system/config
-#    target_path: /_system/config/es
-#    read_only: false
-#    registry_root: /
-#    enable_cache: true
-#
-#  wso2_gov_db:
-#    path: /_system/governance
-#    target_path: /_system/governance
-#    read_only: false
-#    registry_root: /
-#    enable_cache: true
+wso2::registry_mounts:
+  wso2_config_db:
+    path: /_system/config
+    target_path: /_system/config/es
+    read_only: false
+    registry_root: /
+    enable_cache: true
+
+  wso2_gov_db:
+    path: /_system/governance
+    target_path: /_system/governance
+    read_only: false
+    registry_root: /
+    enable_cache: true
