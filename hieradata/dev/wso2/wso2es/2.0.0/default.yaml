@@ -21,7 +21,7 @@ wso2::template_list :
         - repository/conf/datasources/social-datasources.xml
 
 wso2::service_name: wso2es
-wso2::hostname : es.wso2.com
+wso2::hostname : "%{::hostname}"
 wso2::mgt_hostname : es.wso2.com
 
 wso2::file_list :
