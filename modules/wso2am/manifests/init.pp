@@ -19,7 +19,11 @@
 # Class to manage WSO2 API Manager deployment
 
 class wso2am inherits wso2base {
-  $am_datasources     = hiera_hash("wso2::am_datasources")
+  $am_datasources     = hiera ("wso2::am_datasources")
+  $apim_gateway       = hiera ("wso2::apim_gateway")
+  $apim_keymanager    = hiera ("wso2::apim_keymanager")
+  $apim_publisher     = hiera ("wso2::apim_publisher")
+  $apim_store         = hiera ("wso2::apim_store")
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode   => $maintenance_mode,
