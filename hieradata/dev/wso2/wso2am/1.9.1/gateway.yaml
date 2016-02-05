@@ -15,12 +15,6 @@
 wso2::hostname : gw.am.wso2.com
 wso2::mgt_hostname : gw.am.wso2.com
 
-wso2::apim_gateway :
-    host :
-    port :
-    api_endpoint_port :
-    secure_api_endpoint_port :
-
 wso2::clustering :
     enabled : true
     subDomain : mgt
