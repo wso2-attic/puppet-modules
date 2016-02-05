@@ -26,7 +26,7 @@ wso2::template_list :
         - repository/conf/jndi.properties
 
 wso2::service_name: wso2bps
-wso2::hostname : bps.wso2.com
+wso2::hostname : "%{::hostname}"
 
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.36.jar

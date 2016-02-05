@@ -21,7 +21,7 @@ wso2::template_list :
   - repository/conf/datasources/am-datasources.xml
 
 wso2::service_name: wso2am
-wso2::hostname : am.wso2.com
+wso2::hostname : "%{::hostname}"
 
 #wso2::ports:
 #  proxyPort :

@@ -23,7 +23,7 @@ wso2::template_list :
         - repository/conf/analytics/spark/spark-defaults.conf
 
 wso2::service_name: wso2das
-wso2::hostname : das.wso2.com
+wso2::hostname : "%{::hostname}"
 
 wso2::spark_master_count : 1
 

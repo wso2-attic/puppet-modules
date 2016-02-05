@@ -17,7 +17,7 @@ wso2::hostname : es.wso2.com
 
 wso2::clustering :
     enabled : true
-    local_member_host : local.es.wso2.com
+    local_member_host : "%{::ipaddress}"
     local_member_port : 4000
     membership_scheme : kubernetes
     k8 :
