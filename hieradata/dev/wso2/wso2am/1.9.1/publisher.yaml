@@ -15,6 +15,16 @@
 wso2::hostname : publisher.am.wso2.com
 wso2::mgt_hostname : publisher.am.wso2.com
 
+wso2::apim_gateway :
+    host : 127.0.0.1
+    port : 9443
+    api_endpoint_port : 8280
+    secure_api_endpoint_port : 8343
+
+wso2::apim_keymanager :
+    host : 127.0.0.1
+    port : 9443
+
 wso2::clustering :
     enabled : true
     subDomain : mgt
