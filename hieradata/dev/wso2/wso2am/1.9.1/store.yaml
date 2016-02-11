@@ -15,6 +15,16 @@
 wso2::hostname : store.am.wso2.com
 wso2::mgt_hostname : store.am.wso2.com
 
+wso2::apim_gateway :
+    host : wso2am-gateway
+    port : 9443
+    api_endpoint_port : 8280
+    secure_api_endpoint_port : 8243
+
+wso2::apim_keymanager :
+    host : wso2am-keymanager
+    port : 9443
+
 wso2::clustering :
     enabled : true
     subDomain : mgt

@@ -29,7 +29,7 @@ wso2::apim_gateway :
     host : 127.0.0.1
     port : 9443
     api_endpoint_port : 8280
-    secure_api_endpoint_port : 8343
+    secure_api_endpoint_port : 8243
 
 wso2::apim_keymanager :
     host : 127.0.0.1
