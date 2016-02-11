@@ -17,7 +17,6 @@ wso2::mgt_hostname : gw.am.wso2.com
 
 wso2::apim_keymanager :
     host : wso2am-keymanager
-    port : 9443
 
 wso2::clustering :
     enabled : true
