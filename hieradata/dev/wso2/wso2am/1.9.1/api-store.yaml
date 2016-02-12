@@ -15,21 +15,21 @@
 wso2::hostname : store.am.wso2.com
 wso2::mgt_hostname : store.am.wso2.com
 
-wso2::apim_gateway :
-    host : wso2am-gateway
-
-wso2::apim_keymanager :
-    host : wso2am-keymanager
+#wso2::apim_gateway :
+#    host : wso2am-gateway
+#
+#wso2::apim_keymanager :
+#    host : wso2am-keymanager
 
 wso2::clustering :
     enabled : true
-    subDomain : mgt
+    sub_domain : mgt
     local_member_host : local.store.am.wso2.com
     local_member_port : 4000
     membership_scheme : kubernetes
     k8 :
-       k8_master : https://10.245.1.2
+       k8_master : http://172.17.8.101:8080
        k8_namespace : default
-       k8_services : wso2am-store,wso2am-publisher
-       k8_master_username : vagrant
-       k8_master_password : vagrant
+       k8_services : wso2am-store
+       k8_master_username :
+       k8_master_password :
