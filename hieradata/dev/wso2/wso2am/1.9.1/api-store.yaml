@@ -104,5 +104,5 @@ wso2::am_datasources :
 
 wso2::ports:
   proxyPort :
-    http : 32012
-    https : 32013
+    http : 32014
+    https : 32015
