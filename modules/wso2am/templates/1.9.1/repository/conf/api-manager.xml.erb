@@ -49,11 +49,19 @@
         <!--
             Admin username for the Authentication manager.
         -->
-        <Username>${admin.username}</Username>
+        <%- if @apim_keymanager and @apim_keymanager['username'] -%>
+          <Username><%= @apim_keymanager['username'] %></Username>
+        <%- else -%>
+          <Username>${admin.username}</Username>
+        <%- end -%>
         <!--
             Admin password for the Authentication manager.
         -->
-        <Password>${admin.password}</Password>
+        <%- if @apim_keymanager and @apim_keymanager['password'] -%>
+          <Password><%= @apim_keymanager['password'] %></Password>
+        <%- else -%>
+          <Password>${admin.password}</Password>
+        <%- end -%>
 
     </AuthManager>
 
@@ -143,11 +151,19 @@
                     <!--
                         Admin username for the API gateway.
                     -->
-                    <Username>${admin.username}</Username>
+                    <%- if @apim_gateway and @apim_keymanager['username'] -%>
+                      <Username><%= @apim_gateway['username'] %></Username>
+                    <%- else -%>
+                      <Username>${admin.username}</Username>
+                    <%- end -%>
                     <!--
                         Admin password for the API gateway.
                     -->
-                    <Password>${admin.password}</Password>
+                    <%- if @apim_gateway and @apim_gateway['password'] -%>
+                      <Password><%= @apim_gateway['password'] %></Password>
+                    <%- else -%>
+                       <Password>${admin.password}</Password>
+                    <%- end -%>
 
 			              <!--
             			    Endpoint URLs for the APIs hosted in this API gateway.
@@ -290,12 +306,20 @@
         <!--
             Admin username for API key manager.
         -->
-        <Username>${admin.username}</Username>
+        <%- if @apim_keymanager and @apim_keymanager['username'] -%>
+          <Username><%= @apim_keymanager['username'] %></Username>
+        <%- else -%>
+          <Username>${admin.username}</Username>
+        <%- end -%>
 
         <!--
             Admin password for API key manager.
         -->
-        <Password>${admin.password}</Password>
+        <%- if @apim_keymanager and @apim_keymanager['password'] -%>
+          <Password><%= @apim_keymanager['password'] %></Password>
+        <%- else -%>
+          <Password>${admin.password}</Password>
+        <%- end -%>
         <!--
             Enable/Disable JWT caching.
         -->
