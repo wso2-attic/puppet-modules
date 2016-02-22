@@ -19,7 +19,8 @@
 
 class wso2mb inherits wso2base {
 
-  $mb_thrift_port      = hiera("wso2::mb_thrift_port")
+  $mb_thrift_port           = hiera("wso2::mb_thrift_port")
+  $metrics_datasources      = hiera("wso2::metrics_datasources")
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode   => $maintenance_mode,
