@@ -18,6 +18,9 @@
 # This class installs WSO2 DSS
 
 class wso2dss inherits wso2base {
+
+  $taskServerCount                      = hiera("wso2::taskServerCount")
+
   wso2base::server { "${carbon_home}" :
     maintenance_mode   => $maintenance_mode,
     pack_filename      => $pack_filename,

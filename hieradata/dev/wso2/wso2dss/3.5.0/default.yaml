@@ -17,8 +17,13 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
+wso2::template_list :
+  - repository/conf/etc/tasks-config.xml
+
 wso2::service_name: wso2dss
 wso2::hostname : dss.wso2.com
+
+wso2::taskServerCount : 3
 
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.36.jar
