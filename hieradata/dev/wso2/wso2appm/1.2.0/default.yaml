@@ -27,8 +27,12 @@ wso2::hosts_mapping :
     ip_address : 127.0.0.1
     hostname : localhost
   store :
-    ip_address : 127.0.0.2
-    hostname : localhost2
+    ip_address : 192.168.7.7
+    hostname : store.appm.wso2.com
+  publisher :
+    ip_address : 192.168.7.8
+    hostname : publisher.appm.wso2.com
+
 
 wso2::auth_manager :
     hostname: 127.0.0.1
