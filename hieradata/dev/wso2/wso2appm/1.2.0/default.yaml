@@ -33,7 +33,6 @@ wso2::hosts_mapping :
     ip_address : 192.168.7.8
     hostname : publisher.appm.wso2.com
 
-
 wso2::auth_manager :
     hostname: 127.0.0.1
     server_port: 9443
@@ -57,7 +56,8 @@ wso2::sso_configuration :
     username: admin
     password: admin
 
-#wso2::ports:
+wso2::ports:
+   offset: 1
 #  proxyPort :
 #    http: 80
 #    https: 443
@@ -103,8 +103,8 @@ wso2::service_providers :
     sign_response : true
     login_page : /social/login.jag
 
-#wso2::file_list :
-#  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+wso2::file_list :
+  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
 wso2::master_datasources :
   wso2_carbon_db :

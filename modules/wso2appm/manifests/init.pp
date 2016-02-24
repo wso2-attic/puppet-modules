@@ -16,7 +16,7 @@
 #
 # ------------------------------------------------------------------------------
 #
-# Class to manage WSO2 API Manager deployment
+# Class to manage WSO2 App Manager deployment
 
 class wso2appm inherits wso2base {
 
