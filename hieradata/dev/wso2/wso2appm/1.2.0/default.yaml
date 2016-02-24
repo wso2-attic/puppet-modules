@@ -34,7 +34,7 @@ wso2::hosts_mapping :
   gateway :
     ip_address : 192.168.57.10
     hostname : appm.wso2.gw
-   idp :
+  idp :
     ip_address : 192.168.57.88
     hostname : appm.wso2.idp
 
@@ -98,30 +98,31 @@ wso2::registry_mounts:
     registry_root: /
     enable_cache: true
 
-wso2::usermgt_datasource: WSO2USER_DB
+#Provide the 'WSO2USER_DB' datasource configuration key value in master_datasources
+wso2::usermgt_datasource: wso2user_db
 
 wso2::template_list :
   - repository/conf/app-manager.xml
   - repository/conf/identity/sso-idp-config.xml
 
-#wso2::service_providers :
-#  store :
-#    issuer : store
-#    acs_url : https://appm.wso2.store:9443/store/acs
-#    sign_response : true
-#    login_page : /store/login.jag
-#
-#  publisher :
-#    issuer : publisher
-#    acs_url : https://appm.wso2.publisher:9443/publisher/acs
-#    sign_response : true
-#    login_page : /publisher/controllers/login.jag
-#
-#  social :
-#    issuer : social
-#    acs_url : https://appm.wso2.store:9443/social/acs
-#    sign_response : true
-#    login_page : /social/login.jag
+wso2::service_providers :
+  store :
+    issuer : store
+    acs_url : https://appm.wso2.store:9443/store/acs
+    sign_response : true
+    login_page : /store/login.jag
+
+  publisher :
+    issuer : publisher
+    acs_url : https://appm.wso2.publisher:9443/publisher/acs
+    sign_response : true
+    login_page : /publisher/controllers/login.jag
+
+  social :
+    issuer : social
+    acs_url : https://appm.wso2.store:9443/social/acs
+    sign_response : true
+    login_page : /social/login.jag
 
 wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.35-bin.jar
