@@ -21,26 +21,31 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::service_name: wso2appm
 wso2::hostname : appm.wso2.com
 
-
 wso2::hosts_mapping :
   localhost :
     ip_address : 127.0.0.1
     hostname : localhost
   store :
-    ip_address : 192.168.100.4
-    hostname : store.appm.wso2.com
+    ip_address :  192.168.57.87
+    hostname : appm.wso2.store
   publisher :
-    ip_address : 192.168.7.8
-    hostname : publisher.appm.wso2.com
+    ip_address : 192.168.57.9
+    hostname : appm.wso2.publisher
+  gateway :
+    ip_address : 192.168.57.10
+    hostname : appm.wso2.gw
+   idp :
+    ip_address : 192.168.57.88
+    hostname : appm.wso2.idp
 
 wso2::auth_manager :
-    hostname: 127.0.0.1
+    hostname: appm.wso2.idp
     server_port: 9443
     username: admin
     password: admin
 
 wso2::gateway :
-    hostname: 127.0.0.1
+    hostname: appm.wso2.gw
     server_port: 9443
     username: admin
     password: admin
@@ -48,7 +53,7 @@ wso2::gateway :
     https_nio_port: 8243
 
 wso2::sso_configuration :
-    idp_hostname: 192.168.100.4
+    idp_hostname: appm.wso2.idp
     idp_port: 9443
     idp_name: wso2is
     idp_version: 5.0.0
@@ -57,51 +62,66 @@ wso2::sso_configuration :
     password: admin
 
 wso2::ports:
-   offset: 1
+   offset: 0
 #  proxyPort :
 #    http: 80
 #    https: 443
 
-#wso2::registry_mounts:
-#  wso2appm_db:
-#    path: /_system/config
-#    target_path: /_system/config
-#    read_only: true
-#    registry_root: /
-#    enable_cache: true
-#
-#  wso2appm_db:
-#    path: /_system/gov
-#    target_path: /_system/gov
-#    read_only: true
+wso2::registry_mounts:
+  wso2appm_db:
+    path: /_system/config
+    target_path: /_system/config
+    read_only: true
+    registry_root: /
+    enable_cache: true
+
+  wso2appm_db:
+    path: /_system/gov
+    target_path: /_system/gov
+    read_only: true
+    registry_root: /
+    enable_cache: true
+
+
+wso2::registry_mounts:
+#  wso2_config_db:
+#    path: /_system/config/appm
+#    target_path: /_system/config/appm
+#    read_only: false
 #    registry_root: /
 #    enable_cache: true
 
-#wso2::usermgt_datasource: WSO2USER_DB
+  wso2_gov_db:
+    path: /_system/governance
+    target_path: /_system/governance
+    read_only: false
+    registry_root: /
+    enable_cache: true
+
+wso2::usermgt_datasource: WSO2USER_DB
 
 wso2::template_list :
   - repository/conf/app-manager.xml
   - repository/conf/identity/sso-idp-config.xml
-  - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
 
-wso2::service_providers :
-  store :
-    issuer : store
-    acs_url : https://192.168.100.4:9443/store/acs
-    sign_response : true
-    login_page : /store/login.jag
-
-  publisher :
-    issuer : publisher
-    acs_url : https://192.168.100.4:9443/publisher/acs
-    sign_response : true
-    login_page : /publisher/controllers/login.jag
-
-  social :
-    issuer : social
-    acs_url : https://192.168.100.4:9443/social/acs
-    sign_response : true
-    login_page : /social/login.jag
+#wso2::service_providers :
+#  store :
+#    issuer : store
+#    acs_url : https://appm.wso2.store:9443/store/acs
+#    sign_response : true
+#    login_page : /store/login.jag
+#
+#  publisher :
+#    issuer : publisher
+#    acs_url : https://appm.wso2.publisher:9443/publisher/acs
+#    sign_response : true
+#    login_page : /publisher/controllers/login.jag
+#
+#  social :
+#    issuer : social
+#    acs_url : https://appm.wso2.store:9443/social/acs
+#    sign_response : true
+#    login_page : /social/login.jag
 
 wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.35-bin.jar
