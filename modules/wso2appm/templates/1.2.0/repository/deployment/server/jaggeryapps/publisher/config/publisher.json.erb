@@ -56,7 +56,7 @@
         "keyStorePassword": "wso2carbon",
         "identityAlias": "wso2carbon",
         "responseSigningEnabled": "true",
-        "publisherAcs": "%https.host%/publisher/sso",
+        "publisherAcs": "https://<%= @sso_configuration['idp_hostname'] %>:<%= @sso_configuration['idp_port'] %>/publisher/sso",
         "keyStoreName": "/repository/resources/security/wso2carbon.jks"
     },
     "constants" :{

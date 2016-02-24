@@ -109,8 +109,7 @@
                 <!--
                 Server URL of the API gateway.
                 -->
-                <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}/services/</ServerURL>
-                <ServerURL>https:///<%= @gateway['hostname'] %>:<%= @gateway['server_port'] %>/services/</ServerURL>
+                <ServerURL>https://<%= @gateway['hostname'] %>:<%= @gateway['server_port'] %>/services/</ServerURL>
 
                 <!--
                 Admin username for the API gateway.
@@ -125,7 +124,7 @@
                 <!--
                 Endpoint URLs for the APIs hosted in this API gateway.
                 -->
-                <GatewayEndpoint>http://<%= @gateway['server_url'] %>:<%= @gateway['http_nio_port'] %>,https://<%= @gateway['server_url'] %>:<%= @gateway['https_nio_port'] %></GatewayEndpoint>
+                <GatewayEndpoint>http://<%= @gateway['hostname'] %>:<%= @gateway['http_nio_port'] %>,https://<%= @gateway['hostname'] %>:<%= @gateway['https_nio_port'] %></GatewayEndpoint>
 
             </Environment>
 </Environments>

@@ -23,7 +23,7 @@ wso2::gateway :
     hostname: localhost
 
 wso2::sso_configuration :
-    idp_hostname: localhost
+    idp_hostname: 192.168.100.4
     idp_port: 9443
     idp_name: wso2is
     idp_version: 5.0.0

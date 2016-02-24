@@ -27,7 +27,7 @@ wso2::hosts_mapping :
     ip_address : 127.0.0.1
     hostname : localhost
   store :
-    ip_address : 192.168.7.7
+    ip_address : 192.168.100.4
     hostname : store.appm.wso2.com
   publisher :
     ip_address : 192.168.7.8
@@ -49,7 +49,7 @@ wso2::gateway :
     https_nio_port: 8243
 
 wso2::sso_configuration :
-    idp_hostname: 127.0.0.1
+    idp_hostname: 192.168.100.4
     idp_port: 9443
     idp_name: wso2is
     idp_version: 5.0.0
@@ -81,24 +81,25 @@ wso2::sso_configuration :
 
 wso2::template_list :
   - repository/conf/app-manager.xml
-  - repository/conf/sso-idp-config.xml
+  - repository/conf/identity/sso-idp-config.xml
+  - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
 
 wso2::service_providers :
   store :
     issuer : store
-    acs_url : https://localhost:9443/store/acs
+    acs_url : https://192.168.100.4:9443/store/acs
     sign_response : true
     login_page : /store/login.jag
 
   publisher :
     issuer : publisher
-    acs_url : https://localhost:9443/publisher/acs
+    acs_url : https://192.168.100.4:9443/publisher/acs
     sign_response : true
     login_page : /publisher/controllers/login.jag
 
   social :
     issuer : social
-    acs_url : https://localhost:9443/social/acs
+    acs_url : https://192.168.100.4:9443/social/acs
     sign_response : true
     login_page : /social/login.jag
 

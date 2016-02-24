@@ -120,7 +120,7 @@
 
     <handler class="org.wso2.carbon.registry.extensions.handlers.ServiceMediaTypeHandler">
         <!--property name="disableWSDLValidation">true</property-->
-        <property name="defaultServiceVersion">1.0.0</property>
+        <property name="defaultServiceVersion">1.0.0-SNAPSHOT</property>
         <property name="disableSymlinkCreation">true</property>
         <property name="smartLifecycleLinks" type="xml">
             <key>dev</key>
@@ -227,12 +227,10 @@
         </filter>
     </handler>
 
-    <!--This handler clears the caches when workflow-extension config is updated.-->
-   <handler class="org.wso2.carbon.apimgt.impl.handlers.APIConfigMediaTypeHandler" methods="PUT,DELETE">
-      <filter class="org.wso2.carbon.registry.core.jdbc.handlers.filters.MediaTypeMatcher">
-        <property name="mediaType">workflow-config</property>
-    </filter>
-   </handler>
+    <handler class="org.wso2.jaggery.scxml.registry.handlers.JaggeryExecutorHandler" methods="PUT">
+    	<filter class="org.wso2.jaggery.scxml.registry.filters.JaggeryExecutorFilter">
+    	</filter>
+    </handler>
 
     <!--remoteInstance url="https://localhost:9443/registry">
 	<id>instanceid</id>
@@ -292,13 +290,6 @@
             <!--indexer class="org.wso2.carbon.registry.indexing.indexer.XMLIndexer" mediaTypeRegEx="application/(.)+\+xml"/>
             <indexer class="org.wso2.carbon.registry.indexing.indexer.PlainTextIndexer" mediaTypeRegEx="text/(.)+"/>
             <indexer class="org.wso2.carbon.registry.indexing.indexer.PlainTextIndexer" mediaTypeRegEx="application/x-javascript"/-->
-	    <indexer class="org.wso2.carbon.apimgt.impl.indexing.indexer.PlainTextIndexer" mediaTypeRegEx="text/plain+" profiles ="default,api-store,api-publisher"/>
-	    <indexer class="org.wso2.carbon.apimgt.impl.indexing.indexer.PDFIndexer" mediaTypeRegEx="application/pdf" profiles ="default,api-store,api-publisher"/>
-	    <indexer class="org.wso2.carbon.apimgt.impl.indexing.indexer.MSWordIndexer" mediaTypeRegEx="application/msword" profiles ="default,api-store,api-publisher"/>
-	    <indexer class="org.wso2.carbon.apimgt.impl.indexing.indexer.MSPowerpointIndexer" mediaTypeRegEx="application/vnd.ms-powerpoint" profiles ="default,api-store,api-publisher"/>
-	    <indexer class="org.wso2.carbon.apimgt.impl.indexing.indexer.MSExcelIndexer" mediaTypeRegEx="application/vnd.ms-excel" profiles ="default,api-store,api-publisher"/>
-	    <indexer class="org.wso2.carbon.apimgt.impl.indexing.indexer.XMLIndexer" mediaTypeRegEx="application/xml" profiles ="default,api-store,api-publisher"/>
-    	    <indexer class="org.wso2.carbon.apimgt.impl.indexing.indexer.WSDLIndexer" mediaTypeRegEx="application/api-wsdl" profiles ="default,api-store,api-publisher"/>
         </indexers>
         <exclusions>
             <exclusion pathRegEx="/_system/config/repository/dashboards/gadgets/swfobject1-5/.*[.]html"/>
