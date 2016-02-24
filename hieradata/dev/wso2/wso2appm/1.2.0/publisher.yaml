@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::hostname : publisher.appm.wso2.com
-wso2::mgt_hostname : publisher.appm.wso2.com
+wso2::hostname : appm.wso2.publisher
+wso2::mgt_hostname : appm.wso2.publisher
 
 wso2::template_list :
   - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
