@@ -19,6 +19,15 @@ wso2::hosts_mapping :
   localhost :
     ip_address : 127.0.0.1
     hostname : appm-publisher
+  store :
+    ip_address :  192.168.57.87
+    hostname : appm.wso2.store
+  gateway :
+    ip_address : 192.168.57.10
+    hostname : appm.wso2.gw
+  idp :
+    ip_address : 192.168.57.88
+    hostname : appm.wso2.idp
 
 wso2::template_list :
   - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
