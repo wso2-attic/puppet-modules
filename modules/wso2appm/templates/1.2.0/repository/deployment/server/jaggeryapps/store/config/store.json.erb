@@ -9,9 +9,11 @@
         "https": "%https.host%/admin",
         "http": "%http.host%"
     },
-    "lifeCycleBehaviour": {
-        "visibleIn": ["Published"]
+
+    "lifeCycleBehaviour":{
+        "visibleIn":["Published"]
     },
+
     "ssoConfiguration": {
         "enabled": true,
         "issuer": "store",
@@ -22,11 +24,13 @@
         "storeAcs": "https://<%=@hostname%>/store/acs",
         "keyStoreName": "/repository/resources/security/wso2carbon.jks"
     },
+
     "pagination": {
-        "PAGE_SIZE": 18
+        "PAGE_SIZE" : 18
     },
+
     "recentAppCount": {
-        "topAssetPage": 15,
+        "topAssetPage" : 15,
         "assetPage": 5,
         "assetsPage": 5,
         "myAppsPage": 2,
@@ -35,7 +39,13 @@
     "permissions": {
         "webapp_subscribe": "/permission/admin/manage/webapp/subscribe",
         "mobileapp_install": "/permission/admin/manage/mobileapp/subscribe"
+    },
+    "subscriptionConfiguration": {
+        "enableSelfSubscription": false,
+        "enableEnterpriseSubscription": false
+    },
+    "pages": {
+        "landingPage": "/extensions/assets/webapp/myapps",
+        "favouritePage": "/assets/favouriteapps"
     }
 }
-
-
