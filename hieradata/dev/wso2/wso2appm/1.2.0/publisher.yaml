@@ -15,6 +15,11 @@
 wso2::hostname : appm.wso2.publisher
 wso2::mgt_hostname : appm.wso2.publisher
 
+wso2::hosts_mapping :
+  localhost :
+    ip_address : 127.0.0.1
+    hostname : appm-publisher
+
 wso2::template_list :
   - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
 
@@ -57,10 +62,6 @@ wso2::master_datasources :
     jndi_config : jdbc/ES_Storage
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
   wso2social_db:
     name : WSO2_SOCIAL_DB
