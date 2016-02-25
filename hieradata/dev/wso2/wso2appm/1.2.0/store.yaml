@@ -36,21 +36,21 @@ wso2::hosts_mapping :
 wso2::template_list :
   - repository/deployment/server/jaggeryapps/store/config/store.json
 
-#wso2::clustering :
-#    enabled : true
-#    local_member_host : 192.168.100.10
-#    local_member_port : 4000
-#    membership_scheme : wka
-#    sub_domain : mgt
-#    wka :
-#       members :
-#         -
-#           hostname : 192.168.100.10
-#           port : 4000
-#         -
-#           hostname : 192.168.100.20
-#           port : 4000
-#
+wso2::clustering :
+    enabled : true
+    local_member_host : 192.168.57.87
+    local_member_port : 4001
+    membership_scheme : wka
+    sub_domain : worker
+    wka :
+       members :
+         -
+           hostname : 192.168.57.87
+           port : 4001
+         -
+           hostname : 192.168.57.9
+           port : 4000
+
 #wso2::dep_sync :
 #    enabled : false
 #    auto_checkout : true
