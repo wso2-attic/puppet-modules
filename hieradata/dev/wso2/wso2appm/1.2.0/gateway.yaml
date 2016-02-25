@@ -46,3 +46,4 @@ wso2::hosts_mapping :
 #       user : username
 #       password : password
 #       append_tenant_id: true
+
