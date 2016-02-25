@@ -17,7 +17,11 @@ wso2::hostname : appm.wso2.gw
 wso2::mgt_hostname : appm.wso2.gw
 
 wso2::hosts_mapping :
+
   localhost :
+    ip_address : 127.0.0.1
+    hostname : localhost
+  gateway :
     ip_address : 127.0.0.1
     hostname : appm-gw
   store :

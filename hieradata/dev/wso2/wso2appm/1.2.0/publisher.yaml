@@ -18,6 +18,9 @@ wso2::mgt_hostname : appm.wso2.publisher
 wso2::hosts_mapping :
   localhost :
     ip_address : 127.0.0.1
+    hostname : localhost
+  publisher :
+    ip_address : 127.0.0.1
     hostname : appm-publisher
   store :
     ip_address :  192.168.57.87

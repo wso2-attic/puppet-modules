@@ -21,6 +21,9 @@ wso2::template_list :
 wso2::hosts_mapping :
   localhost :
     ip_address : 127.0.0.1
+    hostname : localhost
+  store :
+    ip_address : 127.0.0.1
     hostname : appm-store
   publisher :
     ip_address : 192.168.57.9
