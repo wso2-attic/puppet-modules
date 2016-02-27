@@ -19,29 +19,31 @@
 
 class wso2cep inherits wso2base {
 
-  $jvm                                        = hiera("wso2::jvm") 
+  $jvm                                        = hiera("wso2::jvm")
   $thrift_data_agent                          = hiera("wso2::thrift_data_agent")
   $binary_data_agent                          = hiera("wso2::binary_data_agent")
   $data_bridge                                = hiera("wso2::data_bridge")
   $single_node_deployment                     = hiera("wso2::single_node_deployment")
   $ha_deployment                              = hiera("wso2::ha_deployment")
   $distributed_deployment                     = hiera("wso2::distributed_deployment")
-  
+
 
   wso2base::server { "${carbon_home}" :
-    maintenance_mode   => $maintenance_mode,
-    pack_filename      => $pack_filename,
-    pack_dir           => $pack_dir,
-    install_mode       => $install_mode,
-    install_dir        => $install_dir,
-    pack_extracted_dir => $pack_extracted_dir,
-    wso2_user          => $wso2_user,
-    wso2_group         => $wso2_group,
-    patches_dir        => $patches_dir,
-    service_name       => $service_name,
-    service_template   => $service_template,
-    hosts_template     => $hosts_template,
-    template_list      => $template_list,
-    file_list          => $file_list
+    maintenance_mode    => $maintenance_mode,
+    pack_filename       => $pack_filename,
+    pack_dir            => $pack_dir,
+    install_mode        => $install_mode,
+    install_dir         => $install_dir,
+    pack_extracted_dir  => $pack_extracted_dir,
+    wso2_user           => $wso2_user,
+    wso2_group          => $wso2_group,
+    patches_dir         => $patches_dir,
+    service_name        => $service_name,
+    service_template    => $service_template,
+    hosts_template      => $hosts_template,
+    template_list       => $template_list,
+    file_list           => $file_list,
+    enable_secure_vault => $enable_secure_vault,
+    key_store_password  => $key_store_password
   }
 }
