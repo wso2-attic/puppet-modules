@@ -30,7 +30,9 @@ define wso2base::server (
   $service_template,
   $hosts_template,
   $template_list,
-  $file_list
+  $file_list,
+  $enable_secure_vault,
+  $key_store_password
 ) {
 
   $carbon_home        = $name
@@ -85,25 +87,34 @@ define wso2base::server (
   # Populate templates and copy files provided
   if $vm_type == 'docker' {
     wso2base::configure { $carbon_home:
-      template_list     => $template_list,
-      file_list         => $file_list,
-      user              => $wso2_user,
-      group             => $wso2_group,
-      wso2_module       => $caller_module_name,
-      require           => Wso2base::Patch[$carbon_home]
+      template_list       => $template_list,
+      file_list           => $file_list,
+      user                => $wso2_user,
+      group               => $wso2_group,
+      wso2_module         => $caller_module_name,
+      require             => Wso2base::Patch[$carbon_home]
     }
   }
   else {
     wso2base::configure { $carbon_home:
-      template_list     => $template_list,
-      file_list         => $file_list,
-      user              => $wso2_user,
-      group             => $wso2_group,
-      wso2_module       => $caller_module_name,
-      notify            => Service["${service_name}"],
-      require           => Wso2base::Patch[$carbon_home]
+      template_list       => $template_list,
+      file_list           => $file_list,
+      user                => $wso2_user,
+      group               => $wso2_group,
+      wso2_module         => $caller_module_name,
+      notify              => Service["${service_name}"],
+      require             => Wso2base::Patch[$carbon_home]
     }
   }
+
+  # Apply secure_vault
+  wso2base::apply_secure_vault { $carbon_home:
+    user                => $wso2_user,
+    enable_secure_vault => $enable_secure_vault,
+    key_store_password  => $key_store_password,
+    require             => Wso2base::Configure[$carbon_home]
+  }
+
 
   # Deploy product artifacts
   wso2base::deploy { $carbon_home:
@@ -111,7 +122,7 @@ define wso2base::server (
     group             => $wso2_group,
     product_name      => $::product_name,
     product_version   => $::product_version,
-    require           => Wso2base::Configure[$carbon_home]
+    require           => Wso2base::Apply_secure_vault[$carbon_home]
   }
 
   # Start the service

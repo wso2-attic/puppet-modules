@@ -19,19 +19,21 @@
 
 class wso2as inherits wso2base {
   wso2base::server { "${carbon_home}" :
-    maintenance_mode   => $maintenance_mode,
-    pack_filename      => $pack_filename,
-    pack_dir           => $pack_dir,
-    install_mode       => $install_mode,
-    install_dir        => $install_dir,
-    pack_extracted_dir => $pack_extracted_dir,
-    wso2_user          => $wso2_user,
-    wso2_group         => $wso2_group,
-    patches_dir        => $patches_dir,
-    service_name       => $service_name,
-    service_template   => $service_template,
-    hosts_template     => $hosts_template,
-    template_list      => $template_list,
-    file_list          => $file_list
+    maintenance_mode    => $maintenance_mode,
+    pack_filename       => $pack_filename,
+    pack_dir            => $pack_dir,
+    install_mode        => $install_mode,
+    install_dir         => $install_dir,
+    pack_extracted_dir  => $pack_extracted_dir,
+    wso2_user           => $wso2_user,
+    wso2_group          => $wso2_group,
+    patches_dir         => $patches_dir,
+    service_name        => $service_name,
+    service_template    => $service_template,
+    hosts_template      => $hosts_template,
+    template_list       => $template_list,
+    file_list           => $file_list,
+    enable_secure_vault => $enable_secure_vault,
+    key_store_password  => $key_store_password
   }
 }
