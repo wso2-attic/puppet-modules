@@ -147,6 +147,7 @@
                                 <exclude>**/tlds/**/*</exclude>
                                 <exclude>**/*.log</exclude>
                                 <exclude>**/.gitmodules</exclude>
+                                <exclude>**/password-tmp.erb</exclude>
                             </excludes>
                             <excludeSubProjects>false</excludeSubProjects>
                         </configuration>
