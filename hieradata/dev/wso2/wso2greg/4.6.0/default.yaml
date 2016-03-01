@@ -23,6 +23,12 @@ wso2::hostname : greg.wso2.com
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.38.jar
 
+#wso2::template_list :
+#  - repository/conf/security/cipher-text.properties
+#  - repository/conf/security/cipher-tool.properties
+#  - bin/ciphertool.sh
+#  - password-tmp
+
 #wso2::usermgt_datasource: WSO2USER_DB
 
 wso2::master_datasources :
@@ -76,7 +82,6 @@ wso2::bps_datasources :
     url : jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : bpsds
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -84,3 +89,28 @@ wso2::bps_datasources :
     default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+
+# Secure vault configuration
+wso2::enable_secure_vault : false
+wso2::secure_vault_configs :
+  key_store_password :
+    secret_alias: Carbon.Security.KeyStore.Password
+    secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
+    password: wso2carbon
+  key_store_key_password :
+    secret_alias: Carbon.Security.KeyStore.KeyPassword
+    secret_alias_value: carbon.xml//Server/Security/KeyStore/KeyPassword,true
+    password: wso2carbon
+  trust_store_password :
+    secret_alias: Carbon.Security.TrustStore.Password
+    secret_alias_value: carbon.xml//Server/Security/TrustStore/Password,true
+    password: wso2carbon
+  user_manager_admin_password :
+    secret_alias: UserManager.AdminUser.Password
+    secret_alias_value: user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,true
+    password: admin
+  wso2_carbon_db_password :
+    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
+    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
+    password: wso2carbon
+>>>>>>> Updating hiera files with secure vault configurations

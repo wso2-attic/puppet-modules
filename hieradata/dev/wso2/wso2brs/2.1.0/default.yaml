@@ -24,6 +24,12 @@ wso2::hostname : brs.wso2.com
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
+#wso2::template_list :
+#  - repository/conf/security/cipher-text.properties
+#  - repository/conf/security/cipher-tool.properties
+#  - bin/ciphertool.sh
+#  - password-tmp
+
 wso2::clustering :
     enabled : false
     local_member_host : 127.0.0.1
@@ -72,3 +78,27 @@ wso2::clustering :
 #    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
 #    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+
+# Secure vault configuration
+wso2::enable_secure_vault : false
+wso2::secure_vault_configs :
+  key_store_password :
+    secret_alias: Carbon.Security.KeyStore.Password
+    secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
+    password: wso2carbon
+  key_store_key_password :
+    secret_alias: Carbon.Security.KeyStore.KeyPassword
+    secret_alias_value: carbon.xml//Server/Security/KeyStore/KeyPassword,true
+    password: wso2carbon
+  trust_store_password :
+    secret_alias: Carbon.Security.TrustStore.Password
+    secret_alias_value: carbon.xml//Server/Security/TrustStore/Password,true
+    password: wso2carbon
+  user_manager_admin_password :
+    secret_alias: UserManager.AdminUser.Password
+    secret_alias_value: user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,true
+    password: admin
+  wso2_carbon_db_password :
+    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
+    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
+    password: wso2carbon

@@ -21,14 +21,18 @@ wso2::service_name: wso2ppaas
 wso2::hostname : ppaas.wso2.com
 
 wso2::template_list :
-        - repository/conf/jndi.properties
-        - repository/conf/autoscaler.xml
-        - repository/conf/cartridge-config.properties
-        - repository/conf/cloud-controller.xml
-        - repository/conf/mqtttopic.properties
-        - repository/conf/thrift-client-config.xml
-        - repository/deployment/server/jaggeryapps/console/controllers/menu/menu.json
-        - repository/deployment/server/outputeventadaptors/JMSOutputAdaptor.xml
+  - repository/conf/jndi.properties
+  - repository/conf/autoscaler.xml
+  - repository/conf/cartridge-config.properties
+  - repository/conf/cloud-controller.xml
+  - repository/conf/mqtttopic.properties
+  - repository/conf/thrift-client-config.xml
+  - repository/deployment/server/jaggeryapps/console/controllers/menu/menu.json
+  - repository/deployment/server/outputeventadaptors/JMSOutputAdaptor.xml
+#  - repository/conf/security/cipher-text.properties
+#  - repository/conf/security/cipher-tool.properties
+#  - bin/ciphertool.sh
+#  - password-tmp
 
 
 wso2::mb :
@@ -217,3 +221,47 @@ wso2::ppaas::iaas_providers :
 #       user : username
 #       password : password
 #       append_tenant_id: true
+
+# Secure vault configuration
+wso2::enable_secure_vault : false
+wso2::secure_vault_configs :
+  key_store_password :
+    secret_alias: Carbon.Security.KeyStore.Password
+    secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
+    password: wso2carbon
+  key_store_key_password :
+    secret_alias: Carbon.Security.KeyStore.KeyPassword
+    secret_alias_value: carbon.xml//Server/Security/KeyStore/KeyPassword,true
+    password: wso2carbon
+  trust_store_password :
+    secret_alias: Carbon.Security.TrustStore.Password
+    secret_alias_value: carbon.xml//Server/Security/TrustStore/Password,true
+    password: wso2carbon
+  user_manager_admin_password :
+    secret_alias: UserManager.AdminUser.Password
+    secret_alias_value: user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,true
+    password: admin
+  wso2_carbon_db_password :
+    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
+    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
+    password: wso2carbon
+  openstack_iaas_credential :
+    secret_alias: cloud.controller.openstack.credential
+    secret_alias_value: cloud-controller.xml//cloudController/iaasProviders/iaasProvider[@type='openstack']/credential,true
+    password: credential
+  openstack_iaas_identity :
+    secret_alias: cloud.controller.openstack.identity
+    secret_alias_value: cloud.cloud-controller.xml//cloudController/iaasProviders/iaasProvider[@type='openstack']/identity,true
+    password: project:username
+  ec2_iaas_credential :
+    secret_alias: cloud.controller.ec2.credential
+    secret_alias_value: cloud-controller.xml//cloudController/iaasProviders/iaasProvider[@type='ec2']/credential,true
+    password: credential
+  ec2_iaas_identity :
+    secret_alias: cloud.controller.ec2.identity
+    secret_alias_value: cloud.cloud-controller.xml//cloudController/iaasProviders/iaasProvider[@type='ec2']/identity,true
+    password: identity
+  thrift_client_config_password :
+    secret_alias: thrift.client.configuration.password
+    secret_alias_value: thrift-client-config.xml//thriftClientConfiguration/password,true
+    password: admin
