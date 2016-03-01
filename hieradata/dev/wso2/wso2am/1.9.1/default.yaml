@@ -48,25 +48,27 @@ wso2::apim_publisher :
     host : 127.0.0.1
     port : 9443
 
-wso2::file_list :
-  - repository/components/lib/jackson-annotations-2.5.4.jar
-  - repository/components/lib/jackson-core-2.5.4.jar
-  - repository/components/lib/jackson-databind-2.5.4.jar
-  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+# wso2::file_list :
+#   - repository/components/lib/jackson-annotations-2.5.4.jar
+#   - repository/components/lib/jackson-core-2.5.4.jar
+#   - repository/components/lib/jackson-databind-2.5.4.jar
+#   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+#   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
 wso2::clustering :
-    enabled : true
+    enabled : false
     sub_domain : mgt
     local_member_host : local.am.wso2.com
     local_member_port : 4000
-    membership_scheme : kubernetes
-    k8 :
-       k8_master : http://172.17.8.101:8080
-       k8_namespace : default
-       k8_services : wso2am-default
-       k8_master_username :
-       k8_master_password :
+    membership_scheme : wka
+    # Enable kubernetes membership scheme for Kubernetes deployments
+    # membership_scheme : kubernetes
+    # k8 :
+    #    k8_master : http://172.17.8.101:8080
+    #    k8_namespace : default
+    #    k8_services : wso2am-default
+    #    k8_master_username :
+    #    k8_master_password :
 
 #wso2::ports:
 #  proxyPort :
@@ -88,7 +90,7 @@ wso2::registry_mounts:
     registry_root: /
     enable_cache: true
 
-wso2::usermgt_datasource: wso2user_db
+# wso2::usermgt_datasource: wso2user_db
 
 wso2::am_datasources :
   wso2am_db:
@@ -138,18 +140,18 @@ wso2::master_datasources :
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-#  wso2user_db :
-#    name : WSO2USER_DB
-#    description : The datasource is used for user mangement and userstore
-#    driver_class_name : org.h2.Driver
-#    url : jdbc:h2:repository/database/WSO2USER_DB?autoReconnect=true
-#    username : "%{hiera('wso2::datasources::common::username')}"
-#    password : "%{hiera('wso2::datasources::common::password')}"
-#    #secretAlias :
-#    jndi_config : jdbc/WSO2USER_DB
-#    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+  # wso2user_db :
+  #   name : WSO2USER_DB
+  #   description : The datasource is used for user mangement and userstore
+  #   driver_class_name : org.h2.Driver
+  #   url : jdbc:h2:repository/database/WSO2USER_DB?autoReconnect=true
+  #   username : "%{hiera('wso2::datasources::common::username')}"
+  #   password : "%{hiera('wso2::datasources::common::password')}"
+  #   #secretAlias :
+  #   jndi_config : jdbc/WSO2USER_DB
+  #   max_active : "%{hiera('wso2::datasources::common::max_active')}"
+  #   max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
+  #   test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
+  #   default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
+  #   validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+  #   validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
