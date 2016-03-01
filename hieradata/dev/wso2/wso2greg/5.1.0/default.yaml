@@ -33,7 +33,6 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : jdbc/WSO2AM_DB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -48,7 +47,6 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/samples/BAM_STATS_DB;AUTO_SERVER=TRUE
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : jdbc/WSO2BAM_DATASOURCE
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -63,7 +61,6 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/ES_STORAGE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : sa
     password :
-    #securevault :
     jndi_config : jdbc/test
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -78,7 +75,6 @@ wso2::master_datasources :
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault :
 #    jndi_config : jdbc/WSO2USER_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -102,7 +98,6 @@ wso2::bps_datasources :
     url : jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : bpsds
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -119,7 +114,6 @@ wso2::social_datasources :
     url : jdbc:h2:repository/database/WSO2SOCIAL_DB;DB_CLOSE_ON_EXIT=FALSE;MVCC=true
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : jdbc/WSO2SocialDB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"

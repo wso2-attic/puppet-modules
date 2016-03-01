@@ -40,7 +40,6 @@ wso2::spark_master_count : 1
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault :
 #    jndi_config : jdbc/WSO2_CONFIG_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -55,7 +54,6 @@ wso2::spark_master_count : 1
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault : false
 #    jndi_config : jdbc/WSO2_GOV_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -70,7 +68,6 @@ wso2::spark_master_count : 1
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault :
 #    jndi_config : jdbc/WSO2USER_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -87,7 +84,6 @@ wso2::analytics_datasources :
     url : jdbc:h2:repository/database/ANALYTICS_FS_DB;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -105,7 +101,6 @@ wso2::analytics_datasources :
     url : jdbc:h2:repository/database/ANALYTICS_EVENT_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -123,7 +118,6 @@ wso2::analytics_datasources :
     url : jdbc:h2:repository/database/ANALYTICS_PROCESSED_DATA_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"

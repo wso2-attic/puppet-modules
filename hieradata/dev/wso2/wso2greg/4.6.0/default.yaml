@@ -33,7 +33,6 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : jdbc/WSO2AM_DB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -48,7 +47,6 @@ wso2::master_datasources :
 #    url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
 #    username : wso2carbon
 #    password : wso2carbon
-#    #securevault :
 #    jndi_config : jdbc/WSO2_CONFIG_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -63,7 +61,6 @@ wso2::master_datasources :
 #    url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
 #    username : wso2carbon
 #    password : wso2carbon
-#    #securevault : false
 #    jndi_config : jdbc/WSO2_GOV_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"

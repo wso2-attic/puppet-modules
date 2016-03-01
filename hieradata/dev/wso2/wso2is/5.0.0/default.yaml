@@ -87,7 +87,6 @@ wso2::am_datasources :
 #    url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
 #    username : "%{hiera('wso2::datasources::common::username')}"
 #    password : "%{hiera('wso2::datasources::common::password')}"
-#    #secret_alias :
 #    jndi_config : jdbc/WSO2_CONFIG_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -102,7 +101,6 @@ wso2::am_datasources :
 #    url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
 #    username : "%{hiera('wso2::datasources::common::username')}"
 #    password : "%{hiera('wso2::datasources::common::password')}"
-#    #secret_alias :
 #    jndi_config : jdbc/WSO2_GOV_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -117,7 +115,6 @@ wso2::am_datasources :
 #    url : jdbc:h2:repository/database/WSO2USER_DB?autoReconnect=true
 #    username : "%{hiera('wso2::datasources::common::username')}"
 #    password : "%{hiera('wso2::datasources::common::password')}"
-#    #secret_alias :
 #    jndi_config : jdbc/WSO2USER_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -134,7 +131,6 @@ wso2::bps_datasources :
     url : jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
     username : wso2carbon
     password : wso2carbon
-    #secret_alias :
     jndi_config : bpsds
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -151,7 +147,6 @@ wso2::metrics_datasources :
     url : jdbc:h2:repository/database/WSO2METRICS_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : WSO2MetricsDB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"

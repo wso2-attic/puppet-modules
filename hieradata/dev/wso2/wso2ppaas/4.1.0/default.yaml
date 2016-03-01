@@ -170,7 +170,6 @@ wso2::ppaas::iaas_providers :
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault :
 #    jndi_config : jdbc/WSO2_CONFIG_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -185,7 +184,6 @@ wso2::ppaas::iaas_providers :
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault : false
 #    jndi_config : jdbc/WSO2_GOV_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"

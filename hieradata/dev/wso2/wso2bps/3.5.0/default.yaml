@@ -66,7 +66,6 @@ wso2::enable_humantask_caching: false
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault :
 #    jndi_config : jdbc/WSO2_CONFIG_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -82,7 +81,6 @@ wso2::enable_humantask_caching: false
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault : false
 #    jndi_config : jdbc/WSO2_GOV_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -98,7 +96,6 @@ wso2::enable_humantask_caching: false
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault :
 #    jndi_config : jdbc/WSO2USER_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -115,7 +112,6 @@ wso2::activiti_datasources :
     url : jdbc:h2:repository/database/activiti;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : jdbc/ActivitiDB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -132,7 +128,6 @@ wso2::bps_datasources :
     url : jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : bpsds
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"

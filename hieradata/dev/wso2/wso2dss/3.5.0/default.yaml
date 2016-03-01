@@ -38,7 +38,6 @@ wso2::taskServerCount : 3
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2_CONFIG_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #secret_alias :
 #    jndi_config : jdbc/WSO2_CONFIG_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -53,7 +52,6 @@ wso2::taskServerCount : 3
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2_GOV_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #secret_alias :
 #    jndi_config : jdbc/WSO2_GOV_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -68,7 +66,6 @@ wso2::taskServerCount : 3
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2_USER_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #secret_alias :
 #    jndi_config : jdbc/WSO2_USER_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"

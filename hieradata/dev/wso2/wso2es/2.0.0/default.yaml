@@ -54,7 +54,6 @@ wso2::mgt_hostname : es.wso2.com
 #    url : jdbc:mysql://10.100.0.168:3306/ES_CONFIG_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault :
 #    jndi_config : jdbc/WSO2_CONFIG_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -70,7 +69,6 @@ wso2::mgt_hostname : es.wso2.com
 #    url : jdbc:mysql://10.100.0.168:3306/WSO2REG_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault : false
 #    jndi_config : jdbc/WSO2_GOV_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -86,7 +84,6 @@ wso2::mgt_hostname : es.wso2.com
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault :
 #    jndi_config : jdbc/WSO2USER_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -103,7 +100,6 @@ wso2::social_datasources :
     url : jdbc:h2:repository/database/WSO2SOCIAL_DB;DB_CLOSE_ON_EXIT=FALSE;MVCC=true
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : jdbc/WSO2SocialDB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"

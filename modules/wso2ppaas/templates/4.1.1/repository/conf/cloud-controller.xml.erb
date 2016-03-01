@@ -24,7 +24,7 @@
         <bamServer>
             <!-- BAM server URL should be specified in carbon.xml -->
             <adminUserName>admin</adminUserName>
-            <adminPassword svns:secretAlias="cloud.controller.bam.server.admin.password">admin</adminPassword>
+            <adminPassword>admin</adminPassword>
         </bamServer>
         <!-- Default cron expression is '1 * * * * ? *' meaning 'first second of every minute'.
              Optional element. -->
@@ -57,8 +57,8 @@
         <iaasProvider type="ec2" name="Amazon EC2">
             <className><%= @iaas_providers['ec2']['class_name'] %></className>
             <provider><%= @iaas_providers['ec2']['provider'] %></provider>
-            <identity svns:secretAlias="cloud.controller.ec2.identity"><%= @iaas_providers['ec2']['identity'] %></identity>
-            <credential svns:secretAlias="cloud.controller.ec2.credential"><%= @iaas_providers['ec2']['credential'] %></credential>
+            <identity><%= @iaas_providers['ec2']['identity'] %></identity>
+            <credential><%= @iaas_providers['ec2']['credential'] %></credential>
 <%- @iaas_providers['ec2']['properties'].each do |property| -%>
             <property name="<%= property['name'] %>" value="<%= property['value'] %>" />
 <%- end -%>
@@ -69,8 +69,8 @@
         <iaasProvider type="kubernetes" name="Kubernetes">
             <className><%= @iaas_providers['kubernetes']['class_name'] %></className>
             <provider><%= @iaas_providers['kubernetes']['provider'] %></provider>
-            <identity svns:secretAlias="cloud.controller.kubernetes.identity"><%= @iaas_providers['kubernetes']['identity'] %></identity>
-            <credential svns:secretAlias="cloud.controller.kubernetes.credential"><%= @iaas_providers['kubernetes']['credential'] %></credential>
+            <identity><%= @iaas_providers['kubernetes']['identity'] %></identity>
+            <credential><%= @iaas_providers['kubernetes']['credential'] %></credential>
         </iaasProvider>
 <%- end -%>
 
@@ -78,8 +78,8 @@
         <iaasProvider type="mock" name="Mock">
             <className><%= @iaas_providers['mock']['class_name'] %></className>
             <provider><%= @iaas_providers['mock']['provider'] %></provider>
-            <identity svns:secretAlias="cloud.controller.mock.identity"><%= @iaas_providers['mock']['identity'] %></identity>
-            <credential svns:secretAlias="cloud.controller.mock.credential"><%= @iaas_providers['mock']['credential'] %></credential>
+            <identity><%= @iaas_providers['mock']['identity'] %></identity>
+            <credential><%= @iaas_providers['mock']['credential'] %></credential>
 <%- @iaas_providers['mock']['properties'].each do |property| -%>
             <property name="<%= property['name'] %>" value="<%= property['value'] %>" />
 <%- end -%>

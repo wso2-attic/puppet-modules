@@ -112,7 +112,6 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #secretAlias :
     jndi_config : jdbc/WSO2CarbonDB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -127,7 +126,6 @@ wso2::master_datasources :
 #    url : jdbc:h2:repository/database/WSO2CARBON_DB?autoReconnect=true
 #    username : "%{hiera('wso2::datasources::common::username')}"
 #    password : "%{hiera('wso2::datasources::common::password')}"
-#    #secretAlias :
 #    jndi_config : jdbc/WSO2_USER_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"

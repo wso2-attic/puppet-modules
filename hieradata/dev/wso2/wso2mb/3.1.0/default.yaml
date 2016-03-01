@@ -35,7 +35,6 @@ wso2::master_datasources :
       url : jdbc:h2:repository/database/WSO2MB_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
       username : "%{hiera('wso2::datasources::common::username')}"
       password : "%{hiera('wso2::datasources::common::password')}"
-      #secretAlias :
       jndi_config : WSO2MBStoreDB
       max_active : "%{hiera('wso2::datasources::common::max_active')}"
       max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -52,7 +51,6 @@ wso2::metrics_datasources :
       url : jdbc:h2:repository/database/WSO2METRICS_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
       username : "%{hiera('wso2::datasources::common::username')}"
       password : "%{hiera('wso2::datasources::common::password')}"
-      #secretAlias :
       jndi_config : jdbc/WSO2MetricsDB
       datasource : WSO2MetricsDB
       max_active : "%{hiera('wso2::datasources::common::max_active')}"
@@ -106,7 +104,6 @@ wso2::metrics_datasources :
 #      url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
 #      username : root
 #      password : root
-#      #securevault : false
 #      jndi_config : jdbc/WSO2_GOV_DB
 #      max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #      max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -121,7 +118,6 @@ wso2::metrics_datasources :
 #      url : jdbc:mysql://192.168.100.1:3306/REGISTRY_DB?autoReconnect=true
 #      username : root
 #      password : root
-#      #securevault : false
 #      jndi_config : jdbc/WSO2RegistryDB
 #      max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #      max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -136,7 +132,6 @@ wso2::metrics_datasources :
 #    url : jdbc:mysql://192.168.100.1:3306/WSO2_MB?autoReconnect=true
 #    username : root
 #    password : root
-#    #securevault : false
 #    jndi_config : jdbc/MySQLMessageStore
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
