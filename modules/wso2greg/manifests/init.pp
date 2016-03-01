@@ -20,7 +20,7 @@
 class wso2greg inherits wso2base {
 
   $bps_datasources = hiera_hash("wso2::bps_datasources")
-  $social_datasources = hiera_hash("wso2::social_datasources")
+  $social_datasources = hiera_hash("wso2::social_datasources", undef)
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode    => $maintenance_mode,
