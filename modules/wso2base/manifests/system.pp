@@ -52,8 +52,8 @@ class wso2base::system (
   if $vm_type != 'docker' {
     file { "/etc/init.d/${service_name}":
       ensure               => present,
-      owner                => $user,
-      group                => $group,
+      owner                => $wso2_user,
+      group                => $wso2_group,
       mode                 => '0755',
       content              => template("${service_template}"),
     }
@@ -62,8 +62,8 @@ class wso2base::system (
   if $vm_type != 'docker' {
     file { "/etc/hosts":
       ensure               => present,
-      owner                => $user,
-      group                => $group,
+      owner                => $wso2_user,
+      group                => $wso2_group,
       mode                 => '0755',
       content              => template("${hosts_template}"),
     }
