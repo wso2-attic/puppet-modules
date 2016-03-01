@@ -66,18 +66,31 @@
         <!--
             Server URL of the Authentication service
         -->
-        <ServerURL>https://<%= @keymanager_subdomain %>.<%= @am_subdomain %>.<%= @domain %>/services/</ServerURL>
+        <%- if @apim_keymanager and @apim_keymanager['host'] and @apim_keymanager['port'] -%>
+          <ServerURL>https://<%= @apim_keymanager['host'] %>:<%= @apim_keymanager['port'] %>/services/</ServerURL>
+        <%- else -%>
+           <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
+        <%- end -%>
+
         <!--
             Admin username for the Authentication manager.
         -->
-        <Username><%= @admin_username %></Username>
+        <%- if @apim_keymanager and @apim_keymanager['username'] -%>
+          <Username><%= @apim_keymanager['username'] %></Username>
+        <%- else -%>
+          <Username>${admin.username}</Username>
+        <%- end -%>
         <!--
             Admin password for the Authentication manager.
         -->
-        <Password><%= @admin_password %></Password>
-	<!-- 
+        <%- if @apim_keymanager and @apim_keymanager['password'] -%>
+          <Password><%= @apim_keymanager['password'] %></Password>
+        <%- else -%>
+          <Password>${admin.password}</Password>
+        <%- end -%>
+	<!--
 	   Indicates whether the permissions checking of the user (on the Publisher and Store) should be done
-	   via a remote service. The check will be done on the local server when false.	
+	   via a remote service. The check will be done on the local server when false.
 	-->
 	<CheckPermissionsRemotely>false</CheckPermissionsRemotely>
     </AuthManager>
@@ -170,20 +183,38 @@
                         <!--
                                 Server URL of the API gateway.
                         -->
-                        <ServerURL>https://<%= @gatewaymgt_subdomain %>.<%= @am_subdomain %>.<%= @domain %>/services/</ServerURL>
-			<!--
-            			Admin username for the API gateway.
-        		-->
-                        <Username><%= @admin_username %></Username>
-			<!--
-            			Admin password for the API gateway.
-        		-->
-                        <Password><%= @admin_password %></Password>
-			<!--
-            			Endpoint URLs for the APIs hosted in this API gateway.
-        		-->
-                        <GatewayEndpoint>http://<%= @gateway_subdomain %>.<%= @am_subdomain %>.<%= @domain %>:<%= @am_nio_http_port %>,https://<%= @gateway_subdomain %>.<%= @am_subdomain %>.<%= @domain %>:<%= @am_nio_https_port %></GatewayEndpoint>
-                </Environment>
+                        <%- if @apim_gateway and @apim_gateway['host'] and @apim_gateway['port']-%>
+                          <ServerURL>https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['port'] %>/services/</ServerURL>
+                        <%- else -%>
+                          <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
+                        <%- end -%>
+                        <!--
+                            Admin username for the API gateway.
+                        -->
+                        <%- if @apim_gateway and @apim_keymanager['username'] -%>
+                          <Username><%= @apim_gateway['username'] %></Username>
+                        <%- else -%>
+                          <Username>${admin.username}</Username>
+                        <%- end -%>
+                        <!--
+                            Admin password for the API gateway.
+                        -->
+                        <%- if @apim_gateway and @apim_gateway['password'] -%>
+                          <Password><%= @apim_gateway['password'] %></Password>
+                        <%- else -%>
+                           <Password>${admin.password}</Password>
+                        <%- end -%>
+
+    			              <!--
+                			    Endpoint URLs for the APIs hosted in this API gateway.
+            		        -->
+            		        <%- if @apim_gateway and @apim_gateway['host'] and
+            		        @apim_gateway['api_endpoint_port'] and  @apim_gateway['secure_api_endpoint_port']-%>
+                          <GatewayEndpoint>http://<%= @apim_gateway['host'] %>:<%= @apim_gateway['api_endpoint_port'] %>,https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['secure_api_endpoint_port'] %></GatewayEndpoint>
+                        <%- else -%>
+                          <GatewayEndpoint>http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}</GatewayEndpoint>
+                        <%- end -%>
+                    </Environment>
         </Environments>
 
         <!--
@@ -269,7 +300,7 @@
         <PublisherClass>org.wso2.carbon.apimgt.usage.publisher.APIMgtUsageDataBridgeDataPublisher</PublisherClass>
 
         <!--
-            If below property set to true,then the response message size will be calculated and publish 
+            If below property set to true,then the response message size will be calculated and publish
             with each successful API invocation event.
         -->
         <PublishResponseMessageSize>false</PublishResponseMessageSize>
@@ -315,17 +346,29 @@
         <!--
             Server URL of the API key manager
         -->
-        <ServerURL>https://<%= @keymanager_subdomain %>.<%= @am_subdomain %>.<%= @domain %>/services/</ServerURL>
+        <%- if @apim_keymanager and @apim_keymanager['host'] and @apim_keymanager['port'] -%>
+          <ServerURL>https://<%= @apim_keymanager['host'] %>:<%= @apim_keymanager['port'] %>/services/</ServerURL>
+        <%- else -%>
+           <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
+        <%- end -%>
 
         <!--
             Admin username for API key manager.
         -->
-        <Username><%= @admin_username %></Username>
+        <%- if @apim_keymanager and @apim_keymanager['username'] -%>
+          <Username><%= @apim_keymanager['username'] %></Username>
+        <%- else -%>
+          <Username>${admin.username}</Username>
+        <%- end -%>
 
         <!--
             Admin password for API key manager.
         -->
-        <Password><%= @admin_password %></Password>
+        <%- if @apim_keymanager and @apim_keymanager['password'] -%>
+          <Password><%= @apim_keymanager['password'] %></Password>
+        <%- else -%>
+          <Password>${admin.password}</Password>
+        <%- end -%>
         <!--
             Enable/Disable JWT caching.
         -->
@@ -345,31 +388,34 @@
         -If you are at the Gateway node, you need to point "ThriftClientPort" value to the "ThriftServerPort" value given at KeyManager node.
         -If you need to start two API Manager instances in the same machine, you need to give different ports to "ThriftServerPort" value in two nodes.
         -ThriftServerHost - Allows to configure a hostname for the thrift server. It uses the carbon hostname by default.
-	-Gateway use this parameter to connect key validation thrift service. 
+	-Gateway use this parameter to connect key validation thrift service.
         -->
 
-        <%- if @clustering -%>
-        <KeyValidatorClientType>WSClient</KeyValidatorClientType>
-        <EnableThriftServer>false</EnableThriftServer>
-        <%- else -%>
-        <KeyValidatorClientType>ThriftClient</KeyValidatorClientType>
-        <ThriftServerHost><%= @ipaddress %></ThriftServerHost>
-        <EnableThriftServer>true</EnableThriftServer>
-        <%- end -%>
-        <ThriftClientPort>10397</ThriftClientPort>
-        <ThriftClientConnectionTimeOut>10000</ThriftClientConnectionTimeOut>
-        <ThriftServerPort>10397</ThriftServerPort>        
+        <%- if @clustering['enabled'] -%>
+          <KeyValidatorClientType>WSClient</KeyValidatorClientType>
+      <%- else -%>
+          <KeyValidatorClientType>ThriftClient</KeyValidatorClientType>
+      <%- end -%>
+          <ThriftClientPort>10397</ThriftClientPort>
+          <ThriftClientConnectionTimeOut>10000</ThriftClientConnectionTimeOut>
+          <ThriftServerPort>10397</ThriftServerPort>
+   <!--ThriftServerHost>localhost</ThriftServerHost-->
+     <%- if @clustering['enabled'] -%>
+          <EnableThriftServer>false</EnableThriftServer>
+      <%- else -%>
+          <EnableThriftServer>true</EnableThriftServer>
+      <%- end -%>
 
-        <!-- 
+        <!--
         Scope used for marking Application Tokens. If a token is generated with this scope, they will be treated as Application Access Tokens
         -->
         <ApplicationTokenScope>am_application_scope</ApplicationTokenScope>
 
-        <!-- 
+        <!--
         Specifies the implementation to be used for KeyValidationHandler. Steps for validating a token can be controlled by plugging in a custom KeyValidation Handler
-        -->    
+        -->
         <KeyValidationHandlerClassName>org.wso2.carbon.apimgt.keymgt.handlers.DefaultKeyValidationHandler</KeyValidationHandlerClassName>
-	
+
         <!--
             Remove UserName from JWT Token
         -->
@@ -382,7 +428,7 @@
             <Scope>^device_.*</Scope>
             <Scope>openid</Scope>
         </ScopeWhitelist-->
-    
+
 	<!-- Name of the token API -->
 	<TokenEndPointName>/oauth2/token</TokenEndPointName>
 
@@ -392,8 +438,11 @@
 	     gateway https( /http, we recommend users to use 'https' endpoints for security purpose) url.
          Also please note that we should point gateway revoke service to key manager
 	-->
-	<RevokeAPIURL>https://<%= @gateway_subdomain %>.<%= @am_subdomain %>.<%= @domain %>:<%= @am_nio_https_port %>/revoke</RevokeAPIURL>
-
+    <%- if @apim_gateway and @apim_gateway['host'] and @apim_gateway['api_endpoint_port'] and  @apim_gateway['secure_api_endpoint_port']-%>
+    <RevokeAPIURL>https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['secure_api_endpoint_port'] %>/revoke</RevokeAPIURL>
+  <%- else -%>
+    <RevokeAPIURL>https://${carbon.local.ip}:${https.nio.port}/revoke</RevokeAPIURL>
+  <%- end -%>
 	<!-- Whether to encrypt tokens when storing in the Database
 	Note: If changing this value to true, change the value of <TokenPersistenceProcessor> to
 	org.wso2.carbon.identity.oauth.tokenprocessor.EncryptionDecryptionPersistenceProcessor in the identity.xml -->
@@ -405,7 +454,7 @@
     Uncomment this section only if you are going to have an instance other than KeyValidator as your KeyManager.
     Unless a ThirdParty KeyManager is used, you don't need to configure this section.
     -->
-    
+
     <!--APIKeyManager>
         <KeyManagerClientImpl>org.wso2.carbon.apimgt.keymgt.AMDefaultKeyManagerImpl</KeyManagerClientImpl>
         <Configuration>
@@ -438,7 +487,11 @@
 	<!--GroupingExtractor>org.wso2.carbon.apimgt.impl.DefaultGroupIDExtractorImpl</GroupingExtractor-->
 	<CompareCaseInsensitively>true</CompareCaseInsensitively>
         <DisplayURL>false</DisplayURL>
-        <URL>https://<%= @am_subdomain %>.<%= @domain %>/store</URL>
+        <%- if @apim_store and @apim_store['host'] and @apim_store['port'] -%>
+          <URL>https://<%= @apim_store['host'] %>:<%= @apim_store['port'] %>/store</URL>
+        <%- else -%>
+           <URL>https://${carbon.local.ip}:${mgt.transport.https.port}/store</URL>
+        <%- end -%>
         <!--
             Server URL of the API Store.
         -->
@@ -502,8 +555,12 @@
 
     <APIPublisher>
         <DisplayURL>false</DisplayURL>
-        <URL>https://<%= @am_subdomain %>.<%= @domain %>/publisher</URL>
-        <!-- 
+        <%- if @apim_publisher and @apim_publisher['host'] and @apim_publisher['port'] -%>
+          <URL>https://<%= @apim_publisher['host'] %>:<%= @apim_publisher['port'] %>/publisher</URL>
+        <%- else -%>
+          <URL>https://${carbon.local.ip}:${mgt.transport.https.port}/publisher</URL>
+        <%- end -%>
+        <!--
                This parameter specifies enabling the capability of setting API documentation level granular visibility levels.
                By default any document associate with an API will have the same permissions set as the API.With enabling below
                property,it will show two additional permission levels as visible only to all registered users in a particular
@@ -588,7 +645,7 @@
 
 	<!--Configure Access-Control-Allow-Headers-->
 	<Access-Control-Allow-Headers>authorization,Access-Control-Allow-Origin,Content-Type</Access-Control-Allow-Headers>
-        
+
             <!--Configure Access-Control-Allow-Credentials-->
     <!-- Specifying this header to true means that the server allows cookies (or other user credentials) to be included on cross-origin requests.
          It is false by default and if you set it to true then make sure that the Access-Control-Allow-Origin header does not contain the wildcard (*)
@@ -597,7 +654,7 @@
 
     </CORSConfiguration>
    <!-- This property is there to configure velocity log output into existing Log4j carbon Logger.
- 	You can enable this and set preferable Logger name. 
+ 	You can enable this and set preferable Logger name.
    -->
    <!--VelocityLogger>VELOCITY</VelocityLogger-->
 
