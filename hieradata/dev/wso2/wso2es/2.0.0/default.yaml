@@ -24,27 +24,27 @@ wso2::service_name: wso2es
 wso2::hostname : es.wso2.com
 wso2::mgt_hostname : es.wso2.com
 
-wso2::file_list :
-  - lib/org.wso2.carbon.server-4.2.0.jar
-  - repository/components/lib/jackson-annotations-2.5.4.jar
-  - repository/components/lib/jackson-core-2.5.4.jar
-  - repository/components/lib/jackson-databind-2.5.4.jar
-  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-  - repository/resources/security/client-truststore.jks
-  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+#wso2::file_list :
+#  - lib/org.wso2.carbon.server-4.2.0.jar
+#  - repository/components/lib/jackson-annotations-2.5.4.jar
+#  - repository/components/lib/jackson-core-2.5.4.jar
+#  - repository/components/lib/jackson-databind-2.5.4.jar
+#  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+#  - repository/resources/security/client-truststore.jks
+#  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
-wso2::clustering :
-    enabled : true
-    subDomain : mgt
-    local_member_host : local.es.wso2.com
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    k8 :
-       k8_master : http://172.17.8.101:8080
-       k8_namespace : default
-       k8_services : wso2es-default
-       k8_master_username : vagrant
-       k8_master_password : vagrant
+#wso2::clustering :
+#    enabled : true
+#    subDomain : mgt
+#    local_member_host : local.es.wso2.com
+#    local_member_port : 4000
+#    membership_scheme : kubernetes
+#    k8 :
+#       k8_master : http://172.17.8.101:8080
+#       k8_namespace : default
+#       k8_services : wso2es-default
+#       k8_master_username : vagrant
+#       k8_master_password : vagrant
 
 #wso2::master_datasources :
 #  wso2_config_db :
