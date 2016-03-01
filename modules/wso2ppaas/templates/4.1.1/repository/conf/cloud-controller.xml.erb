@@ -45,8 +45,8 @@
         <iaasProvider type="openstack" name="Openstack">
             <className><%= @iaas_providers['openstack']['class_name'] %></className>
             <provider><%= @iaas_providers['openstack']['provider'] %></provider>
-            <identity svns:secretAlias="cloud.controller.openstack.identity"><%= @iaas_providers['openstack']['identity'] %></identity>
-            <credential svns:secretAlias="cloud.controller.openstack.credential"><%= @iaas_providers['openstack']['credential'] %></credential>
+            <identity><%= @iaas_providers['openstack']['identity'] %></identity>
+            <credential><%= @iaas_providers['openstack']['credential'] %></credential>
 <%- @iaas_providers['openstack']['properties'].each do |property| -%>
             <property name="<%= property['name'] %>" value="<%= property['value'] %>" />
 <%- end -%>
