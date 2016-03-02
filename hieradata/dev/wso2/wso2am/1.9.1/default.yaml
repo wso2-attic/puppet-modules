@@ -27,37 +27,30 @@ wso2::template_list :
 #  - password-tmp
 
 wso2::service_name: wso2am
-wso2::hostname : wso2am-default
-wso2::mgt_hostname : wso2am-default
+wso2::hostname : "%{::ipaddress}"
+wso2::mgt_hostname : am.wso2.com
 
-#wso2::apim_gateway :
-#    host : 127.0.0.1
-#    port : 9443
-#    api_endpoint_port : 8280
-#    secure_api_endpoint_port : 8243
-#    username : admin
-#    password : admin
+wso2::apim_gateway :
+    host : localhost
+    port : 9443
+    api_endpoint_port : 8280
+    secure_api_endpoint_port : 8243
+    username : admin
+    password : admin
 
-#wso2::apim_keymanager :
-#    host : 127.0.0.1
-#    port : 9443
-#    username : admin
-#    password : admin
+wso2::apim_keymanager :
+    host : localhost
+    port : 9443
+    username : admin
+    password : admin
 
-#wso2::apim_store :
-#    host : 127.0.0.1
-#    port : 9443
+wso2::apim_store :
+    host : am.wso2.com
+    port : 9443
 
-#wso2::apim_publisher :
-#    host : 127.0.0.1
-#    port : 9443
-
-# wso2::file_list :
-#   - repository/components/lib/jackson-annotations-2.5.4.jar
-#   - repository/components/lib/jackson-core-2.5.4.jar
-#   - repository/components/lib/jackson-databind-2.5.4.jar
-#   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-#   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+wso2::apim_publisher :
+    host : am.wso2.com
+    port : 9443
 
 wso2::clustering :
     enabled : false
@@ -79,20 +72,20 @@ wso2::clustering :
 #    http: 80
 #    https: 443
 
-wso2::registry_mounts:
-  wso2_config_db:
-    path: /_system/config
-    target_path: /_system/config
-    read_only: false
-    registry_root: /
-    enable_cache: true
-
-  wso2_gov_db:
-    path: /_system/governance
-    target_path: /_system/governance
-    read_only: false
-    registry_root: /
-    enable_cache: true
+#wso2::registry_mounts:
+#  wso2_config_db:
+#    path: /_system/config
+#    target_path: /_system/config
+#    read_only: false
+#    registry_root: /
+#    enable_cache: true
+#
+#  wso2_gov_db:
+#    path: /_system/governance
+#    target_path: /_system/governance
+#    read_only: false
+#    registry_root: /
+#    enable_cache: true
 
 # wso2::usermgt_datasource: wso2user_db
 
@@ -112,34 +105,34 @@ wso2::am_datasources :
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::master_datasources :
-  wso2_config_db:
-    name : WSO2_CONFIG_DB
-    description : The datasource used for config registry
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username : "%{hiera('wso2::datasources::common::username')}"
-    password : "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2_CONFIG_DB
-    max_active: "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
-    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-  wso2_gov_db:
-    name : WSO2_GOV_DB
-    description : The datasource used for gov registry
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username : "%{hiera('wso2::datasources::common::username')}"
-    password : "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2_GOV_DB
-    max_active: "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#wso2::master_datasources :
+#  wso2_config_db:
+#    name : WSO2_CONFIG_DB
+#    description : The datasource used for config registry
+#    driver_class_name : org.h2.Driver
+#    url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+#    username : "%{hiera('wso2::datasources::common::username')}"
+#    password : "%{hiera('wso2::datasources::common::password')}"
+#    jndi_config : jdbc/WSO2_CONFIG_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#
+#  wso2_gov_db:
+#    name : WSO2_GOV_DB
+#    description : The datasource used for gov registry
+#    driver_class_name : org.h2.Driver
+#    url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+#    username : "%{hiera('wso2::datasources::common::username')}"
+#    password : "%{hiera('wso2::datasources::common::password')}"
+#    jndi_config : jdbc/WSO2_GOV_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 #  wso2user_db :
 #    name : WSO2USER_DB
