@@ -113,4 +113,4 @@ wso2::secure_vault_configs :
     secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
     secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
     password: wso2carbon
->>>>>>> Updating hiera files with secure vault configurations
+

@@ -22,8 +22,8 @@ define wso2base::apply_secure_vault ($user, $enable_secure_vault, $key_store_pas
     exec { "Applying secure vault":
       user               => $user,
       path               => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-      cwd                => "$carbon_home/bin",
-      command            => "sh ciphertool.sh -Dconfigure -Dpassword=$key_store_password",
+      cwd                => "${carbon_home}/bin",
+      command            => "sh ciphertool.sh -Dconfigure -Dpassword=${key_store_password}",
       logoutput          => 'on_failure'
     }
   }
