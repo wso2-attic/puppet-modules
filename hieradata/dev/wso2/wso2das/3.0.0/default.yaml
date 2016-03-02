@@ -133,6 +133,22 @@ wso2::analytics_datasources :
     test_while_idle : true
     min_evictable_idle_time_millis : 4000
 
+wso2::metrics_datasources :
+  wso2_metrics_db :
+    name : WSO2_METRICS_DB
+    description : The default datasource used for WSO2 Carbon Metrics
+    driver_class_name : org.h2.Driver
+    url : jdbc:h2:repository/database/WSO2METRICS_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+    jndi_config : jdbc/WSO2MetricsDB
+    username : wso2carbon
+    password : wso2carbon
+    max_active : "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+
 # Secure vault configuration
 wso2::enable_secure_vault : false
 wso2::secure_vault_configs :
