@@ -20,6 +20,10 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::template_list :
   - repository/conf/datasources/am-datasources.xml
   - repository/conf/api-manager.xml
+#  - repository/conf/security/cipher-text.properties
+#  - repository/conf/security/cipher-tool.properties
+#  - bin/ciphertool.sh
+#  - password-tmp
 
 wso2::service_name: wso2am
 wso2::hostname : wso2am-default
@@ -99,7 +103,6 @@ wso2::am_datasources :
     url : jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #secret_alias :
     jndi_config : jdbc/WSO2AM_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -116,7 +119,6 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #secret_alias :
     jndi_config : jdbc/WSO2_CONFIG_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -131,7 +133,6 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #secretAlias :
     jndi_config : jdbc/WSO2_GOV_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -146,7 +147,6 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/WSO2USER_DB?autoReconnect=true
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #secretAlias :
     jndi_config : jdbc/WSO2USER_DB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -162,7 +162,114 @@ wso2::master_datasources :
     url : jdbc:h2:repository/database/ES_STORAGE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #secretAlias :
     jndi_config : jdbc/ES_STORAGE
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
+
+# Secure vault configuration
+wso2::enable_secure_vault : false
+wso2::secure_vault_configs :
+  key_store_password :
+    secret_alias: Carbon.Security.KeyStore.Password
+    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
+    password: wso2carbon
+  key_store_key_password :
+    secret_alias: Carbon.Security.KeyStore.KeyPassword
+    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
+    password: wso2carbon
+  trust_store_password :
+    secret_alias: Carbon.Security.TrustStore.Password
+    secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
+    password: wso2carbon
+  user_manager_admin_password :
+    secret_alias: UserManager.AdminUser.Password
+    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
+    password: admin
+  wso2_carbon_db_password :
+    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
+    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
+    password: wso2carbon
+  connector_key_store_password :
+    secret_alias: Server.Service.Connector.keystorePass
+    secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
+    password: wso2carbon
+  wso2am_db_password :
+    secret_alias: Datasource.WSO2AM_DB.configuration.password
+    secret_alias_value: repository/conf/datasources/am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false
+    password: wso2carbon
+#  wso2am_stats_db_password :
+#    secret_alias: Datasource.WSO2AM_STATS_DB.configuration.password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_STATS_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: wso2carbon
+  wso2_config_db_password :
+    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
+    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
+    password: wso2carbon
+  wso2_gov_db_password :
+    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
+    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
+    password: wso2carbon
+#  user_store_manager_connection_password:
+#    secret_alias: UserStoreManager.Property.ConnectionPassword
+#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='ConnectionPassword'],true
+#    password: admin
+#  user_store_manager_password:
+#    secret_alias: UserStoreManager.Property.password
+#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='password'],true
+#    password: admin
+#  auth_manager_password:
+#    secret_alias: AuthManager.Password
+#    secret_alias_value: repository/conf/api-manager.xml//APIManager/AuthManager/Password,false
+#    password: admin
+#  api_gateway_password:
+#    secret_alias: APIGateway.Password
+#    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIGateway/Environments/Environment/Password,false
+#    password: admin
+#  api_key_validator_password:
+#    secret_alias: APIKeyValidator.Password
+#    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIKeyValidator/Password,false
+#    password: admin
+#  api_store_password:
+#    secret_alias: APIStore.Password
+#    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIStore/Password,false
+#    password: admin
+#  user_trusted_RPStore_password:
+#    secret_alias: Security.UserTrustedRPStore.Password
+#    secret_alias_value: repository/conf/identity.xml//Server/Security/UserTrustedRPStore/Password
+#    password: wso2carbon
+#  user_trusted_RPStore_key_password:
+#    secret_alias: Security.UserTrustedRPStore.KeyPassword
+#    secret_alias_value: repository/conf/identity.xml//Server/Security/UserTrustedRPStore/KeyPassword
+#    password: wso2carbon
+#  identity_system_store_pass:
+#    secret_alias: Identity.System.StorePass
+#    secret_alias_value: repository/conf/identity.xml//Server/Identity/System/StorePass
+#    password: wso2carbon
+#  xmpp_password:
+#    secret_alias: MultifactorAuthentication.XMPPSettings.XMPPConfig.XMPPPassword
+#    secret_alias_value: repository/conf/identity.xml//MultifactorAuthentication/XMPPSettings/XMPPConfig/XMPPPassword
+#    password: wso2carbon
+#  axis2_https_listener_trust_store_password:
+#    secret_alias: Axis2.Https.Listener.TrustStore.Password
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportReceiver[@name='https']/parameter[@name='truststore']/TrustStore/Password,false
+#    password: wso2carbon
+#  axis2_https_listener_key_store_password:
+#    secret_alias: Axis2.Https.Listener.KeyStore.Password
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportReceiver[@name='https']/parameter[@name='keystore']/KeyStore/Password,false
+#    password: wso2carbon
+#  axis2_https_listener_key_store_key_password:
+#    secret_alias: Axis2.Https.Listener.KeyStore.KeyPassword
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportReceiver[@name='https']/parameter[@name='keystore']/KeyStore/KeyPassword,false
+#    password: wso2carbon
+#  axis2_https_sender_trust_store_password:
+#    secret_alias: Axis2.Https.Listener.TrustStore.Password
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='truststore']/TrustStore/Password,false
+#    password: wso2carbon
+#  axis2_https_sender_key_store_password:
+#    secret_alias: Axis2.Https.Listener.KeyStore.Password
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='keystore']/KeyStore/Password,false
+#    password: wso2carbon
+#  axis2_https_sender_key_store_key_password:
+#    secret_alias: Axis2.Https.Listener.KeyStore.KeyPassword
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='keystore']/KeyStore/KeyPassword,false
+#    password: wso2carbon

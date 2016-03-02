@@ -33,11 +33,7 @@
                 <configuration>
                     <url><%= datasource['url'] %></url>
                     <username><%= datasource['username'] %></username>
-   					<%- if datasource['secret_alias'] -%>
-                    <password svns:secretAlias="<%= datasource['secret_alias'] %>">password</password>
-      				<%- else -%>
                     <password><%= datasource['password'] %></password>
-            		<%- end -%>
                     <driverClassName><%= datasource['driver_class_name'] %></driverClassName>
                     <maxActive><%= datasource['max_active'] %></maxActive>
                     <maxWait><%= datasource['max_wait'] %></maxWait>

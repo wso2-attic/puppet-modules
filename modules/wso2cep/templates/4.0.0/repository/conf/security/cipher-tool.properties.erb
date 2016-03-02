@@ -23,5 +23,5 @@
 # and you want its value to be replaced with "password"
  
 <%- @secure_vault_configs.each do |secure_vault_config_name, secure_vault_config| -%>
-  <%= secure_vault_config['secret_alias'] %>=<%= secure_vault_config['secret_alias_value'] %>
+<%= secure_vault_config['secret_alias'] %>=<%= secure_vault_config['secret_alias_value'] %>
 <%- end -%>

@@ -44,7 +44,6 @@ wso2::master_datasources :
     url : jdbc:mysql://172.17.8.1:3306/GOV_DB?autoReconnect=true
     username : root
     password : root
-    #securevault : false
     jndi_config : jdbc/WSO2_GOV_DB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -60,7 +59,6 @@ wso2::master_datasources :
     url : jdbc:mysql://172.17.8.1:3306/STORE_PUB_CONFIG_DB?autoReconnect=true
     username : root
     password : root
-    #securevault :
     jndi_config : jdbc/WSO2_CONFIG_DB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -76,7 +74,6 @@ wso2::master_datasources :
     url : jdbc:mysql://172.17.8.1:3306/WSO2USER_DB?autoReconnect=true
     username : root
     password : root
-    #securevault :
     jndi_config : jdbc/WSO2USER_DB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -93,7 +90,6 @@ wso2::am_datasources :
     url : jdbc:mysql://172.17.8.1:3306/APIMGT_DB?autoReconnect=true
     username : root
     password : root
-    #secret_alias :
     jndi_config : jdbc/WSO2AM_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"

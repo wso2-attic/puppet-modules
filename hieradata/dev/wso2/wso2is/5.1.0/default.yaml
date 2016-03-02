@@ -20,6 +20,10 @@ wso2::template_list :
   - repository/conf/datasources/bps-datasources.xml
   - repository/conf/datasources/master-datasources.xml
   - repository/conf/datasources/metrics-datasources.xml
+#  - repository/conf/security/cipher-text.properties
+#  - repository/conf/security/cipher-tool.properties
+#  - bin/ciphertool.sh
+#  - password-tmp
 
 wso2::service_name: wso2is
 wso2::hostname : is.wso2.com
@@ -72,7 +76,6 @@ wso2::clustering :
 #    url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
 #    username : "%{hiera('wso2::datasources::common::username')}"
 #    password : "%{hiera('wso2::datasources::common::password')}"
-#    #secret_alias :
 #    jndi_config : jdbc/WSO2_CONFIG_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -87,7 +90,6 @@ wso2::clustering :
 #    url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
 #    username : "%{hiera('wso2::datasources::common::username')}"
 #    password : "%{hiera('wso2::datasources::common::password')}"
-#    #secret_alias :
 #    jndi_config : jdbc/WSO2_GOV_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -102,7 +104,6 @@ wso2::clustering :
 #    url : jdbc:h2:repository/database/WSO2USER_DB?autoReconnect=true
 #    username : "%{hiera('wso2::datasources::common::username')}"
 #    password : "%{hiera('wso2::datasources::common::password')}"
-#    #secret_alias :
 #    jndi_config : jdbc/WSO2USER_DB
 #    max_active : "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -119,7 +120,6 @@ wso2::bps_datasources :
     url : jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
     username : wso2carbon
     password : wso2carbon
-    #secret_alias :
     jndi_config : bpsds
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -136,7 +136,6 @@ wso2::metrics_datasources :
     url : jdbc:h2:repository/database/WSO2METRICS_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
     username : wso2carbon
     password : wso2carbon
-    #securevault :
     jndi_config : WSO2MetricsDB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -153,7 +152,6 @@ wso2::am_datasources :
     url : jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE
     username : "%{hiera('wso2::datasources::common::username')}"
     password : "%{hiera('wso2::datasources::common::password')}"
-    #secretAlias :
     jndi_config : jdbc/WSO2AM_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -161,3 +159,31 @@ wso2::am_datasources :
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+# Secure vault configuration
+wso2::enable_secure_vault : false
+wso2::secure_vault_configs :
+  key_store_password :
+    secret_alias: Carbon.Security.KeyStore.Password
+    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
+    password: wso2carbon
+  key_store_key_password :
+    secret_alias: Carbon.Security.KeyStore.KeyPassword
+    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
+    password: wso2carbon
+  trust_store_password :
+    secret_alias: Carbon.Security.TrustStore.Password
+    secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
+    password: wso2carbon
+  user_manager_admin_password :
+    secret_alias: UserManager.AdminUser.Password
+    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
+    password: admin
+  wso2_carbon_db_password :
+    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
+    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
+    password: wso2carbon
+  connector_key_store_password :
+    secret_alias: Server.Service.Connector.keystorePass
+    secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
+    password: wso2carbon
