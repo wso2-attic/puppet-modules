@@ -12,14 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-wso2::hostname : store.am.wso2.com
-wso2::mgt_hostname : store.am.wso2.com
+wso2::hostname : wso2am-api-store
+wso2::mgt_hostname : wso2am-api-store
 
 wso2::apim_gateway :
     host : wso2am-gateway-manager
 
 wso2::apim_keymanager :
     host : wso2am-api-key-manager
+
+wso2::apim_store :
+    host : wso2am-api-store
+    port : 32015
 
 wso2::clustering :
     enabled : true
@@ -98,7 +102,30 @@ wso2::am_datasources :
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
+wso2::registry_mounts:
+  wso2_config_db:
+    path: /_system/config
+    target_path: /_system/config
+    read_only: false
+    registry_root: /
+    enable_cache: true
+  wso2_gov_db:
+    path: /_system/governance
+    target_path: /_system/governance
+    read_only: false
+    registry_root: /
+    enable_cache: true
+
+wso2::usermgt_datasource: wso2user_db
+
 wso2::ports:
   proxyPort :
     http : 32014
     https : 32015
+
+wso2::file_list :
+  - repository/components/lib/jackson-annotations-2.5.4.jar
+  - repository/components/lib/jackson-core-2.5.4.jar
+  - repository/components/lib/jackson-databind-2.5.4.jar
+  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
