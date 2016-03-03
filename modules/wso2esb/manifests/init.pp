@@ -18,6 +18,9 @@
 # This class installs WSO2 ESB
 
 class wso2esb inherits wso2base {
+
+ $esb_wsdl_epr_prefix     = hiera ("wso2::esb_wsdl_epr_prefix")
+
   wso2base::server { "${carbon_home}" :
     maintenance_mode    => $maintenance_mode,
     pack_filename       => $pack_filename,
