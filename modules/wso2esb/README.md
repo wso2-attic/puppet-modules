@@ -25,6 +25,15 @@ adding product pack to files directory.
          proxyPort :
              http : 32001
              https : 32002
+     
+     wso2::esb_wsdl_epr_prefix:
+          http :
+             bind_address : esb.wso2.com
+             prefix : http://esb.wso2.com:32003
+          https:
+             bind_address : esb.wso2.com
+             prefix : http://esb.wso2.com:32004
+
 
 ## Hiera data configuration to start the product with clustering
 Do the below changes to relevant ESB profiles (manager, worker) hiera yaml files to start the server in distributed 
