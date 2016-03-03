@@ -105,3 +105,8 @@ wso2::secure_vault_configs :
     secret_alias: Server.Service.Connector.keystorePass
     secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
     password: wso2carbon
+
+wso2::ports:
+    proxyPort :
+        http : 32001
+        https : 32002

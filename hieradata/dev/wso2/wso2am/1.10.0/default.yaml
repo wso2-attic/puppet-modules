@@ -73,10 +73,12 @@ wso2::clustering :
     #    k8_master_username :
     #    k8_master_password :
 
-#wso2::ports:
-#  proxyPort :
-#    http: 80
-#    https: 443
+# for K8s scenario, need to enable proxy port to match NodePorts
+# defined for servlet HTTP and HTTPS transport in K8s Service definition
+wso2::ports:
+  proxyPort :
+    http: 32003
+    https: 32004
 
 wso2::registry_mounts:
  wso2_config_db:
