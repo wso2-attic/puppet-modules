@@ -21,10 +21,20 @@ environment and update/create new puppet modules.
 ## Hiera data configuration to start the product with default profile
 With disabling the below proxy configuration in default.yaml file, product can be started in default profile with
 adding product pack to files directory.
-     wso2::ports:
-         proxyPort :
-             http : 32001
-             https : 32002
+     
+    wso2::ports:
+          proxyPort :
+             http : esb.wso2.com
+             https : http://esb.wso2.com:32003
+             
+     wso2::esb_wsdl_epr_prefix:
+          http :
+             bind_address : esb.wso2.com
+             prefix : http://esb.wso2.com:32003
+          https:
+             bind_address : esb.wso2.com
+             prefix : http://esb.wso2.com:32004
+
 
 ## Hiera data configuration to start the product with clustering
 Do the below changes to relevant ESB profiles (manager, worker) hiera yaml files to start the server in distributed 
