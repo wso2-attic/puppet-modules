@@ -24,7 +24,7 @@
     <datasources>
         <%- @master_datasources.each do |datasource_name, datasource| -%>
         <datasource>
-            <name><%= datasource_name %></name>
+            <name><%= datasource['name'] %></name>
             <description><%= datasource['description'] %></description>
             <jndiConfig>
                 <name><%= datasource['jndi_config'] %></name>

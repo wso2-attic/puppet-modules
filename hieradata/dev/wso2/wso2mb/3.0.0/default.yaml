@@ -186,10 +186,17 @@ wso2::secure_vault_configs :
     secret_alias_value: repository/conf/broker.xml//broker/transports/amqp/sslConnection/trustStore/password,true
     password: wso2carbon
   transports_mqtt_ssl_connection_key_store_password:
-    secret_alias: transports.amqp.sslConnection.keyStore.password
+    secret_alias: transports.mqtt.sslConnection.keyStore.password
     secret_alias_value: repository/conf/broker.xml//broker/transports/mqtt/sslConnection/keyStore/password,true
     password: wso2carbon
   transports_mqtt_ssl_connection_trust_store_password:
-    secret_alias: transports.amqp.sslConnection.trustStore.password
+    secret_alias: transports.mqtt.sslConnection.trustStore.password
     secret_alias_value: repository/conf/broker.xml//broker/transports/mqtt/sslConnection/trustStore/password,true
     password: wso2carbon
+
+# for K8s scenario, need to enable proxy port to match NodePorts
+# defined for servlet HTTP and HTTPS transport in K8s Service definition
+wso2::ports:
+  proxyPort :
+    http: 32001
+    https: 32002

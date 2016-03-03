@@ -114,3 +114,9 @@ wso2::secure_vault_configs :
     secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
     password: wso2carbon
 
+# for K8s scenario, need to enable proxy port to match NodePorts
+# defined for servlet HTTP and HTTPS transport in K8s Service definition
+wso2::ports:
+  proxyPort :
+    http: 32001
+    https: 32002

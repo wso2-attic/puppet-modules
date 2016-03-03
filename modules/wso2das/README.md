@@ -19,8 +19,8 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 environment and update/create new puppet modules.
 
 ## Hiera data configuration to start the product with default profile
-With the available hiera data configuration in default.yaml file, product can be started in default profile with 
-adding product pack to files directory.
+With disabling the below proxy configuration in default.yaml file, product can be started in default profile with adding product pack to files directory.
+
 
 ## Hiera data configuration to start the product with clustering
 Do the below changes to relevant DAS hiera yaml files to start the server in distributed setup. For more details 
