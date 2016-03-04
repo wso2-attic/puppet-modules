@@ -1,8 +1,8 @@
 # WSO2 ES Puppet Module
 
 This repository contains generic puppet module for installing and configuring WSO2 ES on various environments. It
-supports multiple versions of WSO2 ES. Configuration data is managed using [Hiera] (http://docs.puppetlabs
-.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in
+supports multiple versions of WSO2 ES. Configuration data is managed using [Hiera] (http://docs.puppetlabs.com/hiera/1/). 
+Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in
  a separate set of YAML files in a hierarchical manner.
 
 ## Supported Operating Systems
