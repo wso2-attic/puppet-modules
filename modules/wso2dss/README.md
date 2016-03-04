@@ -109,7 +109,7 @@ setup.
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply sceure_vault
+## Hiera data configuration to apply secure_vault
 Plese note that WSO2 DSS-3.5.0 pack doesn't have cipher tool feature installed. If you need to apply secure vault,
 please install the cipher tool feature and then use the product pack.
 

@@ -108,7 +108,7 @@ setup. For more details refer the [WSO2 AS clustering guide](https://docs.wso2.c
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply sceure_vault
+## Hiera data configuration to apply secure_vault
 Do the below changes in hiera file.
 
 Do the below changes in hiera file.

@@ -108,7 +108,7 @@ Do the below changes to default hiera yaml files to start the server in distribu
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply sceure_vault
+## Hiera data configuration to apply secure_vault
 Do the below changes in hiera file.
 
 1. Enable secure vault

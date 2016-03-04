@@ -110,7 +110,7 @@ setup. For more details refer [WSO2 BRS 2.2.0](https://docs.wso2
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply sceure_vault
+## Hiera data configuration to apply secure_vault
 Note that secure_vault can be applied to carbon kernel 4.4.x based products and 4.2.0 products which has carbon
 kernel patch-0009. It's not supported for WSO2 BRS 2.1.0.
 

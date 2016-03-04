@@ -108,7 +108,7 @@ Do the below changes to relevant CEP profiles (presenter, worker) hiera yaml fil
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply sceure_vault
+## Hiera data configuration to apply secure_vault
 Do the below changes in hiera file.
 
 1. Enable secure vault

@@ -109,7 +109,7 @@ Do the below changes to default hiera yaml files to start the server in distribu
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply sceure_vault
+## Hiera data configuration to apply secure_vault
 Note that secure_vault can be applied to carbon kernel 4.4.x based products and 4.2.0 products which has carbon
 kernel patch-0009. It's not supported for WSO2 IS 5.0.0.
 
