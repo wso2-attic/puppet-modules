@@ -54,13 +54,11 @@
     <!--
     Host name to be used for the Carbon management console
     -->
-    <%- if @mgt_hostname != nil -%>
-        <%- if @sub_domain == 'mgt' -%>
-         <MgtHostName><%= @mgt_hostname %></MgtHostName>
-        <%- end -%>
+    <% if @mgt_hostname != nil %>
+    <MgtHostName><%= @mgt_hostname %></MgtHostName>
     <%- else -%>
-        <!--MgtHostName>localhost</MgtHostName-->
-    <%- end -%>
+    <!--MgtHostName>mgt.wso2.org</MgtHostName-->
+    <% end %>
     <!--
         The URL of the back end server. This is where the admin services are hosted and
         will be used by the clients in the front end server.
