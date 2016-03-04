@@ -33,6 +33,7 @@
                 <include>wso2*/manifests/**</include>
                 <include>wso2*/templates/**</include>
                 <include>wso2*/metadata.json**</include>
+                <include>wso2*/README.md</include>
             </includes>
             <excludes>
                 <exclude>**/*.zip</exclude>
