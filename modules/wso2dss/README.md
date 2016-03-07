@@ -109,7 +109,12 @@ setup.
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply secure_vault
+## Hiera data configuration to apply secure vault
+WSO2 DSS needs to have sensitive data such as passwords, keys in configuration files and put them as plain text in
+configuration files will lead to security attacks. WSO2 carbon secure vault implementation prevents this by using
+secret aliases in configuration files which are mapped to cipher tool encrypted secrets. Read more details on WSO2
+carbon secure vault implementation [here] (https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files).
+
 Plese note that WSO2 DSS-3.5.0 pack doesn't have cipher tool feature installed. If you need to apply secure vault,
 please install the cipher tool feature and then use the product pack.
 

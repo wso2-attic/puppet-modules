@@ -107,7 +107,12 @@ Do the below changes to default hiera yaml files to start the server in distribu
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply secure_vault
+## Hiera data configuration to apply secure vault
+WSO2 PPaaS needs to have sensitive data such as passwords, keys in configuration files and put them as plain text in
+configuration files will lead to security attacks. WSO2 carbon secure vault implementation prevents this by using
+secret aliases in configuration files which are mapped to cipher tool encrypted secrets. Read more details on WSO2
+carbon secure vault implementation [here] (https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files).
+
 Note that secure_vault can be applied to carbon kernel 4.4.x based products and 4.2.0 products which has carbon
 kernel patch-0009.
 

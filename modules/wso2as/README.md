@@ -108,8 +108,11 @@ setup. For more details refer the [WSO2 AS clustering guide](https://docs.wso2.c
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply secure_vault
-Do the below changes in hiera file.
+## Hiera data configuration to apply secure vault
+WSO2 AS needs to have sensitive data such as passwords, keys in configuration files and put them as plain text in
+configuration files will lead to security attacks. WSO2 carbon secure vault implementation prevents this by using
+secret aliases in configuration files which are mapped to cipher tool encrypted secrets. Read more details on WSO2
+carbon secure vault implementation [here] (https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files).
 
 Do the below changes in hiera file.
 

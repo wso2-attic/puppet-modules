@@ -108,7 +108,12 @@ Do the below changes to default hiera yaml files to start the server in distribu
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply secure_vault
+## Hiera data configuration to apply secure vault
+WSO2 MB needs to have sensitive data such as passwords, keys in configuration files and put them as plain text in
+configuration files will lead to security attacks. WSO2 carbon secure vault implementation prevents this by using
+secret aliases in configuration files which are mapped to cipher tool encrypted secrets. Read more details on WSO2
+carbon secure vault implementation [here] (https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files).
+
 Do the below changes in hiera file.
 
 1. Enable secure vault
