@@ -16,6 +16,10 @@ classes:
   - wso2is
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+
+#wso2::file_list :
+#  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
+
 wso2::template_list :
   - repository/conf/datasources/am-datasources.xml
 #  - repository/conf/security/cipher-text.properties

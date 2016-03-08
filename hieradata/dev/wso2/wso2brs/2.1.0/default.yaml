@@ -23,6 +23,7 @@ wso2::hostname : brs.wso2.com
 
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+#  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 
 #wso2::template_list :
 #  - repository/conf/security/cipher-text.properties
