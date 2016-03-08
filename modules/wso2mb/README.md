@@ -1,9 +1,6 @@
 # WSO2 MB Puppet Module
 
-This repository contains generic puppet module for installing and configuring WSO2 MB on various environments. It
-supports multiple versions of WSO2 MB. Configuration data is managed using [Hiera] (http://docs.puppetlabs.com/hiera/1/). 
-Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in
- a separate set of YAML files in a hierarchical manner.
+This repository contains the generic puppet module for installing and configuring WSO2 MB on various environments. It supports multiple versions of WSO2 MB. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
 
 ## Supported Operating Systems
 
@@ -15,8 +12,7 @@ Hiera provides a mechanism for separating configuration data from Puppet scripts
 - Puppet 2.7, 3 or newer
 
 ## How to Contribute
-Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development
-environment and update/create new puppet modules.
+Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
 ## Hiera data configuration to start the product with default profile
 With disabling the below proxy configuration in default.yaml file, product can be started in default profile with
@@ -74,13 +70,13 @@ Do the below changes to default hiera yaml files to start the server in distribu
 
     ```
 
-3. Add registry mounting
+3. Configure registry mounting
 
    Ex:
     ```yaml
     wso2_config_db :
       path : /_system/config
-      target_path : /_system/config/esb
+      target_path : /_system/config/mb
       read_only : false
       registry_root : /
       enable_cache : true
@@ -92,7 +88,7 @@ Do the below changes to default hiera yaml files to start the server in distribu
       enable_cache : true
     ```
 
-4. Add deployment synchronization
+4. Configure deployment synchronization
 
     Ex:
     ```yaml
@@ -108,21 +104,18 @@ Do the below changes to default hiera yaml files to start the server in distribu
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply secure vault
-WSO2 MB needs to have sensitive data such as passwords, keys in configuration files and put them as plain text in
-configuration files will lead to security attacks. WSO2 carbon secure vault implementation prevents this by using
-secret aliases in configuration files which are mapped to cipher tool encrypted secrets. Read more details on WSO2
-carbon secure vault implementation [here] (https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files).
+## Hiera data configuration to apply Secure Vault
+WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
-Do the below changes in hiera file.
+Do the below changes in hiera file to apply Secure Vault.
 
-1. Enable secure vault
+1. Enable Secure Vault
 
     ```yaml
     wso2::enable_secure_vault : true
     ```
 
-2. Add secure vault configurations as below
+2. Add Secure Vault configurations as below
 
     ```yaml
     wso2::secure_vault_configs :
@@ -141,7 +134,7 @@ Do the below changes in hiera file.
         password: wso2carbon
     ```
 
-3. Add below templates to template_list
+3. Add Cipher Tool configuration file templates to `template_list`
 
     ```yaml
     wso2::template_list:

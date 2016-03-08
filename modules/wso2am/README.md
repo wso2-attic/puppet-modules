@@ -1,9 +1,6 @@
 # WSO2 AM Puppet Module
 
-This repository contains generic puppet module for installing and configuring WSO2 AM on various environments.
- Its supports multiple versions of WSO2 AM product. Configuration data is managed using [Hiera] (http://docs.puppetlabs.com/hiera/1/). 
- Hiera provides a mechanism for separating configuration data from Puppet scripts and 
- managing them in a separate set of YAML files in a hierarchical manner.
+This repository contains the generic puppet module for installing and configuring WSO2 AM on various environments. It supports multiple versions of WSO2 AM product. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
 
 ## Supported Operating Systems
 
@@ -15,25 +12,20 @@ This repository contains generic puppet module for installing and configuring WS
 - Puppet 2.7, 3 or newer
 
 ## How to Contribute
-Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development 
-environment and update/create new puppet modules.
+Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
 ## Hiera data configuration to start the product with default profile
-With disabling the below proxy configuration in default.yaml file, product can be started in default profile with
-adding product pack to files directory.
+With disabling the below proxy configuration in default.yaml file, product can be started in default profile with adding product pack to files directory.
 
 ```yaml
 wso2::ports:
-    proxyPort :
-        http : 32001
-        https : 32002
+  proxyPort :
+    http: 32001
+    https: 32002
 ```
 
 ## Hiera data configuration to start the product with clustering
-Do the below changes to relevant API Manager profiles (api-store, api-publisher, api-key-manager, gateway-manager) hiera
-yaml files to start the server in distributed setup. For more details refer the [WSO2 AM 1.10.0](https://docs.wso2
-.com/display/CLUSTER44x/Clustering+API+Manager+1.10.0) and [WSO2 AM 1.9.1](https://docs.wso2
-.com/display/CLUSTER420/Clustering+API+Manager) clustering guides.
+Do the below changes to relevant API Manager profiles (api-store, api-publisher, api-key-manager, gateway-manager) hiera yaml files to start the server in distributed setup. For more details refer the [WSO2 AM 1.10.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+API+Manager+1.10.0) and [WSO2 AM 1.9.1](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) clustering guides.
 
 1. Enable clustering
 
@@ -76,7 +68,7 @@ yaml files to start the server in distributed setup. For more details refer the 
 
     ```
 
-3. Add registry mounting
+3. Configure registry mounting
 
    Ex:
     ```yaml
@@ -94,7 +86,7 @@ yaml files to start the server in distributed setup. For more details refer the 
       enable_cache : true
     ```
 
-4. Add deployment synchronization
+4. Configure deployment synchronization
 
     Ex:
     ```yaml
@@ -110,24 +102,18 @@ yaml files to start the server in distributed setup. For more details refer the 
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply secure vault
-WSO2 AM needs to have sensitive data such as passwords, keys in configuration files and put them as plain text in
-configuration files will lead to security attacks. WSO2 carbon secure vault implementation prevents this by using
-secret aliases in configuration files which are mapped to cipher tool encrypted secrets. Read more details on WSO2
-carbon secure vault implementation [here] (https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files).
+## Hiera data configuration to apply Secure Vault
+WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
-Note that secure_vault can be applied to carbon kernel 4.4.x based products and 4.2.0 products which has carbon
-kernel patch-0009.
+Do the below changes in hiera file to apply Secure Vault.
 
-Do the below changes in hiera file.
-
-1. Enable secure vault
+1. Enable Secure Vault
 
     ```yaml
     wso2::enable_secure_vault : true
     ```
 
-2. Add secure vault configurations as below
+2. Add Secure Vault configurations as below
 
     ```yaml
     wso2::secure_vault_configs :
@@ -137,7 +123,7 @@ Do the below changes in hiera file.
         password: <password>
     ```
 
-    For API Manager 1.10.0 which is based on carbon kernel 4.4.x
+    For API Manager `1.10.0` which is based on WSO2 Carbon Kernel 4.4.x
 
     Ex:
     ```yaml
@@ -148,7 +134,7 @@ Do the below changes in hiera file.
         password: wso2carbon
     ```
 
-    For API Manager 1.9.1 which is based on carbon kernel 4.2.0
+    For API Manager `1.9.1` which is based on WSO2 Carbon Kernel 4.2.0
 
     Ex:
     ```yaml
@@ -159,7 +145,7 @@ Do the below changes in hiera file.
         password: wso2carbon
     ```
 
-3. Add below templates to template_list
+3. Add Cipher Tool configuration file templates to `template_list`
 
     ```yaml
     wso2::template_list:
