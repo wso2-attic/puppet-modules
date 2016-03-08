@@ -204,14 +204,14 @@ wso2::secure_vault_configs :
 #    secret_alias: Datasource.WSO2AM_STATS_DB.configuration.password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_STATS_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
-  wso2_config_db_password :
-    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
-    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
-    password: wso2carbon
-  wso2_gov_db_password :
-    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
-    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
-    password: wso2carbon
+#  wso2_config_db_password :
+#    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: wso2carbon
+#  wso2_gov_db_password :
+#    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: wso2carbon
 #  user_store_manager_connection_password:
 #    secret_alias: UserStoreManager.Property.ConnectionPassword
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='ConnectionPassword'],true
