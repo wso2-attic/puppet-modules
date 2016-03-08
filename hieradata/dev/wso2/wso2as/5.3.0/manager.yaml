@@ -17,18 +17,25 @@ wso2::mgt_hostname : mgt.as.wso2.com
 
 wso2::clustering :
     enabled : true
-    local_member_host : 192.168.100.13
+    local_member_host : local.as.wso2.com
     local_member_port : 4000
-    membership_scheme : wka
+    #membership_scheme : wka
+    membership_scheme : kubernetes
     sub_domain : mgt
-    wka :
-       members :
-         -
-           hostname : 192.168.100.13
-           port : 4000
-         -
-           hostname : 192.168.100.23
-           port : 4000
+    #wka :
+    #   members :
+    #     -
+    #       hostname : 192.168.100.13
+    #       port : 4000
+    #     -
+    #       hostname : 192.168.100.23
+    #       port : 4000
+    k8 :
+       k8_master : http://172.17.8.101:8080
+       k8_namespace : default
+       k8_services : wso2as-manager,wso2as-worker
+       k8_master_username :
+       k8_master_password :
 
 #wso2::registry_mounts:
 #  wso2_config_db :
