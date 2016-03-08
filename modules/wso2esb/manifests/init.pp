@@ -19,7 +19,7 @@
 
 class wso2esb inherits wso2base {
 
- $esb_wsdl_epr_prefix     = hiera ("wso2::esb_wsdl_epr_prefix")
+ $esb_wsdl_epr_prefix     = hiera ("wso2::esb_wsdl_epr_prefix", undef)
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode    => $maintenance_mode,
