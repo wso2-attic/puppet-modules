@@ -25,7 +25,7 @@ wso2::template_list :
 #  - password-tmp
 
 wso2::service_name: wso2es
-wso2::hostname : es.wso2.com
+wso2::hostname : localhost
 wso2::mgt_hostname : es.wso2.com
 
 #wso2::file_list :
