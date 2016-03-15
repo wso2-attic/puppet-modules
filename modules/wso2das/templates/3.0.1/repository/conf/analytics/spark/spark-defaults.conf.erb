@@ -42,7 +42,11 @@ carbon.spark.master.count  <%= @spark_master_count %>
 carbon.spark.results.limit 1000
 
 # this configuratoin can be used to point to a symbolic link to WSO2 DAS HOME
+<%- if @clustering['enabled'] -%>
+ carbon.das.symbolic.link /mnt/carbon.das.symlink
+<%- else -%>
 # carbon.das.symbolic.link /home/ubuntu/das/das_symlink/
+<%- end -%>
 # this configuration can be used with the spark fair scheduler, when fair schedule pools are used. the
 #     defualt pool name for carbon is 'carbon-pool'
 # carbon.scheduler.pool carbon-pool
