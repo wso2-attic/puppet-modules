@@ -28,7 +28,7 @@ wso2::service_name: wso2dss
 wso2::hostname : dss.wso2.com
 wso2::mgt_hostname : dss.wso2.com
 
-wso2::taskServerCount : 3
+wso2::taskServerCount : 1
 
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.36.jar
