@@ -46,7 +46,7 @@ wso2::master_datasources :
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
   wso2bam_datasource :
     name : WSO2BAM_DATASOURCE
@@ -60,7 +60,7 @@ wso2::master_datasources :
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
   jagh2 :
     name : JAGH2
@@ -73,7 +73,7 @@ wso2::master_datasources :
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
     default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 #  wso2user_db :
@@ -111,7 +111,7 @@ wso2::bps_datasources :
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::social_datasources :
@@ -127,7 +127,7 @@ wso2::social_datasources :
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_query : "%{hiera('wso2::datasources:h2:::validation_query')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # Secure vault configuration
