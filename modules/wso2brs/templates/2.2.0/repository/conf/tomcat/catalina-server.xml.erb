@@ -28,8 +28,8 @@
     -->
     <Connector  protocol="org.apache.coyote.http11.Http11NioProtocol"
                 port="9763"
-              <%- if @ports['mapping'] && @ports['mapping'][9763] -%>
-                proxyPort="<%= @ports['mapping'][9763] %>"
+              <%- if @ports['proxyPort'] && @ports['proxyPort']['http'] -%>
+                proxyPort="<%= @ports['proxyPort']['http'] %>"
               <%- end -%>
                 redirectPort="9443" 
                 bindOnInit="false"
@@ -55,8 +55,8 @@
     -->
     <Connector  protocol="org.apache.coyote.http11.Http11NioProtocol"
                 port="9443"
-              <%- if @ports['mapping'] && @ports['mapping'][9443] -%>
-                proxyPort="<%= @ports['mapping'][9443] %>"
+              <%- if @ports['proxyPort'] && @ports['proxyPort']['https'] -%>
+                proxyPort="<%= @ports['proxyPort']['https'] %>"
               <%- end -%>
                 bindOnInit="false"
                 sslProtocol="TLS"
