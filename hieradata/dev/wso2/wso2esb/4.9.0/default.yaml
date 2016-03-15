@@ -19,6 +19,7 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2esb
 wso2::hostname : esb.wso2.com
+wso2::mgt_hostname : esb.wso2.com
 
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.38.jar
@@ -102,6 +103,3 @@ wso2::esb_wsdl_epr_prefix:
   https :
     bind_address : esb.wso2.com
     prefix : http://esb.wso2.com:32004
-
-
-

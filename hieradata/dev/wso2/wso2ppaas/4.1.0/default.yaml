@@ -17,7 +17,7 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
-wso2::service_name: wso2ppaas
+wso2::service_name: ppaas.wso2.com
 wso2::hostname : ppaas.wso2.com
 
 wso2::template_list :

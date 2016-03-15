@@ -55,9 +55,7 @@
     Host name to be used for the Carbon management console
     -->
 <%- if @mgt_hostname -%>
-  <%- if @clustering['sub_domain'] == 'mgt' -%>
     <MgtHostName><%= @mgt_hostname %></MgtHostName>
-  <%- end -%>
 <%- else -%>
     <!--MgtHostName>mgt.wso2.org</MgtHostName-->
 <%- end -%>
