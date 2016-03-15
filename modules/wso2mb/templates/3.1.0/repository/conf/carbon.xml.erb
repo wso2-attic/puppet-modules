@@ -44,22 +44,20 @@
        This is will become part of the End Point Reference of the
        services deployed on this server instance.
     -->
-    <% if @hostname %>
+<% if @hostname %>
     <HostName><%= @hostname %></HostName>
-    <%- else -%>
+<%- else -%>
     <!--HostName>www.wso2.org</HostName-->
-    <% end %>
+<% end %>
 
     <!--
     Host name to be used for the Carbon management console
     -->
-    <%- if @mgt_hostname -%>
-      <%- if @clustering['subDomain'] == 'mgt' -%>
-        <MgtHostName><%= @mgt_hostname %></MgtHostName>
-      <%- end -%>
-    <%- else -%>
-        <!--MgtHostName>mgt.wso2.org</MgtHostName-->
-    <%- end -%>
+<%- if @mgt_hostname -%>
+    <MgtHostName><%= @mgt_hostname %></MgtHostName>
+<%- else -%>
+    <!--MgtHostName>mgt.wso2.org</MgtHostName-->
+<%- end -%>
 
     <!--
         The URL of the back end server. This is where the admin services are hosted and

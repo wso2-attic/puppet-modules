@@ -46,7 +46,7 @@ wso2::master_datasources :
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 #  wso2_config_db :
 #    name : WSO2_CONFIG_DB
@@ -60,7 +60,7 @@ wso2::master_datasources :
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
 #    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
 #    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
 #    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 #  wso2_gov_db :
 #    name : WSO2_GOV_DB
@@ -74,7 +74,7 @@ wso2::master_datasources :
 #    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
 #    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
 #    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
 #    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 wso2::bps_datasources :
   bps_ds :
@@ -89,7 +89,7 @@ wso2::bps_datasources :
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # Secure vault configuration

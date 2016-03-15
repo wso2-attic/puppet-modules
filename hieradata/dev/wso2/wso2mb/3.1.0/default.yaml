@@ -45,7 +45,7 @@ wso2::master_datasources :
       max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
       test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
       default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+      validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
       validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::metrics_datasources :
@@ -62,14 +62,12 @@ wso2::metrics_datasources :
       max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
       test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
       default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-      validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
+      validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
       validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # Clustered MB setup related values. Uncomment for Clustered setup.
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.38-bin.jar
-#
-#wso2::mgt_hostname : mgt.mb.wso2.com
 #
 #wso2::clustering :
 #    enabled : true
