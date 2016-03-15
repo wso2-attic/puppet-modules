@@ -46,15 +46,16 @@
        This is will become part of the End Point Reference of the
        services deployed on this server instance.
     -->
-    <%- if @hostname != nil -%>
-	<HostName><%= @hostname %></HostName>
+    <% if @hostname %>
+    <HostName><%= @hostname %></HostName>
     <%- else -%>
-        <!--HostName>localhost</HostName-->
-    <%- end -%>
+    <!--HostName>www.wso2.org</HostName-->
+    <% end %>
+
     <!--
     Host name to be used for the Carbon management console
     -->
-    <% if @mgt_hostname != nil %>
+    <% if @mgt_hostname %>
     <MgtHostName><%= @mgt_hostname %></MgtHostName>
     <%- else -%>
     <!--MgtHostName>mgt.wso2.org</MgtHostName-->
