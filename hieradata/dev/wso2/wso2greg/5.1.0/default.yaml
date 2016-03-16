@@ -22,7 +22,7 @@ wso2::hostname : greg.wso2.com
 wso2::mgt_hostname : greg.wso2.com
 
 wso2::template_list :
- - repository/conf/identity/sso-idp-config.xml
+  - repository/conf/identity/sso-idp-config.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -127,7 +127,7 @@ wso2::social_datasources :
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources:h2:::validation_query')}"
+    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # Secure vault configuration
