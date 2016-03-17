@@ -131,6 +131,7 @@
                                 <exclude>**/.project</exclude>
                                 <exclude>**/.classpath</exclude>
                                 <exclude>**/.git/**/*</exclude>
+                                <exclude>**/.vagrant/**/*</exclude>
                                 <exclude>**/README.md</exclude>
                                 <exclude>**/*.iml</exclude>
                                 <exclude>**/*.iws</exclude>
