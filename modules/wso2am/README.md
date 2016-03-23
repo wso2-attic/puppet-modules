@@ -1,6 +1,6 @@
-# WSO2 AM Puppet Module
+# WSO2 API Manager Puppet Module
 
-This repository contains the generic puppet module for installing and configuring WSO2 AM on various environments. It supports multiple versions of WSO2 AM product. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
+This repository contains the puppet module for installing and configuring WSO2 API Manager 1.9.1 & 1.10.0 on various environments. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
 
 ## Supported Operating Systems
 
@@ -25,7 +25,7 @@ wso2::ports:
 ```
 
 ## Hiera data configuration to start the product with clustering
-Do the below changes to relevant API Manager profiles (api-store, api-publisher, api-key-manager, gateway-manager) hiera yaml files to start the server in distributed setup. For more details refer the [WSO2 AM 1.10.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+API+Manager+1.10.0) and [WSO2 AM 1.9.1](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) clustering guides.
+Do the below changes to relevant API Manager profiles (api-store, api-publisher, api-key-manager, gateway-manager) hiera yaml files to start the server in distributed setup. For more details refer the [WSO2 API Manager 1.10.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+API+Manager+1.10.0) and [WSO2 API Manager 1.9.1](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) clustering guides.
 
 1. Enable clustering
 
