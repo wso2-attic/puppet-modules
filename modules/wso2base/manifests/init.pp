@@ -62,21 +62,35 @@ class wso2base {
 
   $carbon_home        = "${install_dir}/${pack_extracted_dir}"
 
-  class { '::wso2base::system':
-    packages          => $packages,
-    wso2_group        => $wso2_group,
-    wso2_user         => $wso2_user,
-    service_name      => $service_name,
-    service_template  => $service_template,
-    hosts_template    => $hosts_template,
-  } ->
-  class { '::wso2base::java':
-    java_install_dir  => $java_install_dir,
-    java_source_file  => $java_source_file,
-    wso2_user         => $wso2_user,
-    java_home         => $java_home
+  if ($wso2_patching_mode == undef or str2bool("$wso2_patching_mode") != true) or ($wso2_upgrade_jdk != undef and str2bool("$wso2_upgrade_jdk") == true) {
+      class { '::wso2base::system':
+        packages          => $packages,
+        wso2_group        => $wso2_group,
+        wso2_user         => $wso2_user,
+        service_name      => $service_name,
+        service_template  => $service_template,
+        hosts_template    => $hosts_template,
+      } ->
+      class { '::wso2base::java':
+        java_install_dir  => $java_install_dir,
+        java_source_file  => $java_source_file,
+        wso2_user         => $wso2_user,
+        java_home         => $java_home
+      }
+  }else{
+      class { '::wso2base::system':
+        packages          => $packages,
+        wso2_group        => $wso2_group,
+        wso2_user         => $wso2_user,
+        service_name      => $service_name,
+        service_template  => $service_template,
+        hosts_template    => $hosts_template,
+      }
   }
 
   contain wso2base::system
-  contain wso2base::java
+  # Only install JDK if (wso2_patching_mode=false) or (wso2_patching_mode=true & wso2_upgrade_jdk=true)
+  if ($wso2_patching_mode == undef or str2bool("$wso2_patching_mode") != true) or ($wso2_upgrade_jdk != undef and str2bool("$wso2_upgrade_jdk") == true) {
+      contain wso2base::java
+  }
 }
