@@ -641,6 +641,19 @@
         <parameter name="KUBERNETES_MASTER_PASSWORD"><%= @clustering['k8']['k8_master_password']%></parameter>
         <%- end -%>
 
+        <%- if @clustering['membership_scheme'] == 'aws' -%>
+         <parameter name="accessKey"><%= @clustering['aws']['access_key'] %></parameter>
+         <parameter name="secretKey"><%= @clustering['aws']['secret_key'] %></parameter>
+         <parameter name="securityGroup"><%= @clustering['aws']['security_group'] %></parameter>
+         <%- if @clustering['aws']['region'] -%>
+         <parameter name="region"><%= @clustering['aws']['region'] %></parameter>
+         <%- end -%>
+         <%- if @clustering['aws']['tag_key'] -%>
+         <parameter name="tagKey"><%= @clustering['aws']['tag_key'] %></parameter>
+         <parameter name="tagValue"><%= @clustering['aws']['tag_value'] %></parameter>
+         <%- end -%>
+        <%- end -%>
+
         <!--<parameter name="licenseKey">xxx</parameter>-->
         <!--<parameter name="mgtCenterURL">http://localhost:8081/mancenter/</parameter>-->
 
