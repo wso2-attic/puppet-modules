@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
+wso2::file_list :
+  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+
 wso2::clustering :
     enabled : true
-    local_member_host : local.esb.wso2.com
+    #local_member_host : local.esb.wso2.com
     local_member_port : 4000
     #membership_scheme : wka
     membership_scheme : kubernetes

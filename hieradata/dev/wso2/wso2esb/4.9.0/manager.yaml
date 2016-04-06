@@ -14,9 +14,12 @@
 ---
 wso2::mgt_hostname : mgt.esb.wso2.com
 
+wso2::file_list :
+  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+
 wso2::clustering :
     enabled : true
-    local_member_host : local.esb.wso2.com
+    #local_member_host : local.esb.wso2.com
     domain : wso2.esb.domain
     local_member_port : 4000
     #membership_scheme : wka
