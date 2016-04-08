@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::mgt_hostname : mgt.esb.wso2.com
+wso2::mgt_hostname : wso2esb-manager
+wso2::hostname : wso2esb-worker
 
 wso2::file_list :
   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
@@ -75,3 +76,12 @@ wso2::dep_sync :
        user : username
        password : password
        append_tenant_id: true
+
+# Defines WSDL EPR Prefix
+wso2::esb_wsdl_epr_prefix:
+  http :
+    bind_address : wso2esb-worker
+    prefix : http://wso2esb-worker:32003
+  https :
+    bind_address : wso2esb-worker
+    prefix : http://wso2esb-worker:32004

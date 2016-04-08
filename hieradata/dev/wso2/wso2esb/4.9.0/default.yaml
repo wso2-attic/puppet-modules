@@ -18,8 +18,8 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2esb
-wso2::hostname : esb.wso2.com
-wso2::mgt_hostname : esb.wso2.com
+wso2::hostname : wso2esb-default
+wso2::mgt_hostname : wso2esb-default
 
 wso2::file_list :
   - repository/components/lib/jackson-annotations-2.5.4.jar
@@ -101,8 +101,8 @@ wso2::ports:
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http :
-    bind_address : esb.wso2.com
-    prefix : http://esb.wso2.com:32003
+    bind_address : wso2esb-default
+    prefix : http://wso2esb-default:32003
   https :
-    bind_address : esb.wso2.com
-    prefix : http://esb.wso2.com:32004
+    bind_address : wso2esb-default
+    prefix : https://wso2esb-default:32004
