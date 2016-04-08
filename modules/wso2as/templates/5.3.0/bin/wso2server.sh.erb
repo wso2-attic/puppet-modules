@@ -307,8 +307,6 @@ do
     -Dcom.ibm.cacheLocalHost=true \
 <%- if @product_profile == 'worker' -%>
     -DworkerNode=true \
-  <%- else -%>
-    -DworkerNode=false \
 <%- end -%>
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?

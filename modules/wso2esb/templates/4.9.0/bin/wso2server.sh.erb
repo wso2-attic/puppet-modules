@@ -305,6 +305,7 @@ do
     -Dfile.encoding=UTF8 \
     -Djava.net.preferIPv4Stack=true \
     -Dcom.ibm.cacheLocalHost=true \
+    -DKUBERNETES_MASTER_SKIP_SSL_VERIFICATION=true \
 <%- if @product_profile == 'worker' -%>
     -DworkerNode=true \
   <%- else -%>

@@ -19,6 +19,7 @@ wso2::clustering :
     #membership_scheme : wka
     membership_scheme : kubernetes
     sub_domain : worker
+    domain : wso2.esb.domain
     #wka :
     #   members :
     #     -
