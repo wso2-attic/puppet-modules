@@ -17,6 +17,11 @@ wso2::mgt_hostname : mgt.esb.wso2.com
 wso2::file_list :
   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
 
+wso2::ports:
+  proxyPort :
+    http: 32001
+    https: 32002
+    
 wso2::clustering :
     enabled : true
     #local_member_host : local.esb.wso2.com

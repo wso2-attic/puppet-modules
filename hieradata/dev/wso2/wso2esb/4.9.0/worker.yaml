@@ -15,6 +15,11 @@
 wso2::file_list :
   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
 
+wso2::ports:
+  proxyPort :
+    http: 32003
+    https: 32004
+
 wso2::clustering :
     enabled : true
     #local_member_host : local.esb.wso2.com
