@@ -20,8 +20,8 @@ wso2::mgt_hostname : wso2esb-worker
 
 wso2::ports:
   proxyPort :
-    http: 32003
-    https: 32004
+    http: 32093
+    https: 32094
 
 wso2::clustering :
     enabled : true

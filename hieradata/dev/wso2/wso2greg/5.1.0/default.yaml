@@ -162,5 +162,5 @@ wso2::secure_vault_configs :
 # defined for servlet HTTP and HTTPS transport in K8s Service definition
 wso2::ports:
   proxyPort :
-    http: 32001
-    https: 32002
+    http: 32101
+    https: 32102

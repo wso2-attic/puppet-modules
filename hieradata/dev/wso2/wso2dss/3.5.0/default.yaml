@@ -109,5 +109,5 @@ wso2::secure_vault_configs :
 
 wso2::ports:
     proxyPort :
-        http : 32001
-        https : 32002
+        http : 32071
+        https : 32072
