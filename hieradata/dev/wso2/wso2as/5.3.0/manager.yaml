@@ -66,5 +66,5 @@ wso2::dep_sync :
 # defined for servlet HTTP and HTTPS transport in K8s Service definition
 wso2::ports:
   proxyPort :
-    http: 32001
-    https: 32002
+    http: 32021
+    https: 32022

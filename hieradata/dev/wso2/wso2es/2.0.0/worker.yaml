@@ -37,8 +37,8 @@ wso2::clustering :
 
 wso2::ports:
     proxyPort :
-        http : 32003
-        https : 32004
+        http : 32083
+        https : 32084
 
 #wso2::registry_mounts:
 #  wso2_config_db:

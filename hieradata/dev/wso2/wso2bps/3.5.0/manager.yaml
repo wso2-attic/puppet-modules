@@ -51,3 +51,8 @@ wso2::clustering :
 #    read_only: false
 #    registry_root: /
 #    enable_cache: true
+
+wso2::ports:
+  proxyPort :
+    http : 32031
+    https : 32032

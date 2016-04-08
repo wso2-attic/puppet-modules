@@ -48,3 +48,8 @@ wso2::ha_deployment :
     presentation :
      hostName : "%{::ip}"
      port : 11002
+
+wso2::ports:
+  proxyPort :
+    http: 32051
+    https: 32052

@@ -59,3 +59,8 @@ wso2::dep_sync :
        user : username
        password : password
        append_tenant_id: true
+
+wso2::ports:
+    proxyPort :
+        http : 32073
+        https : 32074
