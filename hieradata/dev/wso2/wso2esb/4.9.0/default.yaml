@@ -102,7 +102,7 @@ wso2::ports:
 wso2::esb_wsdl_epr_prefix:
   http :
     bind_address : wso2esb-default
-    prefix : http://wso2esb-default:32003
+    prefix : http://wso2esb-default:32093
   https :
     bind_address : wso2esb-default
-    prefix : https://wso2esb-default:32004
+    prefix : https://wso2esb-default:32094

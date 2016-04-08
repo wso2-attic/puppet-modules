@@ -18,10 +18,6 @@ wso2::hostname : wso2esb-worker
 wso2::file_list :
   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
 
-wso2::ports:
-  proxyPort :
-    http: 32091
-    https: 32092
     
 wso2::clustering :
     enabled : true
@@ -61,11 +57,6 @@ wso2::clustering :
 #    registry_root: /
 #    enable_cache: true
 
-wso2::ports:
-  proxyPort :
-    http: 32005
-    https: 32006
-
 wso2::dep_sync :
     enabled : false
     auto_checkout : true
@@ -77,11 +68,16 @@ wso2::dep_sync :
        password : password
        append_tenant_id: true
 
+wso2::ports:
+  proxyPort :
+    http: 32095
+    https: 32096
+
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http :
     bind_address : wso2esb-worker
-    prefix : http://wso2esb-worker:32003
+    prefix : http://wso2esb-worker:32093
   https :
     bind_address : wso2esb-worker
-    prefix : http://wso2esb-worker:32004
+    prefix : http://wso2esb-worker:32094

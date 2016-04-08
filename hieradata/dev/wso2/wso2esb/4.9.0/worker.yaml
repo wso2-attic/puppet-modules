@@ -18,11 +18,6 @@ wso2::file_list :
 wso2::hostname : wso2esb-worker
 wso2::mgt_hostname : wso2esb-worker
 
-wso2::ports:
-  proxyPort :
-    http: 32093
-    https: 32094
-
 wso2::clustering :
     enabled : true
     #local_member_host : local.esb.wso2.com
