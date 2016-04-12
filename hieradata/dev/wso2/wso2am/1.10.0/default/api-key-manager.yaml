@@ -12,18 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-wso2::hostname : wso2am-api-store
-wso2::mgt_hostname : wso2am-api-store
+wso2::hostname : wso2am-api-key-manager
+wso2::mgt_hostname : wso2am-api-key-manager
 
 wso2::apim_gateway :
     host : wso2am-gateway-manager
-
-wso2::apim_keymanager :
-    host : wso2am-api-key-manager
-
-wso2::apim_store :
-    host : wso2am-api-store
-    port : 32015
 
 wso2::master_datasources :
 
@@ -34,6 +27,7 @@ wso2::master_datasources :
     url : jdbc:mysql://172.17.8.1:3306/GOV_DB?autoReconnect=true
     username : root
     password : root
+    #securevault : false
     jndi_config : jdbc/WSO2_GOV_DB
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
@@ -46,7 +40,7 @@ wso2::master_datasources :
     name : WSO2_CONFIG_DB
     description : The datasource used for config registry
     driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://172.17.8.1:3306/STORE_PUB_CONFIG_DB?autoReconnect=true
+    url : jdbc:mysql://172.17.8.1:3306/KM_CONFIG_DB?autoReconnect=true
     username : root
     password : root
     jndi_config : jdbc/WSO2_CONFIG_DB
@@ -103,15 +97,3 @@ wso2::registry_mounts:
     enable_cache: true
 
 wso2::usermgt_datasource: wso2user_db
-
-wso2::ports:
-  proxyPort :
-    http : 32014
-    https : 32015
-
-wso2::file_list :
-  - repository/components/lib/jackson-annotations-2.5.4.jar
-  - repository/components/lib/jackson-core-2.5.4.jar
-  - repository/components/lib/jackson-databind-2.5.4.jar
-  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
