@@ -15,6 +15,7 @@
 ---
 :hierarchy:
     - "node/%{::clientcert}"
+    - "wso2/%{::product_name}/%{::product_version}/%{::platform}/%{::product_profile}"
     - "wso2/%{::product_name}/%{::product_version}/%{::product_profile}"
     - "wso2/%{::product_name}/%{::product_version}/default"
     - "osfamily/%{::osfamily}"

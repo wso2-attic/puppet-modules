@@ -81,9 +81,9 @@ wso2::clustering :
          -
            hostname : 127.0.0.1
            port : 4000
-    multicast :
-    k8s :
-    ppaas :
+    # multicast :
+    # kubernetes :
+    # ppaas :
 
 # Deployment synchronization configuration
 wso2::dep_sync :
@@ -154,4 +154,3 @@ wso2::datasources::mysql::validation_query : 'SELECT 1'
 
 # Secure vault configuration
 wso2::enable_secure_vault : false
-

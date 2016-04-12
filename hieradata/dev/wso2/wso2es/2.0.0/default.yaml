@@ -44,12 +44,12 @@ wso2::mgt_hostname : es.wso2.com
 #    local_member_host : local.es.wso2.com
 #    local_member_port : 4000
 #    membership_scheme : kubernetes
-#    k8 :
-#       k8_master : http://172.17.8.101:8080
-#       k8_namespace : default
-#       k8_services : wso2es-default
-#       k8_master_username : vagrant
-#       k8_master_password : vagrant
+#    kubernetes :
+#       kubernetes_master : http://172.17.8.101:8080
+#       kubernetes_namespace : default
+#       kubernetes_services : wso2es-default
+#       kubernetes_master_username : vagrant
+#       kubernetes_master_password : vagrant
 
 #wso2::master_datasources :
 #  wso2_config_db :

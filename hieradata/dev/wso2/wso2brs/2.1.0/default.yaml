@@ -47,9 +47,9 @@ wso2::clustering :
          -
            hostname : localhost
            port : 4001
-    multicast :
-    k8s :
-    ppaas :
+    # multicast :
+    # kubernetes :
+    # ppaas :
 
 #wso2::master_datasources :
 #  ws02_config_db :
@@ -111,4 +111,3 @@ wso2::ports:
   proxyPort :
     http: 32043
     https: 32044
-

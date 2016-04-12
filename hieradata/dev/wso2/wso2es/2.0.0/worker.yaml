@@ -19,12 +19,12 @@ wso2::clustering :
     local_member_host : local.es.wso2.com
     local_member_port : 4000
     membership_scheme : kubernetes
-    k8 :
-       k8_master : https://10.245.1.2
-       k8_namespace : default
-       k8_services : wso2es-worker,wso2es-manager
-       k8_master_username : vagrant
-       k8_master_password : vagrant
+    kubernetes :
+       kubernetes_master : https://10.245.1.2
+       kubernetes_namespace : default
+       kubernetes_services : wso2es-worker,wso2es-manager
+       kubernetes_master_username : vagrant
+       kubernetes_master_password : vagrant
     subDomain : worker
     wka :
        members :

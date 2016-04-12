@@ -53,35 +53,6 @@ wso2::apim_publisher :
     host : am.wso2.com
     port : 32004
 
-# wso2::file_list :
-#   - repository/components/lib/jackson-annotations-2.5.4.jar
-#   - repository/components/lib/jackson-core-2.5.4.jar
-#   - repository/components/lib/jackson-databind-2.5.4.jar
-#   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-#   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
-
-wso2::clustering :
-    enabled : false
-    sub_domain : mgt
-    local_member_host : local.am.wso2.com
-    local_member_port : 4000
-    membership_scheme : wka
-    # Enable kubernetes membership scheme for Kubernetes deployments
-    # membership_scheme : kubernetes
-    # k8 :
-    #    k8_master : http://172.17.8.101:8080
-    #    k8_namespace : default
-    #    k8_services : wso2am-default
-    #    k8_master_username :
-    #    k8_master_password :
-
-# for K8s scenario, need to enable proxy port to match NodePorts
-# defined for servlet HTTP and HTTPS transport in K8s Service definition
-wso2::ports:
-  proxyPort :
-    http: 32003
-    https: 32004
-
 #wso2::registry_mounts:
 # wso2_config_db:
 #   path: /_system/config

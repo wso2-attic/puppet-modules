@@ -31,15 +31,14 @@ $puppet_lib_install_script = <<EOF
 EOF
 
 Vagrant.configure(2) do |config|
-
 	CONFIGURATION_YAML["servers"].each do |server|
 		if (defined?(server['enabled']) && server['enabled'] != false)
-      puts "Provisioning VirtualBox with hostname: ", server['hostname']
+            puts "Provisioning VirtualBox with hostname: ", server['hostname']
 			config.vm.define server["hostname"] do |server_config|
 				server_config.vm.box = server["box"]
 				server_config.vm.host_name = server["hostname"]
 				server_config.vm.network :private_network, ip: server["ip"]
-        server_config.vm.synced_folder(CONFIGURATION_YAML["puppet"]["puppet_home"] + "/hieradata", "/puppet/hieradata")
+                server_config.vm.synced_folder(CONFIGURATION_YAML["puppet"]["puppet_home"] + "/hieradata", "/puppet/hieradata")
 				memory = server["ram"] ? server["ram"] : 256;
 
 				server_config.vm.provider :virtualbox do |vb|
@@ -57,7 +56,7 @@ Vagrant.configure(2) do |config|
 				end
 
 				server_config.vm.provision :puppet do |puppet|
-          puppet.manifest_file = 'site.pp'
+                    puppet.manifest_file = 'site.pp'
 					puppet.manifests_path = CONFIGURATION_YAML["puppet"]["puppet_home"] + "/manifests"
 					puppet.module_path = CONFIGURATION_YAML["puppet"]["puppet_home"] + "/modules"
 					puppet.hiera_config_path = CONFIGURATION_YAML["puppet"]["puppet_home"] + "/hiera.yaml"

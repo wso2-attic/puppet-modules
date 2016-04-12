@@ -44,10 +44,10 @@ wso2::clustering :
          -
            hostname : localhost
            port : 4001
-    multicast :
-       domain : wso2.carbon.domain
-    k8s :
-    ppaas :
+    # multicast :
+    #    domain : wso2.carbon.domain
+    # kubernetes :
+    # ppaas :
 
 #wso2::registry_mounts:
 #  wso2_config_db:

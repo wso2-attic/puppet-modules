@@ -25,20 +25,6 @@ wso2::apim_store :
     host : wso2am-api-store
     port : 32015
 
-wso2::clustering :
-    enabled : true
-    domain : wso2.pub.store.am.domain
-    sub_domain : mgt
-    local_member_host : local.store.am.wso2.com
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    k8 :
-       k8_master : http://172.17.8.101:8080
-       k8_namespace : default
-       k8_services : wso2am-api-store,wso2am-api-publisher
-       k8_master_username :
-       k8_master_password :
-
 wso2::master_datasources :
 
   wso2_gov_db :
@@ -117,15 +103,3 @@ wso2::registry_mounts:
     enable_cache: true
 
 wso2::usermgt_datasource: wso2user_db
-
-wso2::ports:
-  proxyPort :
-    http : 32014
-    https : 32015
-
-wso2::file_list :
-  - repository/components/lib/jackson-annotations-2.5.4.jar
-  - repository/components/lib/jackson-core-2.5.4.jar
-  - repository/components/lib/jackson-databind-2.5.4.jar
-  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar

@@ -230,13 +230,13 @@
         <!--<parameter name="proxyPort">80</parameter>-->
     </transportReceiver>
 
-    <!--Please uncomment this in Multiple Instance Scenario if you want to use NIO Transport Recievers and 
+    <!--Please uncomment this in Multiple Instance Scenario if you want to use NIO Transport Recievers and
  	Remove the current transport REceivers in axis2.xml -->
     <!--transportReceiver name="http" class="org.apache.synapse.transport.nhttp.HttpCoreNIOListener">
         <parameter name="port" locked="false">8280</parameter>
         <parameter name="non-blocking" locked="false">true</parameter>
     </transportReceiver>
-    
+
     <transportReceiver name="https" class="org.apache.synapse.transport.nhttp.HttpCoreNIOSSLListener">
         <parameter name="port" locked="false">8243</parameter>
         <parameter name="non-blocking" locked="false">true</parameter>
@@ -405,7 +405,7 @@
     </transportSender>-->
 
     <!--Please uncomment this in Multiple Instance Scenario if you want to use NIO sender -->
-    <!--  
+    <!--
     <transportSender name="http" class="org.apache.synapse.transport.nhttp.HttpCoreNIOSender">
         <parameter name="non-blocking" locked="false">true</parameter>
     </transportSender>
@@ -619,11 +619,11 @@
 <%- if @clustering['membership_scheme'] == 'kubernetes' -%>
         <!-- kubernetes membership scheme specific parameters -->
         <parameter name="membershipSchemeClassName">org.wso2.carbon.membership.scheme.kubernetes.KubernetesMembershipScheme</parameter>
-        <parameter name="KUBERNETES_MASTER"><%= @clustering['k8']['k8_master'] %></parameter>
-        <parameter name="KUBERNETES_NAMESPACE"><%= @clustering['k8']['k8_namespace'] %></parameter>
-        <parameter name="KUBERNETES_SERVICES"><%= @clustering['k8']['k8_services'] %></parameter>
-        <parameter name="KUBERNETES_MASTER_USERNAME"><%= @clustering['k8']['k8_master_username'] %></parameter>
-        <parameter name="KUBERNETES_MASTER_PASSWORD"><%= @clustering['k8']['k8_master_password']%></parameter>
+        <parameter name="KUBERNETES_MASTER"><%= @clustering['kubernetes']['kubernetes_master'] %></parameter>
+        <parameter name="KUBERNETES_NAMESPACE"><%= @clustering['kubernetes']['kubernetes_namespace'] %></parameter>
+        <parameter name="KUBERNETES_SERVICES"><%= @clustering['kubernetes']['kubernetes_services'] %></parameter>
+        <parameter name="KUBERNETES_MASTER_USERNAME"><%= @clustering['kubernetes']['kubernetes_master_username'] %></parameter>
+        <parameter name="KUBERNETES_MASTER_PASSWORD"><%= @clustering['kubernetes']['kubernetes_master_password']%></parameter>
 <%- end -%>
 
         <!--<parameter name="licenseKey">xxx</parameter>-->

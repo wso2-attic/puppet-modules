@@ -1,0 +1,35 @@
+# Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+wso2::clustering :
+    enabled : true
+    membership_scheme : kubernetes
+    kubernetes :
+       kubernetes_master : http://172.17.8.101:8080
+       kubernetes_namespace : default
+       kubernetes_services : wso2am-api-publisher,wso2am-api-store
+    #    kubernetes_master_username :
+    #    kubernetes_master_password :
+    
+wso2::ports:
+  proxyPort :
+    http : 32012
+    https : 32013
+
+wso2::file_list :
+  - repository/components/lib/jackson-annotations-2.5.4.jar
+  - repository/components/lib/jackson-core-2.5.4.jar
+  - repository/components/lib/jackson-databind-2.5.4.jar
+  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar

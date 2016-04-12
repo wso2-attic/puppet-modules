@@ -18,20 +18,6 @@ wso2::mgt_hostname : wso2am-api-key-manager
 wso2::apim_gateway :
     host : wso2am-gateway-manager
 
-wso2::clustering :
-    enabled : true
-    domain : wso2.km.am.domain
-    sub_domain : mgt
-    local_member_host : local.km.am.wso2.com
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    k8 :
-       k8_master : http://172.17.8.101:8080
-       k8_namespace : default
-       k8_services : wso2am-api-key-manager
-       k8_master_username :
-       k8_master_password :
-
 wso2::master_datasources :
 
   wso2_gov_db :
@@ -111,10 +97,3 @@ wso2::registry_mounts:
     enable_cache: true
 
 wso2::usermgt_datasource: wso2user_db
-
-wso2::file_list :
-  - repository/components/lib/jackson-annotations-2.5.4.jar
-  - repository/components/lib/jackson-core-2.5.4.jar
-  - repository/components/lib/jackson-databind-2.5.4.jar
-  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar

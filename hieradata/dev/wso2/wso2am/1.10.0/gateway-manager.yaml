@@ -18,20 +18,6 @@ wso2::mgt_hostname : wso2am-gateway-manager
 wso2::apim_keymanager :
     host : wso2am-api-key-manager
 
-wso2::clustering :
-    enabled : true
-    domain : wso2.gw.am.domain
-    sub_domain : mgt
-    local_member_host : local.gw.am.wso2.com
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    k8 :
-       k8_master : http://172.17.8.101:8080
-       k8_namespace : default
-       k8_services : wso2am-gateway-manager
-       k8_master_username :
-       k8_master_password :
-
 wso2::master_datasources :
   wso2_gov_db :
     name : WSO2_GOV_DB

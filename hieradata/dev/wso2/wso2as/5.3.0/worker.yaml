@@ -28,12 +28,12 @@ wso2::clustering :
     #     -
     #       hostname : 192.168.100.23
     #       port : 4000
-    k8 :
-       k8_master : http://172.17.8.101:8080
-       k8_namespace : default
-       k8_services : wso2as-manager,wso2as-worker
-       k8_master_username :
-       k8_master_password :
+    kubernetes :
+       kubernetes_master : http://172.17.8.101:8080
+       kubernetes_namespace : default
+       kubernetes_services : wso2as-manager,wso2as-worker
+       kubernetes_master_username :
+       kubernetes_master_password :
 
 #wso2::registry_mounts:
 #  wso2_config_db :

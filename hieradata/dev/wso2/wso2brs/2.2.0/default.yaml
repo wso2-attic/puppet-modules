@@ -46,9 +46,9 @@ wso2::clustering :
          -
            hostname : localhost
            port : 4001
-    multicast :
-    k8s :
-    ppaas :
+    # multicast :
+    # kubernetes :
+    # ppaas :
 
 #wso2::master_datasources :
 #  wso2_config_db :
