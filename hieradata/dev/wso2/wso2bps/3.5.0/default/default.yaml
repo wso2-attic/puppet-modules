@@ -169,10 +169,3 @@ wso2::secure_vault_configs :
     secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
     password: wso2carbon
 
-
-# for K8s scenario, need to enable proxy port to match NodePorts
-# defined for servlet HTTP and HTTPS transport in K8s Service definition
-wso2::ports:
-  proxyPort :
-    http: 32033
-    https: 32034

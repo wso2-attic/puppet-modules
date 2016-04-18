@@ -15,28 +15,6 @@
 ---
 wso2::mgt_hostname : mgt.bps.wso2.com
 
-wso2::clustering :
-    enabled : true
-    local_member_host : local.bps.wso2.com
-    local_member_port : 4000
-    #membership_scheme : wka
-    membership_scheme : kubernetes
-    sub_domain : mgt
-    #wka :
-    #   members :
-    #     -
-    #       hostname : 192.168.100.13
-    #       port : 4000
-    #     -
-    #       hostname : 192.168.100.23
-    #       port : 4000
-    kubernetes :
-       kubernetes_master : http://172.17.8.101:8080
-       kubernetes_namespace : default
-       kubernetes_services : wso2bps-manager,wso2bps-worker
-       kubernetes_master_username :
-       kubernetes_master_password :
-
 #wso2::registry_mounts:
 #  wso2_config_db:
 #    path: /_system/config/esb
@@ -51,8 +29,3 @@ wso2::clustering :
 #    read_only: false
 #    registry_root: /
 #    enable_cache: true
-
-wso2::ports:
-  proxyPort :
-    http : 32031
-    https : 32032
