@@ -25,3 +25,19 @@ wso2::dep_sync :
        user : username
        password : password
        append_tenant_id: true
+
+
+wso2::clustering :
+    enabled : true
+    local_member_host : local.brs.wso2.com
+    domain: wso2.brs.domain
+    local_member_port : 4000
+    membership_scheme : wka
+    wka :
+       members :
+         -
+           hostname : 192.168.100.10
+           port : 4000
+         -
+           hostname : 192.168.100.10
+           port : 4000
