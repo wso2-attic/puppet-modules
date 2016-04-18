@@ -30,3 +30,18 @@ wso2::ha_deployment :
     presentation :
      hostName : "%{::ip}"
      port : 11002
+
+wso2::clustering :
+    enabled : true
+    local_member_host : local.cep.wso2.com
+    domain: wso2.cep.domain
+    local_member_port : 4000
+    membership_scheme : wka
+    wka :
+       members :
+         -
+           hostname : 192.168.100.10
+           port : 4000
+         -
+           hostname : 192.168.100.10
+           port : 4000
