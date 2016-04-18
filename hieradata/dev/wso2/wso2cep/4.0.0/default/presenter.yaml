@@ -15,24 +15,6 @@
 ---
 wso2::mgt_hostname : mgt.cep.wso2.com
 
-wso2::clustering :
-    enabled : true
-    local_member_host : "%{::ip}"
-    local_member_port : 4000
-    membership_scheme : wka
-    subDomain : mgt
-    wka :
-       members :
-         -
-           hostname : "%{::member1}"
-           port : 4000
-         -
-           hostname : "%{::member2}"
-           port : 4000
-         -
-           hostname : "%{::member3}"
-           port : 4000
-
 wso2::ha_deployment :
     enabled : true
     offset: 0
@@ -48,8 +30,3 @@ wso2::ha_deployment :
     presentation :
      hostName : "%{::ip}"
      port : 11002
-
-wso2::ports:
-  proxyPort :
-    http: 32051
-    https: 32052

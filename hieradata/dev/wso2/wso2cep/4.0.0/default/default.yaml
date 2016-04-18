@@ -35,15 +35,6 @@ wso2::mgt_hostname : cep.wso2.com
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.34-bin.jar
 
-
-# for K8s scenario, need to enable proxy port to match NodePorts
-# defined for servlet HTTP and HTTPS transport in K8s Service definition
-wso2::ports:
-  proxyPort :
-    http: 32053
-    https: 32054
-
-
 #wso2::registry_mounts:
 #  wso2_config_db:
 #    name: WSO2_CONFIG_DB
