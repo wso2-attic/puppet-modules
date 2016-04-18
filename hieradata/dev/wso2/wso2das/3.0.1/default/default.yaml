@@ -234,9 +234,3 @@ wso2::secure_vault_configs :
 #    secret_alias_value: repository/conf/axis2.xml//axisconfig/transportSender[@name='mailto']/parameter[@name='mail.smtp.password'],false
 #    password: wso2carbon
 
-# for K8s scenario, need to enable proxy port to match NodePorts
-# defined for servlet HTTP and HTTPS transport in K8s Service definition
-wso2::ports:
-  proxyPort :
-    http: 32061
-    https: 32062
