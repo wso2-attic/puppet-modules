@@ -12,19 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-wso2::clustering :
-    enabled : true
-    membership_scheme : kubernetes
-    kubernetes :
-       kubernetes_master : http://172.17.8.101:8080
-       kubernetes_namespace : default
-       kubernetes_services : wso2am-default
-    #    kubernetes_master_username :
-    #    kubernetes_master_password :
+---
 
 # for K8s scenario, need to enable proxy port to match NodePorts
 # defined for servlet HTTP and HTTPS transport in K8s Service definition
 wso2::ports:
   proxyPort :
-    http: 32003
-    https: 32004
+    http: 32023
+    https: 32024
