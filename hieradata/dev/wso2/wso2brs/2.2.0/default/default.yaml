@@ -31,25 +31,6 @@ wso2::mgt_hostname : brs.wso2.com
 #  - bin/ciphertool.sh
 #  - password-tmp
 
-wso2::clustering :
-    enabled : false
-    local_member_host : 127.0.0.1
-    local_member_port : 4000
-    membership_scheme : wka
-    domain : wso2.brs.domain
-    sub_domain :
-    wka :
-       members :
-         -
-           hostname : localhost
-           port : 4000
-         -
-           hostname : localhost
-           port : 4001
-    # multicast :
-    # kubernetes :
-    # ppaas :
-
 #wso2::master_datasources :
 #  wso2_config_db :
 #    name : WSO2_CONFIG_DB
@@ -121,10 +102,3 @@ wso2::secure_vault_configs :
     secret_alias: Server.Service.Connector.keystorePass
     secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
     password: wso2carbon
-
-# for K8s scenario, need to enable proxy port to match NodePorts
-# defined for servlet HTTP and HTTPS transport in K8s Service definition
-wso2::ports:
-  proxyPort :
-    http: 32043
-    https: 32044

@@ -13,23 +13,12 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname : mgt.brs.wso2.com
-
 wso2::clustering :
     enabled : true
     local_member_host : local.brs.wso2.com
     local_member_port : 4000
-    #membership_scheme : wka
     membership_scheme : kubernetes
-    sub_domain : mgt
-    #wka :
-    #   members :
-    #     -
-    #       hostname : 192.168.100.13
-    #       port : 4000
-    #     -
-    #       hostname : 192.168.100.23
-    #       port : 4000
+    sub_domain : worker
     kubernetes :
        kubernetes_master : http://172.17.8.101:8080
        kubernetes_namespace : default
@@ -37,34 +26,7 @@ wso2::clustering :
        kubernetes_master_username :
        kubernetes_master_password :
 
-
-#wso2::registry_mounts:
-#  wso2_config_db:
-#    path: /_system/config/brs
-#    target_path: /_system/config/brs
-#    read_only: false
-#    registry_root: /
-#    enable_cache: true
-#
-#  wso2_gov_db:
-#    path: /_system/governance
-#    target_path: /_system/governance
-#    read_only: false
-#    registry_root: /
-#    enable_cache: true
-
-wso2::dep_sync :
-    enabled : false
-    auto_checkout : true
-    auto_commit : true
-    repository_type : svn
-    svn :
-       url : http://svnrepo.example.com/repos/
-       user : username
-       password : password
-       append_tenant_id: true
-
 wso2::ports:
   proxyPort :
-    http: 32041
-    https: 32042
+    http: 32043
+    https: 32044
