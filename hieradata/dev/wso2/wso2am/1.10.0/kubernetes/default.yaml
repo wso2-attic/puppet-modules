@@ -54,7 +54,7 @@ wso2::apim_publisher :
     port : 32004
 
 wso2::clustering :
-    enabled : true
+    enabled : false
     membership_scheme : kubernetes
     kubernetes :
        kubernetes_master : http://172.17.8.101:8080
