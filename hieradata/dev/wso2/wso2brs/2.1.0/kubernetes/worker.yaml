@@ -13,6 +13,9 @@
 # limitations under the License.
 
 ---
+wso2::mgt_hostname : wso2brs-worker
+wso2::hostname : wso2brs-worker
+
 wso2::dep_sync :
     enabled : false
     auto_checkout : true
