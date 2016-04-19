@@ -19,8 +19,8 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2brs
-wso2::hostname : brs.wso2.com
-wso2::mgt_hostname : brs.wso2.com
+wso2::hostname : wso2brs-default
+wso2::mgt_hostname : wso2brs-default
 
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
