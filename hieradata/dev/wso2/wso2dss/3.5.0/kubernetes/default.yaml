@@ -25,8 +25,8 @@ wso2::template_list :
 #  - password-tmp
 
 wso2::service_name: wso2dss
-wso2::hostname : dss.wso2.com
-wso2::mgt_hostname : dss.wso2.com
+wso2::mgt_hostname : wso2dss-default
+wso2::hostname : wso2dss-default
 
 wso2::taskServerCount : 1
 

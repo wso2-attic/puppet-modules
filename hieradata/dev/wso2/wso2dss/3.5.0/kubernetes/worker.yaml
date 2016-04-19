@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
+wso2::mgt_hostname : wso2dss-worker
+wso2::hostname : wso2dss-worker
+
 wso2::clustering :
     enabled : true
     local_member_port : 4000
