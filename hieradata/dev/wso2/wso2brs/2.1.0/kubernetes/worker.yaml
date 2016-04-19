@@ -37,6 +37,13 @@ wso2::clustering :
        kubernetes_master_username :
        kubernetes_master_password :
 
+wso2::file_list :
+  - repository/components/lib/jackson-annotations-2.5.4.jar
+  - repository/components/lib/jackson-core-2.5.4.jar
+  - repository/components/lib/jackson-databind-2.5.4.jar
+  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+#  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+
 wso2::ports:
   proxyPort :
     http: 32043
