@@ -72,4 +72,4 @@ wso2::esb_wsdl_epr_prefix:
     prefix : http://wso2esb-worker:32093
   https :
     bind_address : wso2esb-worker
-    prefix : http://wso2esb-worker:32094
+    prefix : https://wso2esb-worker:32094
