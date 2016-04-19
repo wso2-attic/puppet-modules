@@ -87,3 +87,12 @@ wso2::secure_vault_configs :
     secret_alias: Server.Service.Connector.keystorePass
     secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
     password: wso2carbon
+
+# Defines WSDL EPR Prefix
+wso2::esb_wsdl_epr_prefix:
+  http :
+    bind_address : wso2esb-default
+    prefix : http://wso2esb-default:9763
+  https :
+    bind_address : wso2esb-default
+    prefix : https://wso2esb-default:9443
