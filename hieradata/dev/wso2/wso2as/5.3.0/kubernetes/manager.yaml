@@ -14,7 +14,7 @@
 
 ---
 wso2::mgt_hostname : wso2as-manager
-wso2::hostname : wso2as-manager
+wso2::hostname : wso2as-worker
 
 wso2::clustering :
     enabled : true
