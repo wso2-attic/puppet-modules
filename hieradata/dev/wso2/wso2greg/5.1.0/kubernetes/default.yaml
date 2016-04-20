@@ -18,8 +18,8 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2greg
-wso2::hostname : greg.wso2.com
-wso2::mgt_hostname : greg.wso2.com
+wso2::hostname : wso2greg-default
+wso2::mgt_hostname : wso2greg-default
 
 wso2::template_list :
   - repository/conf/identity/sso-idp-config.xml
