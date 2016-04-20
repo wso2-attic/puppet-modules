@@ -13,8 +13,7 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname : wso2brs-manager
-wso2::hostname : wso2brs-worker
+wso2::mgt_hostname : mgt.brs.wso2.com
 
 #wso2::registry_mounts:
 #  wso2_config_db:

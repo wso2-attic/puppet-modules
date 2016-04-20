@@ -13,9 +13,6 @@
 # limitations under the License.
 
 ---
-wso2::hostname : wso2cep-worker
-wso2::mgt_hostname : wso2cep-worker
-
 wso2::ha_deployment :
     enabled: true
     offset: 0

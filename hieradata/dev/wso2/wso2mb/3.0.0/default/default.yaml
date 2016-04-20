@@ -18,8 +18,8 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2mb
-wso2::hostname : wso2mb-default
-wso2::mgt_hostname : wso2mb-default
+wso2::hostname : mb.wso2.com
+wso2::mgt_hostname : mb.wso2.com
 
 wso2::template_list :
   - repository/conf/broker.xml
