@@ -18,8 +18,8 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2esb
-wso2::hostname : esb.wso2.com
-wso2::mgt_hostname : esb.wso2.com
+wso2::hostname : wso2esb-default
+wso2::mgt_hostname : wso2esb-default
 
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
