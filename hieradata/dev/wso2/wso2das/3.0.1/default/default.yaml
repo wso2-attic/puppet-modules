@@ -32,6 +32,21 @@ wso2::mgt_hostname : das.wso2.com
 
 wso2::spark_master_count : 1
 
+wso2::clustering :
+    enabled : false
+    local_member_host : 127.0.0.1
+    local_member_port : 4000
+    domain : wso2.das.domain
+    membership_scheme : wka
+    wka :
+       members :
+         -
+           hostname : localhost
+           port : 4000
+         -
+           hostname : localhost
+           port : 4001
+
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.36.jar
 
