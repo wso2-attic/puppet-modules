@@ -27,10 +27,28 @@ wso2::template_list :
 #  - password-tmp
 
 wso2::service_name: wso2das
-wso2::hostname : das.wso2.com
-wso2::mgt_hostname : das.wso2.com
+wso2::hostname : wso2das-default
+wso2::mgt_hostname : wso2das-default
 
 wso2::spark_master_count : 1
+
+#wso2::file_list :
+#  - repository/components/lib/jackson-annotations-2.5.4.jar
+#  - repository/components/lib/jackson-core-2.5.4.jar
+#  - repository/components/lib/jackson-databind-2.5.4.jar
+#  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+
+#wso2::clustering :
+#    enabled : true
+#    local_member_port : 4000
+#    membership_scheme : kubernetes
+#    sub_domain : mgt
+#    kubernetes :
+#       kubernetes_master : http://172.17.8.101:8080
+#       kubernetes_namespace : default
+#       kubernetes_services : wso2das-default,wso2das-default
+#    #    kubernetes_master_username :
+#    #    kubernetes_master_password :
 
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.36.jar
