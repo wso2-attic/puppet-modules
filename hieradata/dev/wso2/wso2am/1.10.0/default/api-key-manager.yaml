@@ -97,3 +97,19 @@ wso2::registry_mounts:
     enable_cache: true
 
 wso2::usermgt_datasource: wso2user_db
+
+wso2::clustering :
+    enabled : true
+    domain : wso2.km.am.domain
+    sub_domain : mgt
+    local_member_host : local.km.am.wso2.com
+    local_member_port : 4000
+    membership_scheme : wka
+    wka :
+      members :
+        -
+          hostname : 192.168.100.13
+          port : 4000
+        -
+          hostname : 192.168.100.23
+          port : 4000

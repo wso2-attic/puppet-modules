@@ -47,11 +47,11 @@ wso2::apim_keymanager :
 
 wso2::apim_store :
     host : am.wso2.com
-    port : 32004
+    port : 9443
 
 wso2::apim_publisher :
     host : am.wso2.com
-    port : 32004
+    port : 9443
 
 #wso2::registry_mounts:
 # wso2_config_db:
