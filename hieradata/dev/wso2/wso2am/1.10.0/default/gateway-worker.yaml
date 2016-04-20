@@ -80,3 +80,19 @@ wso2::registry_mounts:
     enable_cache: true
 
 wso2::usermgt_datasource: wso2_carbon_db
+
+wso2::clustering :
+    enabled : true
+    domain : wso2.gw.am.domain
+    sub_domain : worker
+    local_member_host : local.store.am.wso2.com
+    local_member_port : 4000
+    membership_scheme : wka
+    wka :
+      members :
+        -
+          hostname : 192.168.100.13
+          port : 4000
+        -
+          hostname : 192.168.100.23
+          port : 4000

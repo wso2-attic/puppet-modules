@@ -23,11 +23,11 @@ wso2::apim_keymanager:
 
 wso2::apim_store:
     host: wso2am-api-store
-    port: 32015
+    port: 32019
 
 wso2::apim_publisher:
     host: wso2am-api-publisher
-    port: 32013
+    port: 32017
 
 wso2::clustering:
     enabled: true
@@ -48,8 +48,8 @@ wso2::file_list:
 
 wso2::ports:
   proxyPort:
-    http: 32012
-    https: 32013
+    http: 32016
+    https: 32017
 
 wso2::master_datasources:
   wso2_gov_db:
