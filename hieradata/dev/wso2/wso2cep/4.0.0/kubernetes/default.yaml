@@ -29,8 +29,8 @@ wso2::template_list :
 #  - password-tmp
 
 wso2::service_name: wso2cep
-wso2::hostname : cep.wso2.com
-wso2::mgt_hostname : cep.wso2.com
+wso2::hostname : wso2cep-default
+wso2::mgt_hostname : wso2cep-default
 
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.34-bin.jar
