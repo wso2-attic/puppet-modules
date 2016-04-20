@@ -19,6 +19,7 @@ wso2::clustering :
     enabled : true
     local_member_port : 4000
     membership_scheme : kubernetes
+    domain : wso2.dss.domain
     sub_domain : mgt
     kubernetes :
        kubernetes_master : http://172.17.8.101:8080
