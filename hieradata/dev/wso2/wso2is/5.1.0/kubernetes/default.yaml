@@ -45,7 +45,6 @@ wso2::clustering :
 #  - repository/components/lib/jackson-core-2.5.4.jar
 #  - repository/components/lib/jackson-databind-2.5.4.jar
 #  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-#  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
 #wso2::registry_mounts:
 #  wso2_config_db:
