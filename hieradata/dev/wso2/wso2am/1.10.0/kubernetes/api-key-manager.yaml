@@ -37,8 +37,8 @@ wso2::file_list:
 
 wso2::ports:
   proxyPort:
-    http: 32009
-    https: 320010
+    http: 32013
+    https: 320014
 
 wso2::master_datasources:
   wso2_gov_db:
