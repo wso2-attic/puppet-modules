@@ -22,6 +22,7 @@ servers:
       product_version: 4.9.0
       product_profile: default
       environment: dev
+      platform: default
     box: ubuntu/trusty64
     ip: 192.168.100.2
     ram: 2048
