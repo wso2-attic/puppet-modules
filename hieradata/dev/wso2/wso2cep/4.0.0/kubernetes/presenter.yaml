@@ -14,7 +14,7 @@
 
 ---
 wso2::mgt_hostname : wso2cep-presenter
-wso2::hostname : wso2cep-worker
+wso2::hostname : wso2cep-presenter
 
 wso2::ha_deployment :
     enabled : true
