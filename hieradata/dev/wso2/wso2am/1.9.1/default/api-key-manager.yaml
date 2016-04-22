@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-wso2::hostname : wso2am-api-key-manager
-wso2::mgt_hostname : wso2am-api-key-manager
+wso2::hostname : km.am.wso2.com
+wso2::mgt_hostname : km.am.wso2.com
 
 wso2::apim_gateway :
-    host : wso2am-gateway-manager
+    host : mgt.gw.am.wso2.com
 
 wso2::master_datasources :
 
