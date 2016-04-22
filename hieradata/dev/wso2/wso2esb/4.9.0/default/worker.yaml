@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::hostname : esb.wso2.com
-wso2::mgt_hostname : esb.wso2.com
-
 wso2::clustering :
     enabled : true
     local_member_host : local.esb.wso2.com
