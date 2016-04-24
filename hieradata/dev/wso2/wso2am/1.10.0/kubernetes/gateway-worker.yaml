@@ -23,11 +23,8 @@ wso2::clustering:
     membership_scheme: kubernetes
     sub_domain: worker
     kubernetes:
-       kubernetes_master: http://172.17.8.101:8080
        kubernetes_namespace: default
        kubernetes_services: wso2am-gateway-worker,wso2am-gateway-manager
-       #kubernetes_master_username:
-       #kubernetes_master_password:
 
 wso2::file_list:
   - repository/components/lib/jackson-annotations-2.5.4.jar
@@ -40,16 +37,16 @@ wso2::ports:
     http: 32011
     https: 32012
 
-#wso2::registry_mounts:
-#  wso2_config_db:
-#    path: /_system/config
-#    target_path: /_system/config
-#    read_only: true
-#    registry_root: /
-#    enable_cache: true
-#  wso2_gov_db:
-#    path: /_system/governance
-#    target_path: /_system/governance
-#    read_only: true
-#    registry_root: /
-#    enable_cache: true
+wso2::registry_mounts:
+  wso2_config_db:
+    path: /_system/config
+    target_path: /_system/config/gateway
+    read_only: true
+    registry_root: /
+    enable_cache: true
+  wso2_gov_db:
+    path: /_system/governance
+    target_path: /_system/governance
+    read_only: true
+    registry_root: /
+    enable_cache: true

@@ -33,11 +33,8 @@ wso2::clustering:
     enabled: true
     membership_scheme: kubernetes
     kubernetes:
-       kubernetes_master: http://172.17.8.101:8080
        kubernetes_namespace: default
        kubernetes_services: wso2am-api-publisher,wso2am-api-store
-       #kubernetes_master_username:
-       #kubernetes_master_password:
 
 wso2::file_list:
   - repository/components/lib/jackson-annotations-2.5.4.jar
@@ -50,16 +47,16 @@ wso2::ports:
     http: 32016
     https: 32017
 
-#wso2::registry_mounts:
-#  wso2_config_db:
-#    path: /_system/config
-#    target_path: /_system/config
-#    read_only: false
-#    registry_root: /
-#    enable_cache: true
-#  wso2_gov_db:
-#    path: /_system/governance
-#    target_path: /_system/governance
-#    read_only: false
-#    registry_root: /
-#    enable_cache: true
+wso2::registry_mounts:
+  wso2_config_db:
+    path: /_system/config
+    target_path: /_system/config/api-publisher
+    read_only: false
+    registry_root: /
+    enable_cache: true
+  wso2_gov_db:
+    path: /_system/governance
+    target_path: /_system/governance
+    read_only: false
+    registry_root: /
+    enable_cache: true
