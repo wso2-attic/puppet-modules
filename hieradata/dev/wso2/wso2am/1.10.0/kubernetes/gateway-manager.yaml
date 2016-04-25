@@ -26,12 +26,6 @@ wso2::clustering:
        kubernetes_namespace: default
        kubernetes_services: wso2am-gateway-manager,wso2am-gateway-worker
 
-wso2::file_list:
-  - repository/components/lib/jackson-annotations-2.5.4.jar
-  - repository/components/lib/jackson-core-2.5.4.jar
-  - repository/components/lib/jackson-databind-2.5.4.jar
-  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-
 wso2::ports:
   proxyPort:
     http: 32007
