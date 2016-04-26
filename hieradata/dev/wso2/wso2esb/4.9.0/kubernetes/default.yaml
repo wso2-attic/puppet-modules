@@ -46,7 +46,7 @@ wso2::master_datasources:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://wso2-mysql-db:3306/WSO2_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-esb-db:3306/ESB_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB
@@ -60,7 +60,7 @@ wso2::master_datasources:
     name: WSO2_GOV_DB
     description: The datasource used for gov registry
     driver_class_name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://wso2-mysql-db:3306/WSO2_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2_GOV_DB
@@ -74,7 +74,7 @@ wso2::master_datasources:
     name: WSO2USER_DB
     description: The datasource is used for user mangement and userstore
     driver_class_name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://wso2-mysql-db:3306/WSO2_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2USER_DB
