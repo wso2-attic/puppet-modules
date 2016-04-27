@@ -12,11 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-wso2::hostname: wso2am-gateway-worker
+#wso2::hostname: wso2am-gateway-worker
 wso2::mgt_hostname: wso2am-gateway-manager
+wso2::hostname: wso2am-gateway-manager
 
 wso2::apim_keymanager:
     host: wso2am-api-key-manager
+
+wso2::apim_gateway:
+    api_endpoint_host: wso2am-gateway-manager
+#    api_endpoint_host: wso2am-gateway-worker
 
 wso2::clustering:
     enabled: true
@@ -24,7 +29,8 @@ wso2::clustering:
     sub_domain : mgt
     kubernetes:
        kubernetes_namespace: default
-       kubernetes_services: wso2am-gateway-manager,wso2am-gateway-worker
+       kubernetes_services: wso2am-gateway-manager
+#       kubernetes_services: wso2am-gateway-manager,wso2am-gateway-worker
 
 wso2::ports:
   proxyPort:

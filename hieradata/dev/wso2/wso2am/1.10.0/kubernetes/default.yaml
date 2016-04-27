@@ -28,8 +28,8 @@ wso2::template_list:
 
 wso2::service_name: wso2am
 # ip address is used here to avoid hostname resolving issues in APIM startup
-wso2::hostname: "%{::ipaddress}"
-wso2::mgt_hostname: am.wso2.com
+wso2::hostname: wso2am-default
+wso2::mgt_hostname: wso2am-default
 
 wso2::clustering:
     enabled: true
@@ -53,8 +53,11 @@ wso2::ports:
 wso2::apim_gateway:
     host: localhost
     port: 9443
-    api_endpoint_port: 8280
-    secure_api_endpoint_port: 8243
+    api_endpoint_host: localhost
+    api_endpoint_port: 32001
+    secure_api_endpoint_port: 32002
+    api_token_revoke_endpoint_port: 8280
+    secure_api_token_revoke_endpoint_port: 8243
     username: admin
     password: admin
 
@@ -65,11 +68,11 @@ wso2::apim_keymanager:
     password: admin
 
 wso2::apim_store:
-    host: am.wso2.com
+    host: wso2am-default
     port: 32004
 
 wso2::apim_publisher:
-    host: am.wso2.com
+    host: wso2am-default
     port: 32004
 
 wso2::registry_mounts:
@@ -94,7 +97,7 @@ wso2::am_datasources:
     name: WSO2AM_DB
     description: The datasource used for API Manager database
     driver_class_name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mysql-wso2-apim:3306/WSO2APIM_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-apim-db:3306/APIM_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2AM_DB
@@ -110,7 +113,7 @@ wso2::master_datasources:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mysql-wso2-apim:3306/WSO2APIM_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-apim-db:3306/APIM_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB
@@ -124,7 +127,7 @@ wso2::master_datasources:
     name: WSO2_GOV_DB
     description: The datasource used for gov registry
     driver_class_name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mysql-wso2-apim:3306/WSO2APIM_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2_GOV_DB
@@ -138,7 +141,7 @@ wso2::master_datasources:
     name: WSO2USER_DB
     description: The datasource is used for user mangement and userstore
     driver_class_name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mysql-wso2-apim:3306/WSO2APIM_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2USER_DB
@@ -153,7 +156,7 @@ wso2::master_datasources:
     name: JAGH2
     description: The datasource used for by the Jaggery Storage Manager
     driver_class_name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mysql-wso2-apim:3306/WSO2APIM_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-apim-db:3306/APIM_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/ES_STORAGE

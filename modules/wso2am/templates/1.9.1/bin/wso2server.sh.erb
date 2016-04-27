@@ -298,6 +298,7 @@ do
     -Djava.security.egd=file:/dev/./urandom \
     -Dfile.encoding=UTF8 \
     -DapplyPatches \
+    -Dsetup \
 <%- if @worker_node -%>
     -DworkerNode=true \
 <%- end -%>
