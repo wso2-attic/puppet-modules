@@ -16,21 +16,6 @@
 wso2::mgt_hostname : wso2brs-manager
 wso2::hostname : wso2brs-worker
 
-#wso2::registry_mounts:
-#  wso2_config_db:
-#    path: /_system/config/brs
-#    target_path: /_system/config/brs
-#    read_only: false
-#    registry_root: /
-#    enable_cache: true
-#
-#  wso2_gov_db:
-#    path: /_system/governance
-#    target_path: /_system/governance
-#    read_only: false
-#    registry_root: /
-#    enable_cache: true
-
 wso2::dep_sync :
     enabled : false
     auto_checkout : true
@@ -52,15 +37,6 @@ wso2::clustering :
        kubernetes_master : http://172.17.8.101:8080
        kubernetes_namespace : default
        kubernetes_services : wso2brs-manager,wso2brs-worker
-       kubernetes_master_username :
-       kubernetes_master_password :
-
-wso2::file_list :
-  - repository/components/lib/jackson-annotations-2.5.4.jar
-  - repository/components/lib/jackson-core-2.5.4.jar
-  - repository/components/lib/jackson-databind-2.5.4.jar
-  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-#  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
 wso2::ports:
   proxyPort :
