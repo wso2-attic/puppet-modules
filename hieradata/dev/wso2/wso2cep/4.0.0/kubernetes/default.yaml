@@ -42,7 +42,7 @@ wso2::file_list :
 wso2::registry_mounts:
   wso2_config_db:
     name: WSO2_CONFIG_DB
-    path: /_system/config
+    path: /_system/config/cep
     target_path: /_system/config
     read_only: false
     registry_root: /
