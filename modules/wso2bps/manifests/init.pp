@@ -46,6 +46,7 @@ class wso2bps inherits wso2base {
     service_template    => $service_template,
     hosts_template      => $hosts_template,
     template_list       => $template_list,
+    directory_list      => $directory_list,
     file_list           => $file_list,
     enable_secure_vault => $enable_secure_vault,
     key_store_password  => $key_store_password
