@@ -14,9 +14,16 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
-define wso2base::configure ($template_list, $file_list, $user, $group, $wso2_module) {
+define wso2base::configure ($template_list, $directory_list, $file_list, $user, $group, $wso2_module) {
   $carbon_home  = $name
   notice("Configuring WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
+
+  if ($directory_list != undef and size($directory_list) > 0) {
+    wso2base::ensure_directory_structures {
+      $directory_list:
+        carbon_home      => $carbon_home
+    }
+  }
 
   if ($template_list != undef and size($template_list) > 0) {
     wso2base::push_templates {
@@ -24,7 +31,8 @@ define wso2base::configure ($template_list, $file_list, $user, $group, $wso2_mod
         owner            => $user,
         group            => $group,
         carbon_home      => $carbon_home,
-        wso2_module      => $wso2_module
+        wso2_module      => $wso2_module,
+        require          => Wso2base::Ensure_directory_structures[$directory_list]
     }
   }
 
@@ -34,7 +42,8 @@ define wso2base::configure ($template_list, $file_list, $user, $group, $wso2_mod
         owner            => $user,
         group            => $group,
         carbon_home      => $carbon_home,
-        wso2_module      => $wso2_module
+        wso2_module      => $wso2_module,
+        require          => Wso2base::Ensure_directory_structures[$directory_list]
     }
   }
 }

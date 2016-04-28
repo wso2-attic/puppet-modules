@@ -22,6 +22,7 @@ class wso2base {
   $packages           = hiera_array("packages")
   $template_list      = hiera_array("wso2::template_list")
   $file_list          = hiera_array("wso2::file_list")
+  $directory_list     = hiera_array("wso2::directory_list", [])
 
   $java_install_dir   = hiera("java_install_dir")
   $java_source_file   = hiera("java_source_file")

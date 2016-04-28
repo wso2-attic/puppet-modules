@@ -30,6 +30,7 @@ define wso2base::server (
   $service_template,
   $hosts_template,
   $template_list,
+  $directory_list,
   $file_list,
   $enable_secure_vault,
   $key_store_password
@@ -91,6 +92,7 @@ define wso2base::server (
   if $vm_type == 'docker' {
     wso2base::configure { $carbon_home:
       template_list       => $template_list,
+      directory_list      => $directory_list,
       file_list           => $file_list,
       user                => $wso2_user,
       group               => $wso2_group,
@@ -101,6 +103,7 @@ define wso2base::server (
   else {
     wso2base::configure { $carbon_home:
       template_list       => $template_list,
+      directory_list      => $directory_list,
       file_list           => $file_list,
       user                => $wso2_user,
       group               => $wso2_group,
