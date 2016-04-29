@@ -16,6 +16,7 @@ classes:
   - wso2greg
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+wso2::datasources::common::bps_default_auto_commit : 'true'
 
 wso2::service_name: wso2greg
 wso2::hostname : wso2greg-default
@@ -113,10 +114,9 @@ wso2::bps_datasources :
     max_active : "%{hiera('wso2::datasources::common::max_active')}"
     max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    default_auto_commit : "%{hiera('wso2::datasources::common::bps_default_auto_commit')}"
     validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-    default_auto_commit : "true"
 
 wso2::registry_mounts:
   wso2_config_db:
