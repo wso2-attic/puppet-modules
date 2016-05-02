@@ -68,7 +68,8 @@ wso2::apim_publisher :
 #   registry_root: /
 #   enable_cache: true
 
-#wso2::usermgt_datasource: WSO2USER_DB
+#wso2::usermgt_datasource: wso2user_db
+wso2::reg_datasource: wso2_carbon_db
 
 wso2::am_datasources :
   wso2am_db:
