@@ -30,7 +30,7 @@
     <!-- This defines the default database and its configuration of the registry -->
 
     <dbConfig name="wso2registry">
-        <dataSource><%= @master_datasources[@reg_datasource]['jndi_config'] %></dataSource>
+        <dataSource>jdbc/WSO2AM_DB</dataSource>
     </dbConfig>
 
 <%- @registry_mounts.each do |datasource_name, registry_mount| -%>
