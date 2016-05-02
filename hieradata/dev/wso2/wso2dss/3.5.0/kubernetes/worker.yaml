@@ -39,6 +39,20 @@ wso2::dep_sync :
        password : password
        append_tenant_id: true
 
+wso2::registry_mounts:
+  wso2_config_db :
+    path : /_system/config
+    target_path : /_system/config/dss
+    read_only : true
+    registry_root : /
+    enable_cache : true
+  wso2_gov_db :
+    path : /_system/governance
+    target_path : /_system/governance
+    read_only : true
+    registry_root : /
+    enable_cache : true
+
 wso2::ports:
     proxyPort :
         http : 32073
