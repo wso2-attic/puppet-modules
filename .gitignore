@@ -14,11 +14,12 @@
 #Backup files
 *~
 
-# Zip archives
+# puppet-modules
 *.zip
 *.gz
 *.tar
 
-#maven
+*.sql
+
 target/
 .vagrant/
