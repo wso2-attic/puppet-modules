@@ -20,6 +20,7 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::template_list :
   - repository/conf/datasources/bps-datasources.xml
   - repository/conf/datasources/metrics-datasources.xml
+  - repository/conf/identity/identity.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh

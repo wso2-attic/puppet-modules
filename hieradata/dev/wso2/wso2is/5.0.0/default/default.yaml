@@ -22,6 +22,7 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::template_list :
   - repository/conf/datasources/am-datasources.xml
+  - repository/conf/identity.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
