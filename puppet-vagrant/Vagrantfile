@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
 				server_config.vm.box = server["box"]
 				server_config.vm.host_name = server["hostname"]
 				server_config.vm.network :private_network, ip: server["ip"]
-                server_config.vm.synced_folder(CONFIGURATION_YAML["puppet"]["puppet_home"] + "/hieradata", "/puppet/hieradata")
+        server_config.vm.synced_folder(CONFIGURATION_YAML["puppet"]["puppet_home"] + "/hieradata", "/puppet/hieradata")
 				memory = server["ram"] ? server["ram"] : 256;
 
 				server_config.vm.provider :virtualbox do |vb|
