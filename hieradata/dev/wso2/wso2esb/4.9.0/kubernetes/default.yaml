@@ -41,6 +41,9 @@ wso2::file_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+wso2::usermgt_datasource: wso2user_db
+wso2::reg_datasource: wso2_config_db
+
 wso2::master_datasources:
   wso2_config_db:
     name: WSO2_CONFIG_DB
@@ -99,8 +102,6 @@ wso2::registry_mounts:
     read_only: false
     registry_root: /
     enable_cache: true
-
-wso2::usermgt_datasource: wso2user_db
 
 # Secure vault configuration
 wso2::enable_secure_vault : false

@@ -104,7 +104,7 @@ packages :
   - tree
 
 # WSO2 datasources
-wso2::master_datasources :
+#wso2::master_datasources :
 #  wso2user_db :
 #    name : WSO2_USER_DB
 #    description : The datasource is used for user mangement and userstore

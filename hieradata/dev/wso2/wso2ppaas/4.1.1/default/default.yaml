@@ -165,6 +165,7 @@ wso2::ppaas::iaas_providers :
 #    http: 80
 #    https: 443
 
+wso2::reg_datasource: wso2_carbon_db
 
 wso2::master_datasources :
   wso2_carbon_db :

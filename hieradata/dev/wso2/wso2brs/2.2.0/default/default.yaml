@@ -31,6 +31,8 @@ wso2::mgt_hostname : brs.wso2.com
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+wso2::reg_datasource: wso2_carbon_db
+
 wso2::master_datasources :
   wso2_carbon_db :
     name : WSO2_CARBON_DB

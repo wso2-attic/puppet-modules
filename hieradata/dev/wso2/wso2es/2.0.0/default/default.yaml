@@ -47,6 +47,8 @@ wso2::mgt_hostname : es.wso2.com
 #           hostname : 192.168.100.23
 #           port : 4000
 
+wso2::reg_datasource: wso2_carbon_db
+
 wso2::master_datasources :
   wso2_carbon_db :
     name : WSO2_CARBON_DB

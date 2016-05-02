@@ -46,6 +46,7 @@ class wso2base {
   $service_template   = hiera("wso2::service_template")
   $hosts_template     = hiera("wso2::hosts_template")
   $usermgt_datasource = hiera("wso2::usermgt_datasource")
+  $reg_datasource     = hiera("wso2::reg_datasource")
   $master_datasources = hiera_hash("wso2::master_datasources")
   $registry_mounts    = hiera_hash("wso2::registry_mounts", { })
   $clustering         = hiera_hash("wso2::clustering")

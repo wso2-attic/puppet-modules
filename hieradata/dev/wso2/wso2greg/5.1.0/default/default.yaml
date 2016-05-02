@@ -31,7 +31,8 @@ wso2::template_list :
 #wso2::file_list :
 #  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
-#wso2::usermgt_datasource: WSO2USER_DB
+#wso2::usermgt_datasource: wso2user_db
+wso2::reg_datasource: wso2_carbon_db
 
 wso2::master_datasources :
   wso2_carbon_db :
@@ -104,13 +105,6 @@ wso2::master_datasources :
 #    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
 #    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-#  wso2_carbon_db :
-#    name : WSO2_CARBON_DB
-#    driver_class_name : com.mysql.jdbc.Driver
-#    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
-#    username : root
-#    password : root
-#    jndi_config : jdbc/WSO2CarbonDB
 
 wso2::bps_datasources :
   bps_ds :

@@ -30,7 +30,7 @@
     <!-- This defines the default database and its configuration of the registry -->
 
     <dbConfig name="wso2registry">
-        <dataSource>jdbc/WSO2CarbonDB</dataSource>
+        <dataSource><%= @master_datasources[@reg_datasource]['jndi_config'] %></dataSource>
     </dbConfig>
 
     <handler class="org.wso2.carbon.identity.entitlement.policy.finder.registry.RegistryPolicyHandler">
