@@ -17,7 +17,8 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
-wso2::template_list :
+wso2::template_list:
+  - repository/conf/identity/identity.xml
   - repository/conf/datasources/analytics-datasources.xml
   - repository/conf/datasources/metrics-datasources.xml
   - repository/conf/analytics/spark/spark-defaults.conf

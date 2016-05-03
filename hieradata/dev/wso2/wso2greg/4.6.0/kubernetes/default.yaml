@@ -22,6 +22,14 @@ wso2::service_name: wso2greg
 wso2::hostname : wso2greg-default
 wso2::mgt_hostname : wso2greg-default
 
+wso2::clustering:
+    enabled: true
+    membership_scheme: kubernetes
+    kubernetes:
+       kubernetes_master : http://172.17.8.101:8080
+       kubernetes_namespace: default
+       kubernetes_services: wso2greg-default
+
 wso2::file_list :
   - repository/components/lib/jackson-annotations-2.5.4.jar
   - repository/components/lib/jackson-core-2.5.4.jar
@@ -30,7 +38,8 @@ wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 #  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 
-wso2::template_list :
+wso2::template_list:
+  - repository/conf/identity.xml
   - repository/conf/datasources/bps-datasources.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties

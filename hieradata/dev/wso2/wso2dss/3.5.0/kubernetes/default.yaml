@@ -30,6 +30,14 @@ wso2::hostname : wso2dss-default
 
 wso2::taskServerCount : 1
 
+wso2::clustering:
+    enabled: true
+    membership_scheme: kubernetes
+    kubernetes:
+       kubernetes_master : http://172.17.8.101:8080
+       kubernetes_namespace: default
+       kubernetes_services: wso2dss-default
+
 wso2::file_list :
   - repository/components/lib/jackson-annotations-2.5.4.jar
   - repository/components/lib/jackson-core-2.5.4.jar

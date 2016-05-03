@@ -17,7 +17,8 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
-wso2::template_list :
+wso2::template_list:
+  - repository/conf/identity.xml
   - repository/conf/datasources/social-datasources.xml
   - repository/conf/identity/sso-idp-config.xml
 #  - repository/conf/security/cipher-text.properties
@@ -28,6 +29,14 @@ wso2::template_list :
 wso2::service_name: wso2es
 wso2::hostname : wso2es-default
 wso2::mgt_hostname : wso2es-default
+
+wso2::clustering:
+    enabled: true
+    membership_scheme: kubernetes
+    kubernetes:
+       kubernetes_master : http://172.17.8.101:8080
+       kubernetes_namespace: default
+       kubernetes_services: wso2es-default
 
 wso2::file_list :
   - repository/components/lib/jackson-annotations-2.5.4.jar
