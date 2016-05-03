@@ -18,7 +18,8 @@
 # Class to manage WSO2 API Manager deployment
 
 class wso2es inherits wso2base {
-  $social_datasources     = hiera_hash("wso2::social_datasources")
+  $social_datasources = hiera_hash("wso2::social_datasources")
+  $is_datasource      = hiera("wso2::is_datasource")
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode    => $maintenance_mode,

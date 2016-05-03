@@ -24,6 +24,7 @@ class wso2am inherits wso2base {
   $apim_keymanager    = hiera_hash ("wso2::apim_keymanager", undef)
   $apim_publisher     = hiera_hash ("wso2::apim_publisher", undef)
   $apim_store         = hiera_hash ("wso2::apim_store", undef)
+  $is_datasource      = hiera("wso2::is_datasource")
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode    => $maintenance_mode,

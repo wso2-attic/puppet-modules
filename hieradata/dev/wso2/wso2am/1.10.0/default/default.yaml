@@ -31,6 +31,8 @@ wso2::service_name: wso2am
 wso2::hostname : "%{::ipaddress}"
 wso2::mgt_hostname : am.wso2.com
 
+wso2::is_datasource : wso2_carbon_db
+
 wso2::apim_gateway :
     host : localhost
     port : 9443

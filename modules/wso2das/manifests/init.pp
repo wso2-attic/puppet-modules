@@ -19,9 +19,10 @@
 
 class wso2das inherits wso2base {
 
-  $analytics_datasources   = hiera("wso2::analytics_datasources")
+  $analytics_datasources = hiera("wso2::analytics_datasources")
   $metrics_datasources   = hiera("wso2::metrics_datasources")
-  $spark_master_count      = hiera("wso2::spark_master_count")
+  $spark_master_count    = hiera("wso2::spark_master_count")
+  $is_datasource         = hiera("wso2::is_datasource")
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode    => $maintenance_mode,

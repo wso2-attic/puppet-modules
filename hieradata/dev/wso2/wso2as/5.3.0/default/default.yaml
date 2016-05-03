@@ -34,6 +34,7 @@ wso2::mgt_hostname : mgt.as.wso2.com
 
 #wso2::usermgt_datasource: wso2_user_db
 # wso2::local_reg_datasource: wso2_carbon_db
+wso2::is_datasource : wso2_carbon_db
 
 wso2::master_datasources :
 #  wso2_config_db :

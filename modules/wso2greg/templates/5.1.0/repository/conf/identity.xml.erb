@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
   ~ Copyright (c) 2005-2011, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
-	~
+	~is_datasource
 	~ WSO2 Inc. licenses this file to you under the Apache License,
 	~ Version 2.0 (the "License"); you may not use this file except
 	~ in compliance	with the License.
@@ -23,7 +23,7 @@
 		<DataSource>
 			<!-- Include a data source name (jndiConfigName) from the set of data
 				sources defined in master-datasources.xml -->
-			<Name><%= @master_datasources[@local_reg_datasource]['jndi_config'] %></Name>
+			<Name><%= @master_datasources[@is_datasource]['jndi_config'] %></Name>
 		</DataSource>
 		<!-- If the identity database is created from another place and if it is
 			required to skip schema initialization during the server start up, set the

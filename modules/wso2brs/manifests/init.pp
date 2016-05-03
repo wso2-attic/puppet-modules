@@ -19,6 +19,7 @@
 
 
 class wso2brs inherits wso2base {
+  $is_datasource = hiera("wso2::is_datasource")
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode    => $maintenance_mode,

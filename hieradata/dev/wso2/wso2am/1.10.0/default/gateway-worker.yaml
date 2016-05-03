@@ -15,6 +15,8 @@
 wso2::apim_keymanager :
     host : km.am.wso2.com
 
+wso2::is_datasource : wso2_config_db
+
 wso2::master_datasources :
   wso2_gov_db :
     name : WSO2_GOV_DB

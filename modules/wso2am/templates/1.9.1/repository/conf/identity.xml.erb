@@ -30,7 +30,7 @@
     <JDBCPersistenceManager>
         <DataSource>
             <!-- Include a data source name (jndiConfigName) from the set of data sources defined in master-datasources.xml -->
-            <Name>jdbc/WSO2AM_DB</Name>
+            <Name><%= @master_datasources[@is_datasource]['jndi_config'] %></Name>
         </DataSource>
         <!-- If the identity database is created from another place and if it is required to skip schema initialization during the server start up, set the following
            property to "true". -->
@@ -158,18 +158,18 @@
 		<UserName>false</UserName>
 	</EnableAssertions>
 
-	<!-- This should be set to true when using multiple user stores and keys should saved 
+	<!-- This should be set to true when using multiple user stores and keys should saved
 			into different tables according to the user store. By default all the application keys are saved in to the same table.
 			UserName Assertion should be 'true' to use this.-->
 	<EnableAccessTokenPartitioning>false</EnableAccessTokenPartitioning>
 
 	<!-- user store domain names and mappings to new table names.
-				eg: if you provide 'A:foo.com', foo.com should be the user store domain name and 'A' represent the relavant mapping of 
+				eg: if you provide 'A:foo.com', foo.com should be the user store domain name and 'A' represent the relavant mapping of
 				token storing table, i.e. tokens relevant to the users comming from foo.com user store will be added to a table called
-				IDN_OAUTH2_ACCESS_TOKEN_A. --> 
+				IDN_OAUTH2_ACCESS_TOKEN_A. -->
 	<AccessTokenPartitioningDomains><!-- A:foo.com, B:bar.com --></AccessTokenPartitioningDomains>
 
-	<AuthorizationContextTokenGeneration>		
+	<AuthorizationContextTokenGeneration>
 		<Enabled>false</Enabled>
 		<TokenGeneratorImplClass>org.wso2.carbon.identity.oauth2.authcontext.JWTTokenGenerator</TokenGeneratorImplClass>
 		<ClaimsRetrieverImplClass>org.wso2.carbon.identity.oauth2.authcontext.DefaultClaimsRetriever</ClaimsRetrieverImplClass>
@@ -194,9 +194,9 @@
               <UserInfoEndpointResponseBuilder>org.wso2.carbon.identity.oauth.endpoint.user.impl.UserInfoJSONResponseBuilder</UserInfoEndpointResponseBuilder>
               <SkipUserConsent>false</SkipUserConsent>
          </OpenIDConnect>
-		<!-- Primary/secondary login configuration for APIstore. If user likes to keep two login attributes in a distributed setup, to login the APIstore, 
+		<!-- Primary/secondary login configuration for APIstore. If user likes to keep two login attributes in a distributed setup, to login the APIstore,
 		he should configure this section. Primary login doesn't have a claimUri associated with it. But secondary login, which is a claim attribute,
-		is associated with a claimuri.--> 
+		is associated with a claimuri.-->
 			<!-- <LoginConfig>
 					<UserIdLogin  primary="true">
 				<ClaimUri></ClaimUri>
@@ -204,7 +204,7 @@
 				<EmailLogin  primary="false">
 					<ClaimUri>http://wso2.org/claims/emailaddress</ClaimUri>
 				</EmailLogin>
-			</LoginConfig>--> 
+			</LoginConfig>-->
     </OAuth>
 
     <MultifactorAuthentication>

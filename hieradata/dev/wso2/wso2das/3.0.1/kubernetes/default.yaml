@@ -56,6 +56,7 @@ wso2::clustering :
 
 wso2::usermgt_datasource : wso2_user_db
 # wso2::local_reg_datasource: wso2_config_db
+wso2::is_datasource : wso2_config_db
 
 wso2::master_datasources :
   wso2_config_db :

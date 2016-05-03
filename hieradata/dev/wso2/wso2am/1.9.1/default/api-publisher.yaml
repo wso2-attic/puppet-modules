@@ -29,6 +29,8 @@ wso2::apim_publisher :
     host : pub.am.wso2.com
     port : 9443
 
+wso2::is_datasource : wso2_config_db
+
 wso2::master_datasources :
 
   wso2_gov_db :

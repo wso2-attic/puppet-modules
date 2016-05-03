@@ -24,6 +24,8 @@ wso2::service_name: wso2greg
 wso2::hostname : store.greg.wso2.com
 wso2::mgt_hostname : store.greg.wso2.com
 
+wso2::is_datasource : wso2_config_db
+
 wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 

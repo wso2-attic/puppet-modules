@@ -14,6 +14,8 @@
 
 wso2::mgt_hostname : mgt.gw.am.wso2.com
 
+wso2::is_datasource : wso2_config_db
+
 wso2::apim_keymanager :
     host : km.am.wso2.com
 
