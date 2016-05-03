@@ -62,23 +62,9 @@ wso2::scheduler_config_max_thread_pool_size: 50
 wso2::enable_humantask_caching: false
 
 #wso2::usermgt_datasource: wso2user_db
-wso2::reg_datasource: wso2_carbon_db
+# wso2::local_reg_datasource: wso2_carbon_db
 
 wso2::master_datasources :
-  wso2_carbon_db :
-    name : WSO2_CARBON_DB
-    description : The datasource used for registry and user manager
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username : "%{hiera('wso2::datasources::common::username')}"
-    password : "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2CarbonDB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 #  wso2_config_db :
 #    name : WSO2_CONFIG_DB
 #    description : The datasource used for config registry
@@ -183,4 +169,3 @@ wso2::secure_vault_configs :
     secret_alias: Server.Service.Connector.keystorePass
     secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
     password: wso2carbon
-
