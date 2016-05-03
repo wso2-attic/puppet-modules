@@ -36,7 +36,8 @@ wso2::file_list :
   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
-#wso2::template_list:
+wso2::template_list:
+  - repository/conf/identity.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
