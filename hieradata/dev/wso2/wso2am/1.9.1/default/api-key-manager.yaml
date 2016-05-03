@@ -18,7 +18,7 @@ wso2::mgt_hostname : km.am.wso2.com
 wso2::apim_gateway :
     host : mgt.gw.am.wso2.com
 
-wso2::is_datasource : wso2_config_db
+wso2::is_datasource : wso2_gov_db
 
 wso2::master_datasources :
 
