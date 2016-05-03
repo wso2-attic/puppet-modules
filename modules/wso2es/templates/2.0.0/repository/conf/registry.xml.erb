@@ -28,7 +28,7 @@
     <registryRoot>/</registryRoot>
 
     <dbConfig name="wso2registry">
-        <dataSource><%= @master_datasources[@reg_datasource]['jndi_config'] %></dataSource>
+        <dataSource><%= @master_datasources[@local_reg_datasource]['jndi_config'] %></dataSource>
     </dbConfig>
 
     <%- @registry_mounts.each do |datasource_name, registry_mount| -%>
