@@ -32,6 +32,14 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+wso2::clustering:
+    enabled: true
+    membership_scheme: kubernetes
+    kubernetes:
+       kubernetes_master : http://172.17.8.101:8080
+       kubernetes_namespace: default
+       kubernetes_services: wso2greg-default
+
 wso2::file_list :
   - repository/components/lib/jackson-annotations-2.5.4.jar
   - repository/components/lib/jackson-core-2.5.4.jar

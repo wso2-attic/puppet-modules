@@ -37,6 +37,7 @@ wso2::clustering:
     enabled: true
     membership_scheme: kubernetes
     kubernetes:
+       kubernetes_master : http://172.17.8.101:8080
        kubernetes_namespace: default
        kubernetes_services: wso2as-default
 
@@ -140,7 +141,7 @@ wso2::bps_datasources :
 
 wso2::registry_mounts:
   wso2_config_db:
-    path: /_system/config/
+    path: /_system/config
     target_path: /_system/config/bps
     read_only: false
     registry_root: /
