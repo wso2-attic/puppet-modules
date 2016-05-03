@@ -42,7 +42,7 @@ wso2::clustering :
 
 wso2::registry_mounts:
   wso2_config_db:
-    path: /_system/config/
+    path: /_system/config
     target_path: /_system/config/as
     read_only: true
     registry_root: /
