@@ -21,6 +21,7 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::template_list:
   - repository/conf/datasources/am-datasources.xml
   - repository/conf/api-manager.xml
+  - repository/conf/identity/identity.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -91,7 +92,7 @@ wso2::registry_mounts:
     enable_cache: true
 
 wso2::usermgt_datasource: wso2user_db
-wso2::is_datasource : wso2_gov_db
+wso2::is_datasource : wso2am_db
 
 wso2::am_datasources:
   wso2am_db:
