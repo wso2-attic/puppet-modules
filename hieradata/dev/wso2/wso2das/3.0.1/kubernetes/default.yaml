@@ -52,7 +52,6 @@ wso2::clustering :
     domain : wso2.das.domain
     sub_domain : mgt
     kubernetes :
-       kubernetes_master : http://172.17.8.101:8080
        kubernetes_namespace : default
        kubernetes_services : wso2das-default
 
