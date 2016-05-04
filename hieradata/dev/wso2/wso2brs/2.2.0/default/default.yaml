@@ -26,7 +26,7 @@ wso2::mgt_hostname : brs.wso2.com
 #  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
 wso2::template_list:
-  - repository/conf/identity.xml
+  - repository/conf/identity/identity.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -35,7 +35,7 @@ wso2::template_list:
 # wso2::local_reg_datasource: wso2_carbon_db
 wso2::is_datasource : wso2_carbon_db
 
-wso2::master_datasources :
+#wso2::master_datasources :
 #  wso2_config_db :
 #    name : WSO2_CONFIG_DB
 #    description : The datasource used for config registry
