@@ -143,6 +143,7 @@
                                 <exclude>**/*.json.erb</exclude>
                                 <!-- because of an IS json config file -->
                                 <exclude>**/*.config.erb</exclude>
+                                <exclude>**/*.sql</exclude>
                                 <exclude>**/.idea/**/*</exclude>
                                 <exclude>**/.idea</exclude>
                                 <exclude>**/tlds/**/*</exclude>
