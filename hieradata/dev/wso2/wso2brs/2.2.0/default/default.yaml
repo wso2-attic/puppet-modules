@@ -35,7 +35,7 @@ wso2::template_list:
 # wso2::local_reg_datasource: wso2_carbon_db
 wso2::is_datasource : wso2_carbon_db
 
-wso2::master_datasources :
+#wso2::master_datasources :
 #  wso2_config_db :
 #    name : WSO2_CONFIG_DB
 #    description : The datasource used for config registry
