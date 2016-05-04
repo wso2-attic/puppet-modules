@@ -45,8 +45,8 @@ wso2::mgt_hostname : bps.wso2.com
 #    enable_cache: true
 #
 #  wso2_gov_db:
-#    path: /_system/gov
-#    target_path: /_system/gov
+#    path: /_system/governance
+#    target_path: /_system/governance
 #    read_only: true
 #    registry_root: /
 #    enable_cache: true

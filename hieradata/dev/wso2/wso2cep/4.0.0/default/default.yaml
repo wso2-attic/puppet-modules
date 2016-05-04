@@ -46,8 +46,8 @@ wso2::mgt_hostname : cep.wso2.com
 
 #  wso2_gov_db:
 #    name: WSO2_GOV_DB
-#    path: /_system/gov
-#    target_path: /_system/gov
+#    path: /_system/governance
+#    target_path: /_system/governance
 #    read_only: false
 #    registry_root: /
 #    enable_cache: true
