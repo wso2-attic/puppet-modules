@@ -31,7 +31,7 @@ wso2::template_list :
 
 wso2::mb_thrift_port : 7611
 
-# wso2::local_reg_datasource: wso2_carbon_db
+
 
 # Comment this datasource for the Clustered setup.
 wso2::master_datasources :

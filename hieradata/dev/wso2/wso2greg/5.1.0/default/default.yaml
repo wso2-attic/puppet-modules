@@ -33,7 +33,7 @@ wso2::template_list:
 #  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
 #wso2::usermgt_datasource: wso2user_db
-# wso2::local_reg_datasource: wso2_carbon_db
+
 wso2::is_datasource : wso2_carbon_db
 
 wso2::master_datasources :

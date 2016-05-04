@@ -53,7 +53,7 @@ wso2::mgt_hostname : cep.wso2.com
 #    enable_cache: true
 
 #wso2::usermgt_datasource: wso2user_db
-# wso2::local_reg_datasource: wso2_carbon_db
+
 
 #wso2::master_datasources :
 #  wso2_config_db :

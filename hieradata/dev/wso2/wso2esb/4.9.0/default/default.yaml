@@ -30,7 +30,7 @@ wso2::mgt_hostname : esb.wso2.com
 #  - bin/ciphertool.sh
 #  - password-tmp
 
-# wso2::local_reg_datasource: wso2_carbon_db
+
 
 #wso2::master_datasources :
 #  wso2_config_db :
