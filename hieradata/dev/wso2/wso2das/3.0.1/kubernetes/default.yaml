@@ -43,6 +43,7 @@ wso2::file_list :
   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
   - dbscripts/identity/h2.sql
+  - dbscripts/identity/mysql.sql
 
 wso2::clustering :
     enabled : true
