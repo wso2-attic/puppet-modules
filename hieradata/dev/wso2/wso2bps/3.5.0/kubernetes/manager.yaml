@@ -23,11 +23,8 @@ wso2::clustering :
     membership_scheme : kubernetes
     sub_domain : mgt
     kubernetes :
-       kubernetes_master : http://172.17.8.101:8080
        kubernetes_namespace : default
        kubernetes_services : wso2bps-manager,wso2bps-worker
-       kubernetes_master_username :
-       kubernetes_master_password :
 
 wso2::ports:
   proxyPort :

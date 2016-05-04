@@ -47,7 +47,6 @@
         <module>modules/wso2greg</module>
         <module>modules/wso2is</module>
         <module>modules/wso2mb</module>
-        <module>modules/wso2ppaas</module>
     </modules>
 
     <build>
@@ -143,6 +142,7 @@
                                 <exclude>**/*.json.erb</exclude>
                                 <!-- because of an IS json config file -->
                                 <exclude>**/*.config.erb</exclude>
+                                <exclude>**/*.sql</exclude>
                                 <exclude>**/.idea/**/*</exclude>
                                 <exclude>**/.idea</exclude>
                                 <exclude>**/tlds/**/*</exclude>

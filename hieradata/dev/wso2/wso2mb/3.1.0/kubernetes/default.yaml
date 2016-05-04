@@ -143,11 +143,8 @@ wso2::clustering :
     local_member_port : 4000
     membership_scheme : kubernetes
     kubernetes :
-       kubernetes_master : http://172.17.8.101:8080
        kubernetes_namespace : default
        kubernetes_services : wso2mb-default
-    #    kubernetes_master_username :
-    #    kubernetes_master_password :
 
 wso2::file_list :
   - repository/components/lib/jackson-annotations-2.5.4.jar

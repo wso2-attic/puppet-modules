@@ -39,7 +39,6 @@ wso2::clustering :
     membership_scheme : kubernetes
     sub_domain : worker
     kubernetes :
-       kubernetes_master : http://172.17.8.101:8080
        kubernetes_namespace : default
        kubernetes_services : wso2cep-presenter,wso2cep-worker
        kubernetes_master_username :
