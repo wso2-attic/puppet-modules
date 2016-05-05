@@ -29,12 +29,12 @@ wso2::file_list :
   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
 wso2::clustering :
-    enabled : true
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    kubernetes :
-       kubernetes_namespace : default
-       kubernetes_services : wso2greg-store,wso2greg-publisher
+  enabled : true
+  local_member_port : 4000
+  membership_scheme : kubernetes
+  kubernetes :
+     kubernetes_namespace : default
+     kubernetes_services : wso2greg-store,wso2greg-publisher
 
 wso2::ports:
   proxyPort :
