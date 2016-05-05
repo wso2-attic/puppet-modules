@@ -16,11 +16,11 @@ classes:
   - wso2greg
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
-wso2::datasources::common::bps_default_auto_commit : 'true'
+wso2::datasources::common::bps_default_auto_commit: 'true'
 
 wso2::service_name: wso2greg
-wso2::hostname : wso2greg-default
-wso2::mgt_hostname : wso2greg-default
+wso2::hostname: wso2greg-default
+wso2::mgt_hostname: wso2greg-default
 
 wso2::clustering:
     enabled: true
@@ -29,7 +29,7 @@ wso2::clustering:
        kubernetes_namespace: default
        kubernetes_services: wso2greg-default
 
-wso2::file_list :
+wso2::file_list:
   - repository/components/lib/jackson-annotations-2.5.4.jar
   - repository/components/lib/jackson-core-2.5.4.jar
   - repository/components/lib/jackson-databind-2.5.4.jar
@@ -45,127 +45,134 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
-wso2::usermgt_datasource: wso2_user_db
-
-wso2::is_datasource : wso2_gov_db
-
-wso2::master_datasources :
-  wso2am_db :
-    name : WSO2AM_DB
-    description : The datasource used for API Manager database
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::common::username')}"
-    password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2AM_DB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-  wso2_config_db :
-    name : WSO2_CONFIG_DB
-    description : The datasource used for config registry
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::common::username')}"
-    password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2_CONFIG_DB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-  wso2_gov_db :
-    name : WSO2_GOV_DB
-    description : The datasource used for gov registry
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::common::username')}"
-    password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2_GOV_DB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-  wso2_user_db :
-    name : WSO2USER_DB
-    description : The datasource is used for user mangement and userstore
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::common::username')}"
-    password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2USER_DB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-
-wso2::bps_datasources :
-  bps_ds :
-    name : BPS_DS
-    description : The datasource used for BPS database
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::common::username')}"
-    password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : bpsds
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::bps_default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-
-#wso2::social_datasources :
-#  wso2_social_db :
-#    name : WSO2_SOCIAL_DB
-#    description : The datasource used for social framework
-#    driver_class_name : com.mysql.jdbc.Driver
-#    url : jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
-#    username: "%{hiera('wso2::datasources::common::username')}"
-#    password: "%{hiera('wso2::datasources::common::password')}"
-#    jndi_config : jdbc/WSO2SocialDB
-#    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-
-# Secure vault configuration
-wso2::enable_secure_vault : false
-wso2::secure_vault_configs :
-  key_store_password :
-    secret_alias: Carbon.Security.KeyStore.Password
-    secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
-    password: wso2carbon
-  key_store_key_password :
-    secret_alias: Carbon.Security.KeyStore.KeyPassword
-    secret_alias_value: carbon.xml//Server/Security/KeyStore/KeyPassword,true
-    password: wso2carbon
-  trust_store_password :
-    secret_alias: Carbon.Security.TrustStore.Password
-    secret_alias_value: carbon.xml//Server/Security/TrustStore/Password,true
-    password: wso2carbon
-  user_manager_admin_password :
-    secret_alias: UserManager.AdminUser.Password
-    secret_alias_value: user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,true
-    password: admin
-  wso2_carbon_db_password :
-    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
-    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
-    password: wso2carbon
-
 # for K8s scenario, need to enable proxy port to match NodePorts
 # defined for servlet HTTP and HTTPS transport in K8s Service definition
 wso2::ports:
-  proxyPort :
+  proxyPort:
     http: 32101
     https: 32102
+
+wso2::usermgt_datasource: wso2_user_db
+
+wso2::is_datasource: wso2_gov_db
+
+wso2::master_datasources:
+  wso2am_db:
+    name: WSO2AM_DB
+    description: The datasource used for API Manager database
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
+    jndi_config: jdbc/WSO2AM_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+  wso2_config_db:
+    name: WSO2_CONFIG_DB
+    description: The datasource used for config registry
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
+    jndi_config: jdbc/WSO2_CONFIG_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+  wso2_gov_db:
+    name: WSO2_GOV_DB
+    description: The datasource used for gov registry
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
+    jndi_config: jdbc/WSO2_GOV_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+  wso2_user_db:
+    name: WSO2USER_DB
+    description: The datasource is used for user mangement and userstore
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
+    jndi_config: jdbc/WSO2USER_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+wso2::bps_datasources:
+  bps_ds:
+    name: BPS_DS
+    description: The datasource used for BPS database
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
+    jndi_config: bpsds
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::bps_default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+#wso2::social_datasources:
+#  wso2_social_db:
+#    name: WSO2_SOCIAL_DB
+#    description: The datasource used for social framework
+#    driver_class_name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::common::username')}"
+#    password: "%{hiera('wso2::datasources::common::password')}"
+#    jndi_config: jdbc/WSO2SocialDB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+# Secure vault configuration
+wso2::enable_secure_vault: false
+wso2::secure_vault_configs:
+  key_store_password:
+    secret_alias: Carbon.Security.KeyStore.Password
+    secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
+    password: wso2carbon
+
+  key_store_key_password:
+    secret_alias: Carbon.Security.KeyStore.KeyPassword
+    secret_alias_value: carbon.xml//Server/Security/KeyStore/KeyPassword,true
+    password: wso2carbon
+
+  trust_store_password:
+    secret_alias: Carbon.Security.TrustStore.Password
+    secret_alias_value: carbon.xml//Server/Security/TrustStore/Password,true
+    password: wso2carbon
+
+  user_manager_admin_password:
+    secret_alias: UserManager.AdminUser.Password
+    secret_alias_value: user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,true
+    password: admin
+
+  wso2_carbon_db_password:
+    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
+    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
+    password: wso2carbon
