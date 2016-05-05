@@ -18,7 +18,23 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
-wso2::template_list :
+wso2::clustering:
+  enabled: true
+  sub_domain: mgt
+  local_member_host: local.am.wso2.com
+  local_member_port: 4000
+  membership_scheme: wka
+  domain: wso2.am.domain
+  wka:
+    members:
+      -
+        hostname: 192.168.100.13
+        port: 4000
+      -
+        hostname: 192.168.100.23
+        port: 4000
+
+wso2::template_list:
   - repository/conf/datasources/am-datasources.xml
   - repository/conf/api-manager.xml
 #  - repository/conf/security/cipher-text.properties
@@ -28,30 +44,30 @@ wso2::template_list :
 
 wso2::service_name: wso2am
 # ip address is used here to avoid hostname resolving issues in APIM startup
-wso2::hostname : "%{::ipaddress}"
-wso2::mgt_hostname : am.wso2.com
+wso2::hostname: "%{::ipaddress}"
+wso2::mgt_hostname: am.wso2.com
 
-wso2::apim_gateway :
-    host : localhost
-    port : 9443
-    api_endpoint_port : 8280
-    secure_api_endpoint_port : 8243
-    username : admin
-    password : admin
+wso2::apim_gateway:
+  host: localhost
+  port: 9443
+  api_endpoint_port: 8280
+  secure_api_endpoint_port: 8243
+  username: admin
+  password: admin
 
-wso2::apim_keymanager :
-    host : localhost
-    port : 9443
-    username : admin
-    password : admin
+wso2::apim_keymanager:
+  host: localhost
+  port: 9443
+  username: admin
+  password: admin
 
-wso2::apim_store :
-    host : am.wso2.com
-    port : 9443
+wso2::apim_store:
+  host: am.wso2.com
+  port: 9443
 
-wso2::apim_publisher :
-    host : am.wso2.com
-    port : 9443
+wso2::apim_publisher:
+  host: am.wso2.com
+  port: 9443
 
 #wso2::registry_mounts:
 # wso2_config_db:
@@ -69,17 +85,17 @@ wso2::apim_publisher :
 #   enable_cache: true
 
 #wso2::usermgt_datasource: wso2user_db
-wso2::is_datasource : wso2_carbon_db
+wso2::is_datasource: wso2_carbon_db
 
-wso2::am_datasources :
+wso2::am_datasources:
   wso2am_db:
-    name : WSO2AM_DB
-    description : The datasource used for API Manager database
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE
-    username : "%{hiera('wso2::datasources::common::username')}"
-    password : "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2AM_DB
+    name: WSO2AM_DB
+    description: The datasource used for API Manager database
+    driver_class_name: org.h2.Driver
+    url: jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
+    jndi_config: jdbc/WSO2AM_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -87,15 +103,15 @@ wso2::am_datasources :
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::master_datasources :
+wso2::master_datasources:
 #  wso2_config_db:
-#    name : WSO2_CONFIG_DB
-#    description : The datasource used for config registry
-#    driver_class_name : org.h2.Driver
-#    url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-#    username : "%{hiera('wso2::datasources::common::username')}"
-#    password : "%{hiera('wso2::datasources::common::password')}"
-#    jndi_config : jdbc/WSO2_CONFIG_DB
+#    name: WSO2_CONFIG_DB
+#    description: The datasource used for config registry
+#    driver_class_name: org.h2.Driver
+#    url: jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+#    username: "%{hiera('wso2::datasources::common::username')}"
+#    password: "%{hiera('wso2::datasources::common::password')}"
+#    jndi_config: jdbc/WSO2_CONFIG_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
 #    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -103,85 +119,91 @@ wso2::master_datasources :
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 #
 #  wso2_gov_db:
-#    name : WSO2_GOV_DB
-#    description : The datasource used for gov registry
-#    driver_class_name : org.h2.Driver
-#    url : jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-#    username : "%{hiera('wso2::datasources::common::username')}"
-#    password : "%{hiera('wso2::datasources::common::password')}"
-#    jndi_config : jdbc/WSO2_GOV_DB
+#    name: WSO2_GOV_DB
+#    description: The datasource used for gov registry
+#    driver_class_name: org.h2.Driver
+#    url: jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+#    username: "%{hiera('wso2::datasources::common::username')}"
+#    password: "%{hiera('wso2::datasources::common::password')}"
+#    jndi_config: jdbc/WSO2_GOV_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
 #    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
 #    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 #
-#  wso2user_db :
-#    name : WSO2USER_DB
-#    description : The datasource is used for user mangement and userstore
-#    driver_class_name : org.h2.Driver
-#    url : jdbc:h2:repository/database/WSO2USER_DB?autoReconnect=true
-#    username : "%{hiera('wso2::datasources::common::username')}"
-#    password : "%{hiera('wso2::datasources::common::password')}"
-#    jndi_config : jdbc/WSO2USER_DB
-#    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
-#    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+#  wso2user_db:
+#    name: WSO2USER_DB
+#    description: The datasource is used for user mangement and userstore
+#    driver_class_name: org.h2.Driver
+#    url: jdbc:h2:repository/database/WSO2USER_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::common::username')}"
+#    password: "%{hiera('wso2::datasources::common::password')}"
+#    jndi_config: jdbc/WSO2USER_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-  wso2user_db :
-    name : JAGH2
-    description : The datasource used for by the Jaggery Storage Manager
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/ES_STORAGE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username : "%{hiera('wso2::datasources::common::username')}"
-    password : "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/ES_STORAGE
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
+  wso2user_db:
+    name: JAGH2
+    description: The datasource used for by the Jaggery Storage Manager
+    driver_class_name: org.h2.Driver
+    url: jdbc:h2:repository/database/ES_STORAGE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
+    jndi_config: jdbc/ES_STORAGE
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
 
 # Secure vault configuration
-wso2::enable_secure_vault : false
-wso2::secure_vault_configs :
-  key_store_password :
+wso2::enable_secure_vault: false
+wso2::secure_vault_configs:
+  key_store_password:
     secret_alias: Carbon.Security.KeyStore.Password
     secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
     password: wso2carbon
-  key_store_key_password :
+
+  key_store_key_password:
     secret_alias: Carbon.Security.KeyStore.KeyPassword
     secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
     password: wso2carbon
-  trust_store_password :
+
+  trust_store_password:
     secret_alias: Carbon.Security.TrustStore.Password
     secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
     password: wso2carbon
-  user_manager_admin_password :
+
+  user_manager_admin_password:
     secret_alias: UserManager.AdminUser.Password
     secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
     password: admin
-  wso2_carbon_db_password :
+
+  wso2_carbon_db_password:
     secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
     secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
     password: wso2carbon
-  connector_key_store_password :
+
+  connector_key_store_password:
     secret_alias: Server.Service.Connector.keystorePass
     secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
     password: wso2carbon
-  wso2am_db_password :
+
+  wso2am_db_password:
     secret_alias: Datasource.WSO2AM_DB.configuration.password
     secret_alias_value: repository/conf/datasources/am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false
     password: wso2carbon
-#  wso2am_stats_db_password :
+#  wso2am_stats_db_password:
 #    secret_alias: Datasource.WSO2AM_STATS_DB.configuration.password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_STATS_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
-#  wso2_config_db_password :
+#  wso2_config_db_password:
 #    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
-#  wso2_gov_db_password :
+#  wso2_gov_db_password:
 #    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
@@ -249,19 +271,3 @@ wso2::secure_vault_configs :
 #    secret_alias: Axis2.Https.Listener.KeyStore.KeyPassword
 #    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='keystore']/KeyStore/KeyPassword,false
 #    password: wso2carbon
-
-wso2::clustering :
-    enabled : true
-    sub_domain : mgt
-    local_member_host : local.am.wso2.com
-    local_member_port : 4000
-    membership_scheme : wka
-    domain : wso2.am.domain
-    wka :
-      members :
-        -
-          hostname : 192.168.100.13
-          port : 4000
-        -
-          hostname : 192.168.100.23
-          port : 4000

@@ -18,16 +18,21 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2greg
-wso2::hostname : wso2greg-store
-wso2::mgt_hostname : wso2greg-store
+wso2::hostname: wso2greg-store
+wso2::mgt_hostname: wso2greg-store
 
-wso2::clustering :
-    enabled : true
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    kubernetes :
-       kubernetes_namespace : default
-       kubernetes_services : wso2greg-publisher,wso2greg-store
+wso2::clustering:
+  enabled: true
+  local_member_port: 4000
+  membership_scheme: kubernetes
+  kubernetes:
+     kubernetes_namespace: default
+     kubernetes_services: wso2greg-publisher,wso2greg-store
+
+wso2::ports:
+  proxyPort:
+    http: 32103
+    https: 32104
 
 wso2::registry_mounts:
   wso2_config_db:
@@ -43,8 +48,3 @@ wso2::registry_mounts:
     read_only: true
     registry_root: /
     enable_cache: true
-
-wso2::ports:
-  proxyPort :
-    http: 32103
-    https: 32104

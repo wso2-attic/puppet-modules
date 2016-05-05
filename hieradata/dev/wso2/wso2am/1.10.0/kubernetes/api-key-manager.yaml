@@ -16,15 +16,15 @@ wso2::hostname: wso2am-api-key-manager
 wso2::mgt_hostname: wso2am-api-key-manager
 
 wso2::apim_gateway:
-     host: wso2am-gateway-manager
-#    host: wso2am-gateway-worker
+   host: wso2am-gateway-manager
+#  host: wso2am-gateway-worker
 
 wso2::clustering:
-    enabled: true
-    membership_scheme: kubernetes
-    kubernetes:
-       kubernetes_namespace: default
-       kubernetes_services: wso2am-api-key-manager
+  enabled: true
+  membership_scheme: kubernetes
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2am-api-key-manager
 
 wso2::ports:
   proxyPort:
@@ -38,6 +38,7 @@ wso2::registry_mounts:
     read_only: false
     registry_root: /
     enable_cache: true
+
   wso2_gov_db:
     path: /_system/governance
     target_path: /_system/governance

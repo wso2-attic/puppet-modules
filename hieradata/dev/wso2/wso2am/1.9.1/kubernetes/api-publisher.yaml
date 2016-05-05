@@ -16,25 +16,25 @@ wso2::hostname: wso2am-api-publisher
 wso2::mgt_hostname: wso2am-api-publisher
 
 wso2::apim_gateway:
-    host: wso2am-gateway-manager
+  host: wso2am-gateway-manager
 
 wso2::apim_keymanager:
-    host: wso2am-api-key-manager
+  host: wso2am-api-key-manager
 
 wso2::apim_store:
-    host: wso2am-api-store
-    port: 32019
+  host: wso2am-api-store
+  port: 32019
 
 wso2::apim_publisher:
-    host: wso2am-api-publisher
-    port: 32017
+  host: wso2am-api-publisher
+  port: 32017
 
 wso2::clustering:
-    enabled: true
-    membership_scheme: kubernetes
-    kubernetes:
-       kubernetes_namespace: default
-       kubernetes_services: wso2am-api-publisher,wso2am-api-store
+  enabled: true
+  membership_scheme: kubernetes
+  kubernetes:
+     kubernetes_namespace: default
+     kubernetes_services: wso2am-api-publisher,wso2am-api-store
 
 wso2::ports:
   proxyPort:
@@ -48,6 +48,7 @@ wso2::registry_mounts:
     read_only: false
     registry_root: /
     enable_cache: true
+
   wso2_gov_db:
     path: /_system/governance
     target_path: /_system/governance
