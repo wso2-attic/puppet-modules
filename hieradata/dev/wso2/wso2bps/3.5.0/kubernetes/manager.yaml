@@ -13,20 +13,22 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname : wso2bps-manager
-wso2::hostname : wso2bps-worker
+wso2::mgt_hostname: wso2bps-manager
+wso2::hostname: wso2bps-worker
 
-wso2::clustering :
-    enabled : true
-    local_member_host : local.bps.wso2.com
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    sub_domain : mgt
-    kubernetes :
-       kubernetes_namespace : default
-       kubernetes_services : wso2bps-manager,wso2bps-worker
-
+# Proxy ports matching NodePorts
 wso2::ports:
-  proxyPort :
-    http : 32031
-    https : 32032
+  proxyPort:
+    http: 32031
+    https: 32032
+
+# Clustering & membership scheme
+wso2::clustering:
+  enabled: true
+  local_member_host: local.bps.wso2.com
+  local_member_port: 4000
+  membership_scheme: kubernetes
+  sub_domain: mgt
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2bps-manager,wso2bps-worker

@@ -13,6 +13,22 @@
 # limitations under the License.
 
 ---
+
+wso2::clustering:
+    enabled: true
+    local_member_host: local.bps.wso2.com
+    local_member_port: 4000
+    membership_scheme: wka
+    sub_domain: worker
+    wka:
+        members:
+            -
+                hostname: 192.168.100.10
+                port: 4000
+            -
+                hostname: 192.168.100.20
+                port: 4000
+
 #wso2::registry_mounts:
 #  wso2_config_db:
 #    path: /_system/config/esb
@@ -23,20 +39,5 @@
 #
 #  wso2_gov_db:
 #    path: /_system/governance
-#    target_path: /_system/governance
 #    read_only: true
-
-wso2::clustering :
-    enabled : true
-    local_member_host : local.bps.wso2.com
-    local_member_port : 4000
-    membership_scheme : wka
-    sub_domain : worker
-    wka :
-       members :
-         -
-           hostname : 192.168.100.10
-           port : 4000
-         -
-           hostname : 192.168.100.20
-           port : 4000
+#    target_path: /_system/governance
