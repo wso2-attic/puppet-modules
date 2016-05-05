@@ -11,28 +11,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 ---
-classes:
-  - wso2es
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
-
-wso2::template_list :
-  - repository/conf/datasources/social-datasources.xml
 
 wso2::service_name: wso2es
 wso2::hostname : wso2es-publisher
 wso2::mgt_hostname : wso2es-publisher
 
 wso2::clustering :
-    enabled : true
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    kubernetes :
-       kubernetes_namespace : default
-       kubernetes_services : wso2es-publisher,wso2es-store
-
-wso2::ports:
-  proxyPort :
-    http: 32081
-    https: 32082
+  enabled : true
+  local_member_port : 4000
+  membership_scheme : kubernetes
+  kubernetes :
+    kubernetes_namespace: default
+    kubernetes_services: wso2es-publisher,wso2es-store
