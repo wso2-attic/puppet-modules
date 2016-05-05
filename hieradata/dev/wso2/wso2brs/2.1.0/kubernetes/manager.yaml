@@ -13,31 +13,31 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname : wso2brs-manager
-wso2::hostname : wso2brs-worker
-
-wso2::dep_sync :
-    enabled : false
-    auto_checkout : true
-    auto_commit : true
-    repository_type : svn
-    svn :
-       url : http://svnrepo.example.com/repos/
-       user : username
-       password : password
-       append_tenant_id: true
-
-wso2::clustering :
-    enabled : true
-    local_member_host : local.brs.wso2.com
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    sub_domain : mgt
-    kubernetes :
-       kubernetes_namespace : default
-       kubernetes_services : wso2brs-manager,wso2brs-worker
+wso2::mgt_hostname: wso2brs-manager
+wso2::hostname: wso2brs-worker
 
 wso2::ports:
-  proxyPort :
+  proxyPort:
     http: 32041
     https: 32042
+
+wso2::clustering:
+  enabled: true
+  local_member_host: local.brs.wso2.com
+  local_member_port: 4000
+  membership_scheme: kubernetes
+  sub_domain: mgt
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2brs-manager,wso2brs-worker
+
+wso2::dep_sync:
+  enabled: false
+  auto_checkout: true
+  auto_commit: true
+  repository_type: svn
+  svn:
+    url: http://svnrepo.example.com/repos/
+    user: username
+    password: password
+    append_tenant_id: true

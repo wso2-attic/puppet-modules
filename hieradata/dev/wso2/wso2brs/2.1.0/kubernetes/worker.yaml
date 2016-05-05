@@ -13,34 +13,23 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname : wso2brs-worker
-wso2::hostname : wso2brs-worker
-
-wso2::dep_sync :
-    enabled : false
-    auto_checkout : true
-    auto_commit : false
-    repository_type : svn
-    svn :
-       url : http://svnrepo.example.com/repos/
-       user : username
-       password : password
-       append_tenant_id: true
-
-wso2::clustering :
-    enabled : true
-    local_member_host : local.brs.wso2.com
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    sub_domain : worker
-    kubernetes :
-       kubernetes_namespace : default
-       kubernetes_services : wso2brs-manager,wso2brs-worker
+wso2::mgt_hostname: wso2brs-worker
+wso2::hostname: wso2brs-worker
 
 wso2::ports:
-  proxyPort :
+  proxyPort:
     http: 32043
     https: 32044
+
+wso2::clustering:
+  enabled: true
+  local_member_host: local.brs.wso2.com
+  local_member_port: 4000
+  membership_scheme: kubernetes
+  sub_domain: worker
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2brs-manager,wso2brs-worker
 
 wso2::registry_mounts:
   wso2_config_db:
@@ -56,3 +45,14 @@ wso2::registry_mounts:
     read_only: true
     registry_root: /
     enable_cache: true
+
+wso2::dep_sync:
+  enabled: false
+  auto_checkout: true
+  auto_commit: false
+  repository_type: svn
+  svn:
+    url: http://svnrepo.example.com/repos/
+    user: username
+    password: password
+    append_tenant_id: true
