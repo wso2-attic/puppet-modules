@@ -18,7 +18,18 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
-wso2::template_list :
+wso2::service_name: wso2cep
+wso2::hostname: wso2cep-default
+wso2::mgt_hostname: wso2cep-default
+
+wso2::file_list:
+  - repository/components/lib/jackson-annotations-2.5.4.jar
+  - repository/components/lib/jackson-core-2.5.4.jar
+  - repository/components/lib/jackson-databind-2.5.4.jar
+  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+
+wso2::template_list:
   - repository/conf/cep/storm/storm.yaml
   - repository/conf/event-processor.xml
   - repository/conf/data-bridge/data-agent-config.xml
@@ -28,23 +39,21 @@ wso2::template_list :
 #  - bin/ciphertool.sh
 #  - password-tmp
 
-wso2::service_name: wso2cep
-wso2::hostname : wso2cep-default
-wso2::mgt_hostname : wso2cep-default
+# for K8s scenario, need to enable proxy port to match NodePorts
+# defined for servlet HTTP and HTTPS transport in K8s Service definition
+wso2::ports:
+  proxyPort:
+    http: 32053
+    https: 32054
 
 wso2::clustering:
-    enabled: true
-    membership_scheme: kubernetes
-    kubernetes:
-       kubernetes_namespace: default
-       kubernetes_services: wso2cep-default
-
-wso2::file_list :
-  - repository/components/lib/jackson-annotations-2.5.4.jar
-  - repository/components/lib/jackson-core-2.5.4.jar
-  - repository/components/lib/jackson-databind-2.5.4.jar
-  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
-  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+  enabled: true
+  membership_scheme: kubernetes
+  local_member_port: 4000
+  local_member_host: local.cep.wso2.com
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2cep-default
 
 wso2::registry_mounts:
   wso2_config_db:
@@ -61,106 +70,106 @@ wso2::registry_mounts:
     registry_root: /
     enable_cache: true
 
-wso2::usermgt_datasource: wso2user_db
+wso2::usermgt_datasource: wso2_user_db
 
-
-wso2::master_datasources :
-  wso2_config_db :
-    name : WSO2_CONFIG_DB
-    description : The datasource used for config registry
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-cepdb:3306/WSO2_CEP_DB?autoReconnect=true
+wso2::master_datasources:
+  wso2_config_db:
+    name: WSO2_CONFIG_DB
+    description: The datasource used for config registry
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-cepdb:3306/WSO2_CEP_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2_CONFIG_DB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+    jndi_config: jdbc/WSO2_CONFIG_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-  wso2_gov_db :
-    name : WSO2_GOV_DB
-    description : The datasource used for gov registry
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
+  wso2_gov_db:
+    name: WSO2_GOV_DB
+    description: The datasource used for gov registry
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2_GOV_DB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+    jndi_config: jdbc/WSO2_GOV_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-  wso2user_db :
-    name : WSO2USER_DB
-    description : The datasource is used for user mangement and userstore
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
+  wso2_user_db:
+    name: WSO2USER_DB
+    description: The datasource is used for user mangement and userstore
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2USER_DB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+    jndi_config: jdbc/WSO2USER_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::thrift_data_agent :
- queueSize : 100
- batchSize : 100
- corePoolSize : 100
- maxPoolSize : 100
+wso2::thrift_data_agent:
+  queueSize: 100
+  batchSize: 100
+  corePoolSize: 100
+  maxPoolSize: 100
 
-wso2::binary_data_agent :
- queueSize : 200
- batchSize : 200
- corePoolSize : 200
- maxPoolSize : 200
+wso2::binary_data_agent:
+  queueSize: 200
+  batchSize: 200
+  corePoolSize: 200
+  maxPoolSize: 200
 
-wso2::data_bridge :
- workerThreads : 2
- maxEventBufferCapacity : 2
- eventBufferSize : 2
- clientTimeoutMin : 20
+wso2::data_bridge:
+  workerThreads: 2
+  maxEventBufferCapacity: 2
+  eventBufferSize: 2
+  clientTimeoutMin: 20
 
-wso2::single_node_deployment :
- enabled : true
+wso2::single_node_deployment:
+  enabled: true
 
-wso2::ha_deployment :
- enabled : false
+wso2::ha_deployment:
+  enabled: false
 
-wso2::distributed_deployment :
- enabled : false
+wso2::distributed_deployment:
+  enabled: false
 
 # Secure vault configuration
-wso2::enable_secure_vault : false
-wso2::secure_vault_configs :
-  key_store_password :
+wso2::enable_secure_vault: false
+
+wso2::secure_vault_configs:
+  key_store_password:
     secret_alias: Carbon.Security.KeyStore.Password
     secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
     password: wso2carbon
-  key_store_key_password :
+  key_store_key_password:
     secret_alias: Carbon.Security.KeyStore.KeyPassword
     secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
     password: wso2carbon
-  trust_store_password :
+  trust_store_password:
     secret_alias: Carbon.Security.TrustStore.Password
     secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
     password: wso2carbon
-  user_manager_admin_password :
+  user_manager_admin_password:
     secret_alias: UserManager.AdminUser.Password
     secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
     password: admin
-  wso2_carbon_db_password :
+  wso2_carbon_db_password:
     secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
     secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
     password: wso2carbon
-  connector_key_store_password :
+  connector_key_store_password:
     secret_alias: Server.Service.Connector.keystorePass
     secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
     password: wso2carbon
@@ -168,15 +177,15 @@ wso2::secure_vault_configs :
     secret_alias: Adapter.Output.Mail.Password
     secret_alias_value: repository/conf/output-event-adapters.xml//adapterConfig[@type='email']/property[@key='mail.smtp.password'],false
     password: wso2carbon
-#  dep_sync_svn_password :
+#  dep_sync_svn_password:
 #    secret_alias: Carbon.DeploymentSynchronizer.SvnPassword
 #    secret_alias_value: repository/conf/carbon.xml//Sever/DeploymentSynchronizer/SvnPassword,false
 #    password: password
-#  wso2_config_db_password :
+#  wso2_config_db_password:
 #    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
-#  wso2_gov_db_password :
+#  wso2_gov_db_password:
 #    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
@@ -232,10 +241,3 @@ wso2::secure_vault_configs :
 #    secret_alias: Axis2.Mailto.Parameter.Password
 #    secret_alias_value: repository/conf/axis2.xml//axisconfig/transportSender[@name='mailto']/parameter[@name='mail.smtp.password'],false
 #    password: wso2carbon
-
-# for K8s scenario, need to enable proxy port to match NodePorts
-# defined for servlet HTTP and HTTPS transport in K8s Service definition
-wso2::ports:
-  proxyPort :
-    http: 32053
-    https: 32054

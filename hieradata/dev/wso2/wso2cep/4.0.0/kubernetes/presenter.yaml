@@ -13,38 +13,36 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname : wso2cep-presenter
-wso2::hostname : wso2cep-presenter
-
-wso2::ha_deployment :
-    enabled : true
-    offset: 0
-    presenter: true
-    presenter_port: 11000
-    worker: false
-    eventSync :
-     hostName : "%{::ip}"
-     port : 11224
-    management :
-     hostName : 0.0.0.0
-     port : 10005
-    presentation :
-     hostName : "%{::ip}"
-     port : 11002
-
-wso2::clustering :
-    enabled : true
-    local_member_host : local.cep.wso2.com
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    sub_domain : mgt
-    kubernetes :
-       kubernetes_namespace : default
-       kubernetes_services : wso2cep-presenter
-       kubernetes_master_username :
-       kubernetes_master_password :
+wso2::mgt_hostname: wso2cep-presenter
+wso2::hostname: wso2cep-presenter
 
 wso2::ports:
-  proxyPort :
+  proxyPort:
     http: 32051
     https: 32052
+
+wso2::ha_deployment:
+  enabled: true
+  offset: 0
+  presenter: true
+  presenter_port: 11000
+  worker: false
+  eventSync:
+    hostName: "%{::ip}"
+    port: 11224
+  management:
+    hostName: 0.0.0.0
+    port: 10005
+  presentation:
+    hostName: "%{::ip}"
+    port: 11002
+
+wso2::clustering:
+  enabled: true
+  local_member_host: local.cep.wso2.com
+  local_member_port: 4000
+  membership_scheme: kubernetes
+  sub_domain: mgt
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2cep-presenter

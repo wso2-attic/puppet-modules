@@ -13,33 +13,33 @@
 # limitations under the License.
 
 ---
-wso2::ha_deployment :
-    enabled: true
-    offset: 0
-    presenter: false
-    presenter_port: 11000
-    worker: true
-    eventSync :
-     hostName : "%{::ip}"
-     port : 11224
-    management :
-     hostName : "%{::ip}"
-     port : 10005
-    presentation :
-     hostName : 0.0.0.0
-     port : 11000
+wso2::ha_deployment:
+  enabled: true
+  offset: 0
+  presenter: false
+  presenter_port: 11000
+  worker: true
+  eventSync:
+    hostName: "%{::ip}"
+    port: 11224
+  management:
+    hostName: "%{::ip}"
+    port: 10005
+  presentation:
+    hostName: 0.0.0.0
+    port: 11000
 
-wso2::clustering :
-    enabled : true
-    local_member_host : local.cep.wso2.com
-    local_member_port : 4000
-    membership_scheme : wka
-    sub_domain : worker
-    wka :
-       members :
-         -
-           hostname : 192.168.100.10
-           port : 4000
-         -
-           hostname : 192.168.100.20
-           port : 4000
+wso2::clustering:
+  enabled: true
+  local_member_host: local.cep.wso2.com
+  local_member_port: 4000
+  membership_scheme: wka
+  sub_domain: worker
+  wka:
+    members:
+      -
+        hostname: 192.168.100.10
+        port: 4000
+      -
+        hostname: 192.168.100.20
+        port: 4000
