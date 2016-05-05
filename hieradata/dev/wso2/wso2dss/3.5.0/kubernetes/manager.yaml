@@ -11,32 +11,32 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 ---
-wso2::mgt_hostname : wso2dss-manager
-wso2::hostname : wso2dss-worker
+wso2::mgt_hostname: wso2dss-manager
+wso2::hostname: wso2dss-worker
 
-wso2::clustering :
-    enabled : true
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    domain : wso2.dss.domain
-    sub_domain : mgt
-    kubernetes :
-       kubernetes_namespace : default
-       kubernetes_services : wso2dss-manager,wso2dss-worker
-
-wso2::dep_sync :
-    enabled : false
-    auto_checkout : true
-    auto_commit : true
-    repository_type : svn
-    svn :
-       url : http://svnrepo.example.com/repos/
-       user : username
-       password : password
-       append_tenant_id: true
+wso2::clustering:
+  enabled: true
+  local_member_port: 4000
+  membership_scheme: kubernetes
+  sub_domain: mgt
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2dss-manager,wso2dss-worker
 
 wso2::ports:
-    proxyPort :
-        http : 32071
-        https : 32072
+  proxyPort:
+    http: 32071
+    https: 32072
+
+wso2::dep_sync:
+  enabled: false
+  auto_checkout: true
+  auto_commit: true
+  repository_type: svn
+  svn:
+    url: http://svnrepo.example.com/repos/
+    user: username
+    password: password
+    append_tenant_id: true
