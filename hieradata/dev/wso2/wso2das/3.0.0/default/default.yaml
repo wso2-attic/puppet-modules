@@ -17,7 +17,14 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
-wso2::template_list :
+wso2::service_name: wso2das
+wso2::hostname: das.wso2.com
+wso2::mgt_hostname: das.wso2.com
+
+#wso2::file_list:
+#  - repository/components/lib/mysql-connector-java-5.1.36.jar
+
+wso2::template_list:
   - repository/conf/datasources/analytics-datasources.xml
   - repository/conf/jndi.properties
   - repository/conf/analytics/spark/spark-defaults.conf
@@ -26,191 +33,184 @@ wso2::template_list :
 #  - bin/ciphertool.sh
 #  - password-tmp
 
-wso2::service_name: wso2das
-wso2::hostname : das.wso2.com
-wso2::mgt_hostname : das.wso2.com
+wso2::spark_master_count: 1
 
-wso2::spark_master_count : 1
+wso2::clustering:
+  enabled: false
+  local_member_host: 127.0.0.1
+  local_member_port: 4000
+  domain: wso2.das.domain
+  membership_scheme: wka
+  wka:
+    members:
+      -
+        hostname: localhost
+        port: 4000
+      -
+        hostname: localhost
+        port: 4001
 
-wso2::clustering :
-    enabled : false
-    local_member_host : 127.0.0.1
-    local_member_port : 4000
-    domain : wso2.das.domain
-    membership_scheme : wka
-    wka :
-       members :
-         -
-           hostname : localhost
-           port : 4000
-         -
-           hostname : localhost
-           port : 4001
+#wso2::usermgt_datasource: wso2_user_db
+wso2::is_datasource: wso2_carbon_db
 
-#wso2::file_list :
-#  - repository/components/lib/mysql-connector-java-5.1.36.jar
+#wso2::master_datasources:
+#  wso2_config_db:
+#    name: WSO2_CONFIG_DB
+#    description: The datasource used for config registry
+#    driver_class_name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+#    username: root
+#    password: root
+#    jndi_config: jdbc/WSO2_CONFIG_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#  wso2_gov_db:
+#    name: WSO2_GOV_DB
+#    description: The datasource used for gov registry
+#    driver_class_name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
+#    username: root
+#    password: root
+#    jndi_config: jdbc/WSO2_GOV_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#  wso2_user_db:
+#    name: wso2_user_db
+#    description: The datasource is used for user mangement and userstore
+#    driver_class_name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
+#    username: root
+#    password: root
+#    jndi_config: jdbc/WSO2USER_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-#wso2::usermgt_datasource : wso2user_db
+wso2::analytics_datasources:
+  wso2_analytics_fs_db:
+    name: WSO2_ANALYTICS_FS_DB
+    description: The datasource used for analytics file system
+    driver_class_name: org.h2.Driver
+    url: jdbc:h2:repository/database/ANALYTICS_FS_DB;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    username: wso2carbon
+    password: wso2carbon
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+    default_auto_commit: false
+    initial_size: 0
+    test_while_idle: true
+    min_evictable_idle_time_millis: 4000
+  wso2_analytics_event_store_db:
+    name: WSO2_ANALYTICS_EVENT_STORE_DB
+    description: The datasource used for analytics record store
+    driver_class_name: org.h2.Driver
+    url: jdbc:h2:repository/database/ANALYTICS_EVENT_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    username: wso2carbon
+    password: wso2carbon
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+    default_auto_commit: false
+    initial_size: 0
+    test_while_idle: true
+    min_evictable_idle_time_millis: 4000
+  wso2_analytics_processed_data_store_db:
+    name: WSO2_ANALYTICS_PROCESSED_DATA_STORE_DB
+    description: The datasource used for analytics record store
+    driver_class_name: org.h2.Driver
+    url: jdbc:h2:repository/database/ANALYTICS_PROCESSED_DATA_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    username: wso2carbon
+    password: wso2carbon
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+    default_auto_commit: false
+    initial_size: 0
+    test_while_idle: true
+    min_evictable_idle_time_millis: 4000
 
-wso2::is_datasource : wso2_carbon_db
-
-#wso2::master_datasources :
-#  wso2_config_db :
-#    name : WSO2_CONFIG_DB
-#    description : The datasource used for config registry
-#    driver_class_name : com.mysql.jdbc.Driver
-#    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
-#    username : root
-#    password : root
-#    jndi_config : jdbc/WSO2_CONFIG_DB
-#    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-#  wso2_gov_db :
-#    name : WSO2_GOV_DB
-#    description : The datasource used for gov registry
-#    driver_class_name : com.mysql.jdbc.Driver
-#    url : jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
-#    username : root
-#    password : root
-#    jndi_config : jdbc/WSO2_GOV_DB
-#    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-#  wso2user_db :
-#    name : wso2user_db
-#    description : The datasource is used for user mangement and userstore
-#    driver_class_name : com.mysql.jdbc.Driver
-#    url : jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
-#    username : root
-#    password : root
-#    jndi_config : jdbc/WSO2USER_DB
-#    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-
-wso2::analytics_datasources :
-  wso2_analytics_fs_db :
-    name : WSO2_ANALYTICS_FS_DB
-    description : The datasource used for analytics file system
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/ANALYTICS_FS_DB;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username : wso2carbon
-    password : wso2carbon
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-    default_auto_commit : false
-    initial_size : 0
-    test_while_idle : true
-    min_evictable_idle_time_millis : 4000
-  wso2_analytics_event_store_db :
-    name : WSO2_ANALYTICS_EVENT_STORE_DB
-    description : The datasource used for analytics record store
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/ANALYTICS_EVENT_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username : wso2carbon
-    password : wso2carbon
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-    default_auto_commit : false
-    initial_size : 0
-    test_while_idle : true
-    min_evictable_idle_time_millis : 4000
-  wso2_analytics_processed_data_store_db :
-    name : WSO2_ANALYTICS_PROCESSED_DATA_STORE_DB
-    description : The datasource used for analytics record store
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/ANALYTICS_PROCESSED_DATA_STORE;AUTO_SERVER=TRUE;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username : wso2carbon
-    password : wso2carbon
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-    default_auto_commit : false
-    initial_size : 0
-    test_while_idle : true
-    min_evictable_idle_time_millis : 4000
-
-wso2::metrics_datasources :
-  wso2_metrics_db :
-    name : WSO2_METRICS_DB
-    description : The default datasource used for WSO2 Carbon Metrics
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2METRICS_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
-    jndi_config : jdbc/WSO2MetricsDB
-    username : wso2carbon
-    password : wso2carbon
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+wso2::metrics_datasources:
+  wso2_metrics_db:
+    name: WSO2_METRICS_DB
+    description: The default datasource used for WSO2 Carbon Metrics
+    driver_class_name: org.h2.Driver
+    url: jdbc:h2:repository/database/WSO2METRICS_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+    jndi_config: jdbc/WSO2MetricsDB
+    username: wso2carbon
+    password: wso2carbon
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # Secure vault configuration
-wso2::enable_secure_vault : false
-wso2::secure_vault_configs :
-  key_store_password :
+wso2::enable_secure_vault: false
+
+wso2::secure_vault_configs:
+  key_store_password:
     secret_alias: Carbon.Security.KeyStore.Password
     secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
     password: wso2carbon
-  key_store_key_password :
+  key_store_key_password:
     secret_alias: Carbon.Security.KeyStore.KeyPassword
     secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
     password: wso2carbon
-  trust_store_password :
+  trust_store_password:
     secret_alias: Carbon.Security.TrustStore.Password
     secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
     password: wso2carbon
-  user_manager_admin_password :
+  user_manager_admin_password:
     secret_alias: UserManager.AdminUser.Password
     secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
     password: admin
-  wso2_carbon_db_password :
+  wso2_carbon_db_password:
     secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
     secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
     password: wso2carbon
-  connector_key_store_password :
+  connector_key_store_password:
     secret_alias: Server.Service.Connector.keystorePass
     secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
     password: wso2carbon
-  analytics_data_config_password :
+  analytics_data_config_password:
     secret_alias: Analytics.Data.Config.Password
     secret_alias_value: repository/conf/analytics/analytics-data-config.xml//AnalyticsDataConfiguration/Password,false
     password: wso2carbon
-#  analytics_data_config_trust_store_password :
+#  analytics_data_config_trust_store_password:
 #    secret_alias: Analytics.Data.Config.TrustStorePassword
 #    secret_alias_value: repository/conf/analytics/analytics-data-config.xml//AnalyticsDataConfiguration/TrustStorePassword,false
 #    password: wso2carbon
-#  dep_sync_svn_password :
+#  dep_sync_svn_password:
 #    secret_alias: Carbon.DeploymentSynchronizer.SvnPassword
 #    secret_alias_value: repository/conf/carbon.xml//Sever/DeploymentSynchronizer/SvnPassword,false
 #    password: password
-#  wso2_config_db_password :
+#  wso2_config_db_password:
 #    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
-#  wso2_gov_db_password :
+#  wso2_gov_db_password:
 #    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
