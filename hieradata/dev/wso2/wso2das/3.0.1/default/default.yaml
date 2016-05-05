@@ -25,7 +25,7 @@ wso2::mgt_hostname: das.wso2.com
 #  - repository/components/lib/mysql-connector-java-5.1.36.jar
 
 wso2::template_list:
-  - repository/conf/identity.xml
+  - repository/conf/identity/identity.xml
   - repository/conf/datasources/analytics-datasources.xml
   - repository/conf/datasources/metrics-datasources.xml
   - repository/conf/analytics/spark/spark-defaults.conf
