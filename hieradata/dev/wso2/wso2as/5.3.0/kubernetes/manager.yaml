@@ -13,35 +13,35 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname : wso2as-manager
-wso2::hostname : wso2as-worker
+wso2::mgt_hostname: wso2as-manager
+wso2::hostname: wso2as-worker
 
-wso2::clustering :
-    enabled : true
-    local_member_host : local.as.wso2.com
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    sub_domain : mgt
-    kubernetes :
-       kubernetes_namespace : default
-       kubernetes_services : wso2as-manager,wso2as-worker
-       kubernetes_master_username :
-       kubernetes_master_password :
-
-wso2::dep_sync :
-    enabled : false
-    auto_checkout : true
-    auto_commit : true
-    repository_type : svn
-    svn :
-       url : http://svnrepo.example.com/repos/
-       user : username
-       password : password
-       append_tenant_id: true
+# Clustering & membership scheme
+wso2::clustering:
+  enabled: true
+  local_member_host: local.as.wso2.com
+  local_member_port: 4000
+  membership_scheme: kubernetes
+  sub_domain: mgt
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2as-manager,wso2as-worker
 
 # for K8s scenario, need to enable proxy port to match NodePorts
 # defined for servlet HTTP and HTTPS transport in K8s Service definition
 wso2::ports:
-  proxyPort :
+  proxyPort:
     http: 32021
     https: 32022
+
+# Deployment synchronization
+wso2::dep_sync:
+  enabled: false
+  auto_checkout: true
+  auto_commit: true
+  repository_type: svn
+  svn:
+    url: http://svnrepo.example.com/repos/
+    user: username
+    password: password
+    append_tenant_id: true
