@@ -11,129 +11,130 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 ---
 classes:
   - wso2dss
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
-wso2::template_list :
-  - repository/conf/etc/tasks-config.xml
-#  - repository/conf/security/cipher-text.properties
-#  - repository/conf/security/cipher-tool.properties
-#  - bin/ciphertool.sh
-#  - password-tmp
-
 wso2::service_name: wso2dss
-wso2::mgt_hostname : wso2dss-default
-wso2::hostname : wso2dss-default
-
-wso2::taskServerCount : 1
+wso2::mgt_hostname: wso2dss-default
+wso2::hostname: wso2dss-default
 
 wso2::clustering:
-    enabled: true
-    membership_scheme: kubernetes
-    kubernetes:
-       kubernetes_namespace: default
-       kubernetes_services: wso2dss-default
+  enabled: true
+  membership_scheme: kubernetes
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2dss-default
 
-wso2::file_list :
+wso2::file_list:
   - repository/components/lib/jackson-annotations-2.5.4.jar
   - repository/components/lib/jackson-core-2.5.4.jar
   - repository/components/lib/jackson-databind-2.5.4.jar
   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
 
+wso2::template_list:
+  - repository/conf/etc/tasks-config.xml
+#  - repository/conf/security/cipher-text.properties
+#  - repository/conf/security/cipher-tool.properties
+#  - bin/ciphertool.sh
+#  - password-tmp
+
+wso2::ports:
+  proxyPort:
+    http: 32071
+    https: 32072
+
+wso2::taskServerCount: 1
+
 wso2::usermgt_datasource: wso2_user_db
 
-
-wso2::master_datasources :
-  wso2_config_db :
-    name : WSO2_CONFIG_DB
-    description : The datasource used for config registry
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-dssdb:3306/WSO2_DSS_DB?autoReconnect=true
+wso2::master_datasources:
+  wso2_config_db:
+    name: WSO2_CONFIG_DB
+    description: The datasource used for config registry
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-dssdb:3306/WSO2_DSS_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2_CONFIG_DB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-  wso2_gov_db :
-    name : WSO2_GOV_DB
-    description : The datasource used for gov registry
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
+    jndi_config: jdbc/WSO2_CONFIG_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+  wso2_gov_db:
+    name: WSO2_GOV_DB
+    description: The datasource used for gov registry
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2_GOV_DB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-  wso2_user_db :
-    name : WSO2_USER_DB
-    description : The datasource is used for user mangement and userstore
-    driver_class_name : com.mysql.jdbc.Driver
-    url : jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
+    jndi_config: jdbc/WSO2_GOV_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+  wso2_user_db:
+    name: WSO2_USER_DB
+    description: The datasource is used for user management and userstore
+    driver_class_name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2_USER_DB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+    jndi_config: jdbc/WSO2_USER_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::registry_mounts:
-  wso2_config_db :
-    path : /_system/config
-    target_path : /_system/config/dss
-    read_only : false
-    registry_root : /
-    enable_cache : true
-  wso2_gov_db :
-    path : /_system/governance
-    target_path : /_system/governance
-    read_only : false
-    registry_root : /
-    enable_cache : true
+  wso2_config_db:
+    path: /_system/config
+    target_path: /_system/config/dss
+    read_only: false
+    registry_root: /
+    enable_cache: true
+  wso2_gov_db:
+    path: /_system/governance
+    target_path: /_system/governance
+    read_only: false
+    registry_root: /
+    enable_cache: true
 
 # Secure vault configuration
-wso2::enable_secure_vault : false
-wso2::secure_vault_configs :
-  key_store_password :
+wso2::enable_secure_vault: false
+
+wso2::secure_vault_configs:
+  key_store_password:
     secret_alias: Carbon.Security.KeyStore.Password
     secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
     password: wso2carbon
-  key_store_key_password :
+  key_store_key_password:
     secret_alias: Carbon.Security.KeyStore.KeyPassword
     secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
     password: wso2carbon
-  trust_store_password :
+  trust_store_password:
     secret_alias: Carbon.Security.TrustStore.Password
     secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
     password: wso2carbon
-  user_manager_admin_password :
+  user_manager_admin_password:
     secret_alias: UserManager.AdminUser.Password
     secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
     password: admin
-  wso2_carbon_db_password :
+  wso2_carbon_db_password:
     secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
     secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
     password: wso2carbon
-  connector_key_store_password :
+  connector_key_store_password:
     secret_alias: Server.Service.Connector.keystorePass
     secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
     password: wso2carbon
-
-wso2::ports:
-    proxyPort :
-        http : 32071
-        https : 32072
