@@ -18,7 +18,6 @@
     - "wso2/%{::product_name}/%{::product_version}/%{::platform}/%{::product_profile}"
     - "wso2/%{::product_name}/%{::product_version}/%{::platform}/default"
     - "osfamily/%{::osfamily}"
-    - "vm_type/%{::vm_type}"
     - wso2/common
     - common
 :backends:
