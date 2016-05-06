@@ -33,7 +33,6 @@
     </licenses>
 
     <modules>
-        <module>modules</module>
         <module>modules/wso2base</module>
         <module>modules/wso2brs</module>
         <module>modules/wso2bps</module>
