@@ -18,8 +18,8 @@ wso2::hostname: wso2dss-worker
 
 wso2::clustering:
   enabled: true
-  local_member_port: 4000
   membership_scheme: kubernetes
+  local_member_port: 4000
   sub_domain: worker
   kubernetes:
     kubernetes_namespace: default

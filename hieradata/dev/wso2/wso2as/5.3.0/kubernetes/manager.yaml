@@ -19,9 +19,8 @@ wso2::hostname: wso2as-worker
 # Clustering & membership scheme
 wso2::clustering:
   enabled: true
-  local_member_host: local.as.wso2.com
-  local_member_port: 4000
   membership_scheme: kubernetes
+  local_member_port: 4000
   sub_domain: mgt
   kubernetes:
     kubernetes_namespace: default

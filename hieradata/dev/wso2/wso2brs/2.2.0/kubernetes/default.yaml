@@ -25,7 +25,6 @@ wso2::mgt_hostname: wso2brs-default
 wso2::clustering:
   enabled: true
   membership_scheme: kubernetes
-  local_member_host: local.brs.wso2.com
   local_member_port: 4000
   kubernetes:
     kubernetes_namespace: default

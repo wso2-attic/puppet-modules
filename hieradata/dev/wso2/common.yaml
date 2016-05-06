@@ -144,10 +144,12 @@ wso2::master_datasources :
 wso2::datasources::common::username : 'wso2carbon'
 wso2::datasources::common::password : 'wso2carbon'
 wso2::datasources::common::max_active : '50'
+wso2::datasources::common::max_idle : '20'
 wso2::datasources::common::max_wait : '60000'
 wso2::datasources::common::default_auto_commit : 'false'
 wso2::datasources::common::test_on_borrow : 'true'
 wso2::datasources::common::validation_interval : '30000'
+wso2::datasources::common::use_datasource_factory : 'false'
 
 # H2 datasources configuration
 wso2::datasources::h2::validation_query : 'SELECT 1'

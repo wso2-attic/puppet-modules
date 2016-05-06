@@ -23,8 +23,8 @@ wso2::mgt_hostname: wso2greg-store
 
 wso2::clustering:
   enabled: true
-  local_member_port: 4000
   membership_scheme: kubernetes
+  local_member_port: 4000
   kubernetes:
      kubernetes_namespace: default
      kubernetes_services: wso2greg-publisher,wso2greg-store

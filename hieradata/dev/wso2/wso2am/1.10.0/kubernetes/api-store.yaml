@@ -34,6 +34,7 @@ wso2::apim_store:
 wso2::clustering:
   enabled: true
   membership_scheme: kubernetes
+  local_member_port: 4000
   kubernetes:
     kubernetes_namespace: default
       kubernetes_services: wso2am-api-store,wso2am-api-publisher
