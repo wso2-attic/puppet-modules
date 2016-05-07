@@ -39,9 +39,8 @@ wso2::ha_deployment:
 
 wso2::clustering:
   enabled: true
-  local_member_host: local.cep.wso2.com
-  local_member_port: 4000
   membership_scheme: kubernetes
+  local_member_port: 4000
   sub_domain: worker
   kubernetes:
     kubernetes_namespace: default

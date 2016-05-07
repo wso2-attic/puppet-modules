@@ -46,10 +46,8 @@ wso2::ports:
 
 wso2::clustering:
   enabled: true
-  local_member_port: 4000
-  local_member_host: local.is.wso2.com
   membership_scheme: kubernetes
-  domain: wso2.is.domain
+  local_member_port: 4000
   sub_domain: mgt
   kubernetes:
     kubernetes_namespace: default

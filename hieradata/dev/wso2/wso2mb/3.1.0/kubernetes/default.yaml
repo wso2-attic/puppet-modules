@@ -47,10 +47,9 @@ wso2::ports:
 
 # Clustered MB setup related values. Uncomment for Clustered setup.
 wso2::clustering:
-  enabled: false
-  local_member_port: 4000
-  local_member_host: local.mb.wso2.com
+  enabled: true
   membership_scheme: kubernetes
+  local_member_port: 4000
   kubernetes:
     kubernetes_namespace: default
     kubernetes_services: wso2mb-default
@@ -162,7 +161,7 @@ wso2::metrics_datasources:
 
 wso2::registry_mounts:
   wso2_config_db:
-    path: /_system/config/
+    path: /_system/config
     target_path: /_system/config/mb
     read_only: false
     registry_root: /

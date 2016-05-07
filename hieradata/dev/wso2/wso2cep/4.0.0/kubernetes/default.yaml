@@ -50,7 +50,6 @@ wso2::clustering:
   enabled: true
   membership_scheme: kubernetes
   local_member_port: 4000
-  local_member_host: local.cep.wso2.com
   kubernetes:
     kubernetes_namespace: default
     kubernetes_services: wso2cep-default

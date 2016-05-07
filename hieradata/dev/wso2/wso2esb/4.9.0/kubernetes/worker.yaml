@@ -16,13 +16,13 @@ wso2::hostname : wso2esb-worker
 wso2::mgt_hostname : wso2esb-worker
 
 wso2::clustering :
-    enabled : true
-    local_member_port : 4000
-    membership_scheme : kubernetes
-    sub_domain : worker
-    kubernetes :
-       kubernetes_namespace : default
-       kubernetes_services : wso2esb-worker,wso2esb-manager
+  enabled : true
+  membership_scheme : kubernetes
+  local_member_port : 4000
+  sub_domain : worker
+  kubernetes :
+    kubernetes_namespace : default
+    kubernetes_services : wso2esb-worker,wso2esb-manager
 
 wso2::dep_sync :
     enabled : false
