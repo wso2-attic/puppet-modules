@@ -131,6 +131,8 @@ wso2::ports:
   proxyPort:
     http: 32093
     https: 32094
+    pass_through_http: 32091
+    pass_through_https: 32092
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
