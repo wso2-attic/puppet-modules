@@ -12,23 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::maintenance_mode : zero
-wso2::install_mode : file_bucket
-wso2::patches_dir : repository/components/patches
-wso2::install_mode : file_bucket
-wso2::install_dir : "/mnt/%{::ipaddress}"
-wso2::user : wso2user
-wso2::group : wso2
-wso2::pack_dir : /mnt/packs
+wso2::maintenance_mode: zero
+wso2::install_mode: file_bucket
+wso2::patches_dir: repository/components/patches
+wso2::install_mode: file_bucket
+wso2::install_dir: "/mnt/%{::ipaddress}"
+wso2::user: wso2user
+wso2::group: wso2
+wso2::pack_dir: /mnt/packs
 
 # Host mapping to be made in etc/hosts
-wso2::hosts_mapping :
-  localhost :
-    ip_address : 127.0.0.1
-    hostname : localhost
+wso2::hosts_mapping:
+  localhost:
+    ip_address: 127.0.0.1
+    hostname: localhost
 
-wso2::ipaddress : "%{::ipaddress}"
-wso2::fqdn : "%{::fqdn}"
+wso2::ipaddress: "%{::ipaddress}"
+wso2::fqdn: "%{::fqdn}"
 
 # System service name
 wso2::service_template: wso2base/wso2service.erb
@@ -37,7 +37,7 @@ wso2::service_template: wso2base/wso2service.erb
 wso2::hosts_template: wso2base/hosts.erb
 
 # Puppet template list to be populated
-wso2::template_list :
+wso2::template_list:
   - repository/conf/carbon.xml
   - repository/conf/user-mgt.xml
   - repository/conf/registry.xml
@@ -51,54 +51,54 @@ wso2::template_list :
 #  - password-tmp
 
 # File list to be copied to the server
-wso2::file_list : []
+wso2::file_list: []
 
 # JVM settings
-wso2::jvm :
+wso2::jvm:
     xms: 256m
     xmx: 1024m
     max_perm_size: 256m
 
 # Server ports configuration
 wso2::ports:
-  offset : 0
+  offset: 0
 
 # Hostname configuration
-wso2::hostname : "%{::clientcert}"
-wso2::mgt_hostname : "%{::clientcert}"
+wso2::hostname: "%{::clientcert}"
+wso2::mgt_hostname: "%{::clientcert}"
 
 # Clustering configuration
 wso2::worker_node: false
-wso2::clustering :
-    enabled : false
-    membership_scheme : wka
-    domain : wso2.carbon.domain
-    local_member_host : 127.0.0.1
-    local_member_port : 4000
-    sub_domain : worker
-    wka :
-       members :
+wso2::clustering:
+    enabled: false
+    membership_scheme: wka
+    domain: wso2.carbon.domain
+    local_member_host: 127.0.0.1
+    local_member_port: 4000
+    sub_domain: worker
+    wka:
+       members:
          -
-           hostname : 127.0.0.1
-           port : 4000
-    # multicast :
-    # kubernetes :
-    # ppaas :
+           hostname: 127.0.0.1
+           port: 4000
+    # multicast:
+    # kubernetes:
+    # ppaas:
 
 # Deployment synchronization configuration
-wso2::dep_sync :
-    enabled : false
-    auto_checkout : true
-    auto_commit : false
-    repository_type : svn
-    svn :
-       url : http://svnrepo.example.com/repos/
-       user : username
-       password : password
+wso2::dep_sync:
+    enabled: false
+    auto_checkout: true
+    auto_commit: false
+    repository_type: svn
+    svn:
+       url: http://svnrepo.example.com/repos/
+       user: username
+       password: password
        append_tenant_id: true
 
 # Common packages to be installed to support WSO2 products
-packages :
+packages:
   - zip
   - unzip
   - tree
@@ -110,52 +110,52 @@ wso2::usermgt_datasource: wso2_carbon_db
 wso2::local_reg_datasource: wso2_carbon_db
 
 # WSO2 datasources
-wso2::master_datasources :
-  wso2_carbon_db :
-    name : WSO2_CARBON_DB
-    description : The datasource used for registry and user manager
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username : "%{hiera('wso2::datasources::common::username')}"
-    password : "%{hiera('wso2::datasources::common::password')}"
-    jndi_config : jdbc/WSO2CarbonDB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
-#  wso2user_db :
-#    name : WSO2_USER_DB
-#    description : The datasource is used for user mangement and userstore
-#    driver_class_name : org.h2.Driver
-#    url : jdbc:h2:repository/database/WSO2CARBON_DB?autoReconnect=true
-#    username : "%{hiera('wso2::datasources::common::username')}"
-#    password : "%{hiera('wso2::datasources::common::password')}"
-#    jndi_config : jdbc/WSO2_USER_DB
-#    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
-#    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
+wso2::master_datasources:
+  wso2_carbon_db:
+    name: WSO2_CARBON_DB
+    description: The datasource used for registry and user manager
+    driver_class_name: org.h2.Driver
+    url: jdbc:h2:repository/database/WSO2CARBON_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
+    jndi_config: jdbc/WSO2CarbonDB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#  wso2user_db:
+#    name: WSO2_USER_DB
+#    description: The datasource is used for user mangement and userstore
+#    driver_class_name: org.h2.Driver
+#    url: jdbc:h2:repository/database/WSO2CARBON_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::common::username')}"
+#    password: "%{hiera('wso2::datasources::common::password')}"
+#    jndi_config: jdbc/WSO2_USER_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # Common datasources configuration
-wso2::datasources::common::username : 'wso2carbon'
-wso2::datasources::common::password : 'wso2carbon'
-wso2::datasources::common::max_active : '50'
-wso2::datasources::common::max_idle : '20'
-wso2::datasources::common::max_wait : '60000'
-wso2::datasources::common::default_auto_commit : 'false'
-wso2::datasources::common::test_on_borrow : 'true'
-wso2::datasources::common::validation_interval : '30000'
-wso2::datasources::common::use_datasource_factory : 'false'
+wso2::datasources::common::username: 'wso2carbon'
+wso2::datasources::common::password: 'wso2carbon'
+wso2::datasources::common::max_active: '50'
+wso2::datasources::common::max_idle: '20'
+wso2::datasources::common::max_wait: '60000'
+wso2::datasources::common::default_auto_commit: 'false'
+wso2::datasources::common::test_on_borrow: 'true'
+wso2::datasources::common::validation_interval: '30000'
+wso2::datasources::common::use_datasource_factory: 'false'
 
 # H2 datasources configuration
-wso2::datasources::h2::validation_query : 'SELECT 1'
+wso2::datasources::h2::validation_query: 'SELECT 1'
 
 # MySQL datasources configuration
-wso2::datasources::mysql::validation_query : 'SELECT 1'
+wso2::datasources::mysql::validation_query: 'SELECT 1'
 
 # Secure vault configuration
-wso2::enable_secure_vault : false
+wso2::enable_secure_vault: false

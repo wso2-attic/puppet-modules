@@ -17,13 +17,13 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2es
-wso2::hostname : wso2es-publisher
-wso2::mgt_hostname : wso2es-publisher
+wso2::hostname: wso2es-publisher
+wso2::mgt_hostname: wso2es-publisher
 
-wso2::clustering :
-  enabled : true
-  membership_scheme : kubernetes
-  local_member_port : 4000
-  kubernetes :
+wso2::clustering:
+  enabled: true
+  membership_scheme: kubernetes
+  local_member_port: 4000
+  kubernetes:
     kubernetes_namespace: default
     kubernetes_services: wso2es-publisher,wso2es-store

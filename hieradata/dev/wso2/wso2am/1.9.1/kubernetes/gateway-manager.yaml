@@ -26,7 +26,7 @@ wso2::apim_gateway:
 wso2::clustering:
   enabled: true
   membership_scheme: kubernetes
-  sub_domain : mgt
+  sub_domain: mgt
   kubernetes:
      kubernetes_namespace: default
      kubernetes_services: wso2am-gateway-manager

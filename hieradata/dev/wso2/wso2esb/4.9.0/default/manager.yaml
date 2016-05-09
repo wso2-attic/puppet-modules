@@ -12,23 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::mgt_hostname : mgt.esb.wso2.com
+wso2::mgt_hostname: mgt.esb.wso2.com
 
-wso2::clustering :
-    enabled : true
-    local_member_host : local.esb.wso2.com
-    domain : wso2.esb.domain
-    local_member_port : 4000
-    membership_scheme : wka
-    sub_domain : mgt
-    wka :
-       members :
+wso2::clustering:
+    enabled: true
+    local_member_host: local.esb.wso2.com
+    domain: wso2.esb.domain
+    local_member_port: 4000
+    membership_scheme: wka
+    sub_domain: mgt
+    wka:
+       members:
          -
-           hostname : 192.168.100.10
-           port : 4000
+           hostname: 192.168.100.10
+           port: 4000
          -
-           hostname : 192.168.100.20
-           port : 4000
+           hostname: 192.168.100.20
+           port: 4000
 
 #wso2::registry_mounts:
 #  wso2_config_db:
@@ -45,22 +45,22 @@ wso2::clustering :
 #    registry_root: /
 #    enable_cache: true
 
-wso2::dep_sync :
-    enabled : false
-    auto_checkout : true
-    auto_commit : true
-    repository_type : svn
-    svn :
-       url : http://svnrepo.example.com/repos/
-       user : username
-       password : password
+wso2::dep_sync:
+    enabled: false
+    auto_checkout: true
+    auto_commit: true
+    repository_type: svn
+    svn:
+       url: http://svnrepo.example.com/repos/
+       user: username
+       password: password
        append_tenant_id: true
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
-  http :
-    bind_address : esb.wso2.com
-    prefix : http://esb.wso2.com:9763
-  https :
-    bind_address : esb.wso2.com
-    prefix : https://esb.wso2.com:9443
+  http:
+    bind_address: esb.wso2.com
+    prefix: http://esb.wso2.com:9763
+  https:
+    bind_address: esb.wso2.com
+    prefix: https://esb.wso2.com:9443

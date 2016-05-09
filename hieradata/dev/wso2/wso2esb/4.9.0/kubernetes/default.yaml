@@ -18,8 +18,8 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2esb
-wso2::hostname : wso2esb-default
-wso2::mgt_hostname : wso2esb-default
+wso2::hostname: wso2esb-default
+wso2::mgt_hostname: wso2esb-default
 
 wso2::clustering:
   enabled: true
@@ -98,29 +98,29 @@ wso2::registry_mounts:
     enable_cache: true
 
 # Secure vault configuration
-wso2::enable_secure_vault : false
-wso2::secure_vault_configs :
-  key_store_password :
+wso2::enable_secure_vault: false
+wso2::secure_vault_configs:
+  key_store_password:
     secret_alias: Carbon.Security.KeyStore.Password
     secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
     password: wso2carbon
-  key_store_key_password :
+  key_store_key_password:
     secret_alias: Carbon.Security.KeyStore.KeyPassword
     secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
     password: wso2carbon
-  trust_store_password :
+  trust_store_password:
     secret_alias: Carbon.Security.TrustStore.Password
     secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
     password: wso2carbon
-  user_manager_admin_password :
+  user_manager_admin_password:
     secret_alias: UserManager.AdminUser.Password
     secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
     password: admin
-  wso2_carbon_db_password :
+  wso2_carbon_db_password:
     secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
     secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
     password: wso2carbon
-  connector_key_store_password :
+  connector_key_store_password:
     secret_alias: Server.Service.Connector.keystorePass
     secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
     password: wso2carbon
@@ -128,15 +128,15 @@ wso2::secure_vault_configs :
 # for K8s scenario, need to enable proxy port to match NodePorts
 # defined for servlet HTTP and HTTPS transport in K8s Service definition
 wso2::ports:
-  proxyPort :
+  proxyPort:
     http: 32093
     https: 32094
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
-  http :
-    bind_address : wso2esb-default
-    prefix : http://wso2esb-default:32093
-  https :
-    bind_address : wso2esb-default
-    prefix : https://wso2esb-default:32094
+  http:
+    bind_address: wso2esb-default
+    prefix: http://wso2esb-default:32093
+  https:
+    bind_address: wso2esb-default
+    prefix: https://wso2esb-default:32094

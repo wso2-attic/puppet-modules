@@ -12,39 +12,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::mgt_hostname : wso2esb-manager
-wso2::hostname : wso2esb-worker
+wso2::mgt_hostname: wso2esb-manager
+wso2::hostname: wso2esb-worker
 
-wso2::clustering :
-  enabled : true
-  membership_scheme : kubernetes
-  local_member_port : 4000
-  sub_domain : mgt
-  kubernetes :
-    kubernetes_namespace : default
-    kubernetes_services : wso2esb-manager,wso2esb-worker
+wso2::clustering:
+  enabled: true
+  membership_scheme: kubernetes
+  local_member_port: 4000
+  sub_domain: mgt
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2esb-manager,wso2esb-worker
 
-wso2::dep_sync :
-    enabled : false
-    auto_checkout : true
-    auto_commit : true
-    repository_type : svn
-    svn :
-       url : http://svnrepo.example.com/repos/
-       user : username
-       password : password
+wso2::dep_sync:
+    enabled: false
+    auto_checkout: true
+    auto_commit: true
+    repository_type: svn
+    svn:
+       url: http://svnrepo.example.com/repos/
+       user: username
+       password: password
        append_tenant_id: true
 
 wso2::ports:
-  proxyPort :
+  proxyPort:
     http: 32095
     https: 32096
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
-  http :
-    bind_address : wso2esb-worker
-    prefix : http://wso2esb-worker:32093
-  https :
-    bind_address : wso2esb-worker
-    prefix : https://wso2esb-worker:32094
+  http:
+    bind_address: wso2esb-worker
+    prefix: http://wso2esb-worker:32093
+  https:
+    bind_address: wso2esb-worker
+    prefix: https://wso2esb-worker:32094

@@ -12,27 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::hostname : wso2esb-worker
-wso2::mgt_hostname : wso2esb-worker
+wso2::hostname: wso2esb-worker
+wso2::mgt_hostname: wso2esb-worker
 
-wso2::clustering :
-  enabled : true
-  membership_scheme : kubernetes
-  local_member_port : 4000
-  sub_domain : worker
-  kubernetes :
-    kubernetes_namespace : default
-    kubernetes_services : wso2esb-worker,wso2esb-manager
+wso2::clustering:
+  enabled: true
+  membership_scheme: kubernetes
+  local_member_port: 4000
+  sub_domain: worker
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2esb-worker,wso2esb-manager
 
-wso2::dep_sync :
-    enabled : false
-    auto_checkout : true
-    auto_commit : false
-    repository_type : svn
-    svn :
-       url : http://svnrepo.example.com/repos/
-       user : username
-       password : password
+wso2::dep_sync:
+    enabled: false
+    auto_checkout: true
+    auto_commit: false
+    repository_type: svn
+    svn:
+       url: http://svnrepo.example.com/repos/
+       user: username
+       password: password
        append_tenant_id: true
 
 wso2::registry_mounts:
