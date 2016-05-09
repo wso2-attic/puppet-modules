@@ -148,7 +148,7 @@ wso2::master_datasources:
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-  wso2store_db:
+  jagh2:
     name: JAGH2
     description: The datasource used for by the Jaggery Storage Manager
     driver_class_name: com.mysql.jdbc.Driver
