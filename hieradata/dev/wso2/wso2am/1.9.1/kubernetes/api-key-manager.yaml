@@ -17,11 +17,11 @@ wso2::mgt_hostname: wso2am-api-key-manager
 
 wso2::apim_gateway:
   host: wso2am-gateway-manager
-#  host: wso2am-gateway-worker
 
 wso2::clustering:
   enabled: true
   membership_scheme: kubernetes
+  local_member_port: 4000
   kubernetes:
      kubernetes_namespace: default
      kubernetes_services: wso2am-api-key-manager

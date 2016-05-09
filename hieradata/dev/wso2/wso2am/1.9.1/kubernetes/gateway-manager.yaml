@@ -26,11 +26,12 @@ wso2::apim_gateway:
 wso2::clustering:
   enabled: true
   membership_scheme: kubernetes
+  local_member_port: 4000
   sub_domain: mgt
   kubernetes:
-     kubernetes_namespace: default
-     kubernetes_services: wso2am-gateway-manager
-#     kubernetes_services: wso2am-gateway-manager,wso2am-gateway-worker
+    kubernetes_namespace: default
+    kubernetes_services: wso2am-gateway-manager
+#    kubernetes_services: wso2am-gateway-manager,wso2am-gateway-worker
 
 wso2::ports:
   proxyPort:

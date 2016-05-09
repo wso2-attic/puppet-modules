@@ -16,8 +16,7 @@ wso2::hostname: wso2am-api-key-manager
 wso2::mgt_hostname: wso2am-api-key-manager
 
 wso2::apim_gateway:
-   host: wso2am-gateway-manager
-#  host: wso2am-gateway-worker
+  host: wso2am-gateway-manager
 
 wso2::clustering:
   enabled: true

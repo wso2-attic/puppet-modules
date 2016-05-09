@@ -34,9 +34,10 @@ wso2::mgt_hostname: wso2am-default
 wso2::clustering:
   enabled: true
   membership_scheme: kubernetes
+  local_member_port: 4000
   kubernetes:
-     kubernetes_namespace: default
-     kubernetes_services: wso2am-default
+    kubernetes_namespace: default
+    kubernetes_services: wso2am-default
 
 wso2::ports:
   proxyPort:
@@ -44,29 +45,29 @@ wso2::ports:
     https: 32004
 
 wso2::apim_gateway:
-  host: localhost
-  port: 9443
-  api_endpoint_host: localhost
-  api_endpoint_port: 32001
-  secure_api_endpoint_port: 32002
-  api_token_revoke_endpoint_port: 8280
-  secure_api_token_revoke_endpoint_port: 8243
-  username: admin
-  password: admin
+    host: localhost
+    port: 9443
+    api_endpoint_host: localhost
+    api_endpoint_port: 32001
+    secure_api_endpoint_port: 32002
+    api_token_revoke_endpoint_port: 8280
+    secure_api_token_revoke_endpoint_port: 8243
+    username: admin
+    password: admin
 
 wso2::apim_keymanager:
-  host: localhost
-  port: 9443
-  username: admin
-  password: admin
+    host: localhost
+    port: 9443
+    username: admin
+    password: admin
 
 wso2::apim_store:
-  host: wso2am-default
-  port: 32004
+    host: wso2am-default
+    port: 32004
 
 wso2::apim_publisher:
-  host: wso2am-default
-  port: 32004
+    host: wso2am-default
+    port: 32004
 
 wso2::registry_mounts:
   wso2_config_db:
@@ -84,7 +85,7 @@ wso2::registry_mounts:
     enable_cache: true
 
 wso2::usermgt_datasource: wso2user_db
-wso2::is_datasource: wso2_gov_db
+wso2::is_datasource: wso2am_db
 
 wso2::am_datasources:
   wso2am_db:
@@ -158,36 +159,36 @@ wso2::master_datasources:
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
 
 # Secure vault configuration
-wso2::enable_secure_vault: false
-wso2::secure_vault_configs:
-  key_store_password:
-    secret_alias: Carbon.Security.KeyStore.Password
-    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
-    password: wso2carbon
-  key_store_key_password:
-    secret_alias: Carbon.Security.KeyStore.KeyPassword
-    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
-    password: wso2carbon
-  trust_store_password:
-    secret_alias: Carbon.Security.TrustStore.Password
-    secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
-    password: wso2carbon
-  user_manager_admin_password:
-    secret_alias: UserManager.AdminUser.Password
-    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
-    password: admin
-  wso2_carbon_db_password:
-    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
-    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
-    password: wso2carbon
-  connector_key_store_password:
-    secret_alias: Server.Service.Connector.keystorePass
-    secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
-    password: wso2carbon
-  wso2am_db_password:
-    secret_alias: Datasource.WSO2AM_DB.configuration.password
-    secret_alias_value: repository/conf/datasources/am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false
-    password: wso2carbon
+#wso2::enable_secure_vault: false
+#wso2::secure_vault_configs:
+#  key_store_password:
+#    secret_alias: Carbon.Security.KeyStore.Password
+#    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
+#    password: wso2carbon
+#  key_store_key_password:
+#    secret_alias: Carbon.Security.KeyStore.KeyPassword
+#    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
+#    password: wso2carbon
+#  trust_store_password:
+#    secret_alias: Carbon.Security.TrustStore.Password
+#    secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
+#    password: wso2carbon
+#  user_manager_admin_password:
+#    secret_alias: UserManager.AdminUser.Password
+#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
+#    password: admin
+#  wso2_carbon_db_password:
+#    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: wso2carbon
+#  connector_key_store_password:
+#    secret_alias: Server.Service.Connector.keystorePass
+#    secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
+#    password: wso2carbon
+#  wso2am_db_password:
+#    secret_alias: Datasource.WSO2AM_DB.configuration.password
+#    secret_alias_value: repository/conf/datasources/am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: wso2carbon
 #  wso2am_stats_db_password:
 #    secret_alias: Datasource.WSO2AM_STATS_DB.configuration.password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_STATS_DB']/definition[@type='RDBMS']/configuration/password,false
