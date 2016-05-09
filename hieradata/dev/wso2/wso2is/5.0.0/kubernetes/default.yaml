@@ -157,29 +157,29 @@ wso2::am_datasources:
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # Secure vault configuration
-wso2::enable_secure_vault: false
-
-wso2::secure_vault_configs:
-  key_store_password:
-    secret_alias: Carbon.Security.KeyStore.Password
-    secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
-    password: wso2carbon
-  key_store_key_password:
-    secret_alias: Carbon.Security.KeyStore.KeyPassword
-    secret_alias_value: carbon.xml//Server/Security/KeyStore/KeyPassword,true
-    password: wso2carbon
-  trust_store_password:
-    secret_alias: Carbon.Security.TrustStore.Password
-    secret_alias_value: carbon.xml//Server/Security/TrustStore/Password,true
-    password: wso2carbon
-  user_manager_admin_password:
-    secret_alias: UserManager.AdminUser.Password
-    secret_alias_value: user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,true
-    password: admin
-  wso2_carbon_db_password:
-    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
-    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
-    password: wso2carbon
+# wso2::enable_secure_vault: false
+#
+# wso2::secure_vault_configs:
+#   key_store_password:
+#     secret_alias: Carbon.Security.KeyStore.Password
+#     secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
+#     password: wso2carbon
+#   key_store_key_password:
+#     secret_alias: Carbon.Security.KeyStore.KeyPassword
+#     secret_alias_value: carbon.xml//Server/Security/KeyStore/KeyPassword,true
+#     password: wso2carbon
+#   trust_store_password:
+#     secret_alias: Carbon.Security.TrustStore.Password
+#     secret_alias_value: carbon.xml//Server/Security/TrustStore/Password,true
+#     password: wso2carbon
+#   user_manager_admin_password:
+#     secret_alias: UserManager.AdminUser.Password
+#     secret_alias_value: user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,true
+#     password: admin
+#   wso2_carbon_db_password:
+#     secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
+#     secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
+#     password: wso2carbon
 #  wso2am_db_password:
 #    secret_alias: Datasource.WSO2AM_DB.configuration.password
 #    secret_alias_value: am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false

@@ -578,7 +578,13 @@
 	    <!--property name="port.mapping.8280" value="9764"/>
             <property name="port.mapping.8243" value="9444"/>
             <property name="subDomain" value="mgt"/-->
-
+            <%- if @ports['proxyPort'] and @ports['proxyPort']['pass_through_http'] -%>
+                <property name="port.mapping.8280" value="<%= @ports['proxyPort']['pass_through_http'] %>"/>
+            <%- end -%>
+            
+            <%- if @ports['proxyPort'] and @ports['proxyPort']['pass_through_https'] -%>
+                <property name="port.mapping.8243" value="<%= @ports['proxyPort']['pass_through_https'] %>"/>
+            <%- end -%>
 	    <!-- Worker Setup-->
 	    <!--property name="subDomain" value="worker"/-->
         <property name="subDomain" value="<%= @clustering['sub_domain'] %>"/>
