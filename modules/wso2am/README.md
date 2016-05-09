@@ -74,7 +74,7 @@ Do the below changes to relevant API Manager profiles (api-store, api-publisher,
     ```yaml
     wso2_config_db :
       path: /_system/config
-      target_path: /_system/config/
+      target_path: /_system/config
       read_only: false
       registry_root: /
       enable_cache: true
@@ -110,7 +110,7 @@ Do the below changes in hiera file to apply Secure Vault.
 1. Enable Secure Vault
 
     ```yaml
-    wso2::enable_secure_vault : true
+    wso2::enable_secure_vault: true
     ```
 
 2. Add Secure Vault configurations as below

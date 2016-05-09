@@ -74,7 +74,7 @@ Do the below changes to default hiera yaml files to start the server in distribu
     ```yaml
     wso2_config_db:
       path: /_system/config
-      target_path: /_system/config/
+      target_path: /_system/config
       read_only: false
       registry_root: /
       enable_cache: true
