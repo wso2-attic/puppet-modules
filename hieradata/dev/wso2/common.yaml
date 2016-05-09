@@ -12,14 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::maintenance_mode: zero
-wso2::install_mode: file_bucket
-wso2::patches_dir: repository/components/patches
-wso2::install_mode: file_bucket
-wso2::install_dir: "/mnt/%{::ipaddress}"
-wso2::user: wso2user
-wso2::group: wso2
-wso2::pack_dir: /mnt/packs
+wso2::maintenance_mode : zero
+wso2::install_mode : file_bucket
+wso2::patches_dir : repository/components/patches
+wso2::install_dir : "/mnt/%{::ipaddress}"
+wso2::user : wso2user
+wso2::group : wso2
+wso2::pack_dir : /mnt/packs
 
 # Host mapping to be made in etc/hosts
 wso2::hosts_mapping:
