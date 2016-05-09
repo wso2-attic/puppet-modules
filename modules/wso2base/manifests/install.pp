@@ -26,31 +26,33 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
   # download wso2 product pack archive
   case $mode {
     'file_repo': {
-      $remote_file_url = hiera("remote_file_url")
+      $remote_file_url = hiera('remote_file_url')
 
-      ensure_resource('exec', "$pack_file_abs_path", {
+      ensure_resource('exec', $pack_file_abs_path, {
         path           => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
         cwd            => $pack_dir,
         command        => "wget -q ${remote_file_url}",
         logoutput      => 'on_failure',
         creates        => $pack_file_abs_path,
-        onlyif         => "test -f $pack_file_abs_path",
+        onlyif         => "test -f ${pack_file_abs_path}",
         timeout        => 0,
         notify         => Exec["extract_${pack_file_abs_path}"],
-        require        => File["${install_dir}", "${pack_dir}"]
+        require        => File[$install_dir, $pack_dir]
       })
     }
 
-    'file_bucket' : {
-      ensure_resource('file', "$pack_file_abs_path", {
+    'file_bucket': {
+      ensure_resource('file', $pack_file_abs_path, {
         mode           => 750,
         owner          => $user,
         group          => $group,
         source         => ["puppet:///modules/${product_name}/${pack_filename}", "puppet:///files/packs/${pack_filename}"],
         notify         => Exec["extract_${pack_file_abs_path}"],
-        require        => File["${install_dir}", "${pack_dir}"]
+        require        => File[$install_dir, $pack_dir]
       })
     }
+
+    default: { fail("Install mode ${mode} is not supported by this module") }
   }
 
   # extract downloaded wso2 product pack archive
@@ -80,18 +82,18 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
   ensure_resource('exec', "set_permissions_${carbon_home}", {
     path               => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     cwd                => $carbon_home,
-    command            => "chmod -R 754 ./",
+    command            => 'chmod -R 754 ./',
     logoutput          => 'on_failure',
     timeout            => 0,
     refreshonly        => true,
-    notify             => Exec["remove_product_pack"]
+    notify             => Exec['remove_product_pack']
   })
 
 
   # Remove wso2 product pack archive
-  exec { "remove_product_pack":
-    path               => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-    command            => "rm -rf ${pack_file_abs_path}",
+  exec { 'remove_product_pack':
+    path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    command => "rm -rf ${pack_file_abs_path}",
   }
 
 
