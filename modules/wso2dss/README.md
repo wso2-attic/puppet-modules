@@ -32,34 +32,34 @@ Do the below changes to relevant DSS profiles (manager, worker) hiera yaml files
    Ex:
     ```yaml
     wso2::clustering :
-        enabled : true
-        local_member_host : 192.168.100.13
-        local_member_port : 4000
-        membership_scheme : wka
-        sub_domain : mgt
-        wka :
-           members :
+        enabled: true
+        local_member_host: 192.168.100.13
+        local_member_port: 4000
+        membership_scheme: wka
+        sub_domain: mgt
+        wka:
+           members:
              -
-               hostname : 192.168.100.13
-               port : 4000
+               hostname: 192.168.100.13
+               port: 4000
              -
-               hostname : 192.168.100.23
-               port : 4000
+               hostname: 192.168.100.23
+               port: 4000
     ```
 
 2. Add external databases to master datasources
 
    Ex:
     ```yaml
-    wso2::master_datasources :
+    wso2::master_datasources:
      wso2_config_db:
-       name : WSO2_CONFIG_DB
-       description : The datasource used for config registry
-       driver_class_name : org.h2.Driver
-       url : jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-       username : "%{hiera('wso2::datasources::common::username')}"
-       password : "%{hiera('wso2::datasources::common::password')}"
-       jndi_config : jdbc/WSO2_CONFIG_DB
+       name: WSO2_CONFIG_DB
+       description: The datasource used for config registry
+       driver_class_name: org.h2.Driver
+       url: jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
+       username: "%{hiera('wso2::datasources::common::username')}"
+       password: "%{hiera('wso2::datasources::common::password')}"
+       jndi_config: jdbc/WSO2_CONFIG_DB
        max_active: "%{hiera('wso2::datasources::common::max_active')}"
        max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
        test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -72,33 +72,33 @@ Do the below changes to relevant DSS profiles (manager, worker) hiera yaml files
 
    Ex:
     ```yaml
-    wso2_config_db :
-      path : /_system/config
-      target_path : /_system/config/dss
-      read_only : false
-      registry_root : /
-      enable_cache : true
-    wso2_gov_db :
-      path : /_system/governance
-      target_path : /_system/governance
-      read_only : false
-      registry_root : /
-      enable_cache : true
+    wso2_config_db:
+      path: /_system/config
+      target_path: /_system/config/dss
+      read_only: false
+      registry_root: /
+      enable_cache: true
+    wso2_gov_db:
+      path: /_system/governance
+      target_path: /_system/governance
+      read_only: false
+      registry_root: /
+      enable_cache: true
     ```
 
 4. Configure deployment synchronization
 
     Ex:
     ```yaml
-    wso2::dep_sync :
-        enabled : true
-        auto_checkout : true
-        auto_commit : true
-        repository_type : svn
-        svn :
-           url : http://svnrepo.example.com/repos/
-           user : username
-           password : password
+    wso2::dep_sync:
+        enabled: true
+        auto_checkout: true
+        auto_commit: true
+        repository_type: svn
+        svn:
+           url: http://svnrepo.example.com/repos/
+           user: username
+           password: password
            append_tenant_id: true
     ```
 
@@ -112,13 +112,13 @@ Do the below changes in hiera file to apply Secure Vault.
 1. Enable Secure Vault
 
     ```yaml
-    wso2::enable_secure_vault : true
+    wso2::enable_secure_vault: true
     ```
 
 2. Add Secure Vault configurations as below
 
     ```yaml
-    wso2::secure_vault_configs :
+    wso2::secure_vault_configs:
       <secure_vault_config_name>:
         secret_alias: <secret_alias>
         secret_alias_value: <secret_alias_value>
@@ -127,8 +127,8 @@ Do the below changes in hiera file to apply Secure Vault.
 
     Ex:
     ```yaml
-    wso2::secure_vault_configs :
-      key_store_password :
+    wso2::secure_vault_configs:
+      key_store_password:
         secret_alias: Carbon.Security.KeyStore.Password
         secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
         password: wso2carbon

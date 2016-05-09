@@ -21,9 +21,9 @@ wso2::service_name: wso2greg
 wso2::hostname: wso2greg-store
 wso2::mgt_hostname: wso2greg-store
 
-wso2::clustering :
-  enabled : true
-  membership_scheme : kubernetes
+wso2::clustering:
+  enabled: true
+  membership_scheme: kubernetes
   local_member_port: 4000
   kubernetes:
      kubernetes_namespace: default
