@@ -33,26 +33,26 @@ class wso2base::java (
   $cachedir = "/home/${wso2_user}/java-setup-${name}"
 
   java::setup { $java_source_file :
-    ensure            => 'present',
-    source            => $java_source_file,
-    deploymentdir     => $java_install_dir,
-    user              => 'root',
-    cachedir          => $cachedir,
-    require           => File[$java_install_dir]
+    ensure        => 'present',
+    source        => $java_source_file,
+    deploymentdir => $java_install_dir,
+    user          => 'root',
+    cachedir      => $cachedir,
+    require       => File[$java_install_dir]
   }
 
   # create a symlink for Java deployment
   file { $java_home:
-    ensure            => 'link',
-    target            => $java_install_dir,
-    require           => Java::Setup[$java_source_file]
+    ensure  => 'link',
+    target  => $java_install_dir,
+    require => Java::Setup[$java_source_file]
   }
 
   # set JAVA_HOME environment variable and include JAVA_HOME/bin in PATH for all users
-  file { "/etc/profile.d/set_java_home.sh":
-    ensure            => present,
-    content           => inline_template("JAVA_HOME=${java_home}\nPATH=${java_home}/bin:\$PATH"),
-    require           => File[$java_home]
+  file { '/etc/profile.d/set_java_home.sh':
+    ensure  => present,
+    content => inline_template("JAVA_HOME=${java_home}\nPATH=${java_home}/bin:\$PATH"),
+    require => File[$java_home]
   }
 
   # Clean up content in cachedir as 7terminals-java module doesn't clean the cachedir

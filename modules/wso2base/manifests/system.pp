@@ -29,43 +29,43 @@ class wso2base::system (
 
   if $::vm_type != 'docker' {
     cron { 'ntpdate':
-      command           => "/usr/sbin/ntpdate pool.ntp.org",
-      user              => 'root',
-      minute            => '*/50'
+      command => '/usr/sbin/ntpdate pool.ntp.org',
+      user    => 'root',
+      minute  => '*/50'
     }
   }
 
   group { $wso2_group:
-    ensure            => 'present',
-    gid               => '502',
+    ensure => 'present',
+    gid    => '502',
   }
 
   user { $wso2_user:
-    password          => $wso2_user,
-    gid               => $wso2_group,
-    ensure            => present,
-    managehome        => true,
-    shell             => '/bin/bash',
-    require           => Group[$wso2_group]
+    ensure     => present,
+    password   => $wso2_user,
+    gid        => $wso2_group,
+    managehome => true,
+    shell      => '/bin/bash',
+    require    => Group[$wso2_group]
   }
 
   if $::vm_type != 'docker' {
     file { "/etc/init.d/${service_name}":
-      ensure               => present,
-      owner                => $wso2_user,
-      group                => $wso2_group,
-      mode                 => '0755',
-      content              => template("${service_template}"),
+      ensure  => present,
+      owner   => $wso2_user,
+      group   => $wso2_group,
+      mode    => '0755',
+      content => template($service_template),
     }
   }
 
   if $::vm_type != 'docker' {
-    file { "/etc/hosts":
-      ensure               => present,
-      owner                => $wso2_user,
-      group                => $wso2_group,
-      mode                 => '0755',
-      content              => template("${hosts_template}"),
+    file { '/etc/hosts':
+      ensure  => present,
+      owner   => $wso2_user,
+      group   => $wso2_group,
+      mode    => '0755',
+      content => template($hosts_template),
     }
   }
 }

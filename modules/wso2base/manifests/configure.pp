@@ -28,22 +28,22 @@ define wso2base::configure ($template_list, $directory_list, $file_list, $user, 
   if ($template_list != undef and size($template_list) > 0) {
     wso2base::push_templates {
       $template_list:
-        owner            => $user,
-        group            => $group,
-        carbon_home      => $carbon_home,
-        wso2_module      => $wso2_module,
-        require          => Wso2base::Ensure_directory_structures[$directory_list]
+        owner       => $user,
+        group       => $group,
+        carbon_home => $carbon_home,
+        wso2_module => $wso2_module,
+        require     => Wso2base::Ensure_directory_structures[$directory_list]
     }
   }
 
   if ($file_list != undef and size($file_list) > 0) {
     wso2base::push_files {
       $file_list:
-        owner            => $user,
-        group            => $group,
-        carbon_home      => $carbon_home,
-        wso2_module      => $wso2_module,
-        require          => Wso2base::Ensure_directory_structures[$directory_list]
+        owner       => $user,
+        group       => $group,
+        carbon_home => $carbon_home,
+        wso2_module => $wso2_module,
+        require     => Wso2base::Ensure_directory_structures[$directory_list]
     }
   }
 }

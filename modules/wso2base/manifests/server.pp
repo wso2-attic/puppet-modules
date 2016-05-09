@@ -41,49 +41,49 @@ define wso2base::server (
 
   notice("Starting WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 
-  if $wso2_patching_mode == undef or str2bool("$wso2_patching_mode") != true {
+  if $::wso2_patching_mode == undef or str2bool($::wso2_patching_mode) != true {
       # Remove any existing installations
       wso2base::clean { $carbon_home:
-        mode              => $maintenance_mode,
-        pack_filename     => $pack_filename,
-        pack_dir          => $pack_dir
+        mode          => $maintenance_mode,
+        pack_filename => $pack_filename,
+        pack_dir      => $pack_dir
       }
 
       # Copy the WSO2 product pack, extract and set permissions
       wso2base::install { $carbon_home:
-          mode              => $install_mode,
-          install_dir       => $install_dir,
-          pack_filename     => $pack_filename,
-          pack_dir          => $pack_dir,
-          user              => $wso2_user,
-          group             => $wso2_group,
-          product_name      => $::product_name,
-          require           => Wso2base::Clean[$carbon_home],
-          notify            => Wso2base::Patch[$carbon_home]
+          mode          => $install_mode,
+          install_dir   => $install_dir,
+          pack_filename => $pack_filename,
+          pack_dir      => $pack_dir,
+          user          => $wso2_user,
+          group         => $wso2_group,
+          product_name  => $::product_name,
+          require       => Wso2base::Clean[$carbon_home],
+          notify        => Wso2base::Patch[$carbon_home]
       }
   }
 
   # Copy any patches to patch directory
   if $::vm_type == 'docker' {
     wso2base::patch { $carbon_home:
-      patches_abs_dir   => $patches_abs_dir,
-      patches_dir       => $patches_dir,
-      user              => $wso2_user,
-      group             => $wso2_group,
-      product_name      => $::product_name,
-      product_version   => $::product_version,
+      patches_abs_dir => $patches_abs_dir,
+      patches_dir     => $patches_dir,
+      user            => $wso2_user,
+      group           => $wso2_group,
+      product_name    => $::product_name,
+      product_version => $::product_version,
     #   subscribe         => Wso2base::Install[$carbon_home]
     }
   }
   else {
     wso2base::patch { $carbon_home:
-      patches_abs_dir   => $patches_abs_dir,
-      patches_dir       => $patches_dir,
-      user              => $wso2_user,
-      group             => $wso2_group,
-      product_name      => $::product_name,
-      product_version   => $::product_version,
-      notify            => Service["${service_name}"],
+      patches_abs_dir => $patches_abs_dir,
+      patches_dir     => $patches_dir,
+      user            => $wso2_user,
+      group           => $wso2_group,
+      product_name    => $::product_name,
+      product_version => $::product_version,
+      notify          => Service[$service_name],
     #   subscribe         => Wso2base::Install[$carbon_home]
     }
   }
@@ -91,25 +91,25 @@ define wso2base::server (
   # Populate templates and copy files provided
   if $::vm_type == 'docker' {
     wso2base::configure { $carbon_home:
-      template_list       => $template_list,
-      directory_list      => $directory_list,
-      file_list           => $file_list,
-      user                => $wso2_user,
-      group               => $wso2_group,
-      wso2_module         => $caller_module_name,
-      require             => Wso2base::Patch[$carbon_home]
+      template_list  => $template_list,
+      directory_list => $directory_list,
+      file_list      => $file_list,
+      user           => $wso2_user,
+      group          => $wso2_group,
+      wso2_module    => $caller_module_name,
+      require        => Wso2base::Patch[$carbon_home]
     }
   }
   else {
     wso2base::configure { $carbon_home:
-      template_list       => $template_list,
-      directory_list      => $directory_list,
-      file_list           => $file_list,
-      user                => $wso2_user,
-      group               => $wso2_group,
-      wso2_module         => $caller_module_name,
-      notify              => Service["${service_name}"],
-      require             => Wso2base::Patch[$carbon_home]
+      template_list  => $template_list,
+      directory_list => $directory_list,
+      file_list      => $file_list,
+      user           => $wso2_user,
+      group          => $wso2_group,
+      wso2_module    => $caller_module_name,
+      notify         => Service[$service_name],
+      require        => Wso2base::Patch[$carbon_home]
     }
   }
 
@@ -124,21 +124,21 @@ define wso2base::server (
 
   # Deploy product artifacts
   wso2base::deploy { $carbon_home:
-    user              => $wso2_user,
-    group             => $wso2_group,
-    product_name      => $::product_name,
-    product_version   => $::product_version,
-    require           => Wso2base::Apply_secure_vault[$carbon_home]
+    user            => $wso2_user,
+    group           => $wso2_group,
+    product_name    => $::product_name,
+    product_version => $::product_version,
+    require         => Wso2base::Apply_secure_vault[$carbon_home]
   }
 
   # Start the service
   if $::vm_type != 'docker' {
     service { $service_name:
-      ensure            => running,
-      hasstatus         => true,
-      hasrestart        => true,
-      enable            => true,
-      require           => [Wso2base::Deploy[$carbon_home]],
+      ensure     => running,
+      hasstatus  => true,
+      hasrestart => true,
+      enable     => true,
+      require    => [Wso2base::Deploy[$carbon_home]],
     }
   }
 

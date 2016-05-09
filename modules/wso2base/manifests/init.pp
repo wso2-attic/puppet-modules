@@ -19,80 +19,83 @@
 # This class installs required base packages for WSO2 products and configures operating system parameters
 
 class wso2base {
-  $packages             = hiera_array("packages")
-  $template_list        = hiera_array("wso2::template_list")
-  $file_list            = hiera_array("wso2::file_list")
-  $directory_list       = hiera_array("wso2::directory_list", [])
+  $packages             = hiera_array('packages')
+  $template_list        = hiera_array('wso2::template_list')
+  $file_list            = hiera_array('wso2::file_list')
+  $directory_list       = hiera_array('wso2::directory_list', [])
 
-  $java_install_dir     = hiera("java_install_dir")
-  $java_source_file     = hiera("java_source_file")
-  $worker_node          = hiera("wso2::worker_node")
+  $java_install_dir     = hiera('java_install_dir')
+  $java_source_file     = hiera('java_source_file')
+  $worker_node          = hiera('wso2::worker_node')
 
   # symlink path to Java install directory
-  $java_home            = hiera("java_home")
+  $java_home            = hiera('java_home')
 
-  $wso2_user            = hiera("wso2::user")
-  $wso2_group           = hiera("wso2::group")
-  $maintenance_mode     = hiera("wso2::maintenance_mode")
-  $install_mode         = hiera("wso2::install_mode")
-  $install_dir          = hiera("wso2::install_dir")
-  $pack_dir             = hiera("wso2::pack_dir")
-  $pack_filename        = hiera("wso2::pack_filename")
-  $pack_extracted_dir   = hiera("wso2::pack_extracted_dir")
-  $hostname             = hiera("wso2::hostname")
-  $mgt_hostname         = hiera("wso2::mgt_hostname")
-  $patches_dir          = hiera("wso2::patches_dir")
-  $service_name         = hiera("wso2::service_name")
-  $service_template     = hiera("wso2::service_template")
-  $hosts_template       = hiera("wso2::hosts_template")
-  $usermgt_datasource   = hiera("wso2::usermgt_datasource")
-  $local_reg_datasource = hiera("wso2::local_reg_datasource")
-  $master_datasources   = hiera_hash("wso2::master_datasources")
-  $registry_mounts      = hiera_hash("wso2::registry_mounts", { })
-  $clustering           = hiera_hash("wso2::clustering")
-  $dep_sync             = hiera_hash("wso2::dep_sync")
-  $ports                = hiera_hash("wso2::ports")
-  $jvm                  = hiera_hash("wso2::jvm")
-  $hosts_mapping        = hiera_hash("wso2::hosts_mapping")
-  $ipaddress            = hiera("wso2::ipaddress")
-  $fqdn                 = hiera("wso2::fqdn")
+  $wso2_user            = hiera('wso2::user')
+  $wso2_group           = hiera('wso2::group')
+  $maintenance_mode     = hiera('wso2::maintenance_mode')
+  $install_mode         = hiera('wso2::install_mode')
+  $install_dir          = hiera('wso2::install_dir')
+  $pack_dir             = hiera('wso2::pack_dir')
+  $pack_filename        = hiera('wso2::pack_filename')
+  $pack_extracted_dir   = hiera('wso2::pack_extracted_dir')
+  $hostname             = hiera('wso2::hostname')
+  $mgt_hostname         = hiera('wso2::mgt_hostname')
+  $patches_dir          = hiera('wso2::patches_dir')
+  $service_name         = hiera('wso2::service_name')
+  $service_template     = hiera('wso2::service_template')
+  $hosts_template       = hiera('wso2::hosts_template')
+  $usermgt_datasource   = hiera('wso2::usermgt_datasource')
+  $local_reg_datasource = hiera('wso2::local_reg_datasource')
+  $master_datasources   = hiera_hash('wso2::master_datasources')
+  $registry_mounts      = hiera_hash('wso2::registry_mounts', { })
+  $clustering           = hiera_hash('wso2::clustering')
+  $dep_sync             = hiera_hash('wso2::dep_sync')
+  $ports                = hiera_hash('wso2::ports')
+  $jvm                  = hiera_hash('wso2::jvm')
+  $hosts_mapping        = hiera_hash('wso2::hosts_mapping')
+  $ipaddress            = hiera('wso2::ipaddress')
+  $fqdn                 = hiera('wso2::fqdn')
 
   #secure_vault configurations
-  $enable_secure_vault  = hiera("wso2::enable_secure_vault")
-  $secure_vault_configs = hiera_hash("wso2::secure_vault_configs")
+  $enable_secure_vault  = hiera('wso2::enable_secure_vault')
+  $secure_vault_configs = hiera_hash('wso2::secure_vault_configs')
   $key_store_password   = $secure_vault_configs['key_store_password']['password']
 
   $carbon_home          = "${install_dir}/${pack_extracted_dir}"
 
-  if ($wso2_patching_mode == undef or str2bool("$wso2_patching_mode") != true) or ($wso2_upgrade_jdk != undef and str2bool("$wso2_upgrade_jdk") == true) {
-      class { '::wso2base::system':
-        packages          => $packages,
-        wso2_group        => $wso2_group,
-        wso2_user         => $wso2_user,
-        service_name      => $service_name,
-        service_template  => $service_template,
-        hosts_template    => $hosts_template,
-      } ->
-      class { '::wso2base::java':
-        java_install_dir  => $java_install_dir,
-        java_source_file  => $java_source_file,
-        wso2_user         => $wso2_user,
-        java_home         => $java_home
-      }
-  }else{
-      class { '::wso2base::system':
-        packages          => $packages,
-        wso2_group        => $wso2_group,
-        wso2_user         => $wso2_user,
-        service_name      => $service_name,
-        service_template  => $service_template,
-        hosts_template    => $hosts_template,
-      }
+  if ($::wso2_patching_mode == undef or
+  str2bool($::wso2_patching_mode) != true) or
+  ($::wso2_upgrade_jdk != undef and str2bool($::wso2_upgrade_jdk) == true) {
+    class { '::wso2base::system':
+      packages         => $packages,
+      wso2_group       => $wso2_group,
+      wso2_user        => $wso2_user,
+      service_name     => $service_name,
+      service_template => $service_template,
+      hosts_template   => $hosts_template,
+    } ->
+    class { '::wso2base::java':
+      java_install_dir => $java_install_dir,
+      java_source_file => $java_source_file,
+      wso2_user        => $wso2_user,
+      java_home        => $java_home
+    }
+  } else {
+    class { '::wso2base::system':
+      packages         => $packages,
+      wso2_group       => $wso2_group,
+      wso2_user        => $wso2_user,
+      service_name     => $service_name,
+      service_template => $service_template,
+      hosts_template   => $hosts_template,
+    }
   }
 
   contain wso2base::system
   # Only install JDK if (wso2_patching_mode=false) or (wso2_patching_mode=true & wso2_upgrade_jdk=true)
-  if ($wso2_patching_mode == undef or str2bool("$wso2_patching_mode") != true) or ($wso2_upgrade_jdk != undef and str2bool("$wso2_upgrade_jdk") == true) {
-      contain wso2base::java
+  if ($::wso2_patching_mode == undef or str2bool($::wso2_patching_mode) != true) or
+  ($::wso2_upgrade_jdk != undef and str2bool($::wso2_upgrade_jdk) == true) {
+    contain wso2base::java
   }
 }
