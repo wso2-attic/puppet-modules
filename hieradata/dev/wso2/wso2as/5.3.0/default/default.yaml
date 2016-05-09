@@ -49,7 +49,6 @@ wso2::template_list:
 #    https: 443
 
 # Data sources
-wso2::usermgt_datasource: wso2_carbon_db
 wso2::is_datasource: wso2_carbon_db
 
 #wso2::master_datasources:

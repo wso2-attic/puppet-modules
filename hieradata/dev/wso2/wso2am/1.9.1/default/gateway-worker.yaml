@@ -35,7 +35,6 @@ wso2::clustering:
         port: 4000
 
 wso2::is_datasource: wso2_gov_db
-wso2::usermgt_datasource: wso2_carbon_db
 
 wso2::master_datasources:
   wso2_gov_db:
