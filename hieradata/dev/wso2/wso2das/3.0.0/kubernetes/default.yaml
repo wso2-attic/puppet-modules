@@ -38,8 +38,8 @@ wso2::directory_list:
 
 wso2::spark_master_count: 1
 
-# for K8s scenario, need to enable proxy port to match NodePorts
-# defined for servlet HTTP and HTTPS transport in K8s Service definition
+# In Kubernetes proxy ports need to be enabled to be matched with node ports,
+# Following ports have been defined for servlet HTTP and HTTPS transports
 wso2::ports:
   proxyPort:
     http: 32061
