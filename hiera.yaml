@@ -17,9 +17,9 @@
     - "node/%{::clientcert}"
     - "wso2/%{::product_name}/%{::product_version}/%{::platform}/%{::product_profile}"
     - "wso2/%{::product_name}/%{::product_version}/%{::platform}/default"
-    - "wso2/%{::platform}/common"
-    - wso2/common
+    - "platform/%{::platform}"
     - "osfamily/%{::osfamily}"
+    - wso2/common
     - common
 :backends:
     - yaml
