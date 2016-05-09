@@ -134,8 +134,8 @@ wso2::metrics_datasources:
 
 wso2::registry_mounts:
   wso2_config_db:
-    path: /_system/config/mb
-    target_path: /_system/config/mbNodes
+    path: /_system/config
+    target_path: /_system/config/mb
     read_only: false
     registry_root: /
     enable_cache: true
