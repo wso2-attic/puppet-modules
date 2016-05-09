@@ -16,8 +16,7 @@
 #
 # Class: wso2base
 #
-# This class installs required base packages for WSO2 products and configures operating system parameters
-
+# This class installs required system packages for WSO2 products and configures operating system parameters
 class wso2base {
   $packages             = hiera_array('packages')
   $template_list        = hiera_array('wso2::template_list')

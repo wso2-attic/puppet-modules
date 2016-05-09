@@ -14,8 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 #
-# Class to manage default WSO2 product installation
-
+# Ochestrates a default WSO2 product installation
 define wso2base::server (
   $maintenance_mode,
   $pack_filename,

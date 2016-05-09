@@ -14,8 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 #
-# Class to manage Java installation.
-
+# Class to manage Java installation
 class wso2base::java (
   $java_install_dir,
   $java_source_file,
@@ -60,6 +59,4 @@ class wso2base::java (
     command => "/bin/rm -rf ${cachedir}",
     require => File['/etc/profile.d/set_java_home.sh'],
   }
-
-
 }

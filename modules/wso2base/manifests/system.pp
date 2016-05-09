@@ -14,8 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 #
-# Class to manage system configuration
-
+# Manages system configuration
 class wso2base::system (
   $packages,
   $wso2_group,

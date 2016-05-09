@@ -14,6 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 
+# Downloads the pack, extract and set user permissions
 define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user, $group, $product_name) {
   $carbon_home = $name
   $pack_file_abs_path = "${pack_dir}/${pack_filename}"
@@ -95,6 +96,4 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
     path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     command => "rm -rf ${pack_file_abs_path}",
   }
-
-
 }
