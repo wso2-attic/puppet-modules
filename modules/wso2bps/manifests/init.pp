@@ -16,38 +16,37 @@
 #
 #
 # Manages WSO2 Business Process Server deployment
-
 class wso2bps inherits wso2base {
-  $so_timeout                                 = hiera("wso2::so_timeout")
-  $connection_timeout                         = hiera("wso2::connection_timeout")
-  $mex_timeout                                = hiera("wso2::mex_timeout")
-  $external_service_timeout                   = hiera("wso2::external_service_timeout")
-  $max_connections_per_host                   = hiera("wso2::max_connections_per_host")
-  $max_total_connections                      = hiera("wso2::max_total_connections")
-  $ode_scheduler_thread_pool_size             = hiera("wso2::ode_scheduler_thread_pool_size")
-  $scheduler_config_max_thread_pool_size      = hiera("wso2::scheduler_config_max_thread_pool_size")
-  $enable_humantask_caching                   = hiera("wso2::enable_humantask_caching")
-  $activity_datasources                       = hiera("wso2::activity_datasources")
-  $bps_datasources                            = hiera("wso2::bps_datasources")
-  $taskServerCount                            = hiera("wso2::taskServerCount")
+  $so_timeout                                 = hiera('wso2::so_timeout')
+  $connection_timeout                         = hiera('wso2::connection_timeout')
+  $mex_timeout                                = hiera('wso2::mex_timeout')
+  $external_service_timeout                   = hiera('wso2::external_service_timeout')
+  $max_connections_per_host                   = hiera('wso2::max_connections_per_host')
+  $max_total_connections                      = hiera('wso2::max_total_connections')
+  $ode_scheduler_thread_pool_size             = hiera('wso2::ode_scheduler_thread_pool_size')
+  $scheduler_config_max_thread_pool_size      = hiera('wso2::scheduler_config_max_thread_pool_size')
+  $enable_humantask_caching                   = hiera('wso2::enable_humantask_caching')
+  $activity_datasources                       = hiera('wso2::activity_datasources')
+  $bps_datasources                            = hiera('wso2::bps_datasources')
+  $taskServerCount                            = hiera('wso2::taskServerCount')
 
-  wso2base::server { "${carbon_home}" :
-    maintenance_mode    => $maintenance_mode,
-    pack_filename       => $pack_filename,
-    pack_dir            => $pack_dir,
-    install_mode        => $install_mode,
-    install_dir         => $install_dir,
-    pack_extracted_dir  => $pack_extracted_dir,
-    wso2_user           => $wso2_user,
-    wso2_group          => $wso2_group,
-    patches_dir         => $patches_dir,
-    service_name        => $service_name,
-    service_template    => $service_template,
-    hosts_template      => $hosts_template,
-    template_list       => $template_list,
-    directory_list      => $directory_list,
-    file_list           => $file_list,
-    enable_secure_vault => $enable_secure_vault,
-    key_store_password  => $key_store_password
+  wso2base::server { $wso2base::carbon_home:
+    maintenance_mode    => $wso2base::maintenance_mode,
+    pack_filename       => $wso2base::pack_filename,
+    pack_dir            => $wso2base::pack_dir,
+    install_mode        => $wso2base::install_mode,
+    install_dir         => $wso2base::install_dir,
+    pack_extracted_dir  => $wso2base::pack_extracted_dir,
+    wso2_user           => $wso2base::wso2_user,
+    wso2_group          => $wso2base::wso2_group,
+    patches_dir         => $wso2base::patches_dir,
+    service_name        => $wso2base::service_name,
+    service_template    => $wso2base::service_template,
+    hosts_template      => $wso2base::hosts_template,
+    template_list       => $wso2base::template_list,
+    directory_list      => $wso2base::directory_list,
+    file_list           => $wso2base::file_list,
+    enable_secure_vault => $wso2base::enable_secure_vault,
+    key_store_password  => $wso2base::key_store_password
   }
 }

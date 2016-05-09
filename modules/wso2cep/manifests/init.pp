@@ -17,30 +17,30 @@
 #
 # Manages WSO2 Complex Event Processor deployment
 class wso2cep inherits wso2base {
-  $thrift_data_agent                          = hiera("wso2::thrift_data_agent")
-  $binary_data_agent                          = hiera("wso2::binary_data_agent")
-  $data_bridge                                = hiera("wso2::data_bridge")
-  $single_node_deployment                     = hiera("wso2::single_node_deployment")
-  $ha_deployment                              = hiera("wso2::ha_deployment")
-  $distributed_deployment                     = hiera("wso2::distributed_deployment")
+  $thrift_data_agent       = hiera('wso2::thrift_data_agent')
+  $binary_data_agent       = hiera('wso2::binary_data_agent')
+  $data_bridge             = hiera('wso2::data_bridge')
+  $single_node_deployment  = hiera('wso2::single_node_deployment')
+  $ha_deployment           = hiera('wso2::ha_deployment')
+  $distributed_deployment  = hiera('wso2::distributed_deployment')
 
-  wso2base::server { "${carbon_home}" :
-    maintenance_mode    => $maintenance_mode,
-    pack_filename       => $pack_filename,
-    pack_dir            => $pack_dir,
-    install_mode        => $install_mode,
-    install_dir         => $install_dir,
-    pack_extracted_dir  => $pack_extracted_dir,
-    wso2_user           => $wso2_user,
-    wso2_group          => $wso2_group,
-    patches_dir         => $patches_dir,
-    service_name        => $service_name,
-    service_template    => $service_template,
-    hosts_template      => $hosts_template,
-    template_list       => $template_list,
-    directory_list      => $directory_list,
-    file_list           => $file_list,
-    enable_secure_vault => $enable_secure_vault,
-    key_store_password  => $key_store_password
+  wso2base::server { $wso2base::carbon_home:
+    maintenance_mode    => $wso2base::maintenance_mode,
+    pack_filename       => $wso2base::pack_filename,
+    pack_dir            => $wso2base::pack_dir,
+    install_mode        => $wso2base::install_mode,
+    install_dir         => $wso2base::install_dir,
+    pack_extracted_dir  => $wso2base::pack_extracted_dir,
+    wso2_user           => $wso2base::wso2_user,
+    wso2_group          => $wso2base::wso2_group,
+    patches_dir         => $wso2base::patches_dir,
+    service_name        => $wso2base::service_name,
+    service_template    => $wso2base::service_template,
+    hosts_template      => $wso2base::hosts_template,
+    template_list       => $wso2base::template_list,
+    directory_list      => $wso2base::directory_list,
+    file_list           => $wso2base::file_list,
+    enable_secure_vault => $wso2base::enable_secure_vault,
+    key_store_password  => $wso2base::key_store_password
   }
 }
