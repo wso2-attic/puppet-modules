@@ -11,17 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 ---
-:hierarchy:
-    - "node/%{::clientcert}"
-    - "wso2/%{::product_name}/%{::product_version}/%{::platform}/%{::product_profile}"
-    - "wso2/%{::product_name}/%{::product_version}/%{::platform}/default"
-    - "wso2/%{::platform}/common"
-    - wso2/common
-    - "osfamily/%{::osfamily}"
-    - common
-:backends:
-    - yaml
-:yaml:
-    :datadir: "hieradata/%{::environment}"
+wso2::install_dir : "/mnt"
+wso2::file_list:
+  - repository/components/lib/jackson-annotations-2.5.4.jar
+  - repository/components/lib/jackson-core-2.5.4.jar
+  - repository/components/lib/jackson-databind-2.5.4.jar
+  - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
+  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
