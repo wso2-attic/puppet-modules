@@ -22,7 +22,6 @@ wso2::ports:
     http: 32031
     https: 32032
 
-# Clustering & membership scheme
 wso2::clustering:
   enabled: true
   membership_scheme: kubernetes

@@ -22,7 +22,6 @@ wso2::service_name: wso2as
 wso2::hostname: wso2as-default
 wso2::mgt_hostname: wso2as-default
 
-# Clustering & membership scheme
 wso2::clustering:
   enabled: true
   membership_scheme: kubernetes

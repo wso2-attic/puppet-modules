@@ -16,7 +16,6 @@
 wso2::mgt_hostname: wso2as-manager
 wso2::hostname: wso2as-worker
 
-# Clustering & membership scheme
 wso2::clustering:
   enabled: true
   membership_scheme: kubernetes
