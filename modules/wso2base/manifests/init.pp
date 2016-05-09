@@ -18,9 +18,11 @@
 #
 # This class installs required system packages for WSO2 products and configures operating system parameters
 class wso2base {
+
   $packages             = hiera_array('packages')
   $template_list        = hiera_array('wso2::template_list')
   $file_list            = hiera_array('wso2::file_list')
+  $system_file_list     = hiera_array('wso2::system_file_list')
   $directory_list       = hiera_array('wso2::directory_list', [])
 
   $java_install_dir     = hiera('java_install_dir')
@@ -74,7 +76,7 @@ class wso2base {
       wso2_user        => $wso2_user,
       service_name     => $service_name,
       service_template => $service_template,
-      hosts_template   => $hosts_template,
+      hosts_template   => $hosts_template
     } ->
     class { '::wso2base::java':
       java_install_dir => $java_install_dir,
@@ -89,7 +91,7 @@ class wso2base {
       wso2_user        => $wso2_user,
       service_name     => $service_name,
       service_template => $service_template,
-      hosts_template   => $hosts_template,
+      hosts_template   => $hosts_template
     }
   }
 

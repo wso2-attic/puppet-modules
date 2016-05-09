@@ -36,6 +36,7 @@ class wso2mb inherits wso2base {
     template_list       => $wso2base::template_list,
     directory_list      => $wso2base::directory_list,
     file_list           => $wso2base::file_list,
+    system_file_list    => $wso2base::system_file_list,
     enable_secure_vault => $wso2base::enable_secure_vault,
     key_store_password  => $wso2base::key_store_password
   }

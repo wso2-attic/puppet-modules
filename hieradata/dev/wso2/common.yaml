@@ -52,6 +52,9 @@ wso2::template_list:
 # File list to be copied to the server
 wso2::file_list: []
 
+#Files to be copied to system
+wso2::system_file_list: []
+
 # JVM settings
 wso2::jvm:
     xms: 256m

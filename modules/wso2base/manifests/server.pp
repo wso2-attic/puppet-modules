@@ -31,6 +31,7 @@ define wso2base::server (
   $template_list,
   $directory_list,
   $file_list,
+  $system_file_list,
   $enable_secure_vault,
   $key_store_password
 ) {
@@ -93,6 +94,7 @@ define wso2base::server (
       template_list  => $template_list,
       directory_list => $directory_list,
       file_list      => $file_list,
+      system_file_list => $system_file_list,
       user           => $wso2_user,
       group          => $wso2_group,
       wso2_module    => $caller_module_name,
@@ -104,6 +106,7 @@ define wso2base::server (
       template_list  => $template_list,
       directory_list => $directory_list,
       file_list      => $file_list,
+      system_file_list => $system_file_list,
       user           => $wso2_user,
       group          => $wso2_group,
       wso2_module    => $caller_module_name,
