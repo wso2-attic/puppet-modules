@@ -15,10 +15,8 @@
 #----------------------------------------------------------------------------
 #
 #
-# This class installs WSO2 DSS
-
+# Manages WSO2 Data Services Server deployment
 class wso2dss inherits wso2base {
-
   $taskServerCount                      = hiera("wso2::taskServerCount")
 
   wso2base::server { "${carbon_home}" :

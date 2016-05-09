@@ -15,9 +15,7 @@
 #----------------------------------------------------------------------------
 #
 #
-# This class installs WSO2 Business Rules Server
-
-
+# Manages WSO2 Business Rules Server deployment
 class wso2brs inherits wso2base {
   $is_datasource = hiera("wso2::is_datasource")
 

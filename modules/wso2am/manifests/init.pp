@@ -16,7 +16,7 @@
 #
 # ------------------------------------------------------------------------------
 #
-# Class to manage WSO2 API Manager deployment
+# Manages WSO2 API Manager deployment
 
 class wso2am inherits wso2base {
   $am_datasources     = hiera ("wso2::am_datasources")

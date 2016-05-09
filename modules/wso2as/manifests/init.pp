@@ -15,10 +15,9 @@
 #----------------------------------------------------------------------------
 #
 #
-# This class installs WSO2 Application Server
+# Manages WSO2 Application Server deployment
 
 class wso2as inherits wso2base {
-
   $is_datasource = hiera("wso2::is_datasource")
 
   wso2base::server { "${carbon_home}" :

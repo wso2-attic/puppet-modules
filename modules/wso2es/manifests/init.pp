@@ -15,8 +15,7 @@
 #----------------------------------------------------------------------------
 #
 #
-# Class to manage WSO2 API Manager deployment
-
+# Manages WSO2 Enterprise Store deployment
 class wso2es inherits wso2base {
   $social_datasources = hiera_hash("wso2::social_datasources")
   $is_datasource      = hiera("wso2::is_datasource")

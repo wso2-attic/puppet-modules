@@ -15,10 +15,8 @@
 #----------------------------------------------------------------------------
 #
 #
-# This class installs WSO2 ESB
-
+# Manages WSO2 Enterprise Service Bus deployment
 class wso2esb inherits wso2base {
-
  $esb_wsdl_epr_prefix     = hiera ("wso2::esb_wsdl_epr_prefix", undef)
 
   wso2base::server { "${carbon_home}" :
