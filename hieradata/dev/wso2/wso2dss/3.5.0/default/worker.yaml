@@ -15,9 +15,9 @@
 ---
 wso2::clustering:
   enabled: true
-  local_member_host: local.dss.wso2.com
+  domain: wso2.carbon.domain
+  local_member_host: "%{::ipaddress}"
   local_member_port: 4000
-  domain: wso2.dss.domain
   membership_scheme: wka
   sub_domain: worker
   wka:

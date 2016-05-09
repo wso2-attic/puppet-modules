@@ -13,19 +13,17 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname: mgt.es.wso2.com
-
 wso2::clustering:
-    enabled: true
-    local_member_host: local.es.wso2.com
-    local_member_port: 4000
-    domain: wso2.es.domain
-    membership_scheme: wka
-    wka:
-       members:
-         -
-           hostname: 192.168.100.13
-           port: 4000
-         -
-           hostname: 192.168.100.23
-           port: 4000
+  enabled: true
+  local_member_host: "%{::ipaddress}"
+  local_member_port: 4000
+  domain: wso2.carbon.domain
+  membership_scheme: wka
+  wka:
+    members:
+     -
+        hostname: 192.168.100.13
+        port: 4000
+      -
+        hostname: 192.168.100.23
+        port: 4000

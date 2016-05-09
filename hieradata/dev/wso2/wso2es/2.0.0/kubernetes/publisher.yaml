@@ -27,3 +27,8 @@ wso2::clustering:
   kubernetes:
     kubernetes_namespace: default
     kubernetes_services: wso2es-publisher,wso2es-store
+
+wso2::ports:
+  proxyPort:
+    http: 32081
+    https: 32082

@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-wso2::hostname: wso2am-gateway-worker
 wso2::mgt_hostname: wso2am-gateway-worker
+wso2::hostname: wso2am-gateway-worker
+
 
 wso2::apim_keymanager:
     host: wso2am-api-key-manager

@@ -14,11 +14,11 @@
 ---
 wso2::clustering:
     enabled: true
-    local_member_host: local.esb.wso2.com
+    local_member_host: "%{::ipaddress}"
     local_member_port: 4000
     membership_scheme: wka
     sub_domain: worker
-    domain: wso2.esb.domain
+    domain: wso2.carbon.domain
     wka:
        members:
          -

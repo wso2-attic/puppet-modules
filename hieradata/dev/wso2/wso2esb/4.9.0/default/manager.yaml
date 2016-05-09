@@ -11,13 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
----
-wso2::mgt_hostname: mgt.esb.wso2.com
 
+---
 wso2::clustering:
     enabled: true
-    local_member_host: local.esb.wso2.com
-    domain: wso2.esb.domain
+    local_member_host: "%{::ipaddress}"
+    domain: wso2.carbon.domain
     local_member_port: 4000
     membership_scheme: wka
     sub_domain: mgt
