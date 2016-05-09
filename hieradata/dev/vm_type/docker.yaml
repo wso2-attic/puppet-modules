@@ -11,18 +11,5 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 ---
-:hierarchy:
-    - "node/%{::clientcert}"
-    - "wso2/%{::product_name}/%{::product_version}/%{::platform}/%{::product_profile}"
-    - "wso2/%{::product_name}/%{::product_version}/%{::platform}/default"
-    - "osfamily/%{::osfamily}"
-    - "vm_type/%{::vm_type}"
-    - "platform/%{::platform}"
-    - wso2/common
-    - common
-:backends:
-    - yaml
-:yaml:
-    :datadir: "hieradata/%{::environment}"
+wso2::install_dir: "/mnt"
