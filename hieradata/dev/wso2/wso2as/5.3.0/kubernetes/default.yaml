@@ -109,7 +109,7 @@ wso2::registry_mounts:
     enable_cache: true
 
 # Secure vault configuration
-wso2::enable_secure_vault: false
+#wso2::enable_secure_vault: false
 
 #wso2::secure_vault_configs:
 #  key_store_password:
