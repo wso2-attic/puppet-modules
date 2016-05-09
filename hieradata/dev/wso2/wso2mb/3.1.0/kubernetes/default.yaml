@@ -21,6 +21,12 @@ wso2::service_name: wso2mb
 wso2::hostname: wso2mb-default
 wso2::mgt_hostname: wso2mb-default
 
+#Files to be copied to system
+wso2::system_file_list:
+  -
+    file: wso2mb-default-init.sh
+    target_path: /usr/local/bin
+
 wso2::template_list:
   - repository/conf/broker.xml
   - repository/conf/datasources/metrics-datasources.xml
