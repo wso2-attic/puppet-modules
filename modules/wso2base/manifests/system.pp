@@ -27,7 +27,7 @@ class wso2base::system (
   # Install system packages
   package { $packages: ensure => installed }
 
-  if $vm_type != 'docker' {
+  if $::vm_type != 'docker' {
     cron { 'ntpdate':
       command           => "/usr/sbin/ntpdate pool.ntp.org",
       user              => 'root',
@@ -49,7 +49,7 @@ class wso2base::system (
     require           => Group[$wso2_group]
   }
 
-  if $vm_type != 'docker' {
+  if $::vm_type != 'docker' {
     file { "/etc/init.d/${service_name}":
       ensure               => present,
       owner                => $wso2_user,
@@ -59,7 +59,7 @@ class wso2base::system (
     }
   }
 
-  if $vm_type != 'docker' {
+  if $::vm_type != 'docker' {
     file { "/etc/hosts":
       ensure               => present,
       owner                => $wso2_user,
@@ -68,5 +68,4 @@ class wso2base::system (
       content              => template("${hosts_template}"),
     }
   }
-
 }

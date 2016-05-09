@@ -64,7 +64,7 @@ define wso2base::server (
   }
 
   # Copy any patches to patch directory
-  if $vm_type == 'docker' {
+  if $::vm_type == 'docker' {
     wso2base::patch { $carbon_home:
       patches_abs_dir   => $patches_abs_dir,
       patches_dir       => $patches_dir,
@@ -89,7 +89,7 @@ define wso2base::server (
   }
 
   # Populate templates and copy files provided
-  if $vm_type == 'docker' {
+  if $::vm_type == 'docker' {
     wso2base::configure { $carbon_home:
       template_list       => $template_list,
       directory_list      => $directory_list,
@@ -132,7 +132,7 @@ define wso2base::server (
   }
 
   # Start the service
-  if $vm_type != 'docker' {
+  if $::vm_type != 'docker' {
     service { $service_name:
       ensure            => running,
       hasstatus         => true,
@@ -142,7 +142,7 @@ define wso2base::server (
     }
   }
 
-  if $vm_type != 'docker' {
+  if $::vm_type != 'docker' {
     notify{ "Successfully started WSO2 service [name] ${service_name}, [CARBON_HOME] ${carbon_home}":
       withpath => true,
       require  => Service[$service_name]
