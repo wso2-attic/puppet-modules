@@ -15,11 +15,9 @@
 #----------------------------------------------------------------------------
 #
 #
-# This class installs WSO2 Business Process Server
+# Manages WSO2 Business Process Server deployment
 
 class wso2bps inherits wso2base {
-
-  $jvm                                        = hiera("wso2::jvm")
   $so_timeout                                 = hiera("wso2::so_timeout")
   $connection_timeout                         = hiera("wso2::connection_timeout")
   $mex_timeout                                = hiera("wso2::mex_timeout")
@@ -31,6 +29,7 @@ class wso2bps inherits wso2base {
   $enable_humantask_caching                   = hiera("wso2::enable_humantask_caching")
   $activity_datasources                       = hiera("wso2::activity_datasources")
   $bps_datasources                            = hiera("wso2::bps_datasources")
+  $taskServerCount                            = hiera("wso2::taskServerCount")
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode    => $maintenance_mode,

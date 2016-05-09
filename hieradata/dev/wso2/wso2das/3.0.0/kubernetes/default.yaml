@@ -1,4 +1,4 @@
-# Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+# Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,9 +52,8 @@ wso2::ports:
 
 wso2::clustering:
   enabled: true
-  local_member_port: 4000
   membership_scheme: kubernetes
-  domain: wso2.das.domain
+  local_member_port: 4000
   sub_domain: mgt
   kubernetes:
     kubernetes_namespace: default
@@ -159,6 +158,21 @@ wso2::metrics_datasources:
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
     default_auto_commit: true
+
+wso2::registry_mounts:
+  wso2_config_db:
+    path: /_system/config
+    target_path: /_system/config/das
+    read_only: false
+    registry_root: /
+    enable_cache: true
+
+  wso2_gov_db:
+    path: /_system/governance
+    target_path: /_system/governance
+    read_only: false
+    registry_root: /
+    enable_cache: true
 
 # Secure vault configuration
 wso2::enable_secure_vault: false

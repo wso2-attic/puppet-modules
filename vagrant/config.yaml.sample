@@ -1,4 +1,4 @@
-# Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+# Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,17 +27,16 @@ servers:
     ip: 192.168.100.2
     ram: 2048
     cpu: 1
-  # -
-  #   enabled: false
-  #   hostname: wso2product.version.dev.wso2.org
-  #   facters:
-  #     product_name: wso2product
-  #     product_version: version
-  #     product_profile: profile
-  #     environment: dev
-  #   box: ubuntu/trusty64
-  #   ip: 192.168.100.3
-  #   ram: 2048
-  #   cpu: 1
-puppet:
-    puppet_home: /etc/puppet
+
+# -
+#   enabled: false
+#   hostname: wso2product.version.dev.wso2.org
+#   facters:
+#     product_name: wso2product
+#     product_version: version
+#     product_profile: profile
+#     environment: dev
+#   box: ubuntu/trusty64
+#   ip: 192.168.100.3
+#   ram: 2048
+#   cpu: 1

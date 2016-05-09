@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------
-# Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+# Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
 #----------------------------------------------------------------------------
 #
 #
-# This class installs WSO2 Application Server
+# Manages WSO2 Application Server deployment
 
 class wso2as inherits wso2base {
-
   $is_datasource = hiera("wso2::is_datasource")
 
   wso2base::server { "${carbon_home}" :

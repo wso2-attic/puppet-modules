@@ -15,10 +15,8 @@
 #----------------------------------------------------------------------------
 #
 #
-# This class installs WSO2 Governance Registry
-
+# Manages WSO2 Governance Registry deployment
 class wso2greg inherits wso2base {
-
   $bps_datasources    = hiera_hash("wso2::bps_datasources")
   $social_datasources = hiera_hash("wso2::social_datasources", undef)
   $is_datasource      = hiera("wso2::is_datasource")

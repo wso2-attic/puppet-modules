@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 #
-# Copyright (c) 2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+# Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 #
 # ------------------------------------------------------------------------------
 #
-# Class to manage WSO2 API Manager deployment
+# Manages WSO2 API Manager deployment
 
 class wso2am inherits wso2base {
   $am_datasources     = hiera ("wso2::am_datasources")

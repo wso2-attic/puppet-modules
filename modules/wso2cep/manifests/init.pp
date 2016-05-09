@@ -15,18 +15,14 @@
 #----------------------------------------------------------------------------
 #
 #
-# This class installs WSO2 Complex Event Processor
-
+# Manages WSO2 Complex Event Processor deployment
 class wso2cep inherits wso2base {
-
-  $jvm                                        = hiera("wso2::jvm")
   $thrift_data_agent                          = hiera("wso2::thrift_data_agent")
   $binary_data_agent                          = hiera("wso2::binary_data_agent")
   $data_bridge                                = hiera("wso2::data_bridge")
   $single_node_deployment                     = hiera("wso2::single_node_deployment")
   $ha_deployment                              = hiera("wso2::ha_deployment")
   $distributed_deployment                     = hiera("wso2::distributed_deployment")
-
 
   wso2base::server { "${carbon_home}" :
     maintenance_mode    => $maintenance_mode,

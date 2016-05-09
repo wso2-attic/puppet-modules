@@ -15,10 +15,8 @@
 #----------------------------------------------------------------------------
 #
 #
-# This class installs WSO2 Governance Registry
-
+# Manages WSO2 Governance Registry deployment
 class wso2das inherits wso2base {
-
   $analytics_datasources = hiera("wso2::analytics_datasources")
   $metrics_datasources   = hiera("wso2::metrics_datasources")
   $spark_master_count    = hiera("wso2::spark_master_count")
@@ -43,5 +41,4 @@ class wso2das inherits wso2base {
     enable_secure_vault => $enable_secure_vault,
     key_store_password  => $key_store_password
   }
-
 }
