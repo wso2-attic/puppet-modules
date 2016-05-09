@@ -27,17 +27,16 @@ servers:
     ip: 192.168.100.2
     ram: 2048
     cpu: 1
-  # -
-  #   enabled: false
-  #   hostname: wso2product.version.dev.wso2.org
-  #   facters:
-  #     product_name: wso2product
-  #     product_version: version
-  #     product_profile: profile
-  #     environment: dev
-  #   box: ubuntu/trusty64
-  #   ip: 192.168.100.3
-  #   ram: 2048
-  #   cpu: 1
-puppet:
-    puppet_home: /etc/puppet
+
+# -
+#   enabled: false
+#   hostname: wso2product.version.dev.wso2.org
+#   facters:
+#     product_name: wso2product
+#     product_version: version
+#     product_profile: profile
+#     environment: dev
+#   box: ubuntu/trusty64
+#   ip: 192.168.100.3
+#   ram: 2048
+#   cpu: 1
