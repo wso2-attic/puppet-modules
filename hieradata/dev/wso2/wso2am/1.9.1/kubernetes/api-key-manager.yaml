@@ -26,6 +26,8 @@ wso2::clustering:
      kubernetes_namespace: default
      kubernetes_services: wso2am-api-key-manager
 
+# In Kubernetes proxy ports need to be configured to match with node ports.
+# Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
     http: 32013

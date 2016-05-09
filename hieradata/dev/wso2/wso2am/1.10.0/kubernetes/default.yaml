@@ -28,7 +28,6 @@ wso2::template_list:
 #  - password-tmp
 
 wso2::service_name: wso2am
-# ip address is used here to avoid hostname resolving issues in APIM startup
 wso2::hostname: wso2am-default
 wso2::mgt_hostname: wso2am-default
 
@@ -40,6 +39,8 @@ wso2::clustering:
     kubernetes_namespace: default
     kubernetes_services: wso2am-default
 
+# In Kubernetes proxy ports need to be configured to match with node ports.
+# Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
     http: 32003

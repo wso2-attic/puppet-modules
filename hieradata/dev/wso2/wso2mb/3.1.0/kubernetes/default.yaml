@@ -31,8 +31,8 @@ wso2::template_list:
 
 wso2::mb_thrift_port: 7611
 
-# In Kubernetes proxy ports need to be enabled to be matched with node ports,
-# Following ports have been defined for servlet HTTP and HTTPS transports
+# In Kubernetes proxy ports need to be configured to match with node ports.
+# Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
     http: 32121
