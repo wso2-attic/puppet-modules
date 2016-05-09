@@ -13,12 +13,8 @@
 # limitations under the License.
 
 ---
-wso2::hostname: wso2as-worker
-wso2::mgt_hostname: wso2as-worker
-
-# Clustering & membership scheme
 wso2::clustering:
-    enabled: false
+    enabled: true
     membership_scheme: wka
     domain: wso2.as.domain
     local_member_host: 127.0.0.1
@@ -32,8 +28,8 @@ wso2::clustering:
 
 #wso2::ports:
 #  proxyPort:
-#    http: 32023
-#    https: 32024
+#    http: 80
+#    https: 443
 
 # Registry mounts
 wso2::registry_mounts:

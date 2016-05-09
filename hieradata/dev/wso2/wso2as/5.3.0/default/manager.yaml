@@ -13,12 +13,8 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname: wso2as-manager
-wso2::hostname: wso2as-worker
-
-# Clustering & membership scheme
 wso2::clustering:
-    enabled: false
+    enabled: true
     membership_scheme: wka
     domain: wso2.as.domain
     local_member_host: 127.0.0.1
