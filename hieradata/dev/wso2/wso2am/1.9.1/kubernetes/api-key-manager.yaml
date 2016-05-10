@@ -40,6 +40,7 @@ wso2::registry_mounts:
     read_only: false
     registry_root: /
     enable_cache: true
+
   wso2_gov_db:
     path: /_system/governance
     target_path: /_system/governance
