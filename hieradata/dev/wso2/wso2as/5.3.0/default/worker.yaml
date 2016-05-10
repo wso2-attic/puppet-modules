@@ -14,17 +14,20 @@
 
 ---
 wso2::clustering:
-    enabled: true
-    membership_scheme: wka
-    domain: wso2.as.domain
-    local_member_host: 127.0.0.1
-    local_member_port: 4000
-    sub_domain: worker
-    wka:
-       members:
-         -
-           hostname: 127.0.0.1
-           port: 4000
+  enabled: true
+  domain: wso2.carbon.domain
+  local_member_host: "%{::ipaddress}"
+  local_member_port: 4000
+  sub_domain: mgt
+  membership_scheme: wka
+  wka:
+    members:
+      -
+        hostname: 192.168.100.21
+        port: 4000
+      -
+        hostname: 192.168.100.22
+        port: 4000
 
 #wso2::ports:
 #  proxyPort:
