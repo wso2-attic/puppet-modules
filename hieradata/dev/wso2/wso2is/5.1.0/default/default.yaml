@@ -32,23 +32,23 @@ wso2::template_list:
 
 # wso2::ports:
 #   proxyPort:
-#     http: 32111
-#     https: 32112
+#     http: 80
+#     https: 443
 
 wso2::clustering:
   enabled: false
-  local_member_host: 127.0.0.1
+  local_member_host: "%{::ipaddress}"
   local_member_port: 4000
-  domain: wso2.is.domain
+  domain: wso2.carbon.domain
   membership_scheme: wka
-  wka:
-    members:
-      -
-        hostname: localhost
-        port: 4000
-      -
-        hostname: localhost
-        port: 4001
+    wka:
+       members:
+         -
+           hostname: 192.168.100.10
+           port: 4000
+         -
+           hostname: 192.168.100.20
+           port: 4000
 
 # wso2::registry_mounts:
 #   wso2_config_db:
