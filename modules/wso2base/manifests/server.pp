@@ -91,27 +91,27 @@ define wso2base::server (
   # Populate templates and copy files provided
   if $::vm_type == 'docker' {
     wso2base::configure { $carbon_home:
-      template_list  => $template_list,
-      directory_list => $directory_list,
-      file_list      => $file_list,
+      template_list    => $template_list,
+      directory_list   => $directory_list,
+      file_list        => $file_list,
       system_file_list => $system_file_list,
-      user           => $wso2_user,
-      group          => $wso2_group,
-      wso2_module    => $caller_module_name,
-      require        => Wso2base::Patch[$carbon_home]
+      user             => $wso2_user,
+      group            => $wso2_group,
+      wso2_module      => $caller_module_name,
+      require          => Wso2base::Patch[$carbon_home]
     }
   }
   else {
     wso2base::configure { $carbon_home:
-      template_list  => $template_list,
-      directory_list => $directory_list,
-      file_list      => $file_list,
+      template_list    => $template_list,
+      directory_list   => $directory_list,
+      file_list        => $file_list,
       system_file_list => $system_file_list,
-      user           => $wso2_user,
-      group          => $wso2_group,
-      wso2_module    => $caller_module_name,
-      notify         => Service[$service_name],
-      require        => Wso2base::Patch[$carbon_home]
+      user             => $wso2_user,
+      group            => $wso2_group,
+      wso2_module      => $caller_module_name,
+      notify           => Service[$service_name],
+      require          => Wso2base::Patch[$carbon_home]
     }
   }
 

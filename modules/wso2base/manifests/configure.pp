@@ -50,10 +50,10 @@ define wso2base::configure ($template_list, $directory_list, $file_list, $system
   if ($system_file_list != undef and size($system_file_list) > 0) {
     wso2base::push_system_files {
       $system_file_list:
-        owner            => $user,
-        group            => $group,
-        wso2_module      => $wso2_module,
-        require          => Wso2base::Ensure_directory_structures[$directory_list]
+        owner       => $user,
+        group       => $group,
+        wso2_module => $wso2_module,
+        require     => Wso2base::Ensure_directory_structures[$directory_list]
     }
   }
 }

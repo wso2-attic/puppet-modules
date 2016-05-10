@@ -59,9 +59,9 @@ class wso2base {
   $fqdn                 = hiera('wso2::fqdn')
 
   #secure_vault configurations
-  $enable_secure_vault  = hiera("wso2::enable_secure_vault")
+  $enable_secure_vault  = hiera('wso2::enable_secure_vault')
   if ($enable_secure_vault == true) {
-      $secure_vault_configs = hiera_hash("wso2::secure_vault_configs")
+      $secure_vault_configs = hiera_hash('wso2::secure_vault_configs')
       $key_store_password   = $secure_vault_configs['key_store_password']['password']
   }
 
