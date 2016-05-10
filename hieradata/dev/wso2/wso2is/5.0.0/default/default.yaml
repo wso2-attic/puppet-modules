@@ -167,38 +167,29 @@ wso2::am_datasources:
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
- # Secure vault configuration
- wso2::enable_secure_vault: false
-
-# wso2::secure_vault_configs:
-#   key_store_password:
-#     secret_alias: Carbon.Security.KeyStore.Password
-#     secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
-#     password: wso2carbon
-#   key_store_key_password:
-#     secret_alias: Carbon.Security.KeyStore.KeyPassword
-#     secret_alias_value: carbon.xml//Server/Security/KeyStore/KeyPassword,true
-#     password: wso2carbon
-#   trust_store_password:
-#     secret_alias: Carbon.Security.TrustStore.Password
-#     secret_alias_value: carbon.xml//Server/Security/TrustStore/Password,true
-#     password: wso2carbon
-#   user_manager_admin_password:
-#     secret_alias: UserManager.AdminUser.Password
-#     secret_alias_value: user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,true
-#     password: admin
-#   wso2_carbon_db_password:
-#     secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
-#     secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
-#     password: wso2carbon
-#  wso2am_db_password:
-#    secret_alias: Datasource.WSO2AM_DB.configuration.password
-#    secret_alias_value: am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
-#  wso2am_stats_db_password:
-#    secret_alias: Datasource.WSO2AM_STATS_DB.configuration.password
-#    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_STATS_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
+# Secure vault configuration
+#wso2::enable_secure_vault: true
+#wso2::secure_vault_configs:
+#  key_store_password:
+#   secret_alias: Carbon.Security.KeyStore.Password
+#   secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
+#   password: wso2carbon
+#  key_store_key_password:
+#   secret_alias: Carbon.Security.KeyStore.KeyPassword
+#   secret_alias_value: carbon.xml//Server/Security/KeyStore/KeyPassword,true
+#   password: wso2carbon
+#  trust_store_password:
+#   secret_alias: Carbon.Security.TrustStore.Password
+#   secret_alias_value: carbon.xml//Server/Security/TrustStore/Password,true
+#   password: wso2carbon
+#  user_manager_admin_password:
+#   secret_alias: UserManager.AdminUser.Password
+#   secret_alias_value: user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,true
+#   password: admin
+#  wso2_carbon_db_password:
+#   secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
+#   secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
+#   password: wso2carbon
 #  wso2_config_db_password:
 #    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
 #    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
@@ -210,6 +201,15 @@ wso2::am_datasources:
 #  connector_key_store_password:
 #    secret_alias: Server.Service.Connector.keystorePass
 #    secret_alias_value: catalina-server.xml//Server/Service/Connector[@keystorePass],false
+#    password: wso2carbon
+##Use below advanced secure vault configurations if the properties are used in corresponding files
+#  wso2am_db_password:
+#    secret_alias: Datasource.WSO2AM_DB.configuration.password
+#    secret_alias_value: am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: wso2carbon
+#  wso2am_stats_db_password:
+#    secret_alias: Datasource.WSO2AM_STATS_DB.configuration.password
+#    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_STATS_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
 #  user_store_manager_connection_password:
 #    secret_alias: UserStoreManager.Property.ConnectionPassword
