@@ -37,7 +37,7 @@ You can pass facters to Vagrant nodes through `/servers/*/facters` array
     <PUPPET_HOME>/modules/wso2as/files
     ````
 
-5. Update `config.yaml` with required products and VM configurations (cpu, memory).
+5. Create a `config.yaml` file with required products and VM configurations (cpu, memory). Refer the samples provided.
 
 6. Update `<PUPPET_HOME>/hieradata` with required product configurations.
 
