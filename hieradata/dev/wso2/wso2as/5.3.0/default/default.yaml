@@ -24,10 +24,10 @@ wso2::mgt_hostname: mgt.as.dev.wso2.org
 
 wso2::template_list:
   - repository/conf/identity.xml
-  # - repository/conf/security/cipher-text.properties
-  # - repository/conf/security/cipher-tool.properties
-  # - bin/ciphertool.sh
-  # - password-tmp
+#  - repository/conf/security/cipher-text.properties
+#  - repository/conf/security/cipher-tool.properties
+#  - bin/ciphertool.sh
+#  - password-tmp
 
 #wso2::ports:
 #  proxyPort:
@@ -88,9 +88,24 @@ wso2::is_datasource: wso2_carbon_db
 #    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
+# Registry mounts
+#wso2::registry_mounts:
+#  wso2_config_db:
+#    path: /_system/config
+#    target_path: /_system/config/as
+#    read_only: false
+#    registry_root: /
+#    enable_cache: true
+
+#  wso2_gov_db:
+#    path: /_system/governance
+#    target_path: /_system/governance
+#    read_only: false
+#    registry_root: /
+#    enable_cache: true
+
 # Secure vault configuration
 #wso2::enable_secure_vault: true
-
 #wso2::secure_vault_configs:
 #  key_store_password:
 #    secret_alias: Carbon.Security.KeyStore.Password
@@ -116,10 +131,6 @@ wso2::is_datasource: wso2_carbon_db
 #    secret_alias: Server.Service.Connector.keystorePass
 #    secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
 #    password: wso2carbon
-#  dep_sync_svn_password:
-#    secret_alias: Carbon.DeploymentSynchronizer.SvnPassword
-#    secret_alias_value: repository/conf/carbon.xml//Sever/DeploymentSynchronizer/SvnPassword,false
-#    password: password
 #  wso2_config_db_password:
 #    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
@@ -128,29 +139,38 @@ wso2::is_datasource: wso2_carbon_db
 #    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#  wso2_user_db_password:
+#    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: wso2carbon
+##Use below advanced secure vault configurations if the properties are used in corresponding files
+#  dep_sync_svn_password:
+#    secret_alias: Carbon.DeploymentSynchronizer.SvnPassword
+#    secret_alias_value: repository/conf/carbon.xml//Sever/DeploymentSynchronizer/SvnPassword,false
+#    password: password
 #  user_store_manager_connection_password:
 #    secret_alias: UserStoreManager.Property.ConnectionPassword
-#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='ConnectionPassword'],true
+#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='ConnectionPassword'],flase
 #    password: admin
 #  user_store_manager_password:
 #    secret_alias: UserStoreManager.Property.password
-#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='password'],true
+#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='password'],false
 #    password: admin
 #  user_trusted_RPStore_password:
 #    secret_alias: Security.UserTrustedRPStore.Password
-#    secret_alias_value: repository/conf/identity.xml//Server/Security/UserTrustedRPStore/Password
+#    secret_alias_value: repository/conf/identity.xml//Server/Security/UserTrustedRPStore/Password,false
 #    password: wso2carbon
 #  user_trusted_RPStore_key_password:
 #    secret_alias: Security.UserTrustedRPStore.KeyPassword
-#    secret_alias_value: repository/conf/identity.xml//Server/Security/UserTrustedRPStore/KeyPassword
+#    secret_alias_value: repository/conf/identity.xml//Server/Security/UserTrustedRPStore/KeyPassword,false
 #    password: wso2carbon
 #  identity_system_store_pass:
 #    secret_alias: Identity.System.StorePass
-#    secret_alias_value: repository/conf/identity.xml//Server/Identity/System/StorePass
+#    secret_alias_value: repository/conf/identity.xml//Server/Identity/System/StorePass,false
 #    password: wso2carbon
 #  xmpp_password:
 #    secret_alias: MultifactorAuthentication.XMPPSettings.XMPPConfig.XMPPPassword
-#    secret_alias_value: repository/conf/identity.xml//MultifactorAuthentication/XMPPSettings/XMPPConfig/XMPPPassword
+#    secret_alias_value: repository/conf/identity.xml//MultifactorAuthentication/XMPPSettings/XMPPConfig/XMPPPassword,false
 #    password: wso2carbon
 #  axis2_https_listener_trust_store_password:
 #    secret_alias: Axis2.Https.Listener.TrustStore.Password
@@ -165,18 +185,18 @@ wso2::is_datasource: wso2_carbon_db
 #    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportReceiver[@name='https']/parameter[@name='keystore']/KeyStore/KeyPassword,false
 #    password: wso2carbon
 #  axis2_https_sender_trust_store_password:
-#    secret_alias: Axis2.Https.Listener.TrustStore.Password
+#    secret_alias: Axis2.Https.Sender.TrustStore.Password
 #    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='truststore']/TrustStore/Password,false
 #    password: wso2carbon
 #  axis2_https_sender_key_store_password:
-#    secret_alias: Axis2.Https.Listener.KeyStore.Password
+#    secret_alias: Axis2.Https.Sender.KeyStore.Password
 #    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='keystore']/KeyStore/Password,false
 #    password: wso2carbon
 #  axis2_https_sender_key_store_key_password:
-#    secret_alias: Axis2.Https.Listener.KeyStore.KeyPassword
+#    secret_alias: Axis2.Https.Sender.KeyStore.KeyPassword
 #    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='keystore']/KeyStore/KeyPassword,false
 #    password: wso2carbon
 #  axis2_mailto_parameter_password:
 #    secret_alias: Axis2.Mailto.Parameter.Password
-#    secret_alias_value: repository/conf/axis2.xml//axisconfig/transportSender[@name='mailto']/parameter[@name='mail.smtp.password'],false
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='mailto']/parameter[@name='mail.smtp.password'],false
 #    password: wso2carbon
