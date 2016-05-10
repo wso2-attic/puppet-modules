@@ -37,7 +37,7 @@ wso2::clustering:
   local_member_port: 4000
   kubernetes:
     kubernetes_namespace: default
-      kubernetes_services: wso2am-api-store,wso2am-api-publisher
+    kubernetes_services: wso2am-api-store,wso2am-api-publisher
 
 # In Kubernetes proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
