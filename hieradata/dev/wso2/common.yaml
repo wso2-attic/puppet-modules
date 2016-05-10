@@ -154,6 +154,7 @@ wso2::datasources::common::validation_interval: '30000'
 wso2::datasources::common::use_datasource_factory: 'false'
 
 # H2 datasources configuration
+wso2::datasources::h2::driver_class_name: 'org.h2.Driver'
 wso2::datasources::h2::validation_query: 'SELECT 1'
 
 # MySQL datasources configuration

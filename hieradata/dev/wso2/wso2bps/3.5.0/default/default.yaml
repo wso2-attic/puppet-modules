@@ -19,11 +19,8 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2bps
-wso2::hostname: bps.wso2.com
-wso2::mgt_hostname: bps.wso2.com
-
-#wso2::file_list:
-#  - repository/components/lib/mysql-connector-java-5.1.36.jar
+wso2::hostname: bps.dev.wso2.org
+wso2::mgt_hostname: mgt.bps.dev.wso2.org
 
 wso2::template_list:
   - repository/conf/datasources/activiti-datasources.xml
@@ -37,20 +34,13 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
-#wso2::registry_mounts:
-#  wso2_config_db:
-#    path: /_system/config
-#    target_path: /_system/config
-#    read_only: true
-#    registry_root: /
-#    enable_cache: true
-#
-#  wso2_gov_db:
-#    path: /_system/governance
-#    target_path: /_system/governance
-#    read_only: true
-#    registry_root: /
-#    enable_cache: true
+#wso2::ports:
+#  proxyPort:
+#    http: 80
+#    https: 443
+
+#wso2::file_list:
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 # BPS configuration
 wso2::so_timeout: 600000
@@ -65,16 +55,19 @@ wso2::enable_humantask_caching: false
 
 wso2::taskServerCount: 1
 
-#wso2::usermgt_datasource: wso2user_db
+# Data sources
+wso2::is_datasource: wso2_carbon_db
+
+wso2::usermgt_datasource: wso2user_db
 
 #wso2::master_datasources:
 #  wso2_config_db:
 #    name: WSO2_CONFIG_DB
 #    description: The datasource used for config registry
-#    driver_class_name: com.mysql.jdbc.Driver
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
 #    url: jdbc:mysql://192.168.100.1:3306/WSO2CONFIG_DB?autoReconnect=true
-#    username: root
-#    password: root
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
 #    jndi_config: jdbc/WSO2_CONFIG_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -86,25 +79,25 @@ wso2::taskServerCount: 1
 #  wso2_gov_db:
 #    name: WSO2_GOV_DB
 #    description: The datasource used for gov registry
-#    driver_class_name: com.mysql.jdbc.Driver
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
 #    url: jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
-#    username: root
-#    password: root
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
 #    jndi_config: jdbc/WSO2_GOV_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
 #    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 #
 #  wso2user_db:
 #    name: WSO2USER_DB
 #    description: The datasource is used for user mangement and userstore
-#    driver_class_name: com.mysql.jdbc.Driver
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
 #    url: jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
-#    username: root
-#    password: root
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
 #    jndi_config: jdbc/WSO2USER_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -117,10 +110,10 @@ wso2::activity_datasources:
   activity_db:
     name: ACTIVITY_DB
     description: The datasource used for activiti engine
-    driver_class_name: org.h2.Driver
+    driver_class_name: "%{hiera('wso2::datasources::h2::driver_class_name')}"
     url: jdbc:h2:repository/database/activiti;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username: wso2carbon
-    password: wso2carbon
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/ActivitiDB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -133,10 +126,10 @@ wso2::bps_datasources:
   bps_ds:
     name: BPS_DS
     description: The datasource used for bps
-    driver_class_name: org.h2.Driver
+    driver_class_name: "%{hiera('wso2::datasources::h2::driver_class_name')}"
     url: jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
-    username: wso2carbon
-    password: wso2carbon
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: bpsds
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_idle: "%{hiera('wso2::datasources::common::max_idle')}"
@@ -148,7 +141,9 @@ wso2::bps_datasources:
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # Secure vault configuration
-#wso2::enable_secure_vault: true
+
+#wso2::enable_secure_vault: false
+
 #wso2::secure_vault_configs:
 #  key_store_password:
 #    secret_alias: Carbon.Security.KeyStore.Password
@@ -194,3 +189,4 @@ wso2::bps_datasources:
 #    secret_alias: Datasources.BPS_DS.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/bps-datasources.xml//datasources-configuration/datasources/datasource[name='BPS_DS']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+
