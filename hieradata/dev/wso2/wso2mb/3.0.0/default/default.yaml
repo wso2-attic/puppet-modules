@@ -62,6 +62,7 @@ wso2::master_datasources:
 #      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
 #      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#
 #  wso2_reg_db:
 #      name: REGISTRY_DB
 #      description: The datasource used for registry- config/governance
@@ -76,6 +77,7 @@ wso2::master_datasources:
 #      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
 #      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#
 #  mb_msg_db:
 #    name: MYSQL_DATA_SOURCE
 #    description: The datasource used for message database

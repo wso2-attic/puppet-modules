@@ -49,6 +49,7 @@ wso2::is_datasource: wso2_carbon_db
 #    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
 #    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#
 #  wso2_gov_db:
 #    name: WSO2_GOV_DB
 #    description: The datasource used for gov registry
@@ -63,6 +64,7 @@ wso2::is_datasource: wso2_carbon_db
 #    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
 #    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#
 #  wso2user_db:
 #    name: WSO2USER_DB
 #    description: The datasource is used for user mangement and userstore
