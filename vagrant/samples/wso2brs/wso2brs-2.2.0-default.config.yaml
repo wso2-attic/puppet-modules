@@ -19,7 +19,7 @@ servers:
     hostname: brs.dev.wso2.org
     facters:
       product_name: wso2brs
-      product_version: 2.1.0
+      product_version: 2.2.0
       product_profile: default
       environment: dev
       platform: default

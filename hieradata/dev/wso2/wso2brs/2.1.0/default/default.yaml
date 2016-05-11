@@ -19,8 +19,8 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2brs
-wso2::hostname: brs.wso2.com
-wso2::mgt_hostname: brs.wso2.com
+wso2::hostname: brs.dev.wso2.org
+wso2::mgt_hostname: mgt.brs.dev.wso2.org
 
 #wso2::file_list:
 #  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
@@ -65,6 +65,7 @@ wso2::is_datasource: wso2_carbon_db
 #    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#
 #  wso2user_db:
 #    name: WSO2USER_DB
 #    description: The datasource is used for user mangement and userstore
