@@ -24,7 +24,7 @@ wso2::mgt_hostname: greg.dev.wso2.org
 
 # Uncomment MySQL connector driver for a clustered setup
 #wso2::file_list:
-#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+#  - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
 #  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 
 wso2::template_list:
@@ -45,7 +45,7 @@ wso2::master_datasources:
   wso2am_db:
     name: WSO2AM_DB
     description: The datasource used for API Manager database
-    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+    driver_class_name: "%{hiera('wso2::datasources::h2::driver_class_name')}"
     url: jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"

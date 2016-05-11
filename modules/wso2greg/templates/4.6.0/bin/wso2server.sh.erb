@@ -298,6 +298,8 @@ do
     -Djava.security.egd=file:/dev/./urandom \
     -Dfile.encoding=UTF8 \
     -Dsetup \
+    -Djava.util.prefs.systemRoot=<%= @system_pref_dir[0] %> \
+    -Djava.util.prefs.userRoot=<%= @system_pref_dir[1] %> \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?
 done
