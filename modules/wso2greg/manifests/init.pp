@@ -18,7 +18,8 @@
 # Manages WSO2 Governance Registry deployment
 class wso2greg inherits wso2base {
   $bps_datasources    = hiera_hash('wso2::bps_datasources')
-  $social_datasources = hiera_hash('wso2::social_datasources')
+#  TODO: Get rid of undef default value in social_datasources hiera_hash lookup once greg 4.6.0 module is removed
+  $social_datasources = hiera_hash('wso2::social_datasources', undef)
   $is_datasource      = hiera('wso2::is_datasource')
 
   wso2base::server { $wso2base::carbon_home:
