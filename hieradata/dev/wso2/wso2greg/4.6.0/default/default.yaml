@@ -16,34 +16,39 @@ classes:
   - wso2greg
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+wso2::datasources::common::bps_default_auto_commit: 'true'
 
 wso2::service_name: wso2greg
 wso2::hostname: greg.dev.wso2.org
 wso2::mgt_hostname: greg.dev.wso2.org
 
+# Uncomment MySQL connector driver for a clustered setup
 #wso2::file_list:
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 #  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 
 wso2::template_list:
   - repository/conf/identity.xml
+  - repository/conf/datasources/bps-datasources.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+# Uncomment the following for clustered setup
 #wso2::usermgt_datasource: wso2user_db
 
 wso2::is_datasource: wso2_carbon_db
 
 wso2::master_datasources:
+# Comment the below h2 datasources for clustered setup
   wso2am_db:
     name: WSO2AM_DB
     description: The datasource used for API Manager database
-    driver_class_name: org.h2.Driver
+    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:h2:repository/database/WSO2AM_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-    username: wso2carbon
-    password: wso2carbon
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2AM_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -52,44 +57,76 @@ wso2::master_datasources:
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
+# Uncomment the following mysql master datasources for clustered setup
+#  wso2am_db:
+#    name: WSO2AM_DB
+#    description: The datasource used for API Manager database
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2AM_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
+#    jndi_config: jdbc/WSO2AM_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
 #  wso2_config_db:
 #    name: WSO2_CONFIG_DB
 #    description: The datasource used for config registry
-#    driver_class_name: org.h2.Driver
-#    url: jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-#    username: wso2carbon
-#    password: wso2carbon
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2_GREG_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
 #    jndi_config: jdbc/WSO2_CONFIG_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
 #    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
 #    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
+#
 #  wso2_gov_db:
 #    name: WSO2_GOV_DB
 #    description: The datasource used for gov registry
-#    driver_class_name: org.h2.Driver
-#    url: jdbc:h2:repository/database/WSO2_GOV_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-#    username: wso2carbon
-#    password: wso2carbon
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2_GOV_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
 #    jndi_config: jdbc/WSO2_GOV_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
 #    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#
+#  wso2user_db:
+#    name: WSO2USER_DB
+#    description: The datasource is used for user mangement and userstore
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
+#    jndi_config: jdbc/WSO2USER_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::bps_datasources:
+# Comment the below h2 datasource for clustered setup and uncomment mysql datasource
   bps_ds:
     name: BPS_DS
     description: The datasource used for BPS database
-    driver_class_name: org.h2.Driver
+    driver_class_name: "%{hiera('wso2::datasources::h2::driver_class_name')}"
     url: jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
-    username: wso2carbon
-    password: wso2carbon
+    username: "%{hiera('wso2::datasources::common::username')}"
+    password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: bpsds
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -97,6 +134,21 @@ wso2::bps_datasources:
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+#  bps_ds:
+#    name: BPS_DS
+#    description: The datasource used for BPS database
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+#    url: jdbc:mysql://192.168.100.1:3306/BPS_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
+#    jndi_config: bpsds
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::bps_default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 # Secure vault configuration
 #wso2::enable_secure_vault: true
