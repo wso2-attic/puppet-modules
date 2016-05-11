@@ -25,7 +25,6 @@ wso2::mgt_hostname: is.wso2.com
 #  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 
 wso2::template_list:
-  - repository/conf/datasources/am-datasources.xml
   - repository/conf/datasources/bps-datasources.xml
   - repository/conf/datasources/metrics-datasources.xml
   - repository/conf/identity.xml
@@ -45,14 +44,14 @@ wso2::clustering:
   local_member_port: 4000
   domain: wso2.carbon.domain
   membership_scheme: wka
-    wka:
-       members:
-         -
-           hostname: 192.168.100.10
-           port: 4000
-         -
-           hostname: 192.168.100.20
-           port: 4000
+  wka:
+    members:
+      -
+        hostname: 192.168.100.10
+        port: 4000
+      -
+        hostname: 192.168.100.20
+        port: 4000
 
 # wso2::registry_mounts:
 #   wso2_config_db:
