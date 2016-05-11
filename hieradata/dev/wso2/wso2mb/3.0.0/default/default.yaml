@@ -31,6 +31,9 @@ wso2::template_list:
 
 wso2::mb_thrift_port: 7611
 
+# Uncomment the following for a clustered setup
+#wso2::usermgt_datasource: wso2user_db
+
 wso2::master_datasources:
 # Comment the following h2 data source for a clustered setup
   wso2_mb_store_db:
@@ -47,45 +50,61 @@ wso2::master_datasources:
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
 # Uncomment the following MySQL data sources for a clustered setup
+#  wso2_config_db:
+#    name: WSO2_CONFIG_DB
+#    description: The datasource used for config registry
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2MB_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
+#    jndi_config: jdbc/WSO2_CONFIG_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#
 #  wso2_gov_db:
-#      name: WSO2_GOV_DB
-#      description: The datasource used for gov registry
-#      driver_class_name: com.mysql.jdbc.Driver
-#      url: jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
-#      username: root
-#      password: root
-#      jndi_config: jdbc/WSO2_GOV_DB
-#      max_active: "%{hiera('wso2::datasources::common::max_active')}"
-#      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-#      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-#      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#    name: WSO2_GOV_DB
+#    description: The datasource used for gov registry
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2_GOV_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
+#    jndi_config: jdbc/WSO2_GOV_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 #
-#  wso2_reg_db:
-#      name: REGISTRY_DB
-#      description: The datasource used for registry- config/governance
-#      driver_class_name: com.mysql.jdbc.Driver
-#      url: jdbc:mysql://192.168.100.1:3306/REGISTRY_DB?autoReconnect=true
-#      username: root
-#      password: root
-#      jndi_config: jdbc/WSO2RegistryDB
-#      max_active: "%{hiera('wso2::datasources::common::max_active')}"
-#      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-#      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-#      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+#  wso2user_db:
+#    name: WSO2USER_DB
+#    description: The datasource is used for user mangement and userstore
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
+#    jndi_config: jdbc/WSO2USER_DB
+#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 #
-#  mb_msg_db:
-#    name: MYSQL_DATA_SOURCE
+#  wso2_mb_store_db:
+#    name: WSO2_MB_STORE_DB
 #    description: The datasource used for message database
-#    driver_class_name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://192.168.100.1:3306/WSO2_MB?autoReconnect=true
-#    username: root
-#    password: root
-#    jndi_config: jdbc/MySQLMessageStore
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+#    url: jdbc:mysql://192.168.100.1:3306/WSO2MB_STORE_DB?autoReconnect=true
+#    username: "%{hiera('wso2::datasources::mysql::username')}"
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
+#    jndi_config: jdbc/WSO2MBStoreDB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
 #    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -101,7 +120,6 @@ wso2::metrics_datasources:
     url: jdbc:h2:repository/database/WSO2METRICS_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
-    #secretAlias:
     jndi_config: jdbc/WSO2MetricsDB
     datasource: WSO2MetricsDB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
@@ -125,10 +143,10 @@ wso2::clustering:
     wka:
        members:
          -
-           hostname: 192.168.100.10
+           hostname: 192.168.100.110
            port: 4000
          -
-           hostname: 192.168.100.20
+           hostname: 192.168.100.120
            port: 4000
 
 # Uncomment following registry mounts for a clustered setup
@@ -198,13 +216,9 @@ wso2::clustering:
 #    secret_alias: transports.mqtt.sslConnection.trustStore.password
 #    secret_alias_value: repository/conf/broker.xml//broker/transports/mqtt/sslConnection/trustStore/password,true
 #    password: wso2carbon
-#  wso2_reg_db_password:
-#    secret_alias: Datasources.REGISTRY_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='REGISTRY_DB']/definition/configuration/password,false
-#    password: wso2carbon
-#  wso2_mb_msg_db_password:
-#    secret_alias: Datasources.MYSQL_DATA_SOURCE.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='MYSQL_DATA_SOURCE']/definition/configuration/password,false
+#  wso2_config_db_password:
+#    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
 #  wso2_gov_db_password:
 #    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
@@ -214,4 +228,3 @@ wso2::clustering:
 #    secret_alias: Datasources.WSO2USER_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
-

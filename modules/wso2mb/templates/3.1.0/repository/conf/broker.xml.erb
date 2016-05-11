@@ -151,8 +151,8 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
         <!-- RDBMS MB Store Configuration -->
 
         <messageStore class="org.wso2.andes.store.rdbms.RDBMSMessageStoreImpl">
-          <%- if @master_datasources['mb_msg_db'] -%>
-            <property name="dataSource"><%= @master_datasources['mb_msg_db']['jndi_config']%></property>
+          <%- if @master_datasources['wso2_mb_store_db'] -%>
+            <property name="dataSource"><%= @master_datasources['wso2_mb_store_db']['jndi_config']%></property>
           <%- else -%>
             <property name="dataSource">WSO2MBStoreDB</property>
           <%- end -%>
@@ -163,8 +163,8 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
         </messageStore>
 
         <contextStore class="org.wso2.andes.store.rdbms.RDBMSAndesContextStoreImpl">
-          <%- if @master_datasources['mb_msg_db'] -%>
-            <property name="dataSource"><%= @master_datasources['mb_msg_db']['jndi_config']%></property>
+          <%- if @master_datasources['wso2_mb_store_db'] -%>
+            <property name="dataSource"><%= @master_datasources['wso2_mb_store_db']['jndi_config']%></property>
           <%- else -%>
             <property name="dataSource">WSO2MBStoreDB</property>
           <%- end -%>
