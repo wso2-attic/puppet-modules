@@ -140,8 +140,23 @@ wso2::bps_datasources:
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-# Secure vault configuration
+# Registry mounts
+#wso2::registry_mounts:
+#  wso2_config_db:
+#    path: /_system/config
+#    target_path: /_system/config/bps
+#    read_only: false
+#    registry_root: /
+#    enable_cache: true
 
+#  wso2_gov_db:
+#    path: /_system/governance
+#    target_path: /_system/governance
+#    read_only: false
+#    registry_root: /
+#    enable_cache: true
+
+# Secure vault configuration
 #wso2::enable_secure_vault: false
 
 #wso2::secure_vault_configs:
