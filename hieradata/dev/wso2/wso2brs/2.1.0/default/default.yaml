@@ -23,7 +23,7 @@ wso2::hostname: brs.dev.wso2.org
 wso2::mgt_hostname: brs.dev.wso2.org
 
 #wso2::file_list:
-#  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 #  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 
 wso2::template_list:
@@ -34,6 +34,9 @@ wso2::template_list:
 #  - password-tmp
 
 wso2::is_datasource: wso2_carbon_db
+
+## Uncomment the following for a clustered setup
+#wso2::usermgt_datasource: wso2user_db
 
 #wso2::master_datasources:
 #  wso2_config_db:
@@ -62,8 +65,8 @@ wso2::is_datasource: wso2_carbon_db
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
 #    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 #
 #  wso2user_db:
