@@ -1,6 +1,6 @@
-# WSO2 DAS Puppet Module
+# WSO2 Data Analytics Server Puppet Module
 
-This repository contains the generic puppet module for installing and configuring WSO2 DAS on various environments. It supports multiple versions of WSO2 DAS. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
+This repository contains the Puppet Module for installing and configuring WSO2 Data Analytics Server on various environments. It supports multiple versions of WSO2 Data Analytics Server. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
 
 ## Supported Operating Systems
 
@@ -14,18 +14,11 @@ This repository contains the generic puppet module for installing and configurin
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
-## Hiera data configuration to start the product with default profile
-With disabling the below proxy configuration in default.yaml file, product can be started in default profile with adding product pack to files directory.
+## Running WSO2 Data Analytics Server in the `default` profile
+No changes to Hiera data are required to run the `default` profile.
 
-```yaml
-wso2::ports:
-  proxyPort :
-    http: 32001
-    https: 32002
-```
-
-## Hiera data configuration to start the product with clustering
-Do the below changes to relevant DAS hiera yaml files to start the server in distributed setup. For more details refer the [WSO2 DAS clustering guide](https://docs.wso2.com/display/CLUSTER44x/Clustering+Data+Analytics+Server)
+## Running WSO2 Data Analytics Server with clustering in specific profiles
+Do the below changes to relevant Data Analytics Server `default` Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 Data Analytics Server clustering guide](https://docs.wso2.com/display/CLUSTER44x/Clustering+Data+Analytics+Server)
 
 1. Enable clustering
 
@@ -40,10 +33,10 @@ Do the below changes to relevant DAS hiera yaml files to start the server in dis
         wka:
            members:
              -
-               hostname: 192.168.100.13
+               hostname: 192.168.100.63
                port: 4000
              -
-               hostname: 192.168.100.23
+               hostname: 192.168.100.64
                port: 4000
     ```
 
@@ -78,6 +71,7 @@ Do the below changes to relevant DAS hiera yaml files to start the server in dis
       read_only: false
       registry_root: /
       enable_cache: true
+      
     wso2_gov_db:
       path: /_system/governance
       target_path: /_system/governance
@@ -102,10 +96,10 @@ Do the below changes to relevant DAS hiera yaml files to start the server in dis
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply Secure Vault
+## Running WSO2 Data Analytics Server with Secure Vault
 WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
-Do the below changes in hiera file to apply Secure Vault.
+Uncomment and modify the below changes in Hiera file to apply Secure Vault.
 
 1. Enable Secure Vault
 
