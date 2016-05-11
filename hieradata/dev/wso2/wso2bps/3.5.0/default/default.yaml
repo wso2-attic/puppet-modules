@@ -58,7 +58,7 @@ wso2::taskServerCount: 1
 # Data sources
 wso2::is_datasource: wso2_carbon_db
 
-wso2::usermgt_datasource: wso2user_db
+#wso2::usermgt_datasource: wso2user_db
 
 #wso2::master_datasources:
 #  wso2_config_db:
