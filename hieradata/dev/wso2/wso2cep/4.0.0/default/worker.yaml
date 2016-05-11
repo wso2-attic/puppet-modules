@@ -20,10 +20,10 @@ wso2::ha_deployment:
   presenter_port: 11000
   worker: true
   eventSync:
-    hostName: "%{::ip}"
+    hostName: "%{::ipaddress}"
     port: 11224
   management:
-    hostName: "%{::ip}"
+    hostName: "%{::ipaddress}"
     port: 10005
   presentation:
     hostName: 0.0.0.0

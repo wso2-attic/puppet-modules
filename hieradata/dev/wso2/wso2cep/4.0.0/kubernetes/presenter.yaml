@@ -28,13 +28,13 @@ wso2::ha_deployment:
   presenter_port: 11000
   worker: false
   eventSync:
-    hostName: "%{::ip}"
+    hostName: "%{::ipaddress}"
     port: 11224
   management:
     hostName: 0.0.0.0
     port: 10005
   presentation:
-    hostName: "%{::ip}"
+    hostName: "%{::ipaddress}"
     port: 11002
 
 wso2::clustering:
