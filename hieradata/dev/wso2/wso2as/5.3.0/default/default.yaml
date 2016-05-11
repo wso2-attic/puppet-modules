@@ -20,7 +20,7 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2as
 wso2::hostname: as.dev.wso2.org
-wso2::mgt_hostname: mgt.as.dev.wso2.org
+wso2::mgt_hostname: as.dev.wso2.org
 
 wso2::template_list:
   - repository/conf/identity.xml
@@ -34,14 +34,17 @@ wso2::template_list:
 #    http: 80
 #    https: 443
 
+## Uncomment the following for a clustered setup
 #wso2::file_list:
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 # Data sources
 wso2::is_datasource: wso2_carbon_db
 
+## Uncomment the following for a clustered setup
 #wso2::usermgt_datasource: wso2user_db
-#
+
+## Uncomment the following MySQL data sources for a clustered setup
 #wso2::master_datasources:
 #  wso2_config_db:
 #    name: WSO2_CONFIG_DB

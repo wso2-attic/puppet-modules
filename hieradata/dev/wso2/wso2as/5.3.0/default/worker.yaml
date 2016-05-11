@@ -13,6 +13,9 @@
 # limitations under the License.
 
 ---
+wso2::mgt_hostname: mgt.as.dev.wso2.org
+wso2::hostname: as.dev.wso2.org
+
 wso2::clustering:
   enabled: true
   domain: wso2.carbon.domain
@@ -28,11 +31,6 @@ wso2::clustering:
       -
         hostname: 192.168.100.22
         port: 4000
-
-#wso2::ports:
-#  proxyPort:
-#    http: 80
-#    https: 443
 
 # Registry mounts
 wso2::registry_mounts:
