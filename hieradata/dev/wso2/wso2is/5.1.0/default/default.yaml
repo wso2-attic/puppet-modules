@@ -35,6 +35,9 @@ wso2::template_list:
 #     http: 80
 #     https: 443
 
+#wso2::file_list:
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+
 wso2::clustering:
   enabled: false
   local_member_host: "%{::ipaddress}"

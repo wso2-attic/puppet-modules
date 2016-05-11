@@ -23,6 +23,7 @@ wso2::mgt_hostname: is.dev.wso2.org
 
 #wso2::file_list:
 #  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 wso2::template_list:
   - repository/conf/datasources/bps-datasources.xml

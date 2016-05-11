@@ -22,8 +22,8 @@ wso2::service_name: wso2brs
 wso2::hostname: brs.dev.wso2.org
 wso2::mgt_hostname: brs.dev.wso2.org
 
-wso2::file_list:
-  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+#wso2::file_list:
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 wso2::template_list:
   - repository/conf/identity/identity.xml

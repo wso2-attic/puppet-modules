@@ -30,7 +30,7 @@ wso2::template_list:
 #  - password-tmp
 
 #wso2::file_list:
-#  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 #wso2::usermgt_datasource: wso2user_db
 

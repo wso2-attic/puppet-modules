@@ -37,7 +37,7 @@ wso2::mgt_hostname: es.dev.wso2.org
 #         port: 4000
 
 #wso2::file_list:
-#  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 wso2::template_list:
   - repository/conf/identity.xml

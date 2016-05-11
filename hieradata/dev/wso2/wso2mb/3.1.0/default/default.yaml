@@ -131,7 +131,7 @@ wso2::metrics_datasources:
 
 # Uncomment MySQL connector driver for a clustered setup
 #wso2::file_list:
-#  - repository/components/lib/mysql-connector-java-5.1.38-bin.jar
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 # Set clustering enabled to true for a clustered setup
 wso2::clustering:
