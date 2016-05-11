@@ -21,8 +21,8 @@ wso2::template_list:
   - repository/conf/datasources/social-datasources.xml
 
 wso2::service_name: wso2greg
-wso2::hostname: pub.greg.wso2.com
-wso2::mgt_hostname: pub.greg.wso2.com
+wso2::hostname: pub.greg.dev.wso2.org
+wso2::mgt_hostname: pub.greg.dev.wso2.org
 
 wso2::file_list:
   - repository/components/lib/mysql-connector-java-5.1.36-bin.jar

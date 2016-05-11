@@ -13,6 +13,8 @@
 # limitations under the License.
 
 ---
+wso2::mgt_hostname: mgt.bps.dev.wso2.org
+
 wso2::clustering:
   enabled: true
   domain: wso2.carbon.domain

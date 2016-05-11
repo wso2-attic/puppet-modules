@@ -18,7 +18,8 @@
 #
 # Manages WSO2 API Manager deployment
 class wso2am inherits wso2base {
-  $am_datasources     = hiera ('wso2::am_datasources')
+  # TODO: remove undef default value when wso2am-1.9.1 support is dropped
+  $am_datasources     = hiera ('wso2::am_datasources', undef)
   $apim_gateway       = hiera_hash ('wso2::apim_gateway')
   $apim_keymanager    = hiera_hash ('wso2::apim_keymanager')
   $apim_publisher     = hiera_hash ('wso2::apim_publisher')

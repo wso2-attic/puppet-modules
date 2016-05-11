@@ -18,11 +18,11 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2greg
-wso2::hostname: greg.wso2.com
-wso2::mgt_hostname: greg.wso2.com
+wso2::hostname: greg.dev.wso2.org
+wso2::mgt_hostname: greg.dev.wso2.org
 
 #wso2::file_list:
-#  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 #  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 
 wso2::template_list:

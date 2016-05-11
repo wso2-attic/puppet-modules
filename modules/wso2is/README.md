@@ -1,6 +1,6 @@
-# WSO2 IS Puppet Module
+# WSO2 Identity Server Puppet Module
 
-This repository contains the generic puppet module for installing and configuring WSO2 IS on various environments. It supports multiple versions of WSO2 IS. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
+This repository contains the Puppet Module for installing and configuring WSO2 Identity Server on various environments. It supports multiple versions of WSO2 Identity Server. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
 
 ## Supported Operating Systems
 
@@ -14,18 +14,11 @@ This repository contains the generic puppet module for installing and configurin
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
-## Hiera data configuration to start the product with default profile
-With disabling the below proxy configuration in default.yaml file, product can be started in default profile with adding product pack to files directory.
+## Running WSO2 Identity Server in the `default` profile
+No changes to Hiera data are required to run the `default` profile.
 
-```yaml
-wso2::ports:
-  proxyPort :
-    http: 32001
-    https: 32002
-```
-
-## Hiera data configuration to start the product with clustering
-Do the below changes to default hiera yaml files to start the server in distributed setup. For more details refer the [WSO2 IS 5.1.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Identity+Server+5.1.0) and [WSO2 IS 5.0.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Identity+Server) clustering guides.
+## Running WSO2 Identity Server with clustering in specific profiles
+Do the below changes to default Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 Identity Server 5.1.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Identity+Server+5.1.0) and [WSO2 Identity Server 5.0.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Identity+Server) clustering guides.
 
 1. Enable clustering
 
@@ -40,10 +33,10 @@ Do the below changes to default hiera yaml files to start the server in distribu
         wka:
            members:
              -
-               hostname: 192.168.100.13
+               hostname: 192.168.100.113
                port: 4000
              -
-               hostname: 192.168.100.23
+               hostname: 192.168.100.114
                port: 4000
     ```
 
@@ -78,6 +71,7 @@ Do the below changes to default hiera yaml files to start the server in distribu
       read_only: false
       registry_root: /
       enable_cache: true
+
     wso2_gov_db:
       path: /_system/governance
       target_path: /_system/governance
@@ -102,17 +96,17 @@ Do the below changes to default hiera yaml files to start the server in distribu
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply Secure Vault
+## Running WSO2 Identity Server with Secure Vault
 WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
-For WSO2 IS 5.0.0, which is based on WSO2 Carbon Kernel 4.2.0, `org.wso2.ciphertool-1.0.0-wso2v2.jar` in Kernel patch [patch0010](http://dist.wso2.org/maven2/org/wso2/carbon/WSO2-CARBON-PATCH-4.2.0/0010/) has to be applied before enabling the Secure Vault. The `org.wso2.ciphertool-1.0.0-wso2v2.jar` in `WSO2-CARBON-PATCH-4.2.0-0009/lib` has to be copied to `wso2is/files/configs/lib` folder and added to the `file_list` in hiera file as below:
+>For WSO2 Identity Server 5.0.0, which is based on WSO2 Carbon Kernel 4.2.0, `org.wso2.ciphertool-1.0.0-wso2v2.jar` in Kernel patch [patch0010](http://dist.wso2.org/maven2/org/wso2/carbon/WSO2-CARBON-PATCH-4.2.0/0010/) has to be applied before enabling the Secure Vault. The `org.wso2.ciphertool-1.0.0-wso2v2.jar` in `WSO2-CARBON-PATCH-4.2.0-0009/lib` has to be copied to `wso2is/files/configs/lib` folder and added to the `file_list` in hiera file as below:
 
 ```yaml
 wso2::file_list :
   - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 ```
 
-Do the below changes in hiera file to apply Secure Vault.
+Uncomment and modify the below changes in Hiera file to apply Secure Vault.
 
 1. Enable Secure Vault
 
@@ -130,7 +124,7 @@ Do the below changes in hiera file to apply Secure Vault.
         password: <password>
     ```
 
-    For IS `5.1.0` which is based on WSO2 Carbon Kernel 4.4.x
+    For Identity Server `5.1.0` which is based on WSO2 Carbon Kernel 4.4.x
 
     Ex:
     ```yaml
@@ -141,7 +135,7 @@ Do the below changes in hiera file to apply Secure Vault.
         password: wso2carbon
     ```
 
-    For IS `5.0.0` which is based on WSO2 Carbon Kernel 4.2.0
+    For Identity Server `5.0.0` which is based on WSO2 Carbon Kernel 4.2.0
 
     Ex:
     ```yaml

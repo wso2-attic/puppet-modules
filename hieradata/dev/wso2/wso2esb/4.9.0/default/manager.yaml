@@ -13,6 +13,8 @@
 # limitations under the License.
 
 ---
+wso2::mgt_hostname: mgt.esb.dev.wso2.org
+
 wso2::clustering:
     enabled: true
     local_member_host: "%{::ipaddress}"

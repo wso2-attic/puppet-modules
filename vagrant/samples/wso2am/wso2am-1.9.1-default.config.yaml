@@ -13,30 +13,17 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname: mgt.brs.dev.wso2.org
-
-wso2::clustering:
-  enabled: true
-  domain: wso2.carbon.domain
-  local_member_host: "%{::ipaddress}"
-  local_member_port: 4000
-  membership_scheme: wka
-  wka:
-    members:
-      -
-        hostname: 192.168.100.41
-        port: 4000
-      -
-        hostname: 192.168.100.42
-        port: 4000
-
-wso2::dep_sync:
-  enabled: false
-  auto_checkout: true
-  auto_commit: true
-  repository_type: svn
-  svn:
-    url: http://svnrepo.example.com/repos/
-    user: username
-    password: password
-    append_tenant_id: true
+servers:
+  -
+    enabled: true
+    hostname: am.dev.wso2.org
+    facters:
+      product_name: wso2am
+      product_version: 1.9.1
+      product_profile: default
+      environment: dev
+      platform: default
+    box: ubuntu/trusty64
+    ip: 192.168.100.2
+    ram: 2048
+    cpu: 1

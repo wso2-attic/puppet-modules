@@ -22,8 +22,8 @@ wso2::template_list:
   - repository/conf/identity/sso-idp-config.xml
 
 wso2::service_name: wso2greg
-wso2::hostname: pub.greg.wso2.com
-wso2::mgt_hostname: pub.greg.wso2.com
+wso2::hostname: pub.greg.dev.wso2.org
+wso2::mgt_hostname: pub.greg.dev.wso2.org
 
 wso2::clustering:
   enabled: true

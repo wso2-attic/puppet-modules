@@ -1,6 +1,6 @@
-# WSO2 ESB Puppet Module
+# WSO2 Enterprise Service Bus Puppet Module
 
-This repository contains the generic puppet module for installing and configuring WSO2 ESB on various environments. It supports multiple versions of WSO2 ESB. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
+This repository contains the Puppet Module for installing and configuring WSO2 Enterprise Service Bus on various environments. It supports multiple versions of WSO2 Enterprise Service Bus. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
 
 ## Supported Operating Systems
 
@@ -14,26 +14,11 @@ This repository contains the generic puppet module for installing and configurin
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
-## Hiera data configuration to start the product with default profile
-With disabling the below proxy configuration in default.yaml file, product can be started in default profile withadding product pack to files directory.
+## Running WSO2 Enterprise Service Bus in the `default` profile
+No changes to Hiera data are required to run the `default` profile.
 
-```yaml
-wso2::ports:
-  proxyPort :
-    http: 32003
-    https: 32004
-
- wso2::esb_wsdl_epr_prefix:
-      http :
-         bind_address: esb.wso2.com
-         prefix: http://esb.wso2.com:32003
-      https:
-         bind_address: esb.wso2.com
-         prefix: http://esb.wso2.com:32004
-```
-
-## Hiera data configuration to start the product with clustering
-Do the below changes to relevant ESB profiles (manager, worker) hiera yaml files to start the server in distributed setup. For more details refer the [WSO2 ESB clustering guide](https://docs.wso2.com/display/CLUSTER44x/Clustering+ESB+4.9.0)
+## Running WSO2 Enterprise Service Bus with clustering in specific profiles
+Do the below changes to relevant Enterprise Service Bus profiles (`manager`, `worker`) Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 Enterprise Service Bus clustering guide](https://docs.wso2.com/display/CLUSTER44x/Clustering+ESB+4.9.0)
 
 1. Enable clustering
 
@@ -48,10 +33,10 @@ Do the below changes to relevant ESB profiles (manager, worker) hiera yaml files
         wka:
            members:
              -
-               hostname: 192.168.100.13
+               hostname: 192.168.100.93
                port: 4000
              -
-               hostname: 192.168.100.23
+               hostname: 192.168.100.94
                port: 4000
     ```
 
@@ -86,6 +71,7 @@ Do the below changes to relevant ESB profiles (manager, worker) hiera yaml files
       read_only: false
       registry_root: /
       enable_cache: true
+      
     wso2_gov_db:
       path: /_system/governance
       target_path: /_system/governance
@@ -110,10 +96,10 @@ Do the below changes to relevant ESB profiles (manager, worker) hiera yaml files
            append_tenant_id: true
     ```
 
-## Hiera data configuration to apply Secure Vault
+## Running WSO2 Enterprise Service Bus with Secure Vault
 WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
-Do the below changes in hiera file to apply Secure Vault.
+Uncomment and modify the below changes in Hiera file to apply Secure Vault.
 
 1. Enable Secure Vault
 

@@ -1,6 +1,6 @@
 # Deploy WSO2 Products with Puppet using Vagrant
 
-This guide walks through the steps needed for deploying WSO2 products using Vagrant and VirtualBox as the provider.
+This guide walks through the steps needed for deploying WSO2 products using Vagrant with VirtualBox as the provider.
 Puppet will be used as the provisioning method in Vagrant and Hiera as the configuration data store.
 
 
@@ -10,7 +10,7 @@ Puppet will be used as the provisioning method in Vagrant and Hiera as the confi
  * **[Virtualbox](https://www.virtualbox.org)** Vagrant hypervisor
 
 
-## How to use
+## How to Use
 
 1. Clone WSO2 Puppet modules Git repository and consider this path as `PUPPET_HOME`:
 
@@ -18,12 +18,13 @@ Puppet will be used as the provisioning method in Vagrant and Hiera as the confi
     git clone https://github.com/wso2/puppet-modules.git
     ````
 
-2. Create server configuration file
-Rename `config.yaml.sample` to `config.yaml` and update the `/servers` section with required values.
-You can add more instances by adding more entries to `/servers` array
-You can pass facters to Vagrant nodes through `/servers/*/facters` array
+2. Create server configuration file:
 
-3. Download and copy Oracle JDK `1.7` distribution to the following path:
+    Rename `config.yaml.sample` to `config.yaml` and update the `/servers` section with required values. You can add more instances by adding more entries to `/servers` array. You can pass facters to Vagrant nodes through `/servers/*/facters` array.
+
+    Additionally, you can copy a sample `config.yaml` file from the `samples` folder to quickly run a particular product on Vagrant.
+
+3. Download and copy Oracle JDK `1.7_80` distribution to the following path:
 
     ````
     <PUPPET_HOME>/modules/wso2base/files/jdk-7u80-linux-x64.tar.gz
@@ -37,9 +38,7 @@ You can pass facters to Vagrant nodes through `/servers/*/facters` array
     <PUPPET_HOME>/modules/wso2as/files
     ````
 
-5. Create a `config.yaml` file with required products and VM configurations (cpu, memory). Refer the samples provided.
-
-6. Update `<PUPPET_HOME>/hieradata` with required product configurations.
+5. Optionally update `<PUPPET_HOME>/hieradata` with required product configurations. `default` profile every product can be run on Vagrant without any changes to the Hiera data.
 
 7. Execute the following command to start the VMs:
 
