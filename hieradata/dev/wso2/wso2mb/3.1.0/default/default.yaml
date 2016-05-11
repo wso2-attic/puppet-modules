@@ -143,10 +143,10 @@ wso2::clustering:
     wka:
        members:
          -
-           hostname: 192.168.100.110
+           hostname: 192.168.100.121
            port: 4000
          -
-           hostname: 192.168.100.120
+           hostname: 192.168.100.122
            port: 4000
 
 # Uncomment following registry mounts for a clustered setup

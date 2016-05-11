@@ -16,28 +16,14 @@
 servers:
   -
     enabled: true
-    hostname: mgt.bps.dev.wso2.org
+    hostname: brs.dev.wso2.org
     facters:
-      product_name: wso2bps
-      product_version: 3.5.0
-      product_profile: manager
+      product_name: wso2brs
+      product_version: 2.2.0
+      product_profile: default
       environment: dev
       platform: default
     box: ubuntu/trusty64
-    ip: 192.168.100.31
-    ram: 2048
-    cpu: 1
-
-  -
-    enabled: true
-    hostname: bps.dev.wso2.org
-    facters:
-      product_name: wso2bps
-      product_version: 3.5.0
-      product_profile: worker
-      environment: dev
-      platform: default
-    box: ubuntu/trusty64
-    ip: 192.168.100.32
+    ip: 192.168.100.41
     ram: 2048
     cpu: 1

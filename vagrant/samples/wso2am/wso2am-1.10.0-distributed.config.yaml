@@ -16,28 +16,56 @@
 servers:
   -
     enabled: true
-    hostname: mgt.bps.dev.wso2.org
+    hostname: km.dev.wso2.org
     facters:
-      product_name: wso2bps
-      product_version: 3.5.0
-      product_profile: manager
+      product_name: wso2am
+      product_version: 1.10.0
+      product_profile: api-key-manager
       environment: dev
       platform: default
     box: ubuntu/trusty64
-    ip: 192.168.100.31
+    ip: 192.168.100.2
     ram: 2048
     cpu: 1
 
   -
     enabled: true
-    hostname: bps.dev.wso2.org
+    hostname: store.dev.wso2.org
     facters:
-      product_name: wso2bps
-      product_version: 3.5.0
-      product_profile: worker
+      product_name: wso2am
+      product_version: 1.10.0
+      product_profile: api-store
       environment: dev
       platform: default
     box: ubuntu/trusty64
-    ip: 192.168.100.32
+    ip: 192.168.100.3
+    ram: 2048
+    cpu: 1
+
+  -
+    enabled: true
+    hostname: publisher.dev.wso2.org
+    facters:
+      product_name: wso2am
+      product_version: 1.10.0
+      product_profile: api-publisher
+      environment: dev
+      platform: default
+    box: ubuntu/trusty64
+    ip: 192.168.100.4
+    ram: 2048
+    cpu: 1
+
+  -
+    enabled: true
+    hostname: gw.dev.wso2.org
+    facters:
+      product_name: wso2am
+      product_version: 1.10.0
+      product_profile: gateway-manager
+      environment: dev
+      platform: default
+    box: ubuntu/trusty64
+    ip: 192.168.100.5
     ram: 2048
     cpu: 1

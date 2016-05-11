@@ -66,6 +66,7 @@ class wso2base {
   }
 
   $carbon_home          = "${install_dir}/${pack_extracted_dir}"
+  $system_pref_dir      = ["/home/${wso2_user}/.java/", "/home/${wso2_user}/.java/.systemPrefs"]
 
   if ($::wso2_patching_mode == undef or
   str2bool($::wso2_patching_mode) != true) or
@@ -82,7 +83,9 @@ class wso2base {
       java_install_dir => $java_install_dir,
       java_source_file => $java_source_file,
       wso2_user        => $wso2_user,
-      java_home        => $java_home
+      wso2_group       => $wso2_group,
+      java_home        => $java_home,
+      system_pref_dir  => $system_pref_dir
     }
   } else {
     class { '::wso2base::system':

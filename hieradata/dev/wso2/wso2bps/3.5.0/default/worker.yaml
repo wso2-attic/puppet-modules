@@ -23,10 +23,10 @@ wso2::clustering:
   wka:
     members:
       -
-        hostname: 192.168.100.21
+        hostname: 192.168.100.31
         port: 4000
       -
-        hostname: 192.168.100.22
+        hostname: 192.168.100.32
         port: 4000
 
 #wso2::ports:

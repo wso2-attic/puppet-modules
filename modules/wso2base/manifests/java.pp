@@ -19,7 +19,9 @@ class wso2base::java (
   $java_install_dir,
   $java_source_file,
   $wso2_user,
-  $java_home
+  $wso2_group,
+  $java_home,
+  $system_pref_dir
 ) {
 
   ensure_resource('file', $java_install_dir, {
@@ -59,4 +61,14 @@ class wso2base::java (
     command => "/bin/rm -rf ${cachedir}",
     require => File['/etc/profile.d/set_java_home.sh'],
   }
+
+  # Set Java system preferences directory
+  ensure_resource('file', $system_pref_dir, {
+    ensure  => 'directory',
+    owner => $wso2_user,
+    group => $wso2_group,
+    mode => 755,
+    require => File['/etc/profile.d/set_java_home.sh']
+  })
+
 }

@@ -16,14 +16,14 @@
 servers:
   -
     enabled: true
-    hostname: brs.dev.wso2.org
+    hostname: am.dev.wso2.org
     facters:
-      product_name: wso2brs
-      product_version: 2.1.0
+      product_name: wso2am
+      product_version: 1.10.0
       product_profile: default
       environment: dev
       platform: default
     box: ubuntu/trusty64
-    ip: 192.168.100.41
+    ip: 192.168.100.2
     ram: 2048
     cpu: 1
