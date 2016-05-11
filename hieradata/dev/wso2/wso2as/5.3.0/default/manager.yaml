@@ -14,7 +14,6 @@
 
 ---
 wso2::mgt_hostname: mgt.as.dev.wso2.org
-wso2::hostname: as.dev.wso2.org
 
 wso2::clustering:
   enabled: true

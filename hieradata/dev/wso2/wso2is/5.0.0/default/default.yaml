@@ -18,8 +18,8 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2is
-wso2::hostname: is.wso2.com
-wso2::mgt_hostname: is.wso2.com
+wso2::hostname: is.dev.wso2.org
+wso2::mgt_hostname: is.dev.wso2.org
 
 #wso2::file_list:
 #  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar

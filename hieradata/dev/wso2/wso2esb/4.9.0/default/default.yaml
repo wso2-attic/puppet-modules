@@ -18,8 +18,8 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2esb
-wso2::hostname: esb.wso2.com
-wso2::mgt_hostname: esb.wso2.com
+wso2::hostname: esb.dev.wso2.org
+wso2::mgt_hostname: esb.dev.wso2.org
 
 #wso2::file_list:
 #  - repository/components/lib/mysql-connector-java-5.1.36-bin.jar
@@ -103,8 +103,8 @@ wso2::mgt_hostname: esb.wso2.com
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
-    bind_address: esb.wso2.com
-    prefix: http://esb.wso2.com:9763
+    bind_address: esb.dev.wso2.org
+    prefix: http://esb.dev.wso2.org:9763
   https:
-    bind_address: esb.wso2.com
-    prefix: https://esb.wso2.com:9443
+    bind_address: esb.dev.wso2.org
+    prefix: https://esb.dev.wso2.org:9443

@@ -21,8 +21,8 @@ wso2::template_list:
   - repository/conf/datasources/social-datasources.xml
 
 wso2::service_name: wso2greg
-wso2::hostname: store.greg.wso2.com
-wso2::mgt_hostname: store.greg.wso2.com
+wso2::hostname: store.greg.dev.wso2.org
+wso2::mgt_hostname: store.greg.dev.wso2.org
 
 wso2::is_datasource: wso2_gov_db
 
