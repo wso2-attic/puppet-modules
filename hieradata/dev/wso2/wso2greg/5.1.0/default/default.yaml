@@ -34,7 +34,7 @@ wso2::template_list:
 
 # Uncomment MySQL connector driver for a clustered setup
 #wso2::file_list:
-#  - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 
 # Uncomment the following for clustered setup

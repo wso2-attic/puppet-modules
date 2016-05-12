@@ -23,7 +23,7 @@ wso2::hostname: dss.dev.wso2.org
 wso2::mgt_hostname: dss.dev.wso2.org
 
 #wso2::file_list:
-#  - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 wso2::template_list:
   - repository/conf/etc/tasks-config.xml

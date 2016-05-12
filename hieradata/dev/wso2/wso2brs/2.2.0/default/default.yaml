@@ -24,7 +24,7 @@ wso2::mgt_hostname: brs.dev.wso2.org
 
 ## Uncomment the following for a clustered setup
 #wso2::file_list:
-#  - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
+#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
 wso2::template_list:
   - repository/conf/identity/identity.xml
