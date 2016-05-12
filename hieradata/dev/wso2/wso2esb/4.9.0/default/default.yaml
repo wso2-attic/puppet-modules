@@ -30,11 +30,20 @@ wso2::mgt_hostname: esb.dev.wso2.org
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+# Defines WSDL EPR Prefix
+wso2::esb_wsdl_epr_prefix:
+  http:
+    bind_address: esb.dev.wso2.org
+    prefix: http://esb.dev.wso2.org:9763
+  https:
+    bind_address: esb.dev.wso2.org
+    prefix: https://esb.dev.wso2.org:9443
+    
 #wso2::master_datasources:
 #  wso2_config_db:
 #    name: WSO2_CONFIG_DB
 #    description: The datasource used for config registry
-#    driver_class_name: com.mysql.jdbc.Driver
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
 #    url: jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
 #    username: "%{hiera('wso2::datasources::mysql::username')}"
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
@@ -48,7 +57,7 @@ wso2::mgt_hostname: esb.dev.wso2.org
 #  wso2_gov_db:
 #    name: WSO2_GOV_DB
 #    description: The datasource used for gov registry
-#    driver_class_name: com.mysql.jdbc.Driver
+#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
 #    url: jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
 #    username: "%{hiera('wso2::datasources::mysql::username')}"
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
@@ -107,12 +116,3 @@ wso2::mgt_hostname: esb.dev.wso2.org
 #    secret_alias: Datasources.WSO2USER_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
-
-# Defines WSDL EPR Prefix
-wso2::esb_wsdl_epr_prefix:
-  http:
-    bind_address: esb.dev.wso2.org
-    prefix: http://esb.dev.wso2.org:9763
-  https:
-    bind_address: esb.dev.wso2.org
-    prefix: https://esb.dev.wso2.org:9443
