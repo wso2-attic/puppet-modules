@@ -18,8 +18,7 @@
 
 <eventProcessorConfiguration>
 
-   <%- if @single_node_deployment['enabled'] == true -%>
-   <mode name="SingleNode" enable="true">
+   <mode name="SingleNode" enable="<%= @single_node_deployment['enabled'] %>">
         <persistence enable="false">
             <persistenceIntervalInMinutes>15</persistenceIntervalInMinutes>
             <persisterSchedulerPoolSize>10</persisterSchedulerPoolSize>
@@ -28,14 +27,12 @@
             </persister>
         </persistence>
     </mode>
-    <%- end -%>
 
 
-   <%- if @ha_deployment['enabled'] == true -%>
-    <mode name="HA" enable="true">
+    <mode name="HA" enable="<%= @ha_deployment['enabled'] %>">
         <nodeType>
-            <worker enable="<%= @ha_deployment['worker'] %>"/>
-            <presenter enable="<%= @ha_deployment['presenter'] %>"/>
+            <worker enable="<%= @ha_deployment['worker_enabled'] %>"/>
+            <presenter enable="<%= @ha_deployment['presenter_enabled'] %>"/>
         </nodeType>
         <checkMemberUpdateInterval>10000</checkMemberUpdateInterval>
         <eventSync>
@@ -71,31 +68,34 @@
             <publisherConnectionStatusCheckInterval>30000</publisherConnectionStatusCheckInterval>
         </presentation>
     </mode>
-    <%- end -%>
-    
-    <%- if @distributed_deployment['enabled'] == true -%>    
-    <mode name="Distributed" enable="true">
+
+
+    <!-- Distributed Mode Config -->
+
+    <mode name="Distributed" enable="false">
         <nodeType>
-            <worker enable="<%= @distributed_deployment['nodeType']['worker'] %>"/>
-            <manager enable="<%= @distributed_deployment['nodeType']['manager'] %>">
+            <worker enable="true"/>
+            <manager enable="true">
                 <hostName>0.0.0.0</hostName>
-                <port><%= @distributed_deployment['nodeType']['manager']['port'] %></port>
+                <port>8904</port>
             </manager>
-            <presenter enable="<%= @distributed_deployment['nodeType']['presenter'] %>">
+            <presenter enable="false">
                 <hostName>0.0.0.0</hostName>
-                <port><%= @distributed_deployment['nodeType']['presenter']['port'] %></port>
+                <port>11000</port>
             </presenter>
         </nodeType>
 
         <management>
-            <managers>            
-            <%- @distributed_deployment['management']['managers'].each do |manager| -%>            
-            <manager>
-                <hostName><%= manager['hostName'] %></hostName>
-                <port><%= manager['port'] %></port>
-            </manager>            
-            <%- end -%>            
-            </managers>    
+            <managers>
+                <manager>
+                    <hostName>localhost</hostName>
+                    <port>8904</port>
+                </manager>
+                <manager>
+                    <hostName>localhost</hostName>
+                    <port>8905</port>
+                </manager>
+            </managers>
             <!--Connection re-try interval to connect to Storm Manager service in case of a connection failure-->
             <reconnectionInterval>20000</reconnectionInterval>
             <!--Heart beat interval (in ms) for event listeners in "Storm Receivers" and "CEP Publishers" to acknowledge their
@@ -152,6 +152,6 @@
         <memberUpdateCheckInterval>20000</memberUpdateCheckInterval>
 
     </mode>
-    <%- end -%>
+
 </eventProcessorConfiguration>
 

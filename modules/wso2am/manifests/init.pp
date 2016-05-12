@@ -19,17 +19,18 @@
 # Manages WSO2 API Manager deployment
 class wso2am inherits wso2base {
   # TODO: remove undef default value when wso2am-1.9.1 support is dropped
-  $am_datasources     = hiera ('wso2::am_datasources', undef)
-  $apim_gateway       = hiera_hash ('wso2::apim_gateway')
-  $apim_keymanager    = hiera_hash ('wso2::apim_keymanager')
-  $apim_publisher     = hiera_hash ('wso2::apim_publisher')
-  $apim_store         = hiera_hash ('wso2::apim_store')
+  $am_datasources     = hiera('wso2::am_datasources', undef)
+  $apim_gateway       = hiera('wso2::apim_gateway')
+  $apim_keymanager    = hiera('wso2::apim_keymanager')
+  $apim_publisher     = hiera('wso2::apim_publisher')
+  $apim_store         = hiera('wso2::apim_store')
   $is_datasource      = hiera('wso2::is_datasource')
 
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,
     pack_filename       => $wso2base::pack_filename,
     pack_dir            => $wso2base::pack_dir,
+    carbon_home_symlink => $wso2base::carbon_home_symlink,
     install_mode        => $wso2base::install_mode,
     install_dir         => $wso2base::install_dir,
     pack_extracted_dir  => $wso2base::pack_extracted_dir,

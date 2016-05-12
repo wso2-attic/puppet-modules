@@ -17,15 +17,16 @@
 #
 # Manages WSO2 Identity Server deployment
 class wso2is inherits wso2base {
-  $am_datasources      = hiera_hash('wso2::am_datasources')
-  $bps_datasources     = hiera_hash('wso2::bps_datasources')
-  $metrics_datasources = hiera_hash('wso2::metrics_datasources')
-  $is_datasource       = hiera('wso2::is_datasource')
+  $am_datasources       = hiera('wso2::am_datasources')
+  $bps_datasources      = hiera('wso2::bps_datasources')
+  $metrics_datasources  = hiera('wso2::metrics_datasources')
+  $is_datasource        = hiera('wso2::is_datasource')
 
   wso2base::server { $wso2base::carbon_home :
     maintenance_mode    => $wso2base::maintenance_mode,
     pack_filename       => $wso2base::pack_filename,
     pack_dir            => $wso2base::pack_dir,
+    carbon_home_symlink => $wso2base::carbon_home_symlink,
     install_mode        => $wso2base::install_mode,
     install_dir         => $wso2base::install_dir,
     pack_extracted_dir  => $wso2base::pack_extracted_dir,

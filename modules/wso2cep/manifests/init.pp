@@ -22,12 +22,12 @@ class wso2cep inherits wso2base {
   $data_bridge             = hiera('wso2::data_bridge')
   $single_node_deployment  = hiera('wso2::single_node_deployment')
   $ha_deployment           = hiera('wso2::ha_deployment')
-  $distributed_deployment  = hiera('wso2::distributed_deployment')
 
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,
     pack_filename       => $wso2base::pack_filename,
     pack_dir            => $wso2base::pack_dir,
+    carbon_home_symlink => $wso2base::carbon_home_symlink,
     install_mode        => $wso2base::install_mode,
     install_dir         => $wso2base::install_dir,
     pack_extracted_dir  => $wso2base::pack_extracted_dir,

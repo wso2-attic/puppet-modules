@@ -23,6 +23,7 @@ class wso2as inherits wso2base {
     maintenance_mode    => $wso2base::maintenance_mode,
     pack_filename       => $wso2base::pack_filename,
     pack_dir            => $wso2base::pack_dir,
+    carbon_home_symlink => $wso2base::carbon_home_symlink,
     install_mode        => $wso2base::install_mode,
     install_dir         => $wso2base::install_dir,
     pack_extracted_dir  => $wso2base::pack_extracted_dir,

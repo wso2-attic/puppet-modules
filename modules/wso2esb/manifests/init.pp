@@ -17,12 +17,13 @@
 #
 # Manages WSO2 Enterprise Service Bus deployment
 class wso2esb inherits wso2base {
-  $esb_wsdl_epr_prefix   = hiera ('wso2::esb_wsdl_epr_prefix')
+  $esb_wsdl_epr_prefix   = hiera('wso2::esb_wsdl_epr_prefix')
 
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,
     pack_filename       => $wso2base::pack_filename,
     pack_dir            => $wso2base::pack_dir,
+    carbon_home_symlink => $wso2base::carbon_home_symlink,
     install_mode        => $wso2base::install_mode,
     install_dir         => $wso2base::install_dir,
     pack_extracted_dir  => $wso2base::pack_extracted_dir,
