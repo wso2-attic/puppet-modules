@@ -24,7 +24,7 @@ wso2::mgt_hostname: das.dev.wso2.org
 wso2::file_list:
   - dbscripts/identity/h2.sql
   - dbscripts/identity/mysql.sql
-#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+#  - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
 
 wso2::template_list:
   - repository/conf/datasources/analytics-datasources.xml

@@ -38,7 +38,7 @@ wso2::template_list:
 #    https: 443
 
 #wso2::file_list:
-#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+#  - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
 
 # Data sources
 wso2::is_datasource: wso2_carbon_db

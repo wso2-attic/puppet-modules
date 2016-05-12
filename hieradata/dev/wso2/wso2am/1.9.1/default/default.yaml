@@ -33,7 +33,7 @@ wso2::template_list:
 
 # Uncomment the following in a clustered setup
 #wso2::file_list:
-#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+#  - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
 
 wso2::service_name: wso2am
 wso2::hostname: am.dev.wso2.org

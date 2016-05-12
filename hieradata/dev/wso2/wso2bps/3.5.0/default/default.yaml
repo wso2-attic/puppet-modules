@@ -40,7 +40,7 @@ wso2::template_list:
 #    https: 443
 
 #wso2::file_list:
-#  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+#  - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
 
 # BPS configuration
 wso2::so_timeout: 600000
