@@ -34,6 +34,22 @@ wso2::clustering:
 #    http: 80
 #    https: 443
 
+wso2::ha_deployment:
+  enabled: true
+  offset: 0
+  presenter: false
+  presenter_port: 11000
+  worker: true
+  eventSync:
+    hostName: "%{::ipaddress}"
+    port: 11224
+  management:
+    hostName: "%{::ipaddress}"
+    port: 10005
+  presentation:
+    hostName: 0.0.0.0
+    port: 11000
+
 # Registry mounts
 wso2::registry_mounts:
   wso2_config_db:
@@ -61,19 +77,3 @@ wso2::dep_sync:
     user: username
     password: password
     append_tenant_id: true
-
-wso2::ha_deployment:
-  enabled: true
-  offset: 0
-  presenter: false
-  presenter_port: 11000
-  worker: true
-  eventSync:
-    hostName: "%{::ipaddress}"
-    port: 11224
-  management:
-    hostName: "%{::ipaddress}"
-    port: 10005
-  presentation:
-    hostName: 0.0.0.0
-    port: 11000
