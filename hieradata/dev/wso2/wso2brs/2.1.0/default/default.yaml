@@ -73,7 +73,7 @@ wso2::is_datasource: wso2_carbon_db
 #
 #  wso2user_db:
 #    name: WSO2USER_DB
-#    description: The datasource is used for user mangement and userstore
+#    description: The datasource is used for user management and userstore
 #    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
 #    url: jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
 #    username: "%{hiera('wso2::datasources::mysql::username')}"
