@@ -141,7 +141,7 @@ wso2::am_datasources:
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-## Ucomment the following AM data source and comment out the above H2 data source for a clustered setup
+## Uncomment the following AM data source and comment out the above H2 data source for a clustered setup
 #  wso2am_db:
 #    name: WSO2AM_DB
 #    description: The datasource used for API Manager database
