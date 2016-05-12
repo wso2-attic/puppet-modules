@@ -19,3 +19,7 @@ wso2::file_list:
   - repository/components/lib/jackson-databind-2.5.4.jar
   - repository/components/lib/kubernetes-membership-scheme-1.0.0-SNAPSHOT.jar
   - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
+
+# MySQL datasources configuration
+wso2::datasources::mysql::username: 'wso2carbon'
+wso2::datasources::mysql::password: 'wso2carbon'
