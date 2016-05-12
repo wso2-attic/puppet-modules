@@ -21,6 +21,12 @@ wso2::ports:
     http: 32051
     https: 32052
 
+#Files to be copied to system
+wso2::system_file_list:
+  -
+    file: wso2cep-presenter-init.sh
+    target_path: /usr/local/bin
+
 wso2::ha_deployment:
   enabled: true
   offset: 0
@@ -28,13 +34,13 @@ wso2::ha_deployment:
   presenter_port: 11000
   worker: false
   eventSync:
-    hostName: "%{::ipaddress}"
+    hostName: 0.0.0.0
     port: 11224
   management:
     hostName: 0.0.0.0
     port: 10005
   presentation:
-    hostName: "%{::ipaddress}"
+    hostName: 0.0.0.0
     port: 11002
 
 wso2::clustering:
