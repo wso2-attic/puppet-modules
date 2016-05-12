@@ -18,7 +18,7 @@ wso2::hostname: bps.dev.wso2.org
 
 wso2::clustering:
   enabled: true
-  domain: wso2.bps.domain
+  domain: bps.wso2.domain
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
   sub_domain: mgt
