@@ -13,8 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #----------------------------------------------------------------------------
-#
-#
+
 # Manages WSO2 Application Server deployment
 class wso2as inherits wso2base {
   $is_datasource = hiera('wso2::is_datasource')

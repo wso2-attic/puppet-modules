@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------
-#  Copyright (c) 2015 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2016 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,12 +13,11 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #----------------------------------------------------------------------------
-#
-#
+
 # Manages WSO2 Governance Registry deployment
 class wso2greg inherits wso2base {
   $bps_datasources      = hiera('wso2::bps_datasources')
-#  TODO: Get rid of undef default value in social_datasources hiera_hash lookup once greg 4.6.0 module is removed
+  #TODO: Remove undef default value when wso2greg-4.6.0 support is dropped
   $social_datasources   = hiera('wso2::social_datasources', undef)
   $is_datasource        = hiera('wso2::is_datasource')
 

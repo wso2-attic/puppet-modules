@@ -1,5 +1,5 @@
 #----------------------------------------------------------------------------
-#  Copyright (c) 2015 WSO2, Inc. http://www.wso2.org
+#  Copyright (c) 2016 WSO2, Inc. http://www.wso2.org
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,15 +13,14 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #----------------------------------------------------------------------------
-#
-#
+
 # Manages WSO2 Data Analytics Server deployment
 class wso2das inherits wso2base {
   $analytics_datasources   = hiera('wso2::analytics_datasources')
   $metrics_datasources     = hiera('wso2::metrics_datasources')
   $spark                   = hiera('wso2::spark')
 
-  # TODO: remove undef default when dropping wso2das-3.0.0 support
+  # TODO: remove undef default when wso2das-3.0.0 support is dropped
   $is_datasource           = hiera('wso2::is_datasource', undef)
   $single_node_deployment  = hiera('wso2::single_node_deployment')
   $ha_deployment           = hiera('wso2::ha_deployment')
