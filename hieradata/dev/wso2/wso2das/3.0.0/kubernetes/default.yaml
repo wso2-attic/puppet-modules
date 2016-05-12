@@ -23,6 +23,7 @@ wso2::mgt_hostname: wso2das-default
 
 wso2::file_list:
   - dbscripts/identity/h2.sql
+  - dbscripts/identity/mysql.sql
 
 wso2::template_list:
   - repository/conf/datasources/analytics-datasources.xml
