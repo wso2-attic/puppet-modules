@@ -13,6 +13,9 @@
 # limitations under the License.
 
 ---
+wso2::mgt_hostname: mgt.brs.dev.wso2.org
+wso2::hostname: brs.dev.wso2.org
+
 wso2::clustering:
   enabled: true
   domain: brs.wso2.domain

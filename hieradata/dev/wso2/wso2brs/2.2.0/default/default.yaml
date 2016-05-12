@@ -22,7 +22,7 @@ wso2::service_name: wso2brs
 wso2::hostname: brs.dev.wso2.org
 wso2::mgt_hostname: brs.dev.wso2.org
 
-## Uncomment the following for a clustered setup
+## Uncomment the following MySQL connector jar in the file_list for a clustered setup
 #wso2::file_list:
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
