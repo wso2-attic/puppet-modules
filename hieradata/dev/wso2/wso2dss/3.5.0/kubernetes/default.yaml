@@ -113,34 +113,42 @@ wso2::registry_mounts:
 #    secret_alias: Carbon.Security.KeyStore.Password
 #    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
 #    password: wso2carbon
+#
 #  key_store_key_password:
 #    secret_alias: Carbon.Security.KeyStore.KeyPassword
 #    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
 #    password: wso2carbon
+#
 #  trust_store_password:
 #    secret_alias: Carbon.Security.TrustStore.Password
 #    secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
 #    password: wso2carbon
+#
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
 #    password: admin
+#
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
 #  connector_key_store_password:
 #    secret_alias: Server.Service.Connector.keystorePass
 #    secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
 #    password: wso2carbon
-##  wso2_config_db_password:
+#
+#  wso2_config_db_password:
 #    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
 #  wso2_gov_db_password:
 #    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
 #  wso2_user_db_password:
 #    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false

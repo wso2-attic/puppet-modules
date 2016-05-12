@@ -90,7 +90,7 @@ wso2::is_datasource: wso2_carbon_db
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 #
 #  wso2_user_db:
-#    name: wso2_user_db
+#    name: WSO2_USER_DB
 #    description: The datasource is used for user mangement and userstore
 #    driver_class_name: com.mysql.jdbc.Driver
 #    url: jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
@@ -182,50 +182,62 @@ wso2::metrics_datasources:
 #    secret_alias: Carbon.Security.KeyStore.Password
 #    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
 #    password: wso2carbon
+#
 #  key_store_key_password:
 #    secret_alias: Carbon.Security.KeyStore.KeyPassword
 #    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
 #    password: wso2carbon
+#
 #  trust_store_password:
 #    secret_alias: Carbon.Security.TrustStore.Password
 #    secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
 #    password: wso2carbon
+#
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
 #    password: admin
+#
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
 #  connector_key_store_password:
 #    secret_alias: Server.Service.Connector.keystorePass
 #    secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
 #    password: wso2carbon
+#
 #  wso2_analytics_event_store_db_password:
 #    secret_alias: Datasources.WSO2_ANALYTICS_EVENT_STORE_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/analytics-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_ANALYTICS_EVENT_STORE_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
 #  wso2_analytics_processed_data_store_db_password:
 #    secret_alias: Datasources.WSO2_ANALYTICS_PROCESSED_DATA_STORE_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/analytics-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_ANALYTICS_PROCESSED_DATA_STORE_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
 #  wso2_metrics_db_password:
 #    secret_alias: Datasources.WSO2_METRICS_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/metrics-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_METRICS_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
 #  wso2_config_db_password:
 #    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
 #  wso2_gov_db_password:
 #    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
 #  wso2_user_db_password:
 #    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
 ##Use below advanced secure vault configurations if the properties are used in corresponding files
 #  analytics_data_config_password:
 #    secret_alias: Analytics.Data.Config.Password
