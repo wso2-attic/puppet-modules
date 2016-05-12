@@ -18,7 +18,7 @@ wso2::clustering:
     local_member_port: 4000
     membership_scheme: wka
     sub_domain: worker
-    domain: wso2.carbon.domain
+    domain: esb.wso2.domain
     wka:
        members:
          -

@@ -45,7 +45,7 @@ wso2::clustering:
   enabled: false
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
-  domain: wso2.das.domain
+  domain: das.wso2.domain
   membership_scheme: wka
   wka:
     members:

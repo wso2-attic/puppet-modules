@@ -17,7 +17,7 @@ wso2::mgt_hostname: mgt.as.dev.wso2.org
 
 wso2::clustering:
   enabled: true
-  domain: wso2.carbon.domain
+  domain: as.wso2.domain
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
   sub_domain: mgt

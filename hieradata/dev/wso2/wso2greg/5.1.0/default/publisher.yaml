@@ -26,7 +26,7 @@ wso2::clustering:
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
   membership_scheme: wka
-  domain: wso2.greg.domain
+  domain: greg.wso2.domain
   wka:
     members:
       -

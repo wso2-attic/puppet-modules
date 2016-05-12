@@ -18,7 +18,7 @@ wso2::hostname: gw.dev.wso2.org
 
 wso2::clustering:
   enabled: true
-  domain: wso2.gw.am.domain
+  domain: gw.am.wso2.domain
   sub_domain: mgt
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000

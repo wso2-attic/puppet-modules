@@ -18,7 +18,7 @@ wso2::hostname: pub.dev.wso2.org
   
 wso2::clustering:
   enabled: true
-  domain: wso2.pub.store.am.domain
+  domain: pub.store.am.wso2.domain
   sub_domain: mgt
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
