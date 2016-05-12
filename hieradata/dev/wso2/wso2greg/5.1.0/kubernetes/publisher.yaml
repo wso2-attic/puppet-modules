@@ -26,8 +26,8 @@ wso2::clustering:
   membership_scheme: kubernetes
   local_member_port: 4000
   kubernetes:
-     kubernetes_namespace: default
-     kubernetes_services: wso2greg-publisher,wso2greg-store
+    kubernetes_namespace: default
+    kubernetes_services: wso2greg-publisher,wso2greg-store
 
 wso2::ports:
   proxyPort:
