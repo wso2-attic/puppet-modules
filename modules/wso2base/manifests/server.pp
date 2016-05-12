@@ -67,9 +67,9 @@ define wso2base::server (
   # Create a symlink to CARBON_HOME
   if $::vm_type != 'docker' {
     file { $carbon_home_symlink:
-      ensure            => 'link',
-      target            => $carbon_home,
-      require           => Wso2base::Install[$carbon_home]
+      ensure  => 'link',
+      target  => $carbon_home,
+      require => Wso2base::Install[$carbon_home]
     }
   }
 
