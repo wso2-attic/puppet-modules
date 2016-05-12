@@ -39,6 +39,7 @@ wso2::template_list:
 #    http: 80
 #    https: 443
 
+## Uncomment the following for a clustered setup
 #wso2::file_list:
 #  - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
 
@@ -58,8 +59,10 @@ wso2::taskServerCount: 1
 # Data sources
 wso2::is_datasource: wso2_carbon_db
 
+## Uncomment the following for a clustered setup
 #wso2::usermgt_datasource: wso2user_db
 
+## Uncomment the following MySQL data sources for a clustered setup
 #wso2::master_datasources:
 #  wso2_config_db:
 #    name: WSO2_CONFIG_DB
@@ -157,7 +160,7 @@ wso2::bps_datasources:
 #    enable_cache: true
 
 # Secure vault configuration
-#wso2::enable_secure_vault: false
+#wso2::enable_secure_vault: true
 
 #wso2::secure_vault_configs:
 #  key_store_password:
@@ -204,4 +207,3 @@ wso2::bps_datasources:
 #    secret_alias: Datasources.BPS_DS.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/bps-datasources.xml//datasources-configuration/datasources/datasource[name='BPS_DS']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
-
