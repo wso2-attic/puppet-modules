@@ -18,20 +18,17 @@
 #
 # This class installs required system packages for WSO2 products and configures operating system parameters
 class wso2base {
-
   $packages             = hiera_array('packages')
   $template_list        = hiera_array('wso2::template_list')
   $file_list            = hiera_array('wso2::file_list')
   $system_file_list     = hiera_array('wso2::system_file_list')
   $directory_list       = hiera_array('wso2::directory_list', [])
-
   $java_install_dir     = hiera('java_install_dir')
   $java_source_file     = hiera('java_source_file')
   $worker_node          = hiera('wso2::worker_node')
-
   # symlink path to Java install directory
   $java_home            = hiera('java_home')
-
+  $carbon_home_symlink  = hiera('wso2::carbon_home_symlink')
   $wso2_user            = hiera('wso2::user')
   $wso2_group           = hiera('wso2::group')
   $maintenance_mode     = hiera('wso2::maintenance_mode')

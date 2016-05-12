@@ -19,6 +19,7 @@ define wso2base::server (
   $maintenance_mode,
   $pack_filename,
   $pack_dir,
+  $carbon_home_symlink,
   $install_mode,
   $install_dir,
   $pack_extracted_dir,
@@ -63,6 +64,15 @@ define wso2base::server (
       }
   }
 
+  # Create a symlink to CARBON_HOME
+  if $::vm_type != 'docker' {
+    file { $carbon_home_symlink:
+      ensure            => 'link',
+      target            => $carbon_home,
+      require           => Wso2base::Install[$carbon_home]
+    }
+  }
+
   # Copy any patches to patch directory
   if $::vm_type == 'docker' {
     wso2base::patch { $carbon_home:
@@ -74,8 +84,7 @@ define wso2base::server (
       product_version => $::product_version,
     #   subscribe         => Wso2base::Install[$carbon_home]
     }
-  }
-  else {
+  } else {
     wso2base::patch { $carbon_home:
       patches_abs_dir => $patches_abs_dir,
       patches_dir     => $patches_dir,
