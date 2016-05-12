@@ -71,8 +71,8 @@ wso2::master_datasources:
     description: The datasource used for config registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-bpsdb:3306/WSO2_BPS_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::common::username')}"
-    password: "%{hiera('wso2::datasources::common::password')}"
+    username: "%{hiera('wso2::datasources::mysql::username')}"
+    password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -86,8 +86,8 @@ wso2::master_datasources:
     description: The datasource used for gov registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::common::username')}"
-    password: "%{hiera('wso2::datasources::common::password')}"
+    username: "%{hiera('wso2::datasources::mysql::username')}"
+    password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_GOV_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -101,8 +101,8 @@ wso2::master_datasources:
     description: The datasource is used for user mangement and userstore
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::common::username')}"
-    password: "%{hiera('wso2::datasources::common::password')}"
+    username: "%{hiera('wso2::datasources::mysql::username')}"
+    password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2USER_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -117,8 +117,8 @@ wso2::activity_datasources:
     description: The datasource used for activiti engine
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-bpsdb:3306/WSO2_BPS_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::common::username')}"
-    password: "%{hiera('wso2::datasources::common::password')}"
+    username: "%{hiera('wso2::datasources::mysql::username')}"
+    password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/ActivitiDB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
@@ -133,8 +133,8 @@ wso2::bps_datasources:
     description: The datasource used for bps
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-bpsdb:3306/WSO2_BPS_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::common::username')}"
-    password: "%{hiera('wso2::datasources::common::password')}"
+    username: "%{hiera('wso2::datasources::mysql::username')}"
+    password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: bpsds
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_idle: "%{hiera('wso2::datasources::common::max_idle')}"
