@@ -136,6 +136,7 @@ wso2::metrics_datasources:
 # Set clustering enabled to true for a clustered setup
 wso2::clustering:
     enabled: false
+    domain: mb.wso2.domain
     local_member_host: "%{::ipaddress}"
     local_member_port: 4000
     membership_scheme: wka
