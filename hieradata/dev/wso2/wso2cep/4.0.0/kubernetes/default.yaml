@@ -134,9 +134,6 @@ wso2::single_node_deployment:
 wso2::ha_deployment:
   enabled: false
 
-wso2::distributed_deployment:
-  enabled: false
-
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:
 #  key_store_password:

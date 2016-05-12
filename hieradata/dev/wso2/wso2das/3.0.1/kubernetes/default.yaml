@@ -38,7 +38,9 @@ wso2::template_list:
 wso2::directory_list:
   - dbscripts/identity
 
-wso2::spark_master_count: 1
+wso2::spark:
+  master_count: 1
+  hostname: "%{::ipaddress}"
 
 # In Kubernetes proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.

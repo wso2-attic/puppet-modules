@@ -13,11 +13,11 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname: mgt.cep.dev.wso2.org
+wso2::mgt_hostname: mgt.das.dev.wso2.org
 
 wso2::clustering:
   enabled: true
-  domain: cep.wso2.domain
+  domain: das.wso2.domain
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
   sub_domain: mgt
@@ -25,10 +25,10 @@ wso2::clustering:
   wka:
     members:
       -
-        hostname: 192.168.100.51
+        hostname: 192.168.100.61
         port: 4000
       -
-        hostname: 192.168.100.52
+        hostname: 192.168.100.62
         port: 4000
 
 #wso2::ports:
@@ -36,10 +36,17 @@ wso2::clustering:
 #    http: 80
 #    https: 443
 
+wso2::spark:
+  master_count: 1
+  hostname: "%{::ipaddress}"
+
+wso2::single_node_deployment:
+  enabled: false
+
 wso2::ha_deployment:
   enabled: true
-  presenter_enabled: true
-  worker_enabled: false
+  presenter_enabled: false
+  worker_enabled: true
   eventSync:
     hostName: "%{::ipaddress}"
     port: 11224
@@ -48,21 +55,21 @@ wso2::ha_deployment:
     port: 10005
   presentation:
     hostName: "%{::ipaddress}"
-    port: 11002
+    port: 11000
 
 # Registry mounts
 wso2::registry_mounts:
   wso2_config_db:
     path: /_system/config
-    target_path: /_system/config/cep
-    read_only: false
+    target_path: /_system/config/das
+    read_only: true
     registry_root: /
     enable_cache: true
 
   wso2_gov_db:
     path: /_system/governance
     target_path: /_system/governance
-    read_only: false
+    read_only: true
     registry_root: /
     enable_cache: true
 
@@ -70,7 +77,7 @@ wso2::registry_mounts:
 wso2::dep_sync:
   enabled: false
   auto_checkout: true
-  auto_commit: true
+  auto_commit: false
   repository_type: svn
   svn:
     url: http://svnrepo.example.com/repos/

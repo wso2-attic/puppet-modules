@@ -19,6 +19,7 @@ wso2::install_dir: "/mnt/%{::ipaddress}"
 wso2::user: wso2user
 wso2::group: wso2
 wso2::pack_dir: /mnt/packs
+wso2::carbon_home_symlink: "/mnt/%{::product_name}-%{::product_version}"
 
 # Host mapping to be made in etc/hosts
 wso2::hosts_mapping:

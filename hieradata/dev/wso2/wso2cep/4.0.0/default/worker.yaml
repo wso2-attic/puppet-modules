@@ -36,10 +36,8 @@ wso2::clustering:
 
 wso2::ha_deployment:
   enabled: true
-  offset: 0
-  presenter: false
-  presenter_port: 11000
-  worker: true
+  presenter_enabled: false
+  worker_enabled: true
   eventSync:
     hostName: "%{::ipaddress}"
     port: 11224
@@ -47,8 +45,8 @@ wso2::ha_deployment:
     hostName: "%{::ipaddress}"
     port: 10005
   presentation:
-    hostName: 0.0.0.0
-    port: 11000
+    hostName: "%{::ipaddress}"
+    port: 11002
 
 # Registry mounts
 wso2::registry_mounts:
