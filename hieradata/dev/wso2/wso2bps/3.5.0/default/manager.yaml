@@ -14,10 +14,11 @@
 
 ---
 wso2::mgt_hostname: mgt.bps.dev.wso2.org
+wso2::hostname: bps.dev.wso2.org
 
 wso2::clustering:
   enabled: true
-  domain: bps.wso2.domain
+  domain: wso2.bps.domain
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
   sub_domain: mgt
@@ -35,6 +36,8 @@ wso2::clustering:
 #  proxyPort:
 #    http: 80
 #    https: 443
+
+wso2::taskServerCount: 2
 
 # Registry mounts
 wso2::registry_mounts:
