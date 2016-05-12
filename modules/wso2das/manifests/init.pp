@@ -15,17 +15,22 @@
 #----------------------------------------------------------------------------
 #
 #
-# Manages WSO2 Governance Registry deployment
+# Manages WSO2 Data Analytics Server deployment
 class wso2das inherits wso2base {
-  $analytics_datasources = hiera('wso2::analytics_datasources')
-  $metrics_datasources   = hiera('wso2::metrics_datasources')
-  $spark_master_count    = hiera('wso2::spark_master_count')
-  $is_datasource         = hiera('wso2::is_datasource')
+  $analytics_datasources   = hiera('wso2::analytics_datasources')
+  $metrics_datasources     = hiera('wso2::metrics_datasources')
+  $spark                   = hiera('wso2::spark')
+
+  # TODO: remove undef default when dropping wso2das-3.0.0 support
+  $is_datasource           = hiera('wso2::is_datasource', undef)
+  $single_node_deployment  = hiera('wso2::single_node_deployment')
+  $ha_deployment           = hiera('wso2::ha_deployment')
 
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,
     pack_filename       => $wso2base::pack_filename,
     pack_dir            => $wso2base::pack_dir,
+    carbon_home_symlink => $wso2base::carbon_home_symlink,
     install_mode        => $wso2base::install_mode,
     install_dir         => $wso2base::install_dir,
     pack_extracted_dir  => $wso2base::pack_extracted_dir,
