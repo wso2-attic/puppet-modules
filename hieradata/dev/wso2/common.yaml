@@ -105,7 +105,6 @@ wso2::dep_sync:
 packages:
   - zip
   - unzip
-  - tree
 
 # User management datasource defaults to local h2 db
 wso2::usermgt_datasource: wso2_carbon_db
