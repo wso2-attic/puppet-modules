@@ -17,6 +17,9 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
+# This value is tightly coupled with Dockerfiles
+wso2::carbon_home_symlink: /mnt/carbon.das.symlink
+
 wso2::service_name: wso2das
 wso2::hostname: wso2das-default
 wso2::mgt_hostname: wso2das-default
@@ -38,9 +41,55 @@ wso2::template_list:
 wso2::directory_list:
   - dbscripts/identity
 
+#Files to be copied to system
+wso2::system_file_list:
+  -
+    file: wso2das-default-init.sh
+    target_path: /usr/local/bin
+
+## Comment out the following in a clustered setup
 wso2::spark:
   master_count: 1
   hostname: "%{::ipaddress}"
+
+wso2::single_node_deployment:
+  enabled: true
+
+wso2::ha_deployment:
+  enabled: false
+  presenter_enabled: false
+  worker_enabled: true
+  eventSync:
+    hostName: "%{::ipaddress}"
+    port: 11224
+  management:
+    hostName: "%{::ipaddress}"
+    port: 10005
+  presentation:
+    hostName: "%{::ipaddress}"
+    port: 11000
+
+## Uncomment the following for a clustered setup
+#wso2::spark:
+#  master_count: 2
+#  hostname: "%{::ipaddress}"
+#
+#wso2::single_node_deployment:
+#  enabled: false
+#
+#wso2::ha_deployment:
+#  enabled: true
+#  presenter_enabled: false
+#  worker_enabled: true
+#  eventSync:
+#    hostName: "%{::ipaddress}"
+#    port: 11224
+#  management:
+#    hostName: "%{::ipaddress}"
+#    port: 10005
+#  presentation:
+#    hostName: "%{::ipaddress}"
+#    port: 11002
 
 # In Kubernetes proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
