@@ -16,11 +16,11 @@
 servers:
   -
     enabled: true
-    hostname: mgt.das.dev.wso2.org
+    hostname: das1.dev.wso2.org
     facters:
       product_name: wso2das
       product_version: 3.0.0
-      product_profile: presenter
+      product_profile: default
       environment: dev
       platform: default
     box: ubuntu/trusty64
@@ -30,11 +30,11 @@ servers:
 
   -
     enabled: true
-    hostname: das.dev.wso2.org
+    hostname: das2.dev.wso2.org
     facters:
       product_name: wso2das
       product_version: 3.0.0
-      product_profile: worker
+      product_profile: default
       environment: dev
       platform: default
     box: ubuntu/trusty64
