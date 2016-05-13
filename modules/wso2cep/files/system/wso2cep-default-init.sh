@@ -34,4 +34,3 @@ echo "replaced management/hostName with local ip ${local_ip}"
 # replace presentation/hostName
 sed -i "/<presentation>/,/<\/presentation>/ s|<hostName>[0-9a-z.]\{1,\}</hostName>|<hostName>${local_ip}</hostName>|g" ${event_processor_xml_file_path}
 echo "replaced presentation/hostName with local ip ${local_ip}"
-

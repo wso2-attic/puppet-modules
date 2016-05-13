@@ -27,12 +27,13 @@ wso2::system_file_list:
     file: wso2cep-presenter-init.sh
     target_path: /usr/local/bin
 
+wso2::single_node_deployment:
+  enabled: false
+
 wso2::ha_deployment:
   enabled: true
-  offset: 0
-  presenter: true
-  presenter_port: 11000
-  worker: false
+  presenter_enabled: true
+  worker_enabled: false
   eventSync:
     hostName: 0.0.0.0
     port: 11224

@@ -32,6 +32,13 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+#Files to be copied to system
+wso2::system_file_list:
+  -
+    file: wso2cep-default-init.sh
+    target_path: /usr/local/bin
+
+
 # In Kubernetes proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
@@ -63,6 +70,23 @@ wso2::registry_mounts:
     enable_cache: true
 
 wso2::usermgt_datasource: wso2_user_db
+
+wso2::single_node_deployment:
+  enabled: true
+
+wso2::ha_deployment:
+  enabled: false
+  presenter_enabled: false
+  worker_enabled: false
+  eventSync:
+    hostName: 0.0.0.0
+    port: 11224
+  management:
+    hostName: 0.0.0.0
+    port: 10005
+  presentation:
+    hostName: 0.0.0.0
+    port: 11002
 
 wso2::master_datasources:
   wso2_config_db:
@@ -127,12 +151,6 @@ wso2::data_bridge:
   maxEventBufferCapacity: 2
   eventBufferSize: 2
   clientTimeoutMin: 20
-
-wso2::single_node_deployment:
-  enabled: true
-
-wso2::ha_deployment:
-  enabled: false
 
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:
