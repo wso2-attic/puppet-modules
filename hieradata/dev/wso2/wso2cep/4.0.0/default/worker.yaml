@@ -34,6 +34,9 @@ wso2::clustering:
 #    http: 80
 #    https: 443
 
+wso2::single_node_deployment:
+  enabled: false
+
 wso2::ha_deployment:
   enabled: true
   presenter_enabled: false
@@ -45,7 +48,7 @@ wso2::ha_deployment:
     hostName: "%{::ipaddress}"
     port: 10005
   presentation:
-    hostName: "%{::ipaddress}"
+    hostName: 192.168.100.51
     port: 11002
 
 # Registry mounts

@@ -36,6 +36,9 @@ wso2::clustering:
 #    http: 80
 #    https: 443
 
+wso2::single_node_deployment:
+  enabled: false
+
 wso2::ha_deployment:
   enabled: true
   presenter_enabled: true
