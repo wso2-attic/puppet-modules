@@ -18,6 +18,7 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
+# This value is tightly coupled with Dockerfiles
 wso2::carbon_home_symlink: /mnt/carbon.das.symlink
 
 wso2::service_name: wso2das
