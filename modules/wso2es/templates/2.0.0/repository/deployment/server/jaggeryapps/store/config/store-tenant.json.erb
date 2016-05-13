@@ -1,0 +1,43 @@
+{
+    "application": {
+        "landingPage": "/pages/top-assets"
+    },
+    "features": {
+        "social": {
+            "enabled": true,
+            "keys": {
+                "socialScriptSource": "%https.host%/social/export-js/social.js",
+                "socialScriptType": "text/javascript",
+                <%- if @ports['proxyPort'] && @ports['proxyPort']['https'] -%>
+                "socialAppUrl": "https://<%= @hostname %>:<%= @ports['proxyPort']['https'] %>/social"
+                <%- elsif @hostname -%>
+                "socialAppUrl": "https://<%= @hostname %>:9443/socila"
+                <%- else -%>
+                "socialAppUrl": "https://localhost:9443/social"
+                <%- end -%>
+            }
+        },
+        "assetTypesHotDelploy": {
+            "enabled": false
+        }
+    },
+    "assets": ["gadget", "site"],
+    "disabledAssets":[],
+    "assetsPageSize": 12,
+    "commentsPageSize": 10,
+    "userSpace": "/_system/governance/users",
+    "roles": {
+        "Internal/store": {
+            "/permission/admin/login": ["ui.execute"]
+        }
+    },
+    "userRoles": ["Internal/store"],
+    "permissions": {
+        "login": {
+            "/permission/admin/login": ["ui.execute"]
+        }
+    },
+    "paths": {
+        "RXT_EXTENSION_PATH": "/config/ext/"
+    }
+}
