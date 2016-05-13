@@ -21,8 +21,8 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::carbon_home_symlink: /mnt/carbon.das.symlink
 
 wso2::service_name: wso2das
-wso2::hostname: das.dev.wso2.org
-wso2::mgt_hostname: das.dev.wso2.org
+wso2::hostname: "%{::fqdn}"
+wso2::mgt_hostname: "%{::fqdn}"
 
 wso2::file_list:
   - dbscripts/identity/h2.sql
@@ -66,6 +66,59 @@ wso2::ha_deployment:
 
 ## Uncomment the following for a clustered setup
 #wso2::usermgt_datasource: wso2_user_db
+#
+#wso2::spark:
+#  master_count: 2
+#  hostname: "%{::ipaddress}"
+#
+#wso2::single_node_deployment:
+#  enabled: false
+#
+#wso2::ha_deployment:
+#  enabled: true
+#  presenter_enabled: false
+#  worker_enabled: true
+#  eventSync:
+#    hostName: "%{::ipaddress}"
+#    port: 11224
+#  management:
+#    hostName: "%{::ipaddress}"
+#    port: 10005
+#  presentation:
+#    hostName: "%{::ipaddress}"
+#    port: 11002
+#
+## Registry mounts
+#wso2::registry_mounts:
+#  wso2_config_db:
+#    path: /_system/config
+#    target_path: /_system/config/das
+#    read_only: false
+#    registry_root: /
+#    enable_cache: true
+#
+#  wso2_gov_db:
+#    path: /_system/governance
+#    target_path: /_system/governance
+#    read_only: false
+#    registry_root: /
+#    enable_cache: true
+#
+#wso2::clustering:
+#  enabled: true
+#  domain: das.wso2.domain
+#  local_member_host: "%{::ipaddress}"
+#  local_member_port: 4000
+#  sub_domain: mgt
+#  membership_scheme: wka
+#  wka:
+#    members:
+#      -
+#        hostname: 192.168.100.61
+#        port: 4000
+#      -
+#        hostname: 192.168.100.62
+#        port: 4000
 
 ## Uncomment the following MySQL data sources for a clustered setup
 #wso2::master_datasources:
