@@ -48,7 +48,7 @@ wso2::ha_deployment:
     hostName: "%{::ipaddress}"
     port: 10005
   presentation:
-    hostName: 192.168.100.51
+    hostName: 192.168.100.52
     port: 11002
 
 # Registry mounts
