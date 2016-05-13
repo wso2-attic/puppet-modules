@@ -21,6 +21,7 @@ wso2::service_name: wso2es
 wso2::hostname: es.dev.wso2.org
 wso2::mgt_hostname: es.dev.wso2.org
 
+## Uncomment the following for a clustered setup
 #wso2::file_list:
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
@@ -35,6 +36,10 @@ wso2::template_list:
 
 wso2::is_datasource: wso2_carbon_db
 
+## Uncomment the following for a clustered setup
+#wso2::usermgt_datasource: wso2user_db
+
+## Uncomment the following MySQL data sources for a clustered setup
 #wso2::master_datasources:
 #  wso2_config_db:
 #    name: WSO2_CONFIG_DB
