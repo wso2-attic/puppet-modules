@@ -24,6 +24,6 @@ servers:
       environment: dev
       platform: default
     box: ubuntu/trusty64
-    ip: 192.168.100.71
+    ip: 192.168.100.72
     ram: 2048
     cpu: 1
