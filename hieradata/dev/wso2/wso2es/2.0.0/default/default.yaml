@@ -37,6 +37,27 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+wso2::service_provider:
+  store:
+    issuer: store
+    acs: https://es.dev.wso2.org:9443/store/acs
+  social:
+    issuer: social
+    acs: https://es.dev.wso2.org:9443/social/acs
+  publisher:
+    issuer: publisher
+    acs: https://es.dev.wso2.org:9443/publisher/acs
+
+wso2::identity_provider:
+  store:
+    issuer: store
+    identity_provider_url: https://es.dev.wso2.org:9443/samlsso
+  publisher:
+    issuer: publisher
+    identity_provider_url: https://es.dev.wso2.org:9443/samlsso
+
+wso2::social_app_url: https://es.dev.wso2.org:9443/social
+
 wso2::is_datasource: wso2_carbon_db
 
 ## Uncomment the following for a clustered setup

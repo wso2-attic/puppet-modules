@@ -20,37 +20,19 @@
     <ServiceProviders>
         <ServiceProvider>
             <Issuer>store</Issuer>
-        <%- if @hostname && @ports['proxyPort'] && @ports['proxyPort']['https'] -%>
-            <AssertionConsumerService>https://<%= @hostname %>:<%= @ports['proxyPort']['https'] %>/store/acs</AssertionConsumerService>
-        <%- elsif @hostname -%>
-            <AssertionConsumerService>https://<%= @hostname %>:9443/store/acs</AssertionConsumerService>
-        <%- else -%>
-            <AssertionConsumerService>https://localhost:9443/store/acs</AssertionConsumerService>
-        <%- end -%>
+            <AssertionConsumerService><%= @service_provider['store']['acs'] %></AssertionConsumerService>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/store/login.jag</CustomLoginPage>
         </ServiceProvider>
         <ServiceProvider>
             <Issuer>social</Issuer>
-        <%- if @hostname && @ports['proxyPort'] && @ports['proxyPort']['https'] -%>
-            <AssertionConsumerService>https://<%= @hostname %>:<%= @ports['proxyPort']['https'] %>/social/acs</AssertionConsumerService>
-        <%- elsif @hostname -%>
-            <AssertionConsumerService>https://<%= @hostname %>:9443/social/acs</AssertionConsumerService>
-        <%- else -%>
-            <AssertionConsumerService>https://localhost:9443/social/acs</AssertionConsumerService>
-        <%- end -%>
+            <AssertionConsumerService><%= @service_provider['social']['acs'] %></AssertionConsumerService>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/social/login</CustomLoginPage>
         </ServiceProvider>
         <ServiceProvider>
             <Issuer>publisher</Issuer>
-        <%- if @hostname && @ports['proxyPort'] && @ports['proxyPort']['https'] -%>
-            <AssertionConsumerService>https://<%= @hostname %>:<%= @ports['proxyPort']['https'] %>/publisher/acs</AssertionConsumerService>
-        <%- elsif @hostname -%>
-            <AssertionConsumerService>https://<%= @hostname %>:9443/publisher/acs</AssertionConsumerService>
-        <%- else -%>
-            <AssertionConsumerService>https://localhost:9443/publisher/acs</AssertionConsumerService>
-        <%- end -%>
+            <AssertionConsumerService><%= @service_provider['publisher']['acs'] %></AssertionConsumerService>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/publisher/controllers/login.jag</CustomLoginPage>
         </ServiceProvider>

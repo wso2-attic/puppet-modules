@@ -52,13 +52,7 @@
             "sso": {
                 "attributes": {
                     "issuer": "publisher",
-                    <%- if @ports['proxyPort'] && @ports['proxyPort']['https'] -%>
-                    "identityProviderURL": "https://<%= @hostname %>:<%= @ports['proxyPort']['https'] %>/samlsso",
-                    <%- elsif @hostname -%>
-                    "identityProviderURL": "https://<%= @hostname %>:9443/samlsso",
-                    <%- else -%>
-                    "identityProviderURL": "%https.host%/samlsso",
-                    <%- end -%>
+                    "identityProviderURL": "<%= @identity_provider['publisher']['identity_provider_url'] %>",
                     "responseSigningEnabled": "true",
                     "acs": "%https.host%/publisher/acs",
                     "identityAlias": "wso2carbon",
