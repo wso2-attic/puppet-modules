@@ -741,21 +741,16 @@
            The list of static or well-known members. These entries will only be valid if the
            "membershipScheme" above is set to "wka"
         -->
+<%- if @clustering['membership_scheme'] == 'wka' -%>
         <members>
-            <%- if @clustering['enable'] == true && @clustering['membership_scheme'] == 'wka' -%>
-              <%- @clustering['wka']['members'].each do |member| -%>
-                  <member>
-                      <hostName><%= member['hostname'] %></hostName>
-                      <port><%= member['port'] %></port>
-                  </member>
-              <%- end -%>
-              <%- else -%>
-                  <member>
-                      <hostName>127.0.0.1</hostName>
-                      <port>4000</port>
-                  </member>
-              <%- end -%>
+   <%- @clustering['wka']['members'].each do |member| -%>
+            <member>
+                <hostName><%= member['hostname'] %></hostName>
+                <port><%= member['port'] %></port>
+            </member>
+   <%- end -%>
         </members>
+<%- end -%>
 
         <!--
         Enable the groupManagement entry if you need to run this node as a cluster manager.

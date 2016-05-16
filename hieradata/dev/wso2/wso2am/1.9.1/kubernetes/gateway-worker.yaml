@@ -17,15 +17,41 @@ wso2::mgt_hostname: wso2am-gateway-worker
 
 wso2::apim_keymanager:
   host: wso2am-api-key-manager
+  port: 9443
+  username: admin
+  password: admin
+
+wso2::apim_gateway:
+  host: wso2am-gateway-worker
+  port: 9443
+  api_endpoint_host: wso2am-gateway-worker
+  api_endpoint_port: 8280
+  secure_api_endpoint_port: 8243
+  api_token_revoke_endpoint_port: 8280
+  secure_api_token_revoke_endpoint_port: 8243
+  username: admin
+  password: admin
 
 wso2::clustering:
   enabled: true
+  domain: gw.am.wso2.domain
   membership_scheme: kubernetes
   local_member_port: 4000
   sub_domain: worker
   kubernetes:
     kubernetes_namespace: default
     kubernetes_services: wso2am-gateway-worker,wso2am-gateway-manager
+
+wso2::dep_sync:
+  enabled: true
+  auto_checkout: true
+  auto_commit: false
+  repository_type: svn
+  svn:
+    url: http://svn-repo/gateway-artifacts
+    user: svnuser
+    password: password
+    append_tenant_id: true
 
 # In Kubernetes proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.

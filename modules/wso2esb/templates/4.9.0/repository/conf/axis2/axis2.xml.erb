@@ -18,7 +18,7 @@
   -->
 
 <axisconfig name="AxisJava2.0">
-    
+
     <!-- ================================================= -->
     <!--                  Parameters                       -->
     <!-- ================================================= -->
@@ -64,7 +64,7 @@
     <!-- During a fault, stacktrace can be sent with the fault message. The following flag -->
     <!-- will control that behaviour -->
     <parameter name="sendStacktraceDetailsWithFaults" locked="false">false</parameter>
-    
+
     <!-- If there aren't any information available to find out the fault reason, we set the -->
     <!-- message of the exception as the faultreason/Reason. But when a fault is thrown from -->
     <!-- a service or some where, it will be wrapped by different levels. Due to this the -->
@@ -357,7 +357,7 @@
     <!--Uncomment this for FIX transport support
     <transportReceiver name="fix" class="org.apache.synapse.transport.fix.FIXTransportListener"/>
     -->
-    
+
     <!--transportReceiver name="hl7" class="org.wso2.carbon.business.messaging.hl7.transport.HL7TransportListener"/-->
 
     <!-- SAP Transport Listeners -->
@@ -444,7 +444,7 @@
     <!--Uncomment this for FIX transport support
     <transportSender name="fix" class="org.apache.synapse.transport.fix.FIXTransportSender"/>
     -->
-    
+
     <!--transportSender name="hl7" class="org.wso2.carbon.business.messaging.hl7.transport.HL7TransportSender"/-->
 
     <!-- SAP Transport Senders -->
@@ -581,7 +581,7 @@
             <%- if @ports['proxyPort'] and @ports['proxyPort']['pass_through_http'] -%>
                 <property name="port.mapping.8280" value="<%= @ports['proxyPort']['pass_through_http'] %>"/>
             <%- end -%>
-            
+
             <%- if @ports['proxyPort'] and @ports['proxyPort']['pass_through_https'] -%>
                 <property name="port.mapping.8243" value="<%= @ports['proxyPort']['pass_through_https'] %>"/>
             <%- end -%>
@@ -594,14 +594,16 @@
            The list of static or well-known members. These entries will only be valid if the
            "membershipScheme" above is set to "wka"
         -->
+<%- if @clustering['membership_scheme'] == 'wka' -%>
         <members>
-<%- @clustering['wka']['members'].each do |member| -%>
+   <%- @clustering['wka']['members'].each do |member| -%>
             <member>
                 <hostName><%= member['hostname'] %></hostName>
                 <port><%= member['port'] %></port>
             </member>
-<%- end -%>
+   <%- end -%>
         </members>
+<%- end -%>
 
         <!--
         Enable the groupManagement entry if you need to run this node as a cluster manager.
@@ -622,7 +624,7 @@
     <!-- ================================================= -->
 
     <!--
-        Uncomment and configure the following section to enable transactions support 
+        Uncomment and configure the following section to enable transactions support
     -->
     <!--<transaction timeout="30000">
         <parameter name="java.naming.factory.initial">org.apache.activemq.jndi.ActiveMQInitialContextFactory</parameter>

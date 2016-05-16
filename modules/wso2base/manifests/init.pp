@@ -23,6 +23,11 @@ class wso2base {
   $file_list            = hiera_array('wso2::file_list')
   $system_file_list     = hiera_array('wso2::system_file_list')
   $directory_list       = hiera_array('wso2::directory_list', [])
+
+  $master_datasources   = hiera_hash('wso2::master_datasources')
+  $registry_mounts      = hiera_hash('wso2::registry_mounts', { })
+  $hosts_mapping        = hiera_hash('wso2::hosts_mapping')
+
   $java_install_dir     = hiera('java_install_dir')
   $java_source_file     = hiera('java_source_file')
   $worker_node          = hiera('wso2::worker_node')
@@ -45,20 +50,17 @@ class wso2base {
   $hosts_template       = hiera('wso2::hosts_template')
   $usermgt_datasource   = hiera('wso2::usermgt_datasource')
   $local_reg_datasource = hiera('wso2::local_reg_datasource')
-  $master_datasources   = hiera_hash('wso2::master_datasources')
-  $registry_mounts      = hiera_hash('wso2::registry_mounts', { })
-  $clustering           = hiera_hash('wso2::clustering')
-  $dep_sync             = hiera_hash('wso2::dep_sync')
-  $ports                = hiera_hash('wso2::ports')
-  $jvm                  = hiera_hash('wso2::jvm')
-  $hosts_mapping        = hiera_hash('wso2::hosts_mapping')
+  $clustering           = hiera('wso2::clustering')
+  $dep_sync             = hiera('wso2::dep_sync')
+  $ports                = hiera('wso2::ports')
+  $jvm                  = hiera('wso2::jvm')
   $ipaddress            = hiera('wso2::ipaddress')
   $fqdn                 = hiera('wso2::fqdn')
 
   #secure_vault configurations
   $enable_secure_vault  = hiera('wso2::enable_secure_vault')
   if ($enable_secure_vault == true) {
-      $secure_vault_configs = hiera_hash('wso2::secure_vault_configs')
+      $secure_vault_configs = hiera('wso2::secure_vault_configs')
       $key_store_password   = $secure_vault_configs['key_store_password']['password']
   }
 

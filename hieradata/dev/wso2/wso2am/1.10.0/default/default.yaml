@@ -94,6 +94,9 @@ wso2::apim_publisher:
 #  apim_gateway:
 #    ip_address: 192.168.100.5
 #    hostname: gw.dev.wso2.org
+#  svn:
+#    ip_address: 192.168.100.1
+#    hostname: svn.gw.am.dev.wso2.org
 
 ## Uncomment the following for a clustered setup
 #wso2::apim_gateway:

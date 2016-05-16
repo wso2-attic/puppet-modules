@@ -32,6 +32,17 @@ wso2::clustering:
 #        hostname: 192.168.100.6
 #        port: 4000
 
+wso2::dep_sync:
+  enabled: false
+  auto_checkout: true
+  auto_commit: true
+  repository_type: svn
+  svn:
+    url: http://svn.gw.am.dev.wso2.org/gateway-artifacts
+    user: svnuser
+    password: password
+    append_tenant_id: true
+
 wso2::registry_mounts:
   wso2_config_db:
     path: /_system/config

@@ -46,20 +46,20 @@ wso2::ports:
     http: 32003
     https: 32004
 
-wso2::apim_gateway:
-  host: localhost
+wso2::apim_keymanager:
+  host: wso2am-default
   port: 9443
-  api_endpoint_host: localhost
-  api_endpoint_port: 32001
-  secure_api_endpoint_port: 32002
-  api_token_revoke_endpoint_port: 8280
-  secure_api_token_revoke_endpoint_port: 8243
   username: admin
   password: admin
 
-wso2::apim_keymanager:
-  host: localhost
+wso2::apim_gateway:
+  host: wso2am-default
   port: 9443
+  api_endpoint_host: wso2am-default
+  api_endpoint_port: 8280
+  secure_api_endpoint_port: 8243
+  api_token_revoke_endpoint_port: 8280
+  secure_api_token_revoke_endpoint_port: 8243
   username: admin
   password: admin
 

@@ -15,11 +15,22 @@
 wso2::hostname: wso2am-api-publisher
 wso2::mgt_hostname: wso2am-api-publisher
 
-wso2::apim_gateway:
-  host: wso2am-gateway-manager
-
 wso2::apim_keymanager:
   host: wso2am-api-key-manager
+  port: 9443
+  username: admin
+  password: admin
+
+wso2::apim_gateway:
+  host: wso2am-gateway-manager
+  port: 9443
+  api_endpoint_host: wso2am-gateway-manager
+  api_endpoint_port: 8280
+  secure_api_endpoint_port: 8243
+  api_token_revoke_endpoint_port: 8280
+  secure_api_token_revoke_endpoint_port: 8243
+  username: admin
+  password: admin
 
 wso2::apim_store:
   host: wso2am-api-store
@@ -31,6 +42,8 @@ wso2::apim_publisher:
 
 wso2::clustering:
   enabled: true
+  domain: pub.store.am.wso2.domain
+  sub_domain: mgt
   membership_scheme: kubernetes
   local_member_port: 4000
   kubernetes:
