@@ -29,13 +29,7 @@
             "sso": {
                 "attributes": {
                     "issuer": "store",
-                    <%- if @ports['proxyPort'] && @ports['proxyPort']['https'] -%>
-                    "identityProviderURL": "https://<%= @hostname %>:<%= @ports['proxyPort']['https'] %>/samlsso",
-                    <%- elsif @hostname -%>
-                    "identityProviderURL": "https://<%= @hostname %>:9443/samlsso",
-                    <%- else -%>
-                    "identityProviderURL": "%https.host%/samlsso",
-                    <%- end -%>
+                    "identityProviderURL": "<%= @identity_provider['store']['identity_provider_url'] %>",
                     "responseSigningEnabled": "true",
                     "acs": "%https.host%/store/acs",
                     "identityAlias": "wso2carbon",
