@@ -15,7 +15,7 @@ This repository contains the Puppet Module for installing and configuring WSO2 C
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
 ## Running WSO2 Complex Event Processor in the `default` profile
-No changes to Hiera data are required to run the `default` profile.
+No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running WSO2 Complex Event Processor with clustering in specific profiles
 Do the below changes to relevant Complex Event Processor profiles (`presenter`, `worker`) Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 Complex Event Processor clustering guide](https://docs.wso2.com/display/CLUSTER44x/Clustering+CEP+4.0.0)

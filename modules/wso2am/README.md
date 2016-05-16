@@ -14,13 +14,20 @@ This repository contains the Puppet Module for installing and configuring WSO2 A
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
+## Packs to be Copied
+
+Copy the following files to their corresponding locations.
+
+1. WSO2 API Manager distribution (1.10.0 or 1.9.1) to `<PUPPET_HOME>/modules/wso2am/files`
+2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
+
 ## Running WSO2 API Manager in the `default` profile
-No changes to Hiera data are required to run the `default` profile.
+No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running WSO2 API Manager with clustering in specific profiles
-Do the below changes to relevant API Manager profiles (`api-store`, `api-publisher`, `api-key-manager`, `gateway-manager`) Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 API Manager 1.10.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+API+Manager+1.10.0) and [WSO2 API Manager 1.9.1](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) clustering guides.
+Hiera data sets matching the distributed profiles of WSO2 API Manager (`api-store`, `api-publisher`, `api-key-manager`, `gateway-manager`) are shipped with clustering related configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment. For more details refer the [WSO2 API Manager 1.10.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+API+Manager+1.10.0) and [WSO2 API Manager 1.9.1](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) clustering guides.
 
-1. Enable clustering
+1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
    Ex:
    ```yaml
@@ -40,30 +47,28 @@ Do the below changes to relevant API Manager profiles (`api-store`, `api-publish
            port: 4000
    ```
 
-2. Add external databases to master datasources
+2. Uncomment and modify the MySQL based data sources to point to the external MySQL servers.
 
    Ex:
     ```yaml
-    wso2::master_datasources:
-      wso2_gov_db:
-        name: WSO2_GOV_DB
-        description: The datasource used for gov registry
-        driver_class_name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://172.17.8.1:3306/GOV_DB?autoReconnect=true
-        username: root
-        password: root
-        #securevault: false
-        jndi_config: jdbc/WSO2_GOV_DB
-        max_active: "%{hiera('wso2::datasources::common::max_active')}"
-        max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-        test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-        validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-        default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-        validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+    wso2am_db:
+      name: WSO2AM_DB
+      description: The datasource used for API Manager database
+      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+      url: jdbc:mysql://192.168.100.1:3306/APIM_DB?autoReconnect=true
+      username: "%{hiera('wso2::datasources::mysql::username')}"
+      password: "%{hiera('wso2::datasources::mysql::password')}"
+      jndi_config: jdbc/WSO2AM_DB
+      max_active: "%{hiera('wso2::datasources::common::max_active')}"
+      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
     ```
 
-3. Configure registry mounting
+3. Uncomment (and optionally configure) registry mounting
 
    Ex:
     ```yaml
@@ -82,7 +87,7 @@ Do the below changes to relevant API Manager profiles (`api-store`, `api-publish
       enable_cache: true
     ```
 
-4. Configure deployment synchronization
+4. Uncomment (and optionally configure) deployment synchronization
 
     Ex:
     ```yaml
