@@ -20,7 +20,7 @@ No changes to Hiera data are required to run the `default` profile.  Copy the ab
 ## Running WSO2 Governance Registry with clustering in specific profiles
 Do the below changes to profile (`publisher`, `store`) Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 Governance Registry 5.0.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Governance+Registry+5.0.0) and [WSO2 Governance Registry 4.6.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Governance+Registry) clustering guide.
 
-1. Enable clustering
+1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
    Ex:
     ```yaml

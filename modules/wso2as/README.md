@@ -14,49 +14,58 @@ This repository contains the Puppet Module for installing and configuring WSO2 A
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
+## Packs to be Copied
+
+Copy the following files to their corresponding locations.
+
+1. WSO2 Application Server distribution (5.3.0) to `<PUPPET_HOME>/modules/wso2am/files`
+2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
+
 ## Running WSO2 Application Server in the `default` profile
 No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running WSO2 Application Server with clustering in specific profiles
-Do the below changes to relevant AS profiles (`worker`, `manager`) Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 AS clustering guide](https://docs.wso2.com/display/CLUSTER44x/Clustering+AS+5.3.0).
+Hiera data sets matching the distributed profiles of WSO2 Application Server (`worker`, `manager`) are shipped with clustering related configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment. For more details refer the [WSO2 AS clustering guide](https://docs.wso2.com/display/CLUSTER44x/Clustering+AS+5.3.0).
 
-1. Enable clustering
+1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
    Ex:
     ```yaml
     wso2::clustering:
-        enabled: true
-        local_member_host: 192.168.100.13
-        local_member_port: 4000
-        membership_scheme: wka
-        sub_domain: mgt
-        wka:
-           members:
-             -
-               hostname: 192.168.100.23
-               port: 4000
-             -
-               hostname: 192.168.100.24
-               port: 4000
+     enabled: true
+     domain: as.wso2.domain
+     local_member_host: "%{::ipaddress}"
+     local_member_port: 4000
+     sub_domain: mgt
+     membership_scheme: wka
+     wka:
+       members:
+         -
+           hostname: 192.168.100.21
+           port: 4000
+         -
+           hostname: 192.168.100.22
+           port: 4000
     ```
 
 2. Add external databases to master datasources
 
    Ex:
     ```yaml
-    wso2::master_datasources :
+    wso2::master_datasources:
      wso2_config_db:
        name: WSO2_CONFIG_DB
        description: The datasource used for config registry
-       driver_class_name: org.h2.Driver
-       url: jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-       username: "%{hiera('wso2::datasources::common::username')}"
-       password: "%{hiera('wso2::datasources::common::password')}"
+       driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+       url: jdbc:mysql://192.168.100.1:3306/WSO2CONFIG_DB?autoReconnect=true
+       username: "%{hiera('wso2::datasources::mysql::username')}"
+       password: "%{hiera('wso2::datasources::mysql::password')}"
        jndi_config: jdbc/WSO2_CONFIG_DB
        max_active: "%{hiera('wso2::datasources::common::max_active')}"
        max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
        test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-       validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
+       default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+       validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
        validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
     ```
@@ -71,7 +80,7 @@ Do the below changes to relevant AS profiles (`worker`, `manager`) Hiera YAML fi
       read_only: false
       registry_root: /
       enable_cache: true
-      
+
     wso2_gov_db:
       path: /_system/governance
       target_path: /_system/governance

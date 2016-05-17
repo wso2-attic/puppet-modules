@@ -20,7 +20,7 @@ No changes to Hiera data are required to run the `default` profile.  Copy the ab
 ## Running WSO2 Business Rules Server with clustering in specific profiles
 Do the below changes to relevant Business Rules Server profiles (`worker`, `manager`) Hiera YAML files to start the server in distributed setup. For more details refer [WSO2 Business Rules Server 2.2.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Business+Rules+Server) and [WSO2 Business Rules Server 2.1.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Business+Rules+Server) clustering guide.
 
-1. Enable clustering
+1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
    Ex:
     ```yaml

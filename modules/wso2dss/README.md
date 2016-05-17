@@ -20,7 +20,7 @@ No changes to Hiera data are required to run the `default` profile.  Copy the ab
 ## Running WSO2 Data Services Server with clustering in specific profiles
 Do the below changes to relevant Data Services Server profiles (`manager`, `worker`) Hiera YAML files to start the server in distributed setup.
 
-1. Enable clustering
+1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
    Ex:
     ```yaml

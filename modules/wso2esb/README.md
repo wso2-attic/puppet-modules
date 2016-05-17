@@ -20,7 +20,7 @@ No changes to Hiera data are required to run the `default` profile.  Copy the ab
 ## Running WSO2 Enterprise Service Bus with clustering in specific profiles
 Do the below changes to relevant Enterprise Service Bus profiles (`manager`, `worker`) Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 Enterprise Service Bus clustering guide](https://docs.wso2.com/display/CLUSTER44x/Clustering+ESB+4.9.0)
 
-1. Enable clustering
+1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
    Ex:
     ```yaml

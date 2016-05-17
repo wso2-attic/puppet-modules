@@ -21,7 +21,7 @@ No changes to Hiera data are required to run the `default` profile.  Copy the ab
 Do the below changes to default Hiera YAML files to start the server in distributed setup. For more details refer the
 [WSO2 Message Broker clustering guide](https://docs.wso2.com/display/CLUSTER44x/Clustering+MB+3.0.0).
 
-1. Enable clustering
+1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
    Ex:
     ```yaml

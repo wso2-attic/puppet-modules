@@ -20,7 +20,7 @@ No changes to Hiera data are required to run the `default` profile.  Copy the ab
 ## Running WSO2 Identity Server with clustering in specific profiles
 Do the below changes to default Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 Identity Server 5.1.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Identity+Server+5.1.0) and [WSO2 Identity Server 5.0.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Identity+Server) clustering guides.
 
-1. Enable clustering
+1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
    Ex:
     ```yaml
