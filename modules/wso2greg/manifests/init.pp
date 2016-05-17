@@ -20,6 +20,9 @@ class wso2greg inherits wso2base {
   #TODO: Remove undef default value when wso2greg-4.6.0 support is dropped
   $social_datasources   = hiera('wso2::social_datasources', undef)
   $is_datasource        = hiera('wso2::is_datasource')
+  $service_provider   = hiera('wso2::service_provider')
+  $identity_provider  = hiera('wso2::identity_provider')
+  $social_app_url     = hiera('wso2::social_app_url')
 
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,

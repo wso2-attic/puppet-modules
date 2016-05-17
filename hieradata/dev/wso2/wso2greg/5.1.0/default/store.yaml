@@ -35,6 +35,27 @@ wso2::clustering:
       -
         hostname: 192.168.100.102
         port: 4000
+        
+wso2::service_provider:
+  store:
+    issuer: store
+    acs: https://store.greg.dev.wso2.org:9443/store/acs
+  social:
+    issuer: social
+    acs: https://store.greg.dev.wso2.org:9443/social/acs
+  publisher:
+    issuer: publisher
+    acs: https://pub.greg.dev.wso2.org:9443/publisher/acs
+
+wso2::identity_provider:
+  store:
+    issuer: store
+    identity_provider_url: https://store.greg.dev.wso2.org:9443/samlsso
+  publisher:
+    issuer: publisher
+    identity_provider_url: https://store.greg.dev.wso2.org:9443/samlsso
+
+wso2::social_app_url: https://store.greg.dev.wso2.org:9443/social
 
 wso2::registry_mounts:
   wso2_config_db:

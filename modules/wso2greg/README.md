@@ -14,11 +14,18 @@ This repository contains the Puppet Module for installing and configuring WSO2 G
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
+## Packs to be Copied
+
+Copy the following files to their corresponding locations.
+
+1. WSO2 Governance Registry distribution (5.1.0 or 4.6.0) to `<PUPPET_HOME>/modules/wso2greg/files`
+2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
+
 ## Running WSO2 Governance Registry in the `default` profile
 No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running WSO2 Governance Registry with clustering in specific profiles
-Do the below changes to profile (`publisher`, `store`) Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 Governance Registry 5.0.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Governance+Registry+5.0.0) and [WSO2 Governance Registry 4.6.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Governance+Registry) clustering guide.
+Hiera data sets matching the distributed profiles of WSO2 Governance Registry (`publisher`, `store`) are shipped with clustering related configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment. For more details refer the [WSO2 Governance Registry 5.0.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Governance+Registry+5.0.0) and [WSO2 Governance Registry 4.6.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Governance+Registry) clustering guide.
 
 1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
@@ -40,7 +47,7 @@ Do the below changes to profile (`publisher`, `store`) Hiera YAML files to start
                port: 4000
     ```
 
-2. Add external databases to master datasources
+2. Uncomment and modify the MySQL based data sources to point to the external MySQL servers.
 
    Ex:
     ```yaml
@@ -61,7 +68,7 @@ Do the below changes to profile (`publisher`, `store`) Hiera YAML files to start
 
     ```
 
-3. Configure registry mounting
+3. Uncomment (and optionally configure) registry mounting
 
    Ex:
     ```yaml
@@ -80,26 +87,10 @@ Do the below changes to profile (`publisher`, `store`) Hiera YAML files to start
       enable_cache: true
     ```
 
-4. Configure deployment synchronization
-
-    Ex:
-    ```yaml
-    wso2::dep_sync:
-        enabled: true
-        auto_checkout: true
-        auto_commit: true
-        repository_type: svn
-        svn:
-           url: http://svnrepo.example.com/repos/
-           user: username
-           password: password
-           append_tenant_id: true
-    ```
-
 ## Running WSO2 Governance Registry with Secure Vault
 WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
->For WSO2 Governance Registry 4.6.0, which is based on WSO2 Carbon Kernel 4.2.0, all the Carbon Kernel patches from patch0002 to patch0008 have to be applied first. Then the `org.wso2.ciphertool-1.0.0-wso2v2.jar` in Kernel patch [patch0010](http://dist.wso2.org/maven2/org/wso2/carbon/WSO2-CARBON-PATCH-4.2.0/0010/) has to be applied before enabling the Secure Vault. The `org.wso2.ciphertool-1.0.0-wso2v2.jar` in `WSO2-CARBON-PATCH-4.2.0-0009/lib` has to be copied to `wso2greg/files/configs/lib` folder and added to the `file_list` in hiera file as below:
+For WSO2 Governance Registry 4.6.0, which is based on WSO2 Carbon Kernel 4.2.0, all the Carbon Kernel patches from patch0002 to patch0008 have to be applied first. Then the `org.wso2.ciphertool-1.0.0-wso2v2.jar` in Kernel patch [patch0010](http://dist.wso2.org/maven2/org/wso2/carbon/WSO2-CARBON-PATCH-4.2.0/0010/) has to be applied before enabling the Secure Vault. The `org.wso2.ciphertool-1.0.0-wso2v2.jar` in `WSO2-CARBON-PATCH-4.2.0-0009/lib` has to be copied to `wso2greg/files/configs/lib` folder and added to the `file_list` in hiera file as below:
 
 ```yaml
 wso2::file_list :
@@ -155,3 +146,5 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
       - bin/ciphertool.sh
       - password-tmp
     ```
+## Running WSO2 Governance Registry on Kubernetes
+WSO2 Puppet Module ships Hiera data required to deploy WSO2 Governance Registry on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).

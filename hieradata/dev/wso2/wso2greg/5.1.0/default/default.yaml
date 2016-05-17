@@ -27,6 +27,9 @@ wso2::template_list:
   - repository/conf/datasources/social-datasources.xml
   - repository/conf/datasources/bps-datasources.xml
   - repository/conf/identity/sso-idp-config.xml
+  - repository/deployment/server/jaggeryapps/store/config/store.json
+  - repository/deployment/server/jaggeryapps/store/config/store-tenant.json
+  - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -36,6 +39,26 @@ wso2::template_list:
 #wso2::file_list:
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
+wso2::service_provider:
+  store:
+    issuer: store
+    acs: https://greg.dev.wso2.org:9443/store/acs
+  social:
+    issuer: social
+    acs: https://greg.dev.wso2.org:9443/social/acs
+  publisher:
+    issuer: publisher
+    acs: https://greg.dev.wso2.org:9443/publisher/acs
+
+wso2::identity_provider:
+  store:
+    issuer: store
+    identity_provider_url: https://greg.dev.wso2.org:9443/samlsso
+  publisher:
+    issuer: publisher
+    identity_provider_url: https://greg.dev.wso2.org:9443/samlsso
+
+wso2::social_app_url: https://greg.dev.wso2.org:9443/social
 
 # Uncomment the following for clustered setup
 #wso2::usermgt_datasource: wso2user_db
