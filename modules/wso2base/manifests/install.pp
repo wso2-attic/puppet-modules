@@ -22,7 +22,13 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
   notice("Installing WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 
   # create directories for installation if they do not exist
-  ensure_resource('file', [$install_dir, $pack_dir], { ensure => 'directory' })
+  # ensure_resource('file', [$install_dir, $pack_dir], { ensure => 'directory' })
+  $install_dirs=[$install_dir, $pack_dir]
+  wso2base::ensure_directory_structures {
+    $install_dirs:
+      system           => true,
+      carbon_home      => $carbon_home
+  }
 
   # download wso2 product pack archive
   case $mode {
@@ -38,7 +44,7 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
         onlyif         => "test -f ${pack_file_abs_path}",
         timeout        => 0,
         notify         => Exec["extract_${pack_file_abs_path}"],
-        require        => File[$install_dir, $pack_dir]
+        require        => Wso2base::Ensure_directory_structures[$install_dirs]
       })
     }
 
@@ -49,7 +55,7 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
         group          => $group,
         source         => ["puppet:///modules/${product_name}/${pack_filename}", "puppet:///files/packs/${pack_filename}"],
         notify         => Exec["extract_${pack_file_abs_path}"],
-        require        => File[$install_dir, $pack_dir]
+        require        => Wso2base::Ensure_directory_structures[$install_dirs]
       })
     }
 

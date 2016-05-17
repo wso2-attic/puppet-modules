@@ -21,6 +21,7 @@ define wso2base::configure ($template_list, $directory_list, $file_list, $system
   if ($directory_list != undef and size($directory_list) > 0) {
     wso2base::ensure_directory_structures {
       $directory_list:
+        system           => false,
         carbon_home      => $carbon_home
     }
   }
