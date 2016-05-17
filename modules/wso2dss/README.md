@@ -18,7 +18,7 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 
 Copy the following files to their corresponding locations.
 
-1. WSO2 Data Services Server distribution (3.0.1) to `<PUPPET_HOME>/modules/wso2dss/files`
+1. WSO2 Data Services Server distribution (3.5.0) to `<PUPPET_HOME>/modules/wso2dss/files`
 2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running WSO2 Data Services Server in the `default` profile
