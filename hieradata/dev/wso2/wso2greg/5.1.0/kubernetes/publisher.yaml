@@ -51,6 +51,6 @@ wso2::identity_provider:
     identity_provider_url: https://wso2greg-store:32104/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://wso2greg-publisher:32102/samlsso
+    identity_provider_url: https://wso2greg-store:32104/samlsso
 
 wso2::social_app_url: https://wso2greg-store:32104/social
