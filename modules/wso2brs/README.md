@@ -14,6 +14,13 @@ This repository contains the Puppet Module for installing and configuring WSO2 B
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
+## Packs to be Copied
+
+Copy the following files to their corresponding locations.
+
+1. WSO2 Business Rules Server distribution (2.1.0 or 2.2.0) to `<PUPPET_HOME>/modules/wso2brs/files`
+2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
+
 ## Running WSO2 Business Rules Server in the `default` profile
 No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
@@ -155,3 +162,6 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
       - bin/ciphertool.sh
       - password-tmp
     ```
+
+## Running WSO2 Business Rules Server on Kubernetes
+WSO2 BRS Puppet module ships Hiera data required to deploy WSO2 Business Rules Server on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
