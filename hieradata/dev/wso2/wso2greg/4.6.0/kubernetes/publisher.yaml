@@ -33,18 +33,24 @@ wso2::ports:
   proxyPort:
     http: 32101
     https: 32102
+    
+wso2::service_provider:
+  store:
+    issuer: store
+    acs: https://wso2greg-store:32104/store/acs
+  social:
+    issuer: social
+    acs: https://wso2greg-store:32104/social/acs
+  publisher:
+    issuer: publisher
+    acs: https://wso2greg-publisher:32102/publisher/acs
 
-wso2::registry_mounts:
-  wso2_config_db:
-    path: /_system/config
-    target_path: /_system/config/greg
-    read_only: false
-    registry_root: /
-    enable_cache: true
+wso2::identity_provider:
+  store:
+    issuer: store
+    identity_provider_url: https://wso2greg-store:32104/samlsso
+  publisher:
+    issuer: publisher
+    identity_provider_url: https://wso2greg-publisher:32102/samlsso
 
-  wso2_gov_db:
-    path: /_system/governance
-    target_path: /_system/governance
-    read_only: false
-    registry_root: /
-    enable_cache: true
+wso2::social_app_url: https://wso2greg-store:32104/social
