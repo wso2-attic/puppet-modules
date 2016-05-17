@@ -20,7 +20,7 @@ Copy the following files to their corresponding locations.
 
 1. WSO2 Application Server distribution (5.3.0) to `<PUPPET_HOME>/modules/wso2as/files`
 2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
-3. (Only for Kubernetes platform) Copy [`kernel patch0005`](http://product-dist.wso2.com/downloads/carbon/4.4.1/patch0005/WSO2-CARBON-PATCH-4.4.1-0005.zip) to `<PUPPET_HOME>/modules/wso2as/files`
+3. (Only for Kubernetes platform) Copy [Kubernetes membership scheme](https://github.com/wso2/kubernetes-artifacts/tree/master/common/kubernetes-membership-scheme) related files to wso2as Puppet module. Refer to [documentation on using WSO2 Puppet modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules) for more information.
 
 ## Running WSO2 Application Server in the `default` profile
 No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
