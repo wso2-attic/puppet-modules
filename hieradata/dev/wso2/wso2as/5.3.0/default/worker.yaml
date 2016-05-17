@@ -19,9 +19,9 @@ wso2::hostname: as.dev.wso2.org
 wso2::clustering:
   enabled: true
   domain: as.wso2.domain
+  sub_domain: worker
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
-  sub_domain: mgt
   membership_scheme: wka
   wka:
     members:

@@ -43,7 +43,7 @@ wso2::apim_publisher:
 wso2::clustering:
   enabled: true
   domain: pub.store.am.wso2.domain
-  sub_domain: mgt
+  sub_domain: worker
   membership_scheme: kubernetes
   local_member_port: 4000
   kubernetes:

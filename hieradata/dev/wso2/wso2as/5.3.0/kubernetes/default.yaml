@@ -24,6 +24,8 @@ wso2::mgt_hostname: wso2as-default
 
 wso2::clustering:
   enabled: true
+  domain: as.wso2.domain
+  sub_domain: worker
   membership_scheme: kubernetes
   local_member_port: 4000
   kubernetes:

@@ -34,8 +34,8 @@ wso2::apim_gateway:
 
 wso2::clustering:
   enabled: true
-  enabled: true
   domain: km.am.wso2.domain
+  sub_domain: worker
   membership_scheme: kubernetes
   local_member_port: 4000
   kubernetes:

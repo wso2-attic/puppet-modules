@@ -39,7 +39,6 @@ wso2::clustering:
   sub_domain: mgt
   membership_scheme: kubernetes
   local_member_port: 4000
-  sub_domain: mgt
   kubernetes:
     kubernetes_namespace: default
     kubernetes_services: wso2am-gateway-manager

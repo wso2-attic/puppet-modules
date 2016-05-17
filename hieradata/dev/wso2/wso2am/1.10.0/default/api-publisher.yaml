@@ -15,11 +15,11 @@
 ---
 wso2::mgt_hostname: pub.dev.wso2.org
 wso2::hostname: pub.dev.wso2.org
-  
+
 wso2::clustering:
   enabled: true
   domain: pub.store.am.wso2.domain
-  sub_domain: mgt
+  sub_domain: worker
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
   membership_scheme: wka
@@ -31,7 +31,7 @@ wso2::clustering:
       -
         hostname: 192.168.100.4
         port: 4000
-  
+
 wso2::registry_mounts:
  wso2_config_db:
    path: /_system/config
