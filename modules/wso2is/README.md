@@ -14,11 +14,18 @@ This repository contains the Puppet Module for installing and configuring WSO2 I
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
+## Packs to be Copied
+
+Copy the following files to their corresponding locations.
+
+1. WSO2 Identity Server distribution (5.1.0) to `<PUPPET_HOME>/modules/wso2is/files`
+2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
+
 ## Running WSO2 Identity Server in the `default` profile
 No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running WSO2 Identity Server with clustering in specific profiles
-Do the below changes to default Hiera YAML files to start the server in distributed setup. For more details refer the [WSO2 Identity Server 5.1.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Identity+Server+5.1.0) and [WSO2 Identity Server 5.0.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Identity+Server) clustering guides.
+No changes to Hiera data are required to run the distributed deployment of WSO2 Identity Server, other than pointing to the correct resources such as the deployment synchronization and remote DB instances.  For more details refer the [WSO2 Identity Server 5.1.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Identity+Server+5.1.0) and [WSO2 Identity Server 5.0.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Identity+Server) clustering guides.
 
 1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
@@ -45,19 +52,20 @@ Do the below changes to default Hiera YAML files to start the server in distribu
    Ex:
     ```yaml
     wso2::master_datasources:
-     wso2_config_db:
-       name: WSO2_CONFIG_DB
-       description: The datasource used for config registry
-       driver_class_name: org.h2.Driver
-       url: jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-       username: "%{hiera('wso2::datasources::common::username')}"
-       password: "%{hiera('wso2::datasources::common::password')}"
-       jndi_config: jdbc/WSO2_CONFIG_DB
-       max_active: "%{hiera('wso2::datasources::common::max_active')}"
-       max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-       test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-       validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
-       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+      wso2_config_db:
+        name: WSO2_CONFIG_DB
+        description: The datasource used for config registry
+        driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+        url: jdbc:mysql://mysql-is-db:3306/IS_DB?autoReconnect=true
+        username: "%{hiera('wso2::datasources::common::username')}"
+        password: "%{hiera('wso2::datasources::common::password')}"
+        jndi_config: jdbc/WSO2_CONFIG_DB
+        max_active: "%{hiera('wso2::datasources::common::max_active')}"
+        max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+        test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+        default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+        validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+        validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
     ```
 
@@ -155,3 +163,6 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
       - bin/ciphertool.sh
       - password-tmp
     ```
+
+## Running WSO2 Identity Server on Kubernetes
+WSO2 Puppet Module ships Hiera data required to deploy WSO2 Identity Server on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
