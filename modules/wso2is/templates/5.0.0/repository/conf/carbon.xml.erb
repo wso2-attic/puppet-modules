@@ -42,20 +42,20 @@
        This is will become part of the End Point Reference of the
        services deployed on this server instance.
     -->
-    <% if @hostname %>
+<% if @hostname %>
     <HostName><%= @hostname %></HostName>
-    <%- else -%>
+<%- else -%>
     <!--HostName>www.wso2.org</HostName-->
-    <% end %>
+<% end %>
 
     <!--
     Host name to be used for the Carbon management console
     -->
-    <% if @mgt_hostname %>
+<% if @mgt_hostname %>
     <MgtHostName><%= @mgt_hostname %></MgtHostName>
-    <%- else -%>
+<%- else -%>
     <!--MgtHostName>mgt.wso2.org</MgtHostName-->
-    <% end %>
+<% end %>
 
 
     <!--
@@ -118,11 +118,11 @@
          the define value + Offset.
          e.g. Offset=2 and HTTPS port=9443 will set the effective HTTPS port to 9445
          -->
-        <%- if @ports['offset'] -%>
+<%- if @ports['offset'] -%>
         <Offset><%= @ports['offset'] %></Offset>
-        <%- else -%>
+<%- else -%>
         <Offset>0</Offset>
-        <%- end -%>
+<%- end -%>
 
         <!-- The JMX Ports -->
         <JMX>

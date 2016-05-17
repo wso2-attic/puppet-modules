@@ -13,6 +13,23 @@ Configuration data is managed using [Hiera] (http://docs.puppetlabs.com/hiera/1/
 
 - Puppet 2.7, 3 or newer
 
+## Getting Started
+
+Refer to the product specific README guides to get started with WSO2 Puppet Modules.
+
+1. [WSO2 API Manager](https://github.com/wso2/puppet-modules/tree/master/modules/wso2am)
+2. [WSO2 Application Server](https://github.com/wso2/puppet-modules/tree/master/modules/wso2as)
+3. [WSO2 Business Process Server](https://github.com/wso2/puppet-modules/tree/master/modules/wso2bps)
+4. [WSO2 Business Rules Server](https://github.com/wso2/puppet-modules/tree/master/modules/wso2brs)
+5. [WSO2 Complex Event Processor](https://github.com/wso2/puppet-modules/tree/master/modules/wso2cep)
+6. [WSO2 Data Analytics Server](https://github.com/wso2/puppet-modules/tree/master/modules/wso2das)
+7. [WSO2 Data Services Server](https://github.com/wso2/puppet-modules/tree/master/modules/wso2dss)
+8. [WSO2 Enterprise Store](https://github.com/wso2/puppet-modules/tree/master/modules/wso2es)
+9. [WSO2 Enterprise Service Bus](https://github.com/wso2/puppet-modules/tree/master/modules/wso2esb)
+10. [WSO2 Governance Registry](https://github.com/wso2/puppet-modules/tree/master/modules/wso2greg)
+11. [WSO2 Identity Server](https://github.com/wso2/puppet-modules/tree/master/modules/wso2is)
+12. [WSO2 Message Broker](https://github.com/wso2/puppet-modules/tree/master/modules/wso2mb)
+
 ## How to Contribute
 1. Fork
 2. Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules

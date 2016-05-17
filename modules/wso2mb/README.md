@@ -14,11 +14,18 @@ This repository contains the Puppet Module for installing and configuring WSO2 M
 ## How to Contribute
 Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/wiki) to setup a development environment and update/create new puppet modules.
 
+## Packs to be Copied
+
+Copy the following files to their corresponding locations.
+
+1. WSO2 Message Broker distribution (5.3.0) to `<PUPPET_HOME>/modules/wso2mb/files`
+2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
+
 ## Running WSO2 Message Broker in the `default` profile
 No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running WSO2 Message Broker with clustering in specific profiles
-Do the below changes to default Hiera YAML files to start the server in distributed setup. For more details refer the
+No changes to Hiera data are required to run the distributed deployment of WSO2 Message broker, other than pointing to the correct resources such as the deployment synchronization and remote DB instances. For more details refer the
 [WSO2 Message Broker clustering guide](https://docs.wso2.com/display/CLUSTER44x/Clustering+MB+3.0.0).
 
 1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
@@ -45,20 +52,20 @@ Do the below changes to default Hiera YAML files to start the server in distribu
 
    Ex:
     ```yaml
-    wso2::master_datasources:
-     wso2_config_db:
-       name: WSO2_CONFIG_DB
-       description: The datasource used for config registry
-       driver_class_name: org.h2.Driver
-       url: jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-       username: "%{hiera('wso2::datasources::common::username')}"
-       password: "%{hiera('wso2::datasources::common::password')}"
-       jndi_config: jdbc/WSO2_CONFIG_DB
-       max_active: "%{hiera('wso2::datasources::common::max_active')}"
-       max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-       test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-       validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
-       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+    wso2_config_db:
+      name: WSO2_CONFIG_DB
+      description: The datasource used for config registry
+      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+      url: jdbc:mysql://192.168.100.1:3306/WSO2MB_DB?autoReconnect=true
+      username: "%{hiera('wso2::datasources::mysql::username')}"
+      password: "%{hiera('wso2::datasources::mysql::password')}"
+      jndi_config: jdbc/WSO2_CONFIG_DB
+      max_active: "%{hiera('wso2::datasources::common::max_active')}"
+      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
     ```
 
@@ -72,7 +79,7 @@ Do the below changes to default Hiera YAML files to start the server in distribu
       read_only: false
       registry_root: /
       enable_cache: true
-      
+
     wso2_gov_db:
       path: /_system/governance
       target_path: /_system/governance
@@ -136,3 +143,6 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
       - bin/ciphertool.sh
       - password-tmp
     ```
+
+## Running WSO2 Message Broker on Kubernetes
+WSO2 Puppet Module ships Hiera data required to deploy WSO2 Message Broker on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
