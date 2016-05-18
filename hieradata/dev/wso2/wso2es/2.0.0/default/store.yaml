@@ -48,7 +48,7 @@ wso2::identity_provider:
     identity_provider_url: https://store.es.dev.wso2.org:9443/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://pub.es.dev.wso2.org:9443/samlsso
+    identity_provider_url: https://store.es.dev.wso2.org:9443/samlsso
 
 wso2::social_app_url: https://store.es.dev.wso2.org:9443/social
 

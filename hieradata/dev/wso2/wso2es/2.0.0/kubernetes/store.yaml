@@ -50,6 +50,6 @@ wso2::identity_provider:
     identity_provider_url: https://wso2es-store:32084/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://wso2es-publisher:32082/samlsso
+    identity_provider_url: https://wso2es-store:32084/samlsso
 
 wso2::social_app_url: https://wso2es-store:32084/social
