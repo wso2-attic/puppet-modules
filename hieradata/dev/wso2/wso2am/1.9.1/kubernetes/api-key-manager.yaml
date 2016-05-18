@@ -27,6 +27,8 @@ wso2::apim_gateway:
   api_endpoint_host: wso2am-gateway-manager
   api_endpoint_port: 8280
   secure_api_endpoint_port: 8243
+# Store and Gateway components may call revoke API internally (via K8S service) to invalidate access tokens
+# Therefore, api token revoke port should point to corresponding K8S service target port
   api_token_revoke_endpoint_port: 8280
   secure_api_token_revoke_endpoint_port: 8243
   username: admin

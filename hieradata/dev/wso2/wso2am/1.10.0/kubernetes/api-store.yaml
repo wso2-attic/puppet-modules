@@ -23,10 +23,14 @@ wso2::apim_keymanager:
 
 wso2::apim_gateway:
   host: wso2am-gateway-manager
-  port: 9443
+  port: 32008
   api_endpoint_host: wso2am-gateway-manager
-  api_endpoint_port: 8280
-  secure_api_endpoint_port: 8243
+# In single-JVM mode, API endpoint ports should point to corresponding K8S service NodePorts which is shown to the user in Store Jaggery app
+# This is because users can only access the API via NodePort (K8S services are not accessible externally)
+  api_endpoint_port: 32005
+  secure_api_endpoint_port: 32006
+# Store and Gateway components may call revoke API internally (via K8S service) to invalidate access tokens
+# Therefore, API token revoke port should point to corresponding K8S service target port
   api_token_revoke_endpoint_port: 8280
   secure_api_token_revoke_endpoint_port: 8243
   username: admin
@@ -34,10 +38,13 @@ wso2::apim_gateway:
 
 wso2::apim_store:
   host: wso2am-api-store
+# This port is used to generate the Store app URL to which the browser is redirected when accessing the Store from Publisher
+# Therefore, it should point to the corresponding K8S service NodePort
   port: 32019
 
 wso2::apim_publisher:
   host: wso2am-api-publisher
+# This port is used to generate the Publisher app URL. It should point to the corresponding K8S service NodePort since it is accessed externally
   port: 32017
 
 wso2::clustering:

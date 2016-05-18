@@ -23,6 +23,8 @@ wso2::apim_keymanager:
 
 wso2::apim_gateway:
   host: wso2am-gateway-manager
+# Publisher component calls Gateway admin service internally (via K8S service) to create Synapse artifacts
+# Therefore, admin service port should point to corresponding K8S service target port
   port: 9443
   api_endpoint_host: wso2am-gateway-manager
   api_endpoint_port: 8280
@@ -34,10 +36,13 @@ wso2::apim_gateway:
 
 wso2::apim_store:
   host: wso2am-api-store
+# This port is used to generate the Store app URL to which the browser is redirected when accessing the Store from Publisher
+# Therefore, it should point to the corresponding K8S service NodePort
   port: 32019
 
 wso2::apim_publisher:
   host: wso2am-api-publisher
+# This port is used to generate the Publisher app URL. It should point to the corresponding K8S service NodePort
   port: 32017
 
 wso2::clustering:
