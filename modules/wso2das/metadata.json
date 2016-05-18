@@ -1,6 +1,6 @@
 {
   "name": "wso2-das",
-  "version": "2.0.0-SNAPSHOT",
+  "version": "2.0.0",
   "author": "wso2",
   "license": "Apache-2.0",
   "summary": "puppet module",
@@ -14,6 +14,6 @@
   ],
   "tags" : ["das", "3.0.0"],
   "dependencies": [
-    { "name": "wso2/base", "version_requirement": "2.0.0-SNAPSHOT" }
+    { "name": "wso2/base", "version_requirement": "2.0.0" }
   ]
 }
