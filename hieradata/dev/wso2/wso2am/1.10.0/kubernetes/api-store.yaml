@@ -23,7 +23,7 @@ wso2::apim_keymanager:
 
 wso2::apim_gateway:
   host: wso2am-gateway-manager
-  port: 32008
+  port: 9443
   api_endpoint_host: wso2am-gateway-manager
 # In single-JVM mode, API endpoint ports should point to corresponding K8S service NodePorts which is shown to the user in Store Jaggery app
 # This is because users can only access the API via NodePort (K8S services are not accessible externally)
