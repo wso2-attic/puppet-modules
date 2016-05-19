@@ -125,20 +125,6 @@ wso2::social_datasources :
     validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::metrics_datasources :
-  h2 :
-    name : WSO2_METRICS_DB
-    description : The default datasource used for WSO2 Carbon Metrics
-    driver_class_name : org.h2.Driver
-    url : jdbc:h2:file:repository/database/jpadb;DB_CLOSE_ON_EXIT=FALSE;MVCC=TRUE
-    username : wso2carbon
-    password : wso2carbon
-    jndi_config : WSO2MetricsDB
-    max_active : "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait : "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow : "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit : "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query : "%{hiera('wso2::datasources::h2::validation_query')}"
-    validation_interval : "%{hiera('wso2::datasources::common::validation_interval')}"
 
   mysql :
     name : WSO2_METRICS_DB

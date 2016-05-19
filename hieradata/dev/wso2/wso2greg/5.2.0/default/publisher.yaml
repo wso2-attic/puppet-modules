@@ -20,7 +20,6 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::template_list :
 #        - repository/conf/datasources/social-datasources.xml
         - repository/conf/identity/sso-idp-config.xml
-        - repository/conf/datasources/metrics-datasources.xml
 
 # Host mapping to be made in etc/hosts
 wso2::hosts_mapping :
