@@ -49,9 +49,11 @@
             <directory>${project.basedir}/hieradata</directory>
             <outputDirectory>./hieradata/</outputDirectory>
             <includes>
-                <include>**/*.yaml</include>
-                <include>**/*.json</include>
+                <include>**</include>
             </includes>
+            <excludes>
+                <exclude>**/.git*</exclude>
+            </excludes>
         </fileSet>
     </fileSets>
 
