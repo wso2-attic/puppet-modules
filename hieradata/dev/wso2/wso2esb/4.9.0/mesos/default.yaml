@@ -32,6 +32,7 @@ wso2::clustering:
     mesos_username:
     mesos_password:
     # mesos_enable_basic_auth:
+
 #wso2::template_list :
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
@@ -42,19 +43,19 @@ wso2::clustering:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 32093
-    https: 32094
-    pass_through_http: 32091
-    pass_through_https: 32092
+    http: 31093
+    https: 31094
+    pass_through_http: 31091
+    pass_through_https: 31092
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
     bind_address: wso2esb-default
-    prefix: http://wso2esb-default:32093
+    prefix: http://wso2esb-default:31093
   https:
     bind_address: wso2esb-default
-    prefix: https://wso2esb-default:32094
+    prefix: https://wso2esb-default:31094
 
 #wso2::usermgt_datasource: wso2user_db
 wso2::is_datasource: wso2_carbon_db

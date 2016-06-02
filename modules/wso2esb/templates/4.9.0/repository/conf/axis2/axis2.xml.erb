@@ -513,12 +513,7 @@
 <%- if @clustering['membership_scheme'] == 'mesos' -%>
         <!-- Apache Mesos membership scheme specific parameters -->
         <parameter name="membershipSchemeClassName">org.wso2.carbon.clustering.mesos.MesosMembershipScheme</parameter>
-        <parameter name="MARATHON_ENDPOINT"><%= @clustering['mesos']['mesos_endpoint'] %></parameter>
         <parameter name="MARATHON_APPLICATIONS"><%= @clustering['mesos']['mesos_applications'] %></parameter>
-        <parameter name="MARATHON_APP_ID"><%= @clustering['mesos']['mesos_app_id'] %></parameter>
-        <parameter name="MARATHON_USERNAME"><%= @clustering['mesos']['mesos_username'] %></parameter>
-        <parameter name="MARATHON_PASSWORD"><%= @clustering['mesos']['mesos_password'] %></parameter>
-        <parameter name="ENABLE_BASIC_AUTH"><%= @clustering['mesos']['mesos_enable_basic_auth'] %></parameter>
 <%- end -%>
 
         <!--<parameter name="licenseKey">xxx</parameter>-->

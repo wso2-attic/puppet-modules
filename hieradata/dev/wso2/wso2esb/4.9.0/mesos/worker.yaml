@@ -18,13 +18,15 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2esb
-wso2::hostname: wso2esb-default
-wso2::mgt_hostname: wso2esb-default
+wso2::hostname: wso2esb-worker
+wso2::mgt_hostname: wso2esb-worker
 
 wso2::clustering:
   enabled: true
   membership_scheme: mesos
   local_member_port: 4000
+  mesos:
+    mesos_applications: wso2esb-manager,wso2esb-worker
 
 #wso2::template_list :
 #  - repository/conf/security/cipher-text.properties
@@ -36,29 +38,20 @@ wso2::clustering:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 32093
-    https: 32094
-    pass_through_http: 32091
-    pass_through_https: 32092
-
-wso2::file_list:
-  - repository/components/lib/mesos-membership-scheme-1.0.0-SNAPSHOT.jar
-  - repository/components/lib/bsh-2.0b4.jar
-  - repository/components/lib/feign-core-8.14.1.jar
-  - repository/components/lib/feign-gson-8.14.1.jar
-  - repository/components/lib/jcommander-1.48.jar
-  - repository/components/lib/snakeyaml-1.15.jar
-  - repository/components/lib/testng-6.9.9.jar
+    http: 31093
+    https: 31094
+    pass_through_http: 31091
+    pass_through_https: 31092
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
     bind_address: wso2esb-default
-    prefix: http://wso2esb-default:32093
+    prefix: http://wso2esb-default:31093
   https:
     bind_address: wso2esb-default
-    prefix: https://wso2esb-default:32094
-    
+    prefix: https://wso2esb-default:31094
+
 #wso2::usermgt_datasource: wso2user_db
 wso2::is_datasource: wso2_carbon_db
 
