@@ -16,10 +16,11 @@
 
 # Manages WSO2 Governance Registry deployment
 class wso2greg inherits wso2base {
-  $bps_datasources      = hiera('wso2::bps_datasources')
+  $bps_datasources      = hiera('wso2::bps_datasources', undef)
   #TODO: Remove undef default value when wso2greg-4.6.0 support is dropped
   $social_datasources   = hiera('wso2::social_datasources', undef)
   $is_datasource        = hiera('wso2::is_datasource')
+  $metrics_datasources  = hiera('wso2::metrics_datasources', undef)
 
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,
