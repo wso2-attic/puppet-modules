@@ -16,12 +16,6 @@ wso2::install_dir: "/mnt"
 
 wso2::file_list:
   - repository/components/lib/mesos-membership-scheme-1.0.0-SNAPSHOT.jar
-  # - repository/components/lib/bsh-2.0b4.jar
-  - repository/components/lib/feign-core-8.14.1.jar
-  - repository/components/lib/feign-gson-8.14.1.jar
-  # - repository/components/lib/jcommander-1.48.jar
-  # - repository/components/lib/snakeyaml-1.15.jar
-  # - repository/components/lib/testng-6.9.9.jar
   - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
 
 # MySQL datasources configuration
