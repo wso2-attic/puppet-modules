@@ -44,10 +44,10 @@ wso2::system_file_list:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 31093
-    https: 31094
-    pass_through_http: 31091
-    pass_through_https: 31092
+    http: 10100
+    https: 10101
+    pass_through_http: 10102
+    pass_through_https: 10103
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
