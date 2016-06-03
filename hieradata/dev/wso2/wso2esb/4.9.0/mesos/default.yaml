@@ -26,7 +26,7 @@ wso2::clustering:
   membership_scheme: mesos
   local_member_port: 4000
   mesos:
-    # mesos_endpoint:
+    marathon_endpoint: http://marathon.mesos:8080/v2/
     mesos_applications: wso2esb-default
     mesos_app_id: wso2esb-default
     # mesos_username:

@@ -22,10 +22,11 @@ wso2::hostname: wso2esb-manager
 wso2::mgt_hostname: wso2esb-manager
 
 wso2::clustering:
-  enabled: true
+  enabled: false
   membership_scheme: mesos
   local_member_port: 4000
   mesos:
+    marathon_endpoint: http://marathon.mesos:8080/v2/
     mesos_applications: wso2esb-manager,wso2esb-worker
 
 #wso2::template_list :
