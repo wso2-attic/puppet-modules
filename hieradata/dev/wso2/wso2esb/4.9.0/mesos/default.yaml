@@ -49,19 +49,19 @@ wso2::system_file_list:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 31093
-    https: 31094
-    pass_through_http: 31091
-    pass_through_https: 31092
+    http: 10093
+    https: 10094
+    pass_through_http: 10091
+    pass_through_https: 10092
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
     bind_address: wso2esb-default
-    prefix: http://wso2esb-default:31093
+    prefix: http://wso2esb-default:10093
   https:
     bind_address: wso2esb-default
-    prefix: https://wso2esb-default:31094
+    prefix: https://wso2esb-default:10094
 
 #wso2::usermgt_datasource: wso2user_db
 wso2::is_datasource: wso2_carbon_db
