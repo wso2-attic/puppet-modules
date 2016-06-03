@@ -67,7 +67,7 @@ wso2::esb_wsdl_epr_prefix:
 wso2::is_datasource: wso2_carbon_db
 
 ## Uncomment the following for a clustered setup
-#wso2::usermgt_datasource: wso2user_db
+wso2::usermgt_datasource: wso2user_db
 
 wso2::master_datasources:
   wso2_config_db:
