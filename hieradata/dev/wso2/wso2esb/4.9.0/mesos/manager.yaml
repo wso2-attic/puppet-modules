@@ -51,11 +51,11 @@ wso2::ports:
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
-    bind_address: wso2esb-default
-    prefix: http://wso2esb-default:10093
+    bind_address: wso2esb-worker
+    prefix: http://wso2esb-worker:10091
   https:
-    bind_address: wso2esb-default
-    prefix: https://wso2esb-default:10094
+    bind_address: wso2esb-worker
+    prefix: https://wso2esb-worker:10092
 
 #wso2::usermgt_datasource: wso2user_db
 wso2::is_datasource: wso2_carbon_db

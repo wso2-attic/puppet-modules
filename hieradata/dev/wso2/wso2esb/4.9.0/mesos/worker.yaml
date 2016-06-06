@@ -53,11 +53,11 @@ wso2::ports:
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
-    bind_address: wso2esb-default
-    prefix: http://wso2esb-default:31093
+    bind_address: wso2esb-worker
+    prefix: http://wso2esb-worker:10091
   https:
-    bind_address: wso2esb-default
-    prefix: https://wso2esb-default:31094
+    bind_address: wso2esb-worker
+    prefix: https://wso2esb-worker:10092
 
 #wso2::usermgt_datasource: wso2user_db
 wso2::is_datasource: wso2_carbon_db
@@ -77,7 +77,7 @@ wso2::is_datasource: wso2_carbon_db
 #    jndi_config: jdbc/WSO2_CONFIG_DB
 #    max_active: "%{hiera('wso2::datasources::common::max_active')}"
 #    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"x
 #    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
 #    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
