@@ -15,7 +15,7 @@
 wso2::install_dir: "/mnt"
 
 wso2::file_list:
-  - repository/components/dropins/mesos-membership-scheme-1.0.0-SNAPSHOT.jar
+  - repository/components/lib/mesos-membership-scheme-1.0.0-SNAPSHOT.jar
   - repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}
 
 # MySQL datasources configuration
