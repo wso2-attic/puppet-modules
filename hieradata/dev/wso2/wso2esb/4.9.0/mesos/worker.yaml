@@ -12,12 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-classes:
-  - wso2esb
-wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
-wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
-
-wso2::service_name: wso2esb
 wso2::hostname: wso2esb-worker
 wso2::mgt_hostname: wso2esb-worker
 
@@ -29,88 +23,22 @@ wso2::clustering:
     marathon_endpoint: http://marathon.mesos:8080/v2/
     mesos_applications: wso2esb-manager,wso2esb-worker
 
-#wso2::template_list :
-#  - repository/conf/security/cipher-text.properties
-#  - repository/conf/security/cipher-tool.properties
-#  - bin/ciphertool.sh
-#  - password-tmp
-
 #Files to be copied to system
 #wso2::system_file_list:
 #  -
 #    file: wso2esb-worker-init.sh
 #    target_path: /usr/local/bin
 
-# In Kubernetes proxy ports need to be configured to match with node ports.
-# Following ports have been defined for servlet HTTP and HTTPS transports.
-wso2::ports:
-  proxyPort:
-    http: 10093
-    https: 10094
-    pass_through_http: 10091
-    pass_through_https: 10092
-
-# Defines WSDL EPR Prefix
-wso2::esb_wsdl_epr_prefix:
-  http:
-    bind_address: wso2esb-worker
-    prefix: http://wso2esb-worker:10091
-  https:
-    bind_address: wso2esb-worker
-    prefix: https://wso2esb-worker:10092
-
-#wso2::usermgt_datasource: wso2user_db
-wso2::is_datasource: wso2_carbon_db
-
-## Uncomment the following for a clustered setup
-#wso2::usermgt_datasource: wso2user_db
-
-## Uncomment the following MySQL data sources for a clustered setup
-#wso2::master_datasources:
-#  wso2_config_db:
-#    name: WSO2_CONFIG_DB
-#    description: The datasource used for config registry
-#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-#    url: jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
-#    username: "%{hiera('wso2::datasources::mysql::username')}"
-#    password: "%{hiera('wso2::datasources::mysql::password')}"
-#    jndi_config: jdbc/WSO2_CONFIG_DB
-#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"x
-#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-#
-#  wso2_gov_db:
-#    name: WSO2_GOV_DB
-#    description: The datasource used for gov registry
-#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-#    url: jdbc:mysql://192.168.100.1:3306/WSO2REG_DB?autoReconnect=true
-#    username: "%{hiera('wso2::datasources::mysql::username')}"
-#    password: "%{hiera('wso2::datasources::mysql::password')}"
-#    jndi_config: jdbc/WSO2_GOV_DB
-#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-#
-#  wso2user_db:
-#    name: WSO2USER_DB
-#    description: The datasource is used for user mangement and userstore
-#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-#    url: jdbc:mysql://192.168.100.1:3306/WSO2USER_DB?autoReconnect=true
-#    username: "%{hiera('wso2::datasources::mysql::username')}"
-#    password: "%{hiera('wso2::datasources::mysql::password')}"
-#    jndi_config: jdbc/WSO2USER_DB
-#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+wso2::dep_sync:
+  enabled: false
+  auto_checkout: true
+  auto_commit: false
+  repository_type: svn
+  svn:
+    url: http://svnrepo.example.com/repos/
+    user: username
+    password: password
+    append_tenant_id: true
 
 wso2::registry_mounts:
   wso2_config_db:
@@ -126,51 +54,3 @@ wso2::registry_mounts:
     read_only: true
     registry_root: /
     enable_cache: true
-
-# Secure vault configuration
-#wso2::enable_secure_vault: true
-#wso2::secure_vault_configs:
-#  key_store_password:
-#    secret_alias: Carbon.Security.KeyStore.Password
-#    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
-#    password: wso2carbon
-#
-#  key_store_key_password:
-#    secret_alias: Carbon.Security.KeyStore.KeyPassword
-#    secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/KeyPassword,false
-#    password: wso2carbon
-#
-#  trust_store_password:
-#    secret_alias: Carbon.Security.TrustStore.Password
-#    secret_alias_value: repository/conf/carbon.xml//Server/Security/TrustStore/Password,false
-#    password: wso2carbon
-#
-#  user_manager_admin_password:
-#    secret_alias: UserManager.AdminUser.Password
-#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
-#    password: admin
-#
-#  wso2_carbon_db_password:
-#    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
-#
-#  connector_key_store_password:
-#    secret_alias: Server.Service.Connector.keystorePass
-#    secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
-#    password: wso2carbon
-#
-#  wso2_config_db_password:
-#    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
-#
-#  wso2_gov_db_password:
-#    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
-#
-#  wso2user_db_password:
-#    secret_alias: Datasources.WSO2USER_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2USER_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
