@@ -22,7 +22,7 @@ wso2::hostname: wso2esb-default
 wso2::mgt_hostname: wso2esb-default
 
 wso2::clustering:
-  enabled: true
+  enabled: false
   membership_scheme: mesos
   local_member_port: 4000
   mesos:
@@ -45,7 +45,7 @@ wso2::clustering:
 #    file: wso2esb-default-init.sh
 #    target_path: /usr/local/bin
 
-# In Kubernetes proxy ports need to be configured to match with node ports.
+# In mesos proxy ports need to be configured to match with service ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
@@ -63,10 +63,6 @@ wso2::esb_wsdl_epr_prefix:
     bind_address: wso2esb-default
     prefix: https://wso2esb-default:10094
 
-#wso2::usermgt_datasource: wso2user_db
-wso2::is_datasource: wso2_carbon_db
-
-## Uncomment the following for a clustered setup
 wso2::usermgt_datasource: wso2user_db
 
 wso2::master_datasources:
