@@ -23,12 +23,6 @@ wso2::clustering:
     marathon_endpoint: http://marathon.mesos:8080/v2/
     mesos_applications: wso2brs-manager,wso2brs-worker
 
-#Files to be copied to system
-#wso2::system_file_list:
-#  -
-#    file: wso2brs-manager-init.sh
-#    target_path: /usr/local/bin
-
 wso2::dep_sync:
   enabled: false
   auto_checkout: true
