@@ -1,0 +1,2 @@
+# sh scripts must have unix line endings to work
+*.erb text eol=lf
