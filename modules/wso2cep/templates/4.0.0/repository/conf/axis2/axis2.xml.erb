@@ -626,6 +626,13 @@
         <parameter name="KUBERNETES_SERVICES"><%= @clustering['kubernetes']['kubernetes_services'] %></parameter>
 <%- end -%>
 
+<%- if @clustering['membership_scheme'] == 'mesos' -%>
+        <!-- Apache Mesos membership scheme specific parameters -->
+        <parameter name="membershipSchemeClassName">org.wso2.carbon.clustering.mesos.MesosMembershipScheme</parameter>
+        <parameter name="MARATHON_ENDPOINT"><%= @clustering['mesos']['marathon_endpoint'] %></parameter>
+        <parameter name="MARATHON_APPLICATIONS"><%= @clustering['mesos']['mesos_applications'] %></parameter>
+<%- end -%>
+
         <!--<parameter name="licenseKey">xxx</parameter>-->
         <!--<parameter name="mgtCenterURL">http://localhost:8081/mancenter/</parameter>-->
 
