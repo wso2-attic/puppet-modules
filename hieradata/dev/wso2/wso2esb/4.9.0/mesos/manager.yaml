@@ -15,6 +15,7 @@
 wso2::hostname: wso2esb-worker
 wso2::mgt_hostname: wso2esb-manager
 
+# Clustering
 wso2::clustering:
   enabled: false
   membership_scheme: mesos
@@ -22,12 +23,9 @@ wso2::clustering:
   mesos:
     marathon_endpoint: http://marathon.mesos:8080/v2/
     mesos_applications: wso2esb-manager,wso2esb-worker
-
-#Files to be copied to system
-#wso2::system_file_list:
-#  -
-#    file: wso2esb-manager-init.sh
-#    target_path: /usr/local/bin
+#    mesos_username:
+#    mesos_password:
+#    mesos_enable_basic_auth:
 
 wso2::dep_sync:
   enabled: false
@@ -40,18 +38,18 @@ wso2::dep_sync:
     password: password
     append_tenant_id: true
 
-# In mesos proxy ports need to be configured to match with service ports.
+# In Mesos proxy ports need to be configured to match with service ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10093
-    https: 10094
+    http: 10095
+    https: 10096
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
     bind_address: wso2esb-worker
-    prefix: http://wso2esb-worker:10091
+    prefix: http://wso2esb-worker:10093
   https:
     bind_address: wso2esb-worker
-    prefix: https://wso2esb-worker:10092
+    prefix: https://wso2esb-worker:10094
