@@ -12,8 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::hostname: wso2esb-worker
-wso2::mgt_hostname: wso2esb-worker
+wso2::hostname: wso2bps-worker
+wso2::mgt_hostname: wso2bps-worker
+
+# In mesos proxy ports need to be configured to match with service ports.
+# Following ports have been defined for servlet HTTP and HTTPS transports.
+wso2::ports:
+  proxyPort:
+    http: 10033
+    https: 10034
 
 # Clustering
 wso2::clustering:
@@ -22,26 +29,16 @@ wso2::clustering:
   local_member_port: 4000
   mesos:
     marathon_endpoint: http://marathon.mesos:8080/v2/
-    mesos_applications: wso2esb-manager,wso2esb-worker
+    mesos_applications: wso2bps-manager,wso2bps-worker
 #    mesos_username:
 #    mesos_password:
 #    mesos_enable_basic_auth:
 
-wso2::dep_sync:
-  enabled: false
-  auto_checkout: true
-  auto_commit: false
-  repository_type: svn
-  svn:
-    url: http://svnrepo.example.com/repos/
-    user: username
-    password: password
-    append_tenant_id: true
-
+# Registry mounts
 wso2::registry_mounts:
   wso2_config_db:
     path: /_system/config
-    target_path: /_system/config/esb
+    target_path: /_system/config/bps
     read_only: true
     registry_root: /
     enable_cache: true
@@ -53,20 +50,14 @@ wso2::registry_mounts:
     registry_root: /
     enable_cache: true
 
-# In Mesos proxy ports need to be configured to match with service ports.
-# Following ports have been defined for servlet HTTP and HTTPS transports.
-wso2::ports:
-  proxyPort:
-    http: 10093
-    https: 10094
-    pass_through_http: 10091
-    pass_through_https: 10092
-
-# Defines WSDL EPR Prefix
-wso2::esb_wsdl_epr_prefix:
-  http:
-    bind_address: wso2esb-worker
-    prefix: http://wso2esb-worker:10093
-  https:
-    bind_address: wso2esb-worker
-    prefix: https://wso2esb-worker:10094
+# Deployment synchronization
+wso2::dep_sync:
+  enabled: false
+  auto_checkout: true
+  auto_commit: false
+  repository_type: svn
+  svn:
+    url: http://svnrepo.example.com/repos/
+    user: username
+    password: password
+    append_tenant_id: true
