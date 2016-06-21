@@ -39,6 +39,8 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+# In Mesos proxy ports need to be configured to match with service ports.
+# Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
     http: 10071

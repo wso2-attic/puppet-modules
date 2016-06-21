@@ -15,7 +15,7 @@
 wso2::mgt_hostname: wso2bps-manager
 wso2::hostname: wso2bps-worker
 
-# In mesos proxy ports need to be configured to match with service ports.
+# In Mesos proxy ports need to be configured to match with service ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:

@@ -35,7 +35,7 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
-# In Kubernetes proxy ports need to be configured to match with node ports.
+# In Mesos proxy ports need to be configured to match with service ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
