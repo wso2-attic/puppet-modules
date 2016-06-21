@@ -11,23 +11,34 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 ---
 classes:
-  - wso2bps
+  - wso2es
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
-wso2::service_name: wso2bps
-wso2::hostname: wso2bps-default
-wso2::mgt_hostname: wso2bps-default
+wso2::service_name: wso2es
+wso2::hostname: wso2es-default
+wso2::mgt_hostname: wso2es-default
+
+wso2::clustering:
+  enabled: false
+  membership_scheme: mesos
+  local_member_port: 4000
+  mesos:
+    marathon_endpoint: http://marathon.mesos:8080/v2/
+#    mesos_username:
+#    mesos_password:
+#    mesos_enable_basic_auth:
 
 wso2::template_list:
-  - repository/conf/datasources/activiti-datasources.xml
-  - repository/conf/datasources/bps-datasources.xml
-  - repository/conf/bps.xml
-  - repository/conf/humantask.xml
-  - repository/conf/jndi.properties
-  - repository/conf/etc/tasks-config.xml
+  - repository/conf/identity.xml
+  - repository/conf/datasources/social-datasources.xml
+  - repository/conf/identity/sso-idp-config.xml
+  - repository/deployment/server/jaggeryapps/store/config/store.json
+  - repository/deployment/server/jaggeryapps/store/config/store-tenant.json
+  - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -37,43 +48,39 @@ wso2::template_list:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10033
-    https: 10034
+    http: 10081
+    https: 10082
 
-# Clustering
-wso2::clustering:
-  enabled: false
-  membership_scheme: mesos
-  local_member_port: 4000
-  mesos:
-    marathon_endpoint: http://marathon.mesos:8080/v2/
-    mesos_applications: wso2bps-default
-#    mesos_username:
-#    mesos_password:
-#    mesos_enable_basic_auth:
+wso2::service_provider:
+  store:
+    issuer: store
+    acs: https://wso2es-default:10082/store/acs
+  social:
+    issuer: social
+    acs: https://wso2es-default:10082/social/acs
+  publisher:
+    issuer: publisher
+    acs: https://wso2es-default:10082/publisher/acs
 
-# BPS configuration
-wso2::so_timeout: 600000
-wso2::connection_timeout: 600000
-wso2::mex_timeout: 600000
-wso2::external_service_timeout: 600000
-wso2::max_connections_per_host: 350
-wso2::max_total_connections: 400
-wso2::ode_scheduler_thread_pool_size: 50
-wso2::scheduler_config_max_thread_pool_size: 50
-wso2::enable_humantask_caching: false
+wso2::identity_provider:
+  store:
+    issuer: store
+    identity_provider_url: https://wso2es-default:10082/samlsso
+  publisher:
+    issuer: publisher
+    identity_provider_url: https://wso2es-default:10082/samlsso
 
-wso2::taskServerCount: 1
+wso2::social_app_url: https://wso2es-default:10082/social
 
-# Data sources
 wso2::usermgt_datasource: wso2_user_db
+wso2::is_datasource: wso2_gov_db
 
 wso2::master_datasources:
   wso2_config_db:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-bps-db.marathon.mesos:10002/BPS_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-es-db.marathon.mesos:10002/ES_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB
@@ -114,49 +121,29 @@ wso2::master_datasources:
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::activity_datasources:
-  activity_db:
-    name: ACTIVITY_DB
-    description: The datasource used for activiti engine
+wso2::social_datasources:
+  wso2_social_db:
+    name: WSO2_SOCIAL_DB
+    description: The datasource used for social framework
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-bps-db.marathon.mesos:10002/BPS_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-es-db.marathon.mesos:10002/ES_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
-    jndi_config: jdbc/ActivitiDB
+    jndi_config: jdbc/WSO2SocialDB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::bps_datasources:
-  bps_ds:
-    name: BPS_DS
-    description: The datasource used for bps
-    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-bps-db.marathon.mesos:10002/BPS_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::mysql::username')}"
-    password: "%{hiera('wso2::datasources::mysql::password')}"
-    jndi_config: bpsds
-    max_active: "%{hiera('wso2::datasources::common::max_active')}"
-    max_idle: "%{hiera('wso2::datasources::common::max_idle')}"
-    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    use_datasource_factory: "%{hiera('wso2::datasources::common::use_datasource_factory')}"
-    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-# Registry mounts
 wso2::registry_mounts:
   wso2_config_db:
     path: /_system/config
-    target_path: /_system/config/bps
+    target_path: /_system/config/es
     read_only: false
     registry_root: /
     enable_cache: true
-
   wso2_gov_db:
     path: /_system/governance
     target_path: /_system/governance
@@ -207,17 +194,12 @@ wso2::registry_mounts:
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
 #
-#  wso2user_db_password:
+#  wso2_user_db_password:
 #    secret_alias: Datasources.WSO2USER_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
 #
-#  activiti_db_password:
-#    secret_alias: Datasources.ACTIVITY_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/activiti-datasources.xml//datasources-configuration/datasources/datasource[name='ACTIVITY_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
-#
-#  bps_ds_db_password:
-#    secret_alias: Datasources.BPS_DS.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/bps-datasources.xml//datasources-configuration/datasources/datasource[name='BPS_DS']/definition[@type='RDBMS']/configuration/password,false
+#  wso2_social_db_password:
+#    secret_alias: Datasources.WSO2_SOCIAL_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/social-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_SOCIAL_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
