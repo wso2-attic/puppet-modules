@@ -18,8 +18,8 @@ wso2::hostname: wso2cep-worker
 
 wso2::ports:
   proxyPort:
-    http: 10093
-    https: 10094
+    http: 10053
+    https: 10054
 
 #Files to be copied to system
 wso2::system_file_list:

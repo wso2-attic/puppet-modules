@@ -25,8 +25,8 @@ wso2::clustering:
 
 wso2::ports:
   proxyPort:
-    http: 10093
-    https: 10094
+    http: 10043
+    https: 10044
 
 wso2::dep_sync:
   enabled: false
