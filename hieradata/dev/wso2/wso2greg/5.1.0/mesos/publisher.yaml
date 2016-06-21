@@ -31,26 +31,26 @@ wso2::clustering:
 
 wso2::ports:
   proxyPort:
-    http: 10091
-    https: 10092
+    http: 10101
+    https: 10102
     
 wso2::service_provider:
   store:
     issuer: store
-    acs: https://wso2greg-store:10094/store/acs
+    acs: https://wso2greg-store:10104/store/acs
   social:
     issuer: social
-    acs: https://wso2greg-store:10094/social/acs
+    acs: https://wso2greg-store:10104/social/acs
   publisher:
     issuer: publisher
-    acs: https://wso2greg-publisher:10092/publisher/acs
+    acs: https://wso2greg-publisher:10102/publisher/acs
 
 wso2::identity_provider:
   store:
     issuer: store
-    identity_provider_url: https://wso2greg-store:10094/samlsso
+    identity_provider_url: https://wso2greg-store:10104/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://wso2greg-store:10094/samlsso
+    identity_provider_url: https://wso2greg-store:10104/samlsso
 
-wso2::social_app_url: https://wso2greg-store:10094/social
+wso2::social_app_url: https://wso2greg-store:10104/social

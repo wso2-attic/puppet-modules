@@ -45,8 +45,8 @@ wso2::template_list:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10091
-    https: 10092
+    http: 10043
+    https: 10044
 
 
 wso2::usermgt_datasource: wso2_user_db

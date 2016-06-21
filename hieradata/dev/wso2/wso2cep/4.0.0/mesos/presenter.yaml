@@ -18,8 +18,8 @@ wso2::hostname: wso2cep-presenter
 
 wso2::ports:
   proxyPort:
-    http: 10091
-    https: 10092
+    http: 10051
+    https: 10052
 
 #Files to be copied to system
 wso2::system_file_list:

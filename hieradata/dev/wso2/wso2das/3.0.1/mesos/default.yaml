@@ -95,8 +95,8 @@ wso2::ha_deployment:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10091
-    https: 10092
+    http: 10061
+    https: 10062
 
 wso2::clustering:
   enabled: false
