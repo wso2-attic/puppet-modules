@@ -191,7 +191,7 @@
                         <!--
                             Admin username for the API gateway.
                         -->
-                        <%- if @apim_gateway and @apim_keymanager['username'] -%>
+                        <%- if @apim_gateway and @apim_gateway['username'] -%>
                           <Username><%= @apim_gateway['username'] %></Username>
                         <%- else -%>
                           <Username>${admin.username}</Username>
