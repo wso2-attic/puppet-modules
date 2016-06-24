@@ -102,7 +102,9 @@ wso2::ports:
 wso2::clustering:
   enabled: true
   membership_scheme: mesos
-#  mesos:
+  mesos:
+    member_discovery_scheme: Marathon
+    marathon_applications: wso2das-default
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
 #    marathon_username: password
