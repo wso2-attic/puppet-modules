@@ -21,36 +21,38 @@ wso2::service_name: wso2greg
 wso2::hostname: wso2greg-store
 wso2::mgt_hostname: wso2greg-store
 
+# Clustering
 wso2::clustering:
-  enabled: false
+  enabled: true
   membership_scheme: mesos
-  local_member_port: 4000
   mesos:
-    marathon_endpoint: http://marathon.mesos:8080/v2/
-    mesos_applications: wso2greg-publisher,wso2greg-store
+    marathon_applications: wso2greg-publisher,wso2greg-store
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
 
 wso2::ports:
   proxyPort:
-    http: 10103
-    https: 10104
+    http: 10104
+    https: 10105
     
 wso2::service_provider:
   store:
     issuer: store
-    acs: https://wso2greg-store:10104/store/acs
+    acs: https://wso2greg-store:10105/store/acs
   social:
     issuer: social
-    acs: https://wso2greg-store:10104/social/acs
+    acs: https://wso2greg-store:10105/social/acs
   publisher:
     issuer: publisher
-    acs: https://wso2greg-publisher:10102/publisher/acs
+    acs: https://wso2greg-publisher:10103/publisher/acs
 
 wso2::identity_provider:
   store:
     issuer: store
-    identity_provider_url: https://wso2greg-store:10104/samlsso
+    identity_provider_url: https://wso2greg-store:10105/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://wso2greg-store:10104/samlsso
+    identity_provider_url: https://wso2greg-store:10105/samlsso
 
-wso2::social_app_url: https://wso2greg-store:10104/social
+wso2::social_app_url: https://wso2greg-store:10105/social

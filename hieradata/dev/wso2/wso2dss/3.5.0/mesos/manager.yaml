@@ -16,21 +16,20 @@
 wso2::mgt_hostname: wso2dss-manager
 wso2::hostname: wso2dss-worker
 
+# Clustering
 wso2::clustering:
-  enabled: false
+  enabled: true
   membership_scheme: mesos
-  local_member_port: 4000
   mesos:
-    marathon_endpoint: http://marathon.mesos:8080/v2/
-    mesos_applications: wso2dss-manager,wso2dss-worker
-#    mesos_username:
-#    mesos_password:
-#    mesos_enable_basic_auth:
+    marathon_applications: wso2dss-manager,wso2dss-worker
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
 
 wso2::ports:
   proxyPort:
-    http: 10071
-    https: 10072
+    http: 10072
+    https: 10073
 
 wso2::registry_mounts:
   wso2_config_db:
