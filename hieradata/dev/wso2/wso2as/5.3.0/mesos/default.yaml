@@ -41,8 +41,8 @@ wso2::template_list:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10023
-    https: 10024
+    http: 10024
+    https: 10025
 
 # Data sources
 wso2::usermgt_datasource: wso2_user_db
@@ -53,7 +53,7 @@ wso2::master_datasources:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-as-db.marathon.mesos:10002/AS_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-as-db.marathon.mesos:10021/AS_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB

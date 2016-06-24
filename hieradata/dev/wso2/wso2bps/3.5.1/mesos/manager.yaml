@@ -19,20 +19,18 @@ wso2::hostname: wso2bps-worker
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10031
-    https: 10032
+    http: 10032
+    https: 10033
 
 # Clustering
 wso2::clustering:
-  enabled: false
+  enabled: true
   membership_scheme: mesos
-  local_member_port: 4000
   mesos:
-    marathon_endpoint: http://marathon.mesos:8080/v2/
-    mesos_applications: wso2bps-manager,wso2bps-worker
-#    mesos_username:
-#    mesos_password:
-#    mesos_enable_basic_auth:
+    marathon_applications: wso2bps-manager,wso2bps-worker
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
 
 # Deployment synchronization
 wso2::dep_sync:

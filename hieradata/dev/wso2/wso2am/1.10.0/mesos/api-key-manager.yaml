@@ -25,8 +25,8 @@ wso2::apim_gateway:
   host: wso2am-gateway-manager
   port: 9443
   api_endpoint_host: wso2am-gateway-worker
-  api_endpoint_port: 10016
-  secure_api_endpoint_port: 10017
+  api_endpoint_port: 10017
+  secure_api_endpoint_port: 10018
 # Store and Gateway components may call revoke API internally (via Mesos service) to invalidate access tokens
 # Therefore, api token revoke port should point to corresponding Mesos service target port
   api_token_revoke_endpoint_port: 8280
@@ -34,21 +34,23 @@ wso2::apim_gateway:
   username: admin
   password: admin
 
+# Clustering
 wso2::clustering:
-  enabled: false
+  enabled: true
   membership_scheme: mesos
-  local_member_port: 4000
   mesos:
-    marathon_endpoint: http://marathon.mesos:8080/v2/
-    mesos_applications: wso2am-api-key-manager
+    marathon_applications: wso2am-api-key-manager
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
 
 
 # In Mesos proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10006
-    https: 10007
+    http: 10007
+    https: 10008
 
 wso2::registry_mounts:
   wso2_config_db:

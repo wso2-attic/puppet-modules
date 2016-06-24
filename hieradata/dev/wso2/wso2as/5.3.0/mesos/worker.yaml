@@ -19,8 +19,8 @@ wso2::mgt_hostname: wso2as-worker
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10023
-    https: 10024
+    http: 10024
+    https: 10025
 
 # Clustering
 wso2::clustering:

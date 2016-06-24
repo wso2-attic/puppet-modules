@@ -40,14 +40,14 @@ wso2::dep_sync:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10095
-    https: 10096
+    http: 10092
+    https: 10093
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
     bind_address: wso2esb-worker
-    prefix: http://wso2esb-worker:10093
+    prefix: http://wso2esb-worker:10094
   https:
     bind_address: wso2esb-worker
-    prefix: https://wso2esb-worker:10094
+    prefix: https://wso2esb-worker:10095

@@ -31,28 +31,27 @@ wso2::service_name: wso2am
 wso2::hostname: wso2am-default
 wso2::mgt_hostname: wso2am-default
 
+# Clustering
 wso2::clustering:
-  enabled: false
-  domain: am.wso2.domain
-  sub_domain: worker
+  enabled: true
   membership_scheme: mesos
-  local_member_port: 4000
-  mesos:
-      marathon_endpoint: http://marathon.mesos:8080/v2/
-      mesos_applications: wso2am-default
+#  mesos:
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
 
 # In Mesos proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10008
-    https: 10009
+    http: 10009
+    https: 10010
 
 wso2::apim_keymanager:
   host: wso2am-default
 # Gateway component calls Key-Manager component internally (via Mesos service) for access token validation and token generation
 # Therefore, admin service port should point to corresponding Mesos service target port
-  port: 10009
+  port: 10010
   username: admin
   password: admin
 
@@ -60,16 +59,16 @@ wso2::apim_gateway:
   host: wso2am-default
 # Publisher component calls Gateway admin service internally (via Mesos service) to create Synapse artifacts
 # Therefore, admin service port should point to corresponding Mesos service target port
-  port: 10009
+  port: 10010
   api_endpoint_host: wso2am-default
 # In single-JVM mode, API endpoint ports should point to corresponding Mesos service NodePorts which is shown to the user in Store Jaggery app
 # This is because users can only access the API via NodePort (Mesos services are not accessible externally)
-  api_endpoint_port: 10006
-  secure_api_endpoint_port: 10007
+  api_endpoint_port: 10007
+  secure_api_endpoint_port: 10008
 # Store and Gateway components may call revoke API internally (via Mesos service) to invalidate access tokens
 # Therefore, API token revoke port should point to corresponding Mesos service target port
-  api_token_revoke_endpoint_port: 10006
-  secure_api_token_revoke_endpoint_port: 10007
+  api_token_revoke_endpoint_port: 10007
+  secure_api_token_revoke_endpoint_port: 10008
   username: admin
   password: admin
 
@@ -77,12 +76,12 @@ wso2::apim_store:
   host: wso2am-default
 # This port is used to generate the Store app URL to which the browser is redirected when accessing the Store from Publisher
 # Therefore, it should point to the corresponding Mesos service NodePort
-  port: 10009
+  port: 10010
 
 wso2::apim_publisher:
   host: wso2am-default
 # This port is used to generate the Publisher app URL. It should point to the corresponding Mesos service NodePort since it is accessed externally
-  port: 10009
+  port: 10010
 
 wso2::registry_mounts:
   wso2_config_db:
@@ -107,7 +106,7 @@ wso2::am_datasources:
     name: WSO2AM_DB
     description: The datasource used for API Manager database
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-apim-db.marathon.mesos:10002/APIM_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-apim-db.marathon.mesos:10006/APIM_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2AM_DB
@@ -123,7 +122,7 @@ wso2::master_datasources:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-apim-db.marathon.mesos:10002/APIM_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-apim-db.marathon.mesos:10006/APIM_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB
@@ -166,7 +165,7 @@ wso2::master_datasources:
     name: JAGH2
     description: The datasource used for by the Jaggery Storage Manager
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-apim-db.marathon.mesos:10002/APIM_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-apim-db.marathon.mesos:10006/APIM_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/ES_STORAGE
