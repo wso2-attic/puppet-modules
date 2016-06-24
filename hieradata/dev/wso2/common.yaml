@@ -101,11 +101,8 @@ wso2::dep_sync:
        password: password
        append_tenant_id: true
 
-# Common packages to be installed to support WSO2 products
-packages:
-  - zip
-  - unzip
-
+# Array of common packages to be installed to support WSO2 products
+packages: []
 # User management datasource defaults to local h2 db
 wso2::usermgt_datasource: wso2_carbon_db
 
