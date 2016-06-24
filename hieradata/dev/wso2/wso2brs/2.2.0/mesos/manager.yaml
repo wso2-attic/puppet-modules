@@ -15,13 +15,15 @@
 wso2::hostname: wso2brs-worker
 wso2::mgt_hostname: wso2brs-manager
 
+# Clustering
 wso2::clustering:
-  enabled: false
+  enabled: true
   membership_scheme: mesos
-  local_member_port: 4000
   mesos:
-    marathon_endpoint: http://marathon.mesos:8080/v2/
-    mesos_applications: wso2brs-manager,wso2brs-worker
+    marathon_applications: wso2brs-manager,wso2brs-worker
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
 
 wso2::dep_sync:
   enabled: false
@@ -38,7 +40,7 @@ wso2::dep_sync:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10041
-    https: 10042
+    http: 10042
+    https: 10043
 
 

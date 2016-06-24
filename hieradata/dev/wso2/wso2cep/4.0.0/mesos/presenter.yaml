@@ -18,8 +18,8 @@ wso2::hostname: wso2cep-presenter
 
 wso2::ports:
   proxyPort:
-    http: 10051
-    https: 10052
+    http: 10052
+    https: 10053
 
 #Files to be copied to system
 wso2::system_file_list:
@@ -45,10 +45,12 @@ wso2::ha_deployment:
     port: 11002
 
 
+# Clustering
 wso2::clustering:
-  enabled: false
+  enabled: true
   membership_scheme: mesos
-  local_member_port: 4000
   mesos:
-    marathon_endpoint: http://marathon.mesos:8080/v2/
-    mesos_applications: wso2cep-presenter,wso2cep-worker
+    marathon_applications: wso2cep-presenter,wso2cep-worker
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
