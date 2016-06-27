@@ -20,7 +20,7 @@ class wso2is-km inherits wso2base {
   $bps_datasources      = hiera('wso2::bps_datasources')
   $metrics_datasources  = hiera('wso2::metrics_datasources')
   $is_datasource        = hiera('wso2::is_datasource')
-  $apim_gateway       = hiera('wso2::apim_gateway')
+  $apim_gateway         = hiera('wso2::apim_gateway')
 
   wso2base::server { $wso2base::carbon_home :
     maintenance_mode    => $wso2base::maintenance_mode,
