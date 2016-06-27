@@ -22,15 +22,16 @@ wso2::service_name: wso2es
 wso2::hostname: wso2es-default
 wso2::mgt_hostname: wso2es-default
 
+# Clustering
 wso2::clustering:
-  enabled: false
+  enabled: true
   membership_scheme: mesos
-  local_member_port: 4000
   mesos:
-    marathon_endpoint: http://marathon.mesos:8080/v2/
-#    mesos_username:
-#    mesos_password:
-#    mesos_enable_basic_auth:
+    member_discovery_scheme: Marathon
+    marathon_applications: wso2es-default
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
 
 wso2::template_list:
   - repository/conf/identity.xml
@@ -48,29 +49,29 @@ wso2::template_list:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10081
-    https: 10082
+    http: 10082
+    https: 10083
 
 wso2::service_provider:
   store:
     issuer: store
-    acs: https://wso2es-default:10082/store/acs
+    acs: https://wso2es-default:10083/store/acs
   social:
     issuer: social
-    acs: https://wso2es-default:10082/social/acs
+    acs: https://wso2es-default:10083/social/acs
   publisher:
     issuer: publisher
-    acs: https://wso2es-default:10082/publisher/acs
+    acs: https://wso2es-default:10083/publisher/acs
 
 wso2::identity_provider:
   store:
     issuer: store
-    identity_provider_url: https://wso2es-default:10082/samlsso
+    identity_provider_url: https://wso2es-default:10083/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://wso2es-default:10082/samlsso
+    identity_provider_url: https://wso2es-default:10083/samlsso
 
-wso2::social_app_url: https://wso2es-default:10082/social
+wso2::social_app_url: https://wso2es-default:10083/social
 
 wso2::usermgt_datasource: wso2_user_db
 wso2::is_datasource: wso2_gov_db
@@ -80,7 +81,7 @@ wso2::master_datasources:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-es-db.marathon.mesos:10002/ES_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-es-db.marathon.mesos:10081/ES_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB
@@ -126,7 +127,7 @@ wso2::social_datasources:
     name: WSO2_SOCIAL_DB
     description: The datasource used for social framework
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-es-db.marathon.mesos:10002/ES_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-es-db.marathon.mesos:10081/ES_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2SocialDB

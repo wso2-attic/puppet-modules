@@ -23,16 +23,16 @@ wso2::mgt_hostname: wso2esb-default
 
 # Clustering
 wso2::clustering:
-  enabled: false
+  enabled: true
   membership_scheme: mesos
-  local_member_port: 4000
   mesos:
-    marathon_endpoint: http://marathon.mesos:8080/v2/
-#    mesos_username:
-#    mesos_password:
-#    mesos_enable_basic_auth:
+    member_discovery_scheme: Marathon
+    marathon_applications: wso2esb-default
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
 
-#wso2::template_list :
+#wso2::template_list:
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -42,19 +42,19 @@ wso2::clustering:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10093
-    https: 10094
-    pass_through_http: 10091
-    pass_through_https: 10092
+    http: 10094
+    https: 10095
+    pass_through_http: 10092
+    pass_through_https: 10093
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
     bind_address: wso2esb-default
-    prefix: http://wso2esb-default:10093
+    prefix: http://wso2esb-default:10094
   https:
     bind_address: wso2esb-default
-    prefix: https://wso2esb-default:10094
+    prefix: https://wso2esb-default:10095
 
 wso2::usermgt_datasource: wso2user_db
 
@@ -63,7 +63,7 @@ wso2::master_datasources:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-esb-db.marathon.mesos:10002/ESB_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-esb-db.marathon.mesos:10091/ESB_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB

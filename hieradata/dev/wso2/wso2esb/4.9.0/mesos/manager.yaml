@@ -17,15 +17,14 @@ wso2::mgt_hostname: wso2esb-manager
 
 # Clustering
 wso2::clustering:
-  enabled: false
+  enabled: true
   membership_scheme: mesos
-  local_member_port: 4000
   mesos:
-    marathon_endpoint: http://marathon.mesos:8080/v2/
-    mesos_applications: wso2esb-manager,wso2esb-worker
-#    mesos_username:
-#    mesos_password:
-#    mesos_enable_basic_auth:
+    member_discovery_scheme: Marathon
+    marathon_applications: wso2esb-manager,wso2esb-worker
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
 
 wso2::dep_sync:
   enabled: false
@@ -42,14 +41,14 @@ wso2::dep_sync:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10095
-    https: 10096
+    http: 10092
+    https: 10093
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
     bind_address: wso2esb-worker
-    prefix: http://wso2esb-worker:10093
+    prefix: http://wso2esb-worker:10094
   https:
     bind_address: wso2esb-worker
-    prefix: https://wso2esb-worker:10094
+    prefix: https://wso2esb-worker:10095

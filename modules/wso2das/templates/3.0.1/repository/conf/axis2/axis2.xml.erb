@@ -643,10 +643,32 @@
 <%- end -%>
 
 <%- if @clustering['membership_scheme'] == 'mesos' -%>
+<<<<<<< HEAD
         <!-- Apache Mesos membership scheme specific parameters -->
         <parameter name="membershipSchemeClassName">org.wso2.carbon.clustering.mesos.MesosMembershipScheme</parameter>
         <parameter name="MARATHON_ENDPOINT"><%= @clustering['mesos']['marathon_endpoint'] %></parameter>
         <parameter name="MARATHON_APPLICATIONS"><%= @clustering['mesos']['mesos_applications'] %></parameter>
+=======
+          <!-- Apache Mesos membership scheme specific parameters -->
+          <parameter name="membershipSchemeClassName">org.wso2.carbon.clustering.mesos.MesosMembershipScheme</parameter>
+          <parameter name="MESOS_MEMBER_DISCOVERY_SCHEME"><%= @clustering['mesos']['member_discovery_scheme'] %></parameter>
+          <parameter name="MARATHON_APPLICATIONS"><%= @clustering['mesos']['marathon_applications'] %></parameter>
+    <%- if @clustering['mesos']['marathon_endpoint'] -%>
+          <parameter name="MARATHON_ENDPOINT"><%= @clustering['mesos']['marathon_endpoint'] %></parameter>
+    <%- end -%>
+    <%- if @clustering['mesos']['enable_marathon_basic_auth'] -%>
+          <parameter name="ENABLE_MARATHON_BASIC_AUTH"><%= @clustering['mesos']['enable_marathon_basic_auth'] %></parameter>
+    <%- end -%>
+    <%- if @clustering['mesos']['marathon_username'] -%>
+          <parameter name="MARATHON_USERNAME"><%= @clustering['mesos']['marathon_username'] %></parameter>
+    <%- end -%>
+    <%- if @clustering['mesos']['marathon_password'] -%>
+          <parameter name="MARATHON_PASSWORD"><%= @clustering['mesos']['marathon_password'] %></parameter>
+    <%- end -%>
+    <%- if @clustering['mesos']['dns_endpoint'] -%>
+          <parameter name="MESOS_DNS_ENDPOINT"><%= @clustering['mesos']['dns_endpoint'] %></parameter>
+    <%- end -%>
+>>>>>>> c0c96e072c618308d276f7909ec428836ce8efd7
 <%- end -%>
 
         <!--
