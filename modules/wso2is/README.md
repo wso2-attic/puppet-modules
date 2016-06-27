@@ -25,7 +25,8 @@ Copy the following files to their corresponding locations.
 No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running WSO2 Identity Server with clustering in specific profiles
-No changes to Hiera data are required to run the distributed deployment of WSO2 Identity Server, other than pointing to the correct resources such as the deployment synchronization and remote DB instances. For more details refer the [WSO2 Identity Server 5.1.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Identity+Server+5.1.0) and [WSO2 Identity Server 5.0.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Identity+Server) clustering guides.
+No changes to Hiera data are required to run the distributed deployment of WSO2 Identity Server, other than pointing to the correct resources such as the deployment synchronization and remote DB instances.
+For more details refer the [WSO2 Identity Server 5.1.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Identity+Server+5.1.0) clustering guides.
 
 1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
@@ -107,13 +108,6 @@ No changes to Hiera data are required to run the distributed deployment of WSO2 
 ## Running WSO2 Identity Server with Secure Vault
 WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
->For WSO2 Identity Server 5.0.0, which is based on WSO2 Carbon Kernel 4.2.0, `org.wso2.ciphertool-1.0.0-wso2v2.jar` in Kernel patch [patch0010](http://dist.wso2.org/maven2/org/wso2/carbon/WSO2-CARBON-PATCH-4.2.0/0010/) has to be applied before enabling the Secure Vault. The `org.wso2.ciphertool-1.0.0-wso2v2.jar` in `WSO2-CARBON-PATCH-4.2.0-0009/lib` has to be copied to `wso2is/files/configs/lib` folder and added to the `file_list` in hiera file as below:
-
-```yaml
-wso2::file_list :
-  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
-```
-
 Uncomment and modify the below changes in Hiera file to apply Secure Vault.
 
 1. Enable Secure Vault
@@ -140,17 +134,6 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
       key_store_password:
         secret_alias: Carbon.Security.KeyStore.Password
         secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
-        password: wso2carbon
-    ```
-
-    For Identity Server `5.0.0` which is based on WSO2 Carbon Kernel 4.2.0
-
-    Ex:
-    ```yaml
-    wso2::secure_vault_configs:
-      key_store_password:
-        secret_alias: Carbon.Security.KeyStore.Password
-        secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
         password: wso2carbon
     ```
 
