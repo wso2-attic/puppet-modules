@@ -1,9 +1,9 @@
 {
   "name": "wso2-es",
   "version": "2.0.0",
-  "author": "wso2",
+  "author": "WSO2",
   "license": "Apache-2.0",
-  "summary": "puppet module",
+  "summary": "WSO2 Enterprise Store Puppet module",
   "source": "https://github.com/wso2/puppet-modules/tree/master/wso2es",
   "project_page": "http://wso2.com/products/enterprise-store/",
   "operatingsystem_support": [
@@ -12,8 +12,8 @@
       "operatingsystemrelease": [ "12.04", "14.04" ]
     }
   ],
-  "tags" : ["es", "2.0.0"],
+  "tags" : ["wso2es", "2.0.0"],
   "dependencies": [
-    { "name": "wso2/base", "version_requirement": "2.0.0" }
+    { "name": "wso2/wso2base", "version_requirement": "2.0.0" }
   ]
 }

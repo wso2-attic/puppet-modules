@@ -12,7 +12,7 @@
       "operatingsystemrelease": [ "12.04", "14.04" ]
     }
   ],
-  "tags" : ["mb", "3.1.0"],
+  "tags" : ["wso2mb", "3.1.0"],
   "dependencies": [
     { "name": "wso2/wso2base", "version_requirement": "2.0.0" }
   ]

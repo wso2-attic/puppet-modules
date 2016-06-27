@@ -12,7 +12,7 @@
       "operatingsystemrelease": [ "12.04", "14.04" ]
     }
   ],
-  "tags" : ["base"],
+  "tags" : ["wso2base"],
   "dependencies": [
   	{ "name": "puppetlabs/stdlib", "version_requirement": ">= 3.2.0 < 5.0.0" }
   ]

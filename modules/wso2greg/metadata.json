@@ -12,7 +12,7 @@
       "operatingsystemrelease": [ "12.04", "14.04" ]
     }
   ],
-  "tags" : [ "greg", "5.1.0" ],
+  "tags" : [ "wso2greg", "5.1.0" ],
   "dependencies": [
     { "name": "wso2/wso2base", "version_requirement": "2.0.0" }
   ]
