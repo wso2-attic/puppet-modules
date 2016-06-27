@@ -45,6 +45,7 @@ wso2::template_list:
   - repository/conf/datasources/master-datasources.xml
   - repository/conf/tomcat/catalina-server.xml
   - repository/conf/axis2/axis2.xml
+  - repository/conf/security/authenticators.xml
   - bin/wso2server.sh
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
@@ -164,3 +165,15 @@ wso2::datasources::mysql::validation_query: 'SELECT 1'
 
 # Secure vault configuration
 wso2::enable_secure_vault: false
+
+wso2::sso_authentication:
+    disabled: true
+    login_page: /carbon/admin/login.jsp
+    service_provider_id: carbonServer
+    sso_service_url: https://localhost:9443/samlsso
+    consumer_service_url: https://localhost:9443/acs
+
+wso2::user_management:
+    admin_role: admin
+    admin_username: admin
+    admin_password: admin

@@ -56,6 +56,8 @@ class wso2base {
   $jvm                  = hiera('wso2::jvm')
   $ipaddress            = hiera('wso2::ipaddress')
   $fqdn                 = hiera('wso2::fqdn')
+  $sso_authentication   = hiera('wso2::sso_authentication')
+  $user_management      = hiera('wso2::user_management')
 
   #secure_vault configurations
   $enable_secure_vault  = hiera('wso2::enable_secure_vault')
