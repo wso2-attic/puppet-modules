@@ -474,7 +474,6 @@
      -->
     <clustering class="org.wso2.carbon.core.clustering.hazelcast.HazelcastClusteringAgent"
                 enable="<%= @clustering['enabled'] %>">
-
         <!--
            This parameter indicates whether the cluster has to be automatically initalized
            when the AxisConfiguration is built. If set to "true" the initialization will not be
@@ -496,41 +495,7 @@
                     Service (GMS) using a TCP ping mechanism.
         -->
         <parameter name="membershipScheme"><%= @clustering['membership_scheme'] %></parameter>
-
-<%- if @clustering['membership_scheme'] == 'private-paas' -%>
-        <!-- private-paas membership scheme specific parameters -->
-        <parameter name="membershipSchemeClassName">org.wso2.carbon.ppaas.PrivatePaaSBasedMembershipScheme</parameter>
-        <parameter name="clusterIds"><%= @clustering['private_paas'] %></parameter>
-<%- end -%>
-
-<%- if @clustering['membership_scheme'] == 'kubernetes' -%>
-        <!-- kubernetes membership scheme specific parameters -->
-        <parameter name="membershipSchemeClassName">org.wso2.carbon.membership.scheme.kubernetes.KubernetesMembershipScheme</parameter>
-        <parameter name="KUBERNETES_NAMESPACE"><%= @clustering['kubernetes']['kubernetes_namespace'] %></parameter>
-        <parameter name="KUBERNETES_SERVICES"><%= @clustering['kubernetes']['kubernetes_services'] %></parameter>
-<%- end -%>
-
-<%- if @clustering['membership_scheme'] == 'mesos' -%>
-        <!-- Apache Mesos membership scheme specific parameters -->
-        <parameter name="membershipSchemeClassName">org.wso2.carbon.clustering.mesos.MesosMembershipScheme</parameter>
-        <parameter name="MESOS_MEMBER_DISCOVERY_SCHEME"><%= @clustering['mesos']['member_discovery_scheme'] %></parameter>
-        <parameter name="MARATHON_APPLICATIONS"><%= @clustering['mesos']['marathon_applications'] %></parameter>
-  <%- if @clustering['mesos']['marathon_endpoint'] -%>
-        <parameter name="MARATHON_ENDPOINT"><%= @clustering['mesos']['marathon_endpoint'] %></parameter>
-  <%- end -%>
-  <%- if @clustering['mesos']['enable_marathon_basic_auth'] -%>
-        <parameter name="ENABLE_MARATHON_BASIC_AUTH"><%= @clustering['mesos']['enable_marathon_basic_auth'] %></parameter>
-  <%- end -%>
-  <%- if @clustering['mesos']['marathon_username'] -%>
-        <parameter name="MARATHON_USERNAME"><%= @clustering['mesos']['marathon_username'] %></parameter>
-  <%- end -%>
-  <%- if @clustering['mesos']['marathon_password'] -%>
-        <parameter name="MARATHON_PASSWORD"><%= @clustering['mesos']['marathon_password'] %></parameter>
-  <%- end -%>
-  <%- if @clustering['mesos']['dns_endpoint'] -%>
-        <parameter name="MESOS_DNS_ENDPOINT"><%= @clustering['mesos']['dns_endpoint'] %></parameter>
-  <%- end -%>
-<%- end -%>
+        <%= scope.function_template(["wso2base/clustering/#{@clustering['membership_scheme']}.erb"]) %>
 
         <!--<parameter name="licenseKey">xxx</parameter>-->
         <!--<parameter name="mgtCenterURL">http://localhost:8081/mancenter/</parameter>-->
@@ -597,32 +562,17 @@
 	    <!--property name="port.mapping.8280" value="9764"/>
             <property name="port.mapping.8243" value="9444"/>
             <property name="subDomain" value="mgt"/-->
-            <%- if @ports['proxyPort'] and @ports['proxyPort']['pass_through_http'] -%>
-                <property name="port.mapping.8280" value="<%= @ports['proxyPort']['pass_through_http'] %>"/>
-            <%- end -%>
+          <%- if @ports['proxyPort'] and @ports['proxyPort']['pass_through_http'] -%>
+            <property name="port.mapping.8280" value="<%= @ports['proxyPort']['pass_through_http'] %>"/>
+          <%- end -%>
 
-            <%- if @ports['proxyPort'] and @ports['proxyPort']['pass_through_https'] -%>
-                <property name="port.mapping.8243" value="<%= @ports['proxyPort']['pass_through_https'] %>"/>
-            <%- end -%>
+          <%- if @ports['proxyPort'] and @ports['proxyPort']['pass_through_https'] -%>
+            <property name="port.mapping.8243" value="<%= @ports['proxyPort']['pass_through_https'] %>"/>
+          <%- end -%>
 	    <!-- Worker Setup-->
 	    <!--property name="subDomain" value="worker"/-->
-        <property name="subDomain" value="<%= @clustering['sub_domain'] %>"/>
+            <property name="subDomain" value="<%= @clustering['sub_domain'] %>"/>
         </parameter>
-
-        <!--
-           The list of static or well-known members. These entries will only be valid if the
-           "membershipScheme" above is set to "wka"
-        -->
-<%- if @clustering['membership_scheme'] == 'wka' -%>
-        <members>
-   <%- @clustering['wka']['members'].each do |member| -%>
-            <member>
-                <hostName><%= member['hostname'] %></hostName>
-                <port><%= member['port'] %></port>
-            </member>
-   <%- end -%>
-        </members>
-<%- end -%>
 
         <!--
         Enable the groupManagement entry if you need to run this node as a cluster manager.
