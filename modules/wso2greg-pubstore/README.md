@@ -18,7 +18,7 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 
 Copy the following files to their corresponding locations.
 
-1. WSO2 Governance Registry distribution (5.1.0) which has installed API Manager Publisher and Store features to `<PUPPET_HOME>/modules/wso2greg/files`
+1. WSO2 Governance Registry distribution (v5.1.0) which has installed API Manager Publisher and Store features to `<PUPPET_HOME>/modules/wso2greg/files`
 2. Change the distribution folder name to wso2greg-pubstore-5.1.0 from wso2greg-5.1.0.
 3. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
@@ -26,7 +26,8 @@ Copy the following files to their corresponding locations.
 No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running WSO2 Governance Registry with clustering in specific profiles
-Hiera data sets matching the distributed profiles of WSO2 Governance Registry (`publisher`, `store`) are shipped with clustering related configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment. For more details refer the [WSO2 Governance Registry 5.0.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Governance+Registry+5.0.0) and [WSO2 Governance Registry 4.6.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Governance+Registry) clustering guide.
+Hiera data sets matching the distributed profiles of WSO2 Governance Registry (`publisher`, `store`) are shipped with clustering related configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment.
+For more details refer the [WSO2 Governance Registry 5.1.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Governance+Registry).
 
 1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
@@ -91,13 +92,6 @@ Hiera data sets matching the distributed profiles of WSO2 Governance Registry (`
 ## Running WSO2 Governance Registry with Secure Vault
 WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
-For WSO2 Governance Registry 4.6.0, which is based on WSO2 Carbon Kernel 4.2.0, all the Carbon Kernel patches from patch0002 to patch0008 have to be applied first. Then the `org.wso2.ciphertool-1.0.0-wso2v2.jar` in Kernel patch [patch0010](http://dist.wso2.org/maven2/org/wso2/carbon/WSO2-CARBON-PATCH-4.2.0/0010/) has to be applied before enabling the Secure Vault. The `org.wso2.ciphertool-1.0.0-wso2v2.jar` in `WSO2-CARBON-PATCH-4.2.0-0009/lib` has to be copied to `wso2greg/files/configs/lib` folder and added to the `file_list` in hiera file as below:
-
-```yaml
-wso2::file_list :
-  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
-```
-
 Uncomment and modify the below changes in Hiera file to apply Secure Vault.
 
 1. Enable Secure Vault
@@ -124,17 +118,6 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
       key_store_password:
         secret_alias: Carbon.Security.KeyStore.Password
         secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
-        password: wso2carbon
-    ```
-
-    For Governance Registry `4.6.0` which is based on WSO2 Carbon Kernel 4.2.0
-
-    Ex:
-    ```yaml
-    wso2::secure_vault_configs:
-      key_store_password:
-        secret_alias: Carbon.Security.KeyStore.Password
-        secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
         password: wso2carbon
     ```
 

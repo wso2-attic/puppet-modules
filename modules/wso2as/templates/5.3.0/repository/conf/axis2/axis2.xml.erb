@@ -641,8 +641,12 @@
   <%- if @clustering['membership_scheme'] == 'mesos' -%>
           <!-- Apache Mesos membership scheme specific parameters -->
           <parameter name="membershipSchemeClassName">org.wso2.carbon.clustering.mesos.MesosMembershipScheme</parameter>
+    <%- if @clustering['mesos']['member_discovery_scheme'] -%>
           <parameter name="MESOS_MEMBER_DISCOVERY_SCHEME"><%= @clustering['mesos']['member_discovery_scheme'] %></parameter>
+    <%- end -%>
+    <%- if @clustering['mesos']['marathon_applications'] -%>
           <parameter name="MARATHON_APPLICATIONS"><%= @clustering['mesos']['marathon_applications'] %></parameter>
+    <%- end -%>
     <%- if @clustering['mesos']['marathon_endpoint'] -%>
           <parameter name="MARATHON_ENDPOINT"><%= @clustering['mesos']['marathon_endpoint'] %></parameter>
     <%- end -%>

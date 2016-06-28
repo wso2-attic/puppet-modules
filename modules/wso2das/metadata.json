@@ -1,9 +1,9 @@
 {
   "name": "wso2-das",
   "version": "2.0.0",
-  "author": "wso2",
+  "author": "WSO2",
   "license": "Apache-2.0",
-  "summary": "puppet module",
+  "summary": "WSO2 Data Analytics Server Puppet module",
   "source": "https://github.com/wso2/puppet-modules/tree/master/wso2das",
   "project_page": "http://wso2.com/products/data-analytics-server/",
   "operatingsystem_support": [
@@ -12,8 +12,8 @@
       "operatingsystemrelease": [ "12.04", "14.04" ]
     }
   ],
-  "tags" : ["das", "3.0.0"],
+  "tags" : ["wso2das", "3.0.0"],
   "dependencies": [
-    { "name": "wso2/base", "version_requirement": "2.0.0" }
+    { "name": "wso2/wso2base", "version_requirement": "2.0.0" }
   ]
 }

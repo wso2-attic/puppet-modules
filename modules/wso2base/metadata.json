@@ -1,9 +1,9 @@
 {
   "name": "wso2-base",
   "version": "2.0.0",
-  "author": "wso2",
+  "author": "WSO2",
   "license": "Apache-2.0",
-  "summary": "puppet module",
+  "summary": "WSO2 base libraries Puppet module",
   "source": "https://github.com/wso2/puppet-modules/tree/master/wso2base",
   "project_page": "",
   "operatingsystem_support": [
@@ -12,7 +12,7 @@
       "operatingsystemrelease": [ "12.04", "14.04" ]
     }
   ],
-  "tags" : ["base"],
+  "tags" : ["wso2base"],
   "dependencies": [
   	{ "name": "puppetlabs/stdlib", "version_requirement": ">= 3.2.0 < 5.0.0" }
   ]
