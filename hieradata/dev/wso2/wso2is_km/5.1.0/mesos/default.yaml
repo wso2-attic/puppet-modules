@@ -17,9 +17,9 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
-wso2::service_name: wso2is-km
-wso2::hostname: wso2is-km-default
-wso2::mgt_hostname: wso2is-km-default
+wso2::service_name: wso2is_km
+wso2::hostname: wso2is_km-default
+wso2::mgt_hostname: wso2is_km-default
 
 wso2::template_list:
   - repository/conf/datasources/bps-datasources.xml

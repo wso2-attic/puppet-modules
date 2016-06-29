@@ -17,7 +17,7 @@ classes:
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
-wso2::service_name: wso2is-km
+wso2::service_name: wso2is_km
 wso2::mgt_hostname: is.km.dev.wso2.org
 wso2::hostname: is.km.dev.wso2.org
 
