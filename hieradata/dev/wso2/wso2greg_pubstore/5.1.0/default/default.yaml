@@ -18,7 +18,7 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::datasources::common::bps_default_auto_commit: 'true'
 
-wso2::service_name: wso2greg-pubstore
+wso2::service_name: wso2greg_pubstore
 wso2::hostname: greg.pubstore.dev.wso2.org
 wso2::mgt_hostname: greg.pubstore.dev.wso2.org
 
