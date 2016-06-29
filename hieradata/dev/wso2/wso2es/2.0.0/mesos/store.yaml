@@ -25,7 +25,6 @@ wso2::clustering:
   enabled: true
   membership_scheme: mesos
   mesos:
-    member_discovery_scheme: Marathon
     marathon_applications: wso2es-publisher,wso2es-store
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
