@@ -47,7 +47,7 @@
         <module>modules/wso2is</module>
         <module>modules/wso2mb</module>
         <module>modules/wso2greg_pubstore</module>
-        <module>modules/wso2is-km</module>
+        <module>modules/wso2is_km</module>
     </modules>
 
     <build>

@@ -13,7 +13,7 @@
 # limitations under the License.
 
 classes:
-  - wso2is-km
+  - wso2is_km
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
@@ -47,7 +47,7 @@ wso2::template_list:
 wso2::apim_gateway:
   host: wso2am-gateway-manager
   port: 9443
-  api_endpoint_host: wso2am-gateway-worker
+  api_endpoint_host: wso2am-gateway-manager
   api_endpoint_port: 8280
   secure_api_endpoint_port: 8243
   api_token_revoke_endpoint_port: 8280
@@ -55,21 +55,22 @@ wso2::apim_gateway:
   username: admin
   password: admin
 
-# In Mesos proxy ports need to be configured to match with service ports.
+# In Kubernetes proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10142
-    https: 10143
+    http: 32141
+    https: 32142
 
-# Clustering
 wso2::clustering:
   enabled: true
-  membership_scheme: mesos
-#  mesos:
-#    enable_marathon_basic_auth: true
-#    marathon_username: username
-#    marathon_username: password
+  domain: km.is.wso2.domain
+  sub_domain: worker
+  membership_scheme: kubernetes
+  local_member_port: 4000
+  kubernetes:
+    kubernetes_namespace: default
+    kubernetes_services: wso2is-km-default
 
 wso2::registry_mounts:
   wso2_config_db:
@@ -94,7 +95,7 @@ wso2::master_datasources:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-is-db.marathon.mesos:10141/IS_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-is-db:3306/IS_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB
@@ -109,7 +110,7 @@ wso2::master_datasources:
     name: WSO2_GOV_DB
     description: The datasource used for gov registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-gov-db.marathon.mesos:10000/WSO2_GOV_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2_GOV_DB
@@ -124,7 +125,7 @@ wso2::master_datasources:
     name: WSO2_USER_DB
     description: The datasource is used for user management and userstore
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-user-db.marathon.mesos:10001/WSO2_USER_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2USER_DB
@@ -140,7 +141,7 @@ wso2::bps_datasources:
     name: BPS_DS
     description: The datasource used for bps
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-is-db.marathon.mesos:10141/IS_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-is-db:3306/IS_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: bpsds
@@ -156,7 +157,7 @@ wso2::metrics_datasources:
     name: WSO2_METRICS_DB
     description: The default datasource used for WSO2 Carbon Metrics
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-is-db.marathon.mesos:10141/IS_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-is-db:3306/IS_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2MetricsDB
@@ -172,7 +173,7 @@ wso2::am_datasources:
     name: WSO2AM_DB
     description: The datasource used for IS as Key Manager database
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-apim-db.marathon.mesos:10006/APIM_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-apim-db:3306/APIM_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::common::username')}"
     password: "%{hiera('wso2::datasources::common::password')}"
     jndi_config: jdbc/WSO2AM_DB
@@ -240,3 +241,4 @@ wso2::am_datasources:
 #    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+

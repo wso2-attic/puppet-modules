@@ -15,7 +15,7 @@
 #----------------------------------------------------------------------------
 
 # Manages WSO2 Identity Server as Key Manager deployment
-class wso2is-km inherits wso2base {
+class wso2is_km inherits wso2base {
   $am_datasources       = hiera('wso2::am_datasources')
   $bps_datasources      = hiera('wso2::bps_datasources')
   $metrics_datasources  = hiera('wso2::metrics_datasources')

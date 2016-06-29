@@ -19,7 +19,7 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 Copy the following files to their corresponding locations.
 
 1. Get the WSO2 Identity Server 5.1.0 distribution with API Key Manager feature installed on it.
-2. Rename the distribution as `wso2is-km-<version>` and copy to `<PUPPET_HOME>/modules/wso2is-km/files`
+2. Rename the distribution as `wso2is_km-<version>` and copy to `<PUPPET_HOME>/modules/wso2is_km/files`
 2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running  WSO2 Identity Server Key Manager in the `default` profile

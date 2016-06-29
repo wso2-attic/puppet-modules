@@ -52,8 +52,8 @@
             </excludes>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/../../hieradata/dev/wso2/wso2is-km/</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/hieradata/dev/wso2/wso2is-km/</outputDirectory>
+            <directory>${project.basedir}/../../hieradata/dev/wso2/wso2is_km/</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/hieradata/dev/wso2/wso2is_km/</outputDirectory>
         </fileSet>
 
     </fileSets>

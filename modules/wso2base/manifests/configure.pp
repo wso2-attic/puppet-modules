@@ -39,9 +39,14 @@ define wso2base::configure ($template_list, $directory_list, $file_list, $system
 
   # TODO: Break these into different extensions and use it.
   # Configure sso for WSO2IS
-  if ($wso2_module == 'wso2is' or $wso2_module == 'wso2is-km') {
+  if ($wso2_module == 'wso2is' or $wso2_module == 'wso2is_km') {
 
-    $sso_product_list = $wso2is::sso_product_list
+    if ($wso2_module == 'wso2is') {
+      $sso_product_list = $wso2is::sso_product_list
+    }else
+    {
+      $sso_product_list = $wso2is_km::sso_product_list
+    }
 
     if ($sso_product_list != undef and size($sso_product_list) > 0) {
       $server_list = keys($sso_product_list)
