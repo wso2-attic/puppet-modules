@@ -18,14 +18,41 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 
 Copy the following files to their corresponding locations.
 
-1. Get the WSO2 Identity Server distribution pre-packaged with Key Manager features, unzip it, rename the unzipped folder as wso2is-km-<version>, compress the wso2is-km-<version> as zip file and copy to `<PUPPET_HOME>/modules/wso2is-km/files`
+1. Get the WSO2 Identity Server 5.1.0 distribution with API Key Manager feature installed on it.
+2. Rename the distribution as `wso2is-km-<version>` and copy to `<PUPPET_HOME>/modules/wso2is-km/files`
 2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running  WSO2 Identity Server Key Manager in the `default` profile
-By default `WSO2AM_DB` is configured to point to WSO2 API Manager's APIM_DB database. Change the `WSO2AM_DB` datasource url to `WSO2_CONFIG_DB` datasource url to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
+By default `WSO2AM_DB` is configured to point to WSO2 API Manager's APIM_DB database. Make sure that APIM_DB database is created with all the tables before running WSO2 Identity Server Key Manager. Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running  WSO2 Identity Server Key Manager with clustering in specific profiles
-No changes to Hiera data are required to run the distributed deployment of WSO2 Identity Server Key Manager, other than pointing to the correct resources such as the deployment synchronization and remote DB instances. WSO2 API Manager store, publisher and gateway nodes have to configured with WSO2 Identity Server Key Manager as the key manager node. Before starting WSO2 Identity Server Key Manager node, other WSO2 API Manager components have to be started first in distributed deployment. For more details refer the [ WSO2 Identity Server as Key Manager ](https://docs.wso2.com/display/CLUSTER44x/Configuring+the+Pre-Packaged+Identity+Server+5.1.0+with+API+Manager+1.10.0) clustering guides.
+When running WSO2 Identity Server Key Manager as Key Manager node with WSO2 API Manager distributed setup, do the following changes:
+- WSO2 API Manager store, publisher and gateway nodes have to be configured with WSO2 Identity Server Key Manager as the key manager node.
+    Ex:
+    ```yaml
+    wso2::apim_keymanager:
+      host: wso2am-api-key-manager
+      port: 9443
+      username: admin
+      password: admin
+    ```
+       
+- WSO2 Identity Server Key Manager has to be configured with WSO2 API Manager gateway nodes
+    Ex:
+    ```yaml
+    wso2::apim_gateway:
+      host: wso2am-gateway-manager
+      port: 9443
+      api_endpoint_host: wso2am-gateway-worker
+      api_endpoint_port: 8280
+      secure_api_endpoint_port: 8243
+      api_token_revoke_endpoint_port: 8280
+      secure_api_token_revoke_endpoint_port: 8243
+      username: admin
+      password: admin
+    ```
+    
+No other changes to Hiera data are required to run the distributed deployment of WSO2 Identity Server Key Manager, other than pointing to the correct resources such as the deployment synchronization and remote DB instances. For more details refer the [ WSO2 Identity Server Key Manager ](https://docs.wso2.com/display/CLUSTER44x/Configuring+the+Pre-Packaged+Identity+Server+5.1.0+with+API+Manager+1.10.0) clustering guides.
 
 1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
@@ -124,8 +151,6 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
         secret_alias_value: <secret_alias_value>
         password: <password>
     ```
-
-    For Identity Server `5.1.0` which is based on WSO2 Carbon Kernel 4.4.x
 
     Ex:
     ```yaml
