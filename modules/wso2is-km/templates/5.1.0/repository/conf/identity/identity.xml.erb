@@ -271,7 +271,11 @@
             https://<HostName>:<MgtTrpProxyPort except 443>/<ProxyContextPath>/samlsso
             If that doesn't satisfy uncomment the following config and explicitly configure the value
         -->
-        <IdentityProviderURL>${carbon.protocol}://${carbon.host}:${carbon.management.port}/samlsso</IdentityProviderURL>
+        <%- if @ports['proxyPort'] and @ports['proxyPort']['https'] -%>
+		<IdentityProviderURL>https://<%= @hostname %>:<%= @ports['proxyPort']['https'] %>/samlsso</IdentityProviderURL>
+		<%- else -%>
+		<IdentityProviderURL>${carbon.protocol}://${carbon.host}:${carbon.management.port}/samlsso</IdentityProviderURL>
+		<%- end -%>
         <DefaultLogoutEndpoint>${carbon.protocol}://${carbon.host}:${carbon.management.port}/authenticationendpoint/samlsso_logout.do</DefaultLogoutEndpoint>
         <NotificationEndpoint>${carbon.protocol}://${carbon.host}:${carbon.management.port}/authenticationendpoint/samlsso_notification.do</NotificationEndpoint>
         <SingleLogoutRetryCount>5</SingleLogoutRetryCount>

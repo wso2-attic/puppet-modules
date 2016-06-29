@@ -1,12 +1,12 @@
 <ServiceProvider>
     <ApplicationID>6</ApplicationID>
-    <ApplicationName>IDP_ESB</ApplicationName>
-    <Description>ESB Service Provider</Description>
+    <ApplicationName><%= @name %></ApplicationName>
+    <Description><%= @name %> Service Provider</Description>
     <IsSaaSApp>true</IsSaaSApp>
     <InboundAuthenticationConfig>
         <InboundAuthenticationRequestConfigs>
             <InboundAuthenticationRequestConfig>
-                <InboundAuthKey>IDP_ESB</InboundAuthKey>
+                <InboundAuthKey><%= @name %></InboundAuthKey>
                 <InboundAuthType>samlsso</InboundAuthType>
                 <Properties></Properties>
             </InboundAuthenticationRequestConfig>

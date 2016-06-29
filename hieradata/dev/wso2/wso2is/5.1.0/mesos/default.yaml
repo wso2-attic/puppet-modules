@@ -32,6 +32,7 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+# Provide the server list for setting up sso
 #wso2::sso_product_list:
 #    wso2esb:
 #      assertion_consumer_service_url: https://wso2esb-default:9443/acs
