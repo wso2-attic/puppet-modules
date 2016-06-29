@@ -18,14 +18,16 @@ wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2esb
-wso2::hostname: wso2esb-default
-wso2::mgt_hostname: wso2esb-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 # Clustering
 wso2::clustering:
   enabled: true
   membership_scheme: mesos
-#  mesos:
+  mesos:
+    member_discovery_scheme: Marathon
+    marathon_applications: wso2esb-default
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
 #    marathon_username: password
@@ -35,6 +37,10 @@ wso2::clustering:
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
 #  - password-tmp
+
+wso2::file_list:
+  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+  - repository/components/dropins/mesos-membership-scheme-1.0.0-SNAPSHOT.jar
 
 # In Mesos proxy ports need to be configured to match with service ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
@@ -48,11 +54,11 @@ wso2::ports:
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
-    bind_address: wso2esb-default
-    prefix: http://wso2esb-default:10094
+    bind_address: marathon-lb.marathon.mesos
+    prefix: http://marathon-lb.marathon.mesos:10094
   https:
-    bind_address: wso2esb-default
-    prefix: https://wso2esb-default:10095
+    bind_address: marathon-lb.marathon.mesos
+    prefix: https://marathon-lb.marathon.mesos:10095
 
 wso2::usermgt_datasource: wso2user_db
 
