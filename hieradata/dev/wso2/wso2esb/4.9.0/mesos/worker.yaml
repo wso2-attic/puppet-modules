@@ -64,7 +64,7 @@ wso2::ports:
 wso2::esb_wsdl_epr_prefix:
   http:
     bind_address: wso2esb-worker
-    prefix: http://wso2esb-worker:10094
+    prefix: http://marathon-lb.marathon.mesos:10094
   https:
     bind_address: wso2esb-worker
-    prefix: https://wso2esb-worker:10095
+    prefix: https://marathon-lb.marathon.mesos:10095

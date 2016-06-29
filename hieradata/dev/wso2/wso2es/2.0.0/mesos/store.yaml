@@ -38,20 +38,20 @@ wso2::ports:
 wso2::service_provider:
   store:
     issuer: store
-    acs: https://wso2es-store:10085/store/acs
+    acs: https://marathon-lb.marathon.mesos:10085/store/acs
   social:
     issuer: social
-    acs: https://wso2es-store:10085/social/acs
+    acs: https://marathon-lb.marathon.mesos:10085/social/acs
   publisher:
     issuer: publisher
-    acs: https://wso2es-publisher:10083/publisher/acs
+    acs: https://marathon-lb.marathon.mesos:10083/publisher/acs
 
 wso2::identity_provider:
   store:
     issuer: store
-    identity_provider_url: https://wso2es-store:10085/samlsso
+    identity_provider_url: https://marathon-lb.marathon.mesos:10085/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://wso2es-store:10085/samlsso
+    identity_provider_url: https://marathon-lb.marathon.mesos:10085/samlsso
 
-wso2::social_app_url: https://wso2es-store:10085/social
+wso2::social_app_url: https://marathon-lb.marathon.mesos:10085/social

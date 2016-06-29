@@ -16,7 +16,7 @@ wso2::hostname: wso2am-api-publisher
 wso2::mgt_hostname: wso2am-api-publisher
 
 wso2::apim_keymanager:
-  host: wso2am-api-key-manager
+  host: marathon-lb.marathon.mesos
   port: 10008
   username: admin
   password: admin
@@ -35,13 +35,13 @@ wso2::apim_gateway:
   password: admin
 
 wso2::apim_store:
-  host: wso2am-api-store
+  host: marathon-lb.marathon.mesos
 # This port is used to generate the Store app URL to which the browser is redirected when accessing the Store from Publisher
 # Therefore, it should point to the corresponding Mesos service NodePort
   port: 10012
 
 wso2::apim_publisher:
-  host: wso2am-api-publisher
+  host: marathon-lb.marathon.mesos
 # This port is used to generate the Publisher app URL. It should point to the corresponding Mesos service NodePort
   port: 10010
 

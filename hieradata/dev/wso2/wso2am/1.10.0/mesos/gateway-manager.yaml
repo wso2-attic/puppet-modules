@@ -16,7 +16,7 @@ wso2::mgt_hostname: wso2am-gateway-manager
 wso2::hostname: wso2am-gateway-manager
 
 wso2::apim_keymanager:
-  host: wso2am-api-key-manager
+  host: marathon-lb.marathon.mesos
 # Gateway component calls Key-Manager component internally (via Mesos service) for access token validation and token generation
 # Therefore, admin service port should point to corresponding Mesos service target port
   port: 10008
@@ -26,7 +26,7 @@ wso2::apim_keymanager:
 wso2::apim_gateway:
   host: wso2am-gateway-manager
   port: 9443
-  api_endpoint_host: wso2am-gateway-worker
+  api_endpoint_host: marathon-lb.marathon.mesos
   api_endpoint_port: 10017
   secure_api_endpoint_port: 10018
 # Store and Gateway components may call revoke API internally (via Mesos service) to invalidate access tokens
