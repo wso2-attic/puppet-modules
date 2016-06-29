@@ -13,7 +13,7 @@
 # limitations under the License.
 ---
 classes:
-  - wso2greg-pubstore
+  - wso2greg_pubstore
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::datasources::common::bps_default_auto_commit: 'true'
@@ -22,13 +22,14 @@ wso2::service_name: wso2greg-pubstore
 wso2::hostname: wso2greg-pubstore-default
 wso2::mgt_hostname: wso2greg-pubstore-default
 
+# Clustering
 wso2::clustering:
   enabled: true
-  membership_scheme: kubernetes
-  local_member_port: 4000
-  kubernetes:
-    kubernetes_namespace: default
-    kubernetes_services: wso2greg-pubstore-default
+  membership_scheme: mesos
+#  mesos:
+#    enable_marathon_basic_auth: true
+#    marathon_username: username
+#    marathon_username: password
 
 wso2::template_list:
   - repository/conf/identity.xml
@@ -63,34 +64,33 @@ wso2::apim_keymanager:
 
 wso2::enableThriftServer: false
 
-
-# In Kubernetes proxy ports need to be configured to match with node ports.
+# In mesos proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 32101
-    https: 32102
+    http: 10133
+    https: 10134
     
 wso2::service_provider:
   store:
     issuer: store
-    acs: https://wso2greg-pubstore-default:32102/store/acs
+    acs: https://wso2greg-pubstore-default:10134/store/acs
   social:
     issuer: social
-    acs: https://wso2greg-pubstore-default:32102/social/acs
+    acs: https://wso2greg-pubstore-default:10134/social/acs
   publisher:
     issuer: publisher
-    acs: https://wso2greg-pubstore-default:32102/publisher/acs
+    acs: https://wso2greg-pubstore-default:10134/publisher/acs
 
 wso2::identity_provider:
   store:
     issuer: store
-    identity_provider_url: https://wso2greg-pubstore-default:32102/samlsso
+    identity_provider_url: https://wso2greg-pubstore-default:10134/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://wso2greg-pubstore-default:32102/samlsso
+    identity_provider_url: https://wso2greg-pubstore-default:10134/samlsso
 
-wso2::social_app_url: https://wso2es-default:32102/social
+wso2::social_app_url: https://wso2es-default:10134/social
 
 wso2::usermgt_datasource: wso2_user_db
 wso2::is_datasource: wso2_gov_db
@@ -100,7 +100,7 @@ wso2::master_datasources:
     name: WSO2AM_DB
     description: The datasource used for API Manager database
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-gregdb:3306/APIM_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-greg-apim-db.marathon.mesos:10132/GREG_APIM_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2AM_DB
@@ -115,7 +115,7 @@ wso2::master_datasources:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10131/GREG_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB
@@ -130,7 +130,7 @@ wso2::master_datasources:
     name: WSO2_GOV_DB
     description: The datasource used for gov registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-govdb:3306/WSO2_GOV_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-gov-db.marathon.mesos:10000/WSO2_GOV_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_GOV_DB
@@ -142,13 +142,13 @@ wso2::master_datasources:
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
   wso2_user_db:
-    name: WSO2USER_DB
+    name: WSO2_USER_DB
     description: The datasource is used for user mangement and userstore
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-user-db.marathon.mesos:10001/WSO2_USER_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
-    jndi_config: jdbc/WSO2USER_DB
+    jndi_config: jdbc/WSO2_USER_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -161,7 +161,7 @@ wso2::social_datasources:
     name: WSO2_SOCIAL_DB
     description: The datasource used for social framework
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10131/GREG_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_SOCIAL_DB
@@ -177,7 +177,7 @@ wso2::bps_datasources:
     name: BPS_DS
     description: The datasource used for BPS database
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-gregdb:3306/WSO2_GREG_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10131/GREG_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: bpsds
@@ -256,7 +256,7 @@ wso2::registry_mounts:
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
 #
-#  wso2user_db_password:
-#    secret_alias: Datasources.WSO2USER_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2USER_DB']/definition[@type='RDBMS']/configuration/password,false
+#  wso2_user_db_password:
+#    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon

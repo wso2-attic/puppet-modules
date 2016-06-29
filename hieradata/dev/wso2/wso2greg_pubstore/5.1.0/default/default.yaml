@@ -13,7 +13,7 @@
 # limitations under the License.
 ---
 classes:
-  - wso2greg-pubstore
+  - wso2greg_pubstore
 wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
 wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 wso2::datasources::common::bps_default_auto_commit: 'true'

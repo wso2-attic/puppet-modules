@@ -15,7 +15,7 @@
 #----------------------------------------------------------------------------
 
 # Manages WSO2 Governance Registry deployment
-class wso2greg-pubstore inherits wso2base {
+class wso2greg_pubstore inherits wso2base {
   $bps_datasources    = hiera('wso2::bps_datasources')
   $social_datasources = hiera('wso2::social_datasources')
   $is_datasource      = hiera('wso2::is_datasource')

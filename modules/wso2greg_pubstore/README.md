@@ -19,7 +19,7 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 Copy the following files to their corresponding locations.
 
 1. WSO2 Governance Registry distribution (v5.1.0) which has installed API Manager Publisher and Store features to `<PUPPET_HOME>/modules/wso2greg/files`
-2. Change the distribution folder name to wso2greg-pubstore-5.1.0 from wso2greg-5.1.0.
+2. Change the distribution folder name to wso2greg_pubstore-5.1.0 from wso2greg-5.1.0.
 3. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running WSO2 Governance Registry in the `default` profile
