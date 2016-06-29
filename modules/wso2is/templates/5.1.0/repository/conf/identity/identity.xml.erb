@@ -222,7 +222,11 @@
         <PersistanceCacheTimeout>157680000</PersistanceCacheTimeout>
         <SessionIndexCacheTimeout>157680000</SessionIndexCacheTimeout>
 		<EntityId>localhost</EntityId>
-		<IdentityProviderURL>https://localhost:9443/samlsso</IdentityProviderURL>
+		<%- if @ports['proxyPort'] and @ports['proxyPort']['https'] -%>
+		<IdentityProviderURL>https://<%= @hostname %>:<%= @ports['proxyPort']['https'] %>/samlsso</IdentityProviderURL>
+		<%- else -%>
+		<IdentityProviderURL>https://<%= @hostname %>:9443/samlsso</IdentityProviderURL>
+		<%- end -%>
 		<SingleLogoutRetryCount>5</SingleLogoutRetryCount>
 		<SingleLogoutRetryInterval>60000</SingleLogoutRetryInterval> <!-- in milli seconds -->
 		<TenantPartitioningEnabled>false</TenantPartitioningEnabled>
