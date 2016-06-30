@@ -64,7 +64,7 @@
       </AudiencesList>
     </ServiceProvider>
 
-    <%- @sso_product_list.each do |server_name, server| -%>
+    <%- @sso_service_providers.each do |server_name, server| -%>
     <ServiceProvider>
           <Issuer><%= server_name %></Issuer>
           <AssertionConsumerServiceURLs>

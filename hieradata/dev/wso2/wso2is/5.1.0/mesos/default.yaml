@@ -33,7 +33,7 @@ wso2::template_list:
 #  - password-tmp
 
 # Provide the server list for setting up sso
-#wso2::sso_product_list:
+#wso2::sso_service_providers:
 #    wso2esb:
 #      assertion_consumer_service_url: https://wso2esb-default:9443/acs
 #      default_assertion_consumer_service_url: https://wso2esb-default:9443/acs

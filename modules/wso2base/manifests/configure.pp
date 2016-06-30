@@ -42,14 +42,14 @@ define wso2base::configure ($template_list, $directory_list, $file_list, $system
   if ($wso2_module == 'wso2is' or $wso2_module == 'wso2is_km') {
 
     if ($wso2_module == 'wso2is') {
-      $sso_product_list = $wso2is::sso_product_list
+      $sso_service_providers = $wso2is::sso_service_providers
     }else
     {
-      $sso_product_list = $wso2is_km::sso_product_list
+      $sso_service_providers = $wso2is_km::sso_service_providers
     }
 
-    if ($sso_product_list != undef and size($sso_product_list) > 0) {
-      $server_list = keys($sso_product_list)
+    if ($sso_service_providers != undef and size($sso_service_providers) > 0) {
+      $server_list = keys($sso_service_providers)
 
       wso2base::configure_sso {
         $server_list:
