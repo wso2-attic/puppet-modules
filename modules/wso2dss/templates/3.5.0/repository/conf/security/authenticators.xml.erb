@@ -28,7 +28,7 @@
     </Authenticator>
 
     <!-- Authenticator Configurations for SAML2SSOAuthenticator -->
-    <Authenticator name="SAML2SSOAuthenticator" disabled="<%= @sso_authentication['disabled'] %>">
+    <Authenticator name="SAML2SSOAuthenticator" disabled="<%= (!@sso_authentication['disabled']) %>">
         <Priority>10</Priority>
         <Config>
             <Parameter name="LoginPage"><%= @sso_authentication['login_page'] %></Parameter>
