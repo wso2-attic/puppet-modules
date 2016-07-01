@@ -25,9 +25,13 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+wso2::file_list:
+  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+  - repository/components/dropins/mesos-membership-scheme-1.0.0-SNAPSHOT.jar
+
 wso2::service_name: wso2am
-wso2::hostname: wso2am-default
-wso2::mgt_hostname: wso2am-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 # Clustering
 wso2::clustering:
@@ -46,7 +50,7 @@ wso2::ports:
     https: 10010
 
 wso2::apim_keymanager:
-  host: wso2am-default
+  host: marathon-lb.marathon.mesos
 # Gateway component calls Key-Manager component internally (via Mesos service) for access token validation and token generation
 # Therefore, admin service port should point to corresponding Mesos service target port
   port: 10010
@@ -54,11 +58,11 @@ wso2::apim_keymanager:
   password: admin
 
 wso2::apim_gateway:
-  host: wso2am-default
+  host: marathon-lb.marathon.mesos
 # Publisher component calls Gateway admin service internally (via Mesos service) to create Synapse artifacts
 # Therefore, admin service port should point to corresponding Mesos service target port
   port: 10010
-  api_endpoint_host: wso2am-default
+  api_endpoint_host: marathon-lb.marathon.mesos
 # In single-JVM mode, API endpoint ports should point to corresponding Mesos service NodePorts which is shown to the user in Store Jaggery app
 # This is because users can only access the API via NodePort (Mesos services are not accessible externally)
   api_endpoint_port: 10007
@@ -71,13 +75,13 @@ wso2::apim_gateway:
   password: admin
 
 wso2::apim_store:
-  host: wso2am-default
+  host: marathon-lb.marathon.mesos
 # This port is used to generate the Store app URL to which the browser is redirected when accessing the Store from Publisher
 # Therefore, it should point to the corresponding Mesos service NodePort
   port: 10010
 
 wso2::apim_publisher:
-  host: wso2am-default
+  host: marathon-lb.marathon.mesos
 # This port is used to generate the Publisher app URL. It should point to the corresponding Mesos service NodePort since it is accessed externally
   port: 10010
 
