@@ -14,8 +14,6 @@
 ---
 classes:
   - wso2esb
-wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
-wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2esb
 wso2::hostname: wso2esb-default
@@ -52,7 +50,7 @@ wso2::esb_wsdl_epr_prefix:
   https:
     bind_address: wso2esb-default
     prefix: https://wso2esb-default:32094
-    
+
 wso2::usermgt_datasource: wso2user_db
 
 wso2::master_datasources:

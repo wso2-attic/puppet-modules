@@ -14,8 +14,7 @@
 ---
 classes:
   - wso2greg_pubstore
-wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
-wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+
 wso2::datasources::common::bps_default_auto_commit: 'true'
 
 wso2::service_name: wso2greg_pubstore
@@ -70,7 +69,7 @@ wso2::ports:
   proxyPort:
     http: 32101
     https: 32102
-    
+
 wso2::service_provider:
   store:
     issuer: store

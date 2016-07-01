@@ -15,8 +15,6 @@
 ---
 classes:
   - wso2dss
-wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
-wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2dss
 wso2::mgt_hostname: wso2dss-default

@@ -22,6 +22,9 @@ wso2::group: wso2
 wso2::pack_dir: /mnt/packs
 wso2::carbon_home_symlink: "/mnt/%{::product_name}-%{::product_version}"
 
+wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
+wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+
 # Host mapping to be made in etc/hosts
 wso2::hosts_mapping:
   localhost:

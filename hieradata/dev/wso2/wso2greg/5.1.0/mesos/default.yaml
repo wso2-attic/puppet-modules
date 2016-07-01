@@ -14,8 +14,7 @@
 ---
 classes:
   - wso2greg
-wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
-wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
+  
 wso2::datasources::common::bps_default_auto_commit: 'true'
 
 wso2::service_name: wso2greg
@@ -50,7 +49,7 @@ wso2::ports:
   proxyPort:
     http: 10102
     https: 10103
-    
+
 wso2::service_provider:
   store:
     issuer: store

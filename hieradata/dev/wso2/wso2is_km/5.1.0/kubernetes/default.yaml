@@ -14,8 +14,6 @@
 
 classes:
   - wso2is_km
-wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
-wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2is_km
 wso2::hostname: wso2is_km-default
@@ -241,4 +239,3 @@ wso2::am_datasources:
 #    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
-

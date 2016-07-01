@@ -15,8 +15,6 @@
 ---
 classes:
   - wso2as
-wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
-wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2as
 wso2::hostname: wso2as-default
