@@ -30,13 +30,6 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
-#Files to be copied to system
-wso2::system_file_list:
-  -
-    file: wso2cep-default-init.sh
-    target_path: /usr/local/bin
-
-
 # In mesos proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:

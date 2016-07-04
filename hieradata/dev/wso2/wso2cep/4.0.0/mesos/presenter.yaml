@@ -21,12 +21,6 @@ wso2::ports:
     http: 10052
     https: 10053
 
-#Files to be copied to system
-wso2::system_file_list:
-  -
-    file: wso2cep-presenter-init.sh
-    target_path: /usr/local/bin
-
 wso2::single_node_deployment:
   enabled: false
 
