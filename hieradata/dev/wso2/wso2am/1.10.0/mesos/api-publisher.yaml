@@ -32,10 +32,10 @@ wso2::apim_gateway:
   api_token_revoke_endpoint_port: 10210
   secure_api_token_revoke_endpoint_port: 10211
 # uncomment the below four lines for manager-worker separated gateway, and comment the same above
-  # api_endpoint_port: 10210
-  # secure_api_endpoint_port: 10211
-  # api_token_revoke_endpoint_port: 10210
-  # secure_api_token_revoke_endpoint_port: 10211
+  # api_endpoint_port: 10214
+  # secure_api_endpoint_port: 10215
+  # api_token_revoke_endpoint_port: 10214
+  # secure_api_token_revoke_endpoint_port: 10215
   username: admin
   password: admin
 

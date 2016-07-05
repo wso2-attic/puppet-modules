@@ -25,19 +25,19 @@ wso2::apim_keymanager:
 
 wso2::apim_gateway:
   host: marathon-lb.marathon.mesos
-  port: 10213
+  port: 10016
   api_endpoint_host: marathon-lb.marathon.mesos
   api_endpoint_port: 10210
   secure_api_endpoint_port: 10211
 # Store and Gateway components may call revoke API internally (via Mesos service) to invalidate access tokens
 # Therefore, api token revoke port should point to corresponding Mesos service target port
   api_token_revoke_endpoint_port: 10210
-  secure_api_token_revoke_endpoint_port: 10213
+  secure_api_token_revoke_endpoint_port: 10211
 # uncomment the below four lines for manager-worker separated gateway, and comment the same above
-  # api_endpoint_port: 10017
-  # secure_api_endpoint_port: 10018
-  # api_token_revoke_endpoint_port: 10017
-  # secure_api_token_revoke_endpoint_port: 10018
+  # api_endpoint_port: 10214
+  # secure_api_endpoint_port: 10215
+  # api_token_revoke_endpoint_port: 10214
+  # secure_api_token_revoke_endpoint_port: 10215
   username: admin
   password: admin
 

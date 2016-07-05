@@ -38,8 +38,8 @@ wso2::apim_gateway:
   # secure_api_endpoint_port: 10215
   # api_token_revoke_endpoint_port: 10214
   # secure_api_token_revoke_endpoint_port: 10215
-  # username: admin
-  # password: admin
+  username: admin
+  password: admin
 
 wso2::apim_store:
   host: marathon-lb.marathon.mesos
