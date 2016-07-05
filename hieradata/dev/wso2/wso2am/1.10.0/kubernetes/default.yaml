@@ -99,6 +99,7 @@ wso2::registry_mounts:
 
 wso2::usermgt_datasource: wso2user_db
 wso2::is_datasource: wso2am_db
+wso2::am_datasource: wso2am_db
 
 wso2::am_datasources:
   wso2am_db:

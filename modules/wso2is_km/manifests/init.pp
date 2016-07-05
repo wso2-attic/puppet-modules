@@ -22,6 +22,7 @@ class wso2is_km inherits wso2base {
   $is_datasource        = hiera('wso2::is_datasource')
   $apim_gateway         = hiera('wso2::apim_gateway')
   $sso_service_providers = hiera('wso2::sso_service_providers', { })
+  $am_datasource     = hiera('wso2::am_datasource')
 
   wso2base::server { $wso2base::carbon_home :
     maintenance_mode    => $wso2base::maintenance_mode,

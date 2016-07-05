@@ -16,6 +16,7 @@
 
 # Manages WSO2 Message Broker deployment
 class wso2mb inherits wso2base {
+  $mb_thrift_server       = hiera('wso2::mb_thrift_server')
   $mb_thrift_port       = hiera('wso2::mb_thrift_port')
   $metrics_datasources  = hiera('wso2::metrics_datasources')
 

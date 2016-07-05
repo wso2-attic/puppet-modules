@@ -27,6 +27,7 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+wso2::mb_thrift_server : "%{::ipaddress}"
 wso2::mb_thrift_port: 7611
 
 # Uncomment the following for a clustered setup
