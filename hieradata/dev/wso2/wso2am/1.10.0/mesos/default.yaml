@@ -46,14 +46,14 @@ wso2::clustering:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10009
-    https: 10010
+    http: 10202
+    https: 10203
 
 wso2::apim_keymanager:
   host: marathon-lb.marathon.mesos
 # Gateway component calls Key-Manager component internally (via Mesos service) for access token validation and token generation
 # Therefore, admin service port should point to corresponding Mesos service target port
-  port: 10010
+  port: 10203
   username: admin
   password: admin
 
@@ -61,16 +61,16 @@ wso2::apim_gateway:
   host: marathon-lb.marathon.mesos
 # Publisher component calls Gateway admin service internally (via Mesos service) to create Synapse artifacts
 # Therefore, admin service port should point to corresponding Mesos service target port
-  port: 10010
+  port: 10203
   api_endpoint_host: marathon-lb.marathon.mesos
 # In single-JVM mode, API endpoint ports should point to corresponding Mesos service NodePorts which is shown to the user in Store Jaggery app
 # This is because users can only access the API via NodePort (Mesos services are not accessible externally)
-  api_endpoint_port: 10007
-  secure_api_endpoint_port: 10008
+  api_endpoint_port: 10200
+  secure_api_endpoint_port: 10201
 # Store and Gateway components may call revoke API internally (via Mesos service) to invalidate access tokens
 # Therefore, API token revoke port should point to corresponding Mesos service target port
-  api_token_revoke_endpoint_port: 10007
-  secure_api_token_revoke_endpoint_port: 10008
+  api_token_revoke_endpoint_port: 10200
+  secure_api_token_revoke_endpoint_port: 10201
   username: admin
   password: admin
 
@@ -78,12 +78,12 @@ wso2::apim_store:
   host: marathon-lb.marathon.mesos
 # This port is used to generate the Store app URL to which the browser is redirected when accessing the Store from Publisher
 # Therefore, it should point to the corresponding Mesos service NodePort
-  port: 10010
+  port: 10203
 
 wso2::apim_publisher:
   host: marathon-lb.marathon.mesos
 # This port is used to generate the Publisher app URL. It should point to the corresponding Mesos service NodePort since it is accessed externally
-  port: 10010
+  port: 10203
 
 wso2::registry_mounts:
   wso2_config_db:

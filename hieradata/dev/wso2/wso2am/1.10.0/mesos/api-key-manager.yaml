@@ -17,20 +17,20 @@ wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 wso2::apim_keymanager:
   host: wso2am-api-key-manager
-  port: 10008
+  port: 10205
   username: admin
   password: admin
 
 wso2::apim_gateway:
   host: wso2am-gateway-manager
-  port: 10016
+  port: 10213
   api_endpoint_host: marathon-lb.marathon.mesos
-  api_endpoint_port: 10013
-  secure_api_endpoint_port: 10014
+  api_endpoint_port: 10210
+  secure_api_endpoint_port: 10211
 # Store and Gateway components may call revoke API internally (via Mesos service) to invalidate access tokens
 # Therefore, api token revoke port should point to corresponding Mesos service target port
-  api_token_revoke_endpoint_port: 10013
-  secure_api_token_revoke_endpoint_port: 10014
+  api_token_revoke_endpoint_port: 10210
+  secure_api_token_revoke_endpoint_port: 10211
   username: admin
   password: admin
 
@@ -48,8 +48,8 @@ wso2::clustering:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10007
-    https: 10008
+    http: 10204
+    https: 10205
 
 wso2::registry_mounts:
   wso2_config_db:
