@@ -16,8 +16,8 @@ classes:
   - wso2as
 
 wso2::service_name: wso2as
-wso2::hostname: wso2as-default
-wso2::mgt_hostname: wso2as-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 # Clustering
 wso2::clustering:
@@ -39,8 +39,8 @@ wso2::template_list:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10024
-    https: 10025
+    http: 10022
+    https: 10023
 
 # Data sources
 wso2::usermgt_datasource: wso2_user_db
