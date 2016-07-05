@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::mgt_hostname: wso2as-manager
-wso2::hostname: wso2as-worker
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 # In mesos proxy ports need to be configured to match with service ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.

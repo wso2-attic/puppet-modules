@@ -135,3 +135,33 @@ wso2::esb_wsdl_epr_prefix:
 #    secret_alias: Datasources.WSO2USER_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
+#
+#  axis2_https_listener_trust_store_password:
+#    secret_alias: Axis2.Https.Listener.TrustStore.Password
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportReceiver[@name='https']/parameter[@name='truststore']/TrustStore/Password,false
+#    password: wso2carbon
+#
+#  axis2_https_listener_key_store_password:
+#    secret_alias: Axis2.Https.Listener.KeyStore.Password
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportReceiver[@name='https']/parameter[@name='keystore']/KeyStore/Password,false
+#    password: wso2carbon
+#
+#  axis2_https_listener_key_store_key_password:
+#    secret_alias: Axis2.Https.Listener.KeyStore.KeyPassword
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportReceiver[@name='https']/parameter[@name='keystore']/KeyStore/KeyPassword,false
+#    password: wso2carbon
+#
+#  axis2_https_sender_trust_store_password:
+#    secret_alias: Axis2.Https.Sender.TrustStore.Password
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='truststore']/TrustStore/Password,false
+#    password: wso2carbon
+#
+#  axis2_https_sender_key_store_password:
+#    secret_alias: Axis2.Https.Sender.KeyStore.Password
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='keystore']/KeyStore/Password,false
+#    password: wso2carbon
+#
+#  axis2_https_sender_key_store_key_password:
+#    secret_alias: Axis2.Https.Sender.KeyStore.KeyPassword
+#    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='keystore']/KeyStore/KeyPassword,false
+#    password: wso2carbon

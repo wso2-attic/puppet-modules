@@ -22,6 +22,7 @@ class wso2am inherits wso2base {
   $apim_publisher     = hiera('wso2::apim_publisher')
   $apim_store         = hiera('wso2::apim_store')
   $is_datasource      = hiera('wso2::is_datasource')
+  $am_datasource     = hiera('wso2::am_datasource')
 
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,

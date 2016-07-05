@@ -22,7 +22,7 @@
         key manager. This data source should be defined in the master-datasources.xml file
         in conf/datasources directory.
     -->
-    <DataSourceName>jdbc/WSO2AM_DB</DataSourceName>
+    <DataSourceName><%= @am_datasources[@am_datasource]['jndi_config'] %></DataSourceName>
 
     <!-- This parameter is used when adding api management capability to other products like GReg, AS, DSS etc.-->
     <GatewayType>Synapse</GatewayType>

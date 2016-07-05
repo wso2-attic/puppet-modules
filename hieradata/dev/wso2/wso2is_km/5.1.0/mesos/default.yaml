@@ -26,6 +26,7 @@ wso2::template_list:
   - repository/conf/datasources/am-datasources.xml
   - repository/conf/api-manager.xml
   - repository/conf/identity/sso-idp-config.xml
+  - repository/conf/identity/EndpointConfig.properties
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -86,6 +87,7 @@ wso2::registry_mounts:
 
 wso2::usermgt_datasource: wso2_user_db
 wso2::is_datasource: wso2am_db
+wso2::am_datasource: wso2am_db
 
 wso2::master_datasources:
   wso2_config_db:
@@ -237,4 +239,9 @@ wso2::am_datasources:
 #  wso2user_db_password:
 #    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: wso2carbon
+#
+#  wso2am_db_password:
+#    secret_alias: Datasource.WSO2AM_DB.configuration.password
+#    secret_alias_value: repository/conf/datasources/am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon

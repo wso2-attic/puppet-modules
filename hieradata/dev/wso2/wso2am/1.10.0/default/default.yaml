@@ -125,6 +125,7 @@ wso2::apim_publisher:
 
 # Use H2 based wso2am_db in a stand-alone setup. In a clustered setup this should point to a MySQL data source
 wso2::is_datasource: wso2am_db
+wso2::am_datasource: wso2am_db
 
 wso2::am_datasources:
   wso2am_db:
