@@ -12,15 +12,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-wso2::mgt_hostname: wso2bps-manager
-wso2::hostname: wso2bps-worker
+wso2::mgt_hostname: marathon-lb.marathon.mesos
+wso2::hostname: marathon-lb.marathon.mesos
 
 # In Mesos proxy ports need to be configured to match with service ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10031
-    https: 10032
+    http: 10032
+    https: 10033
 
 # Clustering
 wso2::clustering:

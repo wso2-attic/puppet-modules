@@ -16,8 +16,8 @@ classes:
   - wso2bps
 
 wso2::service_name: wso2bps
-wso2::hostname: wso2bps-default
-wso2::mgt_hostname: wso2bps-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 wso2::template_list:
   - repository/conf/datasources/activiti-datasources.xml
@@ -35,8 +35,8 @@ wso2::template_list:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10033
-    https: 10034
+    http: 10032
+    https: 10033
 
 # Clustering
 wso2::clustering:
@@ -68,7 +68,7 @@ wso2::master_datasources:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-bps-db.marathon.mesos:10002/BPS_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-bps-db.marathon.mesos:10031/BPS_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB
@@ -114,7 +114,7 @@ wso2::activity_datasources:
     name: ACTIVITY_DB
     description: The datasource used for activiti engine
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-bps-db.marathon.mesos:10002/BPS_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-bps-db.marathon.mesos:10031/BPS_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/ActivitiDB
@@ -130,7 +130,7 @@ wso2::bps_datasources:
     name: BPS_DS
     description: The datasource used for bps
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-bps-db.marathon.mesos:10002/BPS_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-bps-db.marathon.mesos:10031/BPS_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: bpsds
