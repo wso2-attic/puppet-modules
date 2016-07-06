@@ -228,22 +228,6 @@ wso2::master_datasources:
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: wso2carbon
 #
-##Use below advanced secure vault configurations if they are used in corresponding files
-#  wso2am_stats_db_password:
-#    secret_alias: Datasource.WSO2AM_STATS_DB.configuration.password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_STATS_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
-#
-#  user_store_manager_connection_password:
-#    secret_alias: UserStoreManager.Property.ConnectionPassword
-#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='ConnectionPassword'],flase
-#    password: admin
-#
-#  user_store_manager_password:
-#    secret_alias: UserStoreManager.Property.password
-#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='password'],true
-#    password: admin
-#
 #  auth_manager_password:
 #    secret_alias: AuthManager.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/AuthManager/Password,false
@@ -263,21 +247,6 @@ wso2::master_datasources:
 #    secret_alias: APIStore.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIStore/Password,false
 #    password: admin
-#
-#  user_trusted_RPStore_password:
-#    secret_alias: Security.UserTrustedRPStore.Password
-#    secret_alias_value: repository/conf/identity/identity.xml//Server/Security/UserTrustedRPStore/Password,false
-#    password: wso2carbon
-#
-#  user_trusted_RPStore_key_password:
-#    secret_alias: Security.UserTrustedRPStore.KeyPassword
-#    secret_alias_value: repository/conf/identity/identity.xml//Server/Security/UserTrustedRPStore/KeyPassword,false
-#    password: wso2carbon
-#
-#  identity_system_store_pass:
-#    secret_alias: Identity.System.StorePass
-#    secret_alias_value: repository/conf/identity/identity.xml//Server/Identity/System/StorePass,false
-#    password: wso2carbon
 #
 #  xmpp_password:
 #    secret_alias: MultifactorAuthentication.XMPPSettings.XMPPConfig.XMPPPassword
@@ -312,4 +281,40 @@ wso2::master_datasources:
 #  axis2_https_sender_key_store_key_password:
 #    secret_alias: Axis2.Https.Sender.KeyStore.KeyPassword
 #    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='https']/parameter[@name='keystore']/KeyStore/KeyPassword,false
+#    password: wso2carbon
+#
+#  authenticator_config_trust_store_password:
+#    secret_alias: AuthenticatorConfig.TrustStore.Password
+#    secret_alias_value: repository/conf/identity/application-authentication.xml//ApplicationAuthentication/AuthenticatorConfigs/AuthenticatorConfig[@name='OpenIDAuthenticator']/Parameter[@name='TrustStorePassword'],false
+#    password: wso2carbon
+#
+##Use below advanced secure vault configurations if they are used in corresponding files
+#  wso2am_stats_db_password:
+#    secret_alias: Datasource.WSO2AM_STATS_DB.configuration.password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_STATS_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: wso2carbon
+#
+#  user_store_manager_connection_password:
+#    secret_alias: UserStoreManager.Property.ConnectionPassword
+#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='ConnectionPassword'],flase
+#    password: admin
+#
+#  user_store_manager_password:
+#    secret_alias: UserStoreManager.Property.password
+#    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='password'],true
+#    password: admin
+#
+#  user_trusted_RPStore_password:
+#    secret_alias: Security.UserTrustedRPStore.Password
+#    secret_alias_value: repository/conf/identity/identity.xml//Server/Security/UserTrustedRPStore/Password,false
+#    password: wso2carbon
+#
+#  user_trusted_RPStore_key_password:
+#    secret_alias: Security.UserTrustedRPStore.KeyPassword
+#    secret_alias_value: repository/conf/identity/identity.xml//Server/Security/UserTrustedRPStore/KeyPassword,false
+#    password: wso2carbon
+#
+#  identity_system_store_pass:
+#    secret_alias: Identity.System.StorePass
+#    secret_alias_value: repository/conf/identity/identity.xml//Server/Identity/System/StorePass,false
 #    password: wso2carbon
