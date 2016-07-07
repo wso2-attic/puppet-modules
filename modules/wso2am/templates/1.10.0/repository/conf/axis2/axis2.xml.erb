@@ -309,17 +309,17 @@
        <parameter name="httpGetProcessor" locked="false">org.wso2.carbon.mediation.transport.handlers.PassThroughNHttpGetProcessor</parameter>
         <parameter name="keystore" locked="false">
             <KeyStore>
-                <Location>repository/resources/security/wso2carbon.jks</Location>
-                <Type>JKS</Type>
-                <Password>wso2carbon</Password>
-                <KeyPassword>wso2carbon</KeyPassword>
+                <Location><%= @key_stores['key_store']['location'] %></Location>
+                <Type><%= @key_stores['key_store']['type'] %></Type>
+                <Password><%= @key_stores['key_store']['password'] %></Password>
+                <KeyPassword><%= @key_stores['key_store']['key_password'] %></KeyPassword>
             </KeyStore>
         </parameter>
         <parameter name="truststore" locked="false">
             <TrustStore>
-                <Location>repository/resources/security/client-truststore.jks</Location>
-                <Type>JKS</Type>
-                <Password>wso2carbon</Password>
+                <Location><%= @key_stores['trust_store']['location'] %></Location>
+                <Type><%= @key_stores['trust_store']['type'] %></Type>
+                <Password><%= @key_stores['trust_store']['password'] %></Password>
             </TrustStore>
         </parameter>
         <!--<parameter name="SSLVerifyClient">require</parameter>
@@ -530,17 +530,17 @@
         <parameter name="non-blocking" locked="false">true</parameter>
         <parameter name="keystore" locked="false">
             <KeyStore>
-                <Location>repository/resources/security/wso2carbon.jks</Location>
-                <Type>JKS</Type>
-                <Password>wso2carbon</Password>
-                <KeyPassword>wso2carbon</KeyPassword>
+                <Location><%= @key_stores['key_store']['location'] %></Location>
+                <Type><%= @key_stores['key_store']['type'] %></Type>
+                <Password><%= @key_stores['key_store']['password'] %></Password>
+                <KeyPassword><%= @key_stores['key_store']['key_password'] %></KeyPassword>
             </KeyStore>
         </parameter>
         <parameter name="truststore" locked="false">
             <TrustStore>
-                <Location>repository/resources/security/client-truststore.jks</Location>
-                <Type>JKS</Type>
-                <Password>wso2carbon</Password>
+                <Location><%= @key_stores['trust_store']['location'] %></Location>
+                <Type><%= @key_stores['trust_store']['type'] %></Type>
+                <Password><%= @key_stores['trust_store']['password'] %></Password>
             </TrustStore>
         </parameter>
 

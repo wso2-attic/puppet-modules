@@ -78,8 +78,8 @@
                 compressionMinSize="2048"
                 noCompressionUserAgents="gozilla, traviata"
                 compressableMimeType="text/html,text/javascript,application/x-javascript,application/javascript,application/xml,text/css,application/xslt+xml,text/xsl,image/gif,image/jpg,image/jpeg"
-                keystoreFile="${carbon.home}/repository/resources/security/wso2carbon.jks"
-                keystorePass="wso2carbon"
+				        keystoreFile="${carbon.home}/<%= @key_stores['connector_key_store']['location'] %>"
+				        keystorePass="<%= @key_stores['connector_key_store']['password'] %>"
                 ciphers="SSL_RSA_WITH_RC4_128_MD5,SSL_RSA_WITH_RC4_128_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA"
                 URIEncoding="UTF-8"/>
 

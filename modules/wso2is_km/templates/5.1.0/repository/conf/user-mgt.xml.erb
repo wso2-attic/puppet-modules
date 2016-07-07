@@ -21,10 +21,10 @@
     <Realm>
         <Configuration>
 		<AddAdmin>true</AddAdmin>
-            <AdminRole>admin</AdminRole>
+            <AdminRole><%= @user_management['admin_role'] %></AdminRole>
             <AdminUser>
-                <UserName>admin</UserName>
-                <Password>admin</Password>
+                <UserName><%= @user_management['admin_username'] %></UserName>
+                <Password><%= @user_management['admin_password'] %></Password>
             </AdminUser>
             <EveryOneRoleName>everyone</EveryOneRoleName> <!-- By default users in this role sees the registry root -->
             <Property name="isCascadeDeleteEnabled">true</Property>

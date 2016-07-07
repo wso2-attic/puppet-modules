@@ -20,8 +20,8 @@ wso2::apim_keymanager:
 # Gateway component calls Key-Manager component internally (via K8S service) for access token validation and token generation
 # Therefore, admin service port should point to corresponding K8S service target port
   port: 9443
-  username: admin
-  password: admin
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::username')}"
 
 wso2::apim_gateway:
   host: wso2am-gateway-worker
@@ -33,8 +33,8 @@ wso2::apim_gateway:
 # Therefore, api token revoke port should point to corresponding K8S service target port
   api_token_revoke_endpoint_port: 8280
   secure_api_token_revoke_endpoint_port: 8243
-  username: admin
-  password: admin
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::username')}"
 
 wso2::clustering:
   enabled: true

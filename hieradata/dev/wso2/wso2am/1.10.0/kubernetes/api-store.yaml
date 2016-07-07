@@ -18,8 +18,8 @@ wso2::mgt_hostname: wso2am-api-store
 wso2::apim_keymanager:
   host: wso2am-api-key-manager
   port: 9443
-  username: admin
-  password: admin
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::username')}"
 
 wso2::apim_gateway:
   host: wso2am-gateway-manager
@@ -33,8 +33,8 @@ wso2::apim_gateway:
 # Therefore, API token revoke port should point to corresponding K8S service target port
   api_token_revoke_endpoint_port: 8280
   secure_api_token_revoke_endpoint_port: 8243
-  username: admin
-  password: admin
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::username')}"
 
 wso2::apim_store:
   host: wso2am-api-store
