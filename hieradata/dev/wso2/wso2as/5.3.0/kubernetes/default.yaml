@@ -153,9 +153,9 @@ wso2::registry_mounts:
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
-#  wso2user_db_password:
-#    secret_alias: Datasources.WSO2USER_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2USER_DB']/definition[@type='RDBMS']/configuration/password,false
+#  wso2_user_db_password:
+#    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  user_trusted_RPStore_password:

@@ -192,8 +192,8 @@ wso2::data_bridge:
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  wso2_user_db_password:
-#    secret_alias: Datasources.WSO2USER_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2USER_DB']/definition[@type='RDBMS']/configuration/password,false
+#    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  dep_sync_svn_password:

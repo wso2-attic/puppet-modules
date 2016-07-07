@@ -109,8 +109,6 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
         password: <password>
     ```
 
-    For Governance Registry `5.1.0` which is based on WSO2 Carbon Kernel 4.4.x
-
     Ex:
     ```yaml
     wso2::secure_vault_configs:

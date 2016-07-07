@@ -124,8 +124,6 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
         password: <password>
     ```
 
-    For Business Rules Server `2.2.0` which is based on WSO2 Carbon Kernel 4.4.x
-
     Ex:
     ```yaml
     wso2::secure_vault_configs :

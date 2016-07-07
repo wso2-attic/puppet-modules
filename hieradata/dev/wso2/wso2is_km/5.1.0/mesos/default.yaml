@@ -16,8 +16,8 @@ classes:
   - wso2is_km
 
 wso2::service_name: wso2is_km
-wso2::hostname: wso2is_km-default
-wso2::mgt_hostname: wso2is_km-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 wso2::template_list:
   - repository/conf/datasources/bps-datasources.xml
@@ -45,9 +45,9 @@ wso2::template_list:
 
 
 wso2::apim_gateway:
-  host: wso2am-gateway-manager
+  host: marathon-lb.marathon.mesos
   port: 9443
-  api_endpoint_host: wso2am-gateway-worker
+  api_endpoint_host: marathon-lb.marathon.mesos
   api_endpoint_port: 8280
   secure_api_endpoint_port: 8243
   api_token_revoke_endpoint_port: 8280
@@ -237,7 +237,7 @@ wso2::am_datasources:
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
-#  wso2user_db_password:
+#  wso2_user_db_password:
 #    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
