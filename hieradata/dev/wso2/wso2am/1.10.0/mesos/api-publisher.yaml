@@ -18,8 +18,8 @@ wso2::mgt_hostname: marathon-lb.marathon.mesos
 wso2::apim_keymanager:
   host: marathon-lb.marathon.mesos
   port: 10205
-  username: admin
-  password: admin
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::username')}"
 
 wso2::apim_gateway:
   host: marathon-lb.marathon.mesos
@@ -36,8 +36,8 @@ wso2::apim_gateway:
   # secure_api_endpoint_port: 10215
   # api_token_revoke_endpoint_port: 10214
   # secure_api_token_revoke_endpoint_port: 10215
-  username: admin
-  password: admin
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::username')}"
 
 wso2::apim_store:
   host: marathon-lb.marathon.mesos

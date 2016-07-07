@@ -59,7 +59,10 @@ class wso2base {
   $sso_authentication   = hiera('wso2::sso_authentication')
   $user_management      = hiera('wso2::user_management')
 
-  #secure_vault configurations
+  # key_stores
+  $key_stores           = hiera('wso2::key_stores')
+
+  # secure_vault configurations
   $enable_secure_vault  = hiera('wso2::enable_secure_vault')
   if ($enable_secure_vault == true) {
       $secure_vault_configs = hiera('wso2::secure_vault_configs')
