@@ -13,8 +13,8 @@
 # limitations under the License.
 
 ---
-wso2::mgt_hostname: wso2dss-manager
-wso2::hostname: wso2dss-worker
+wso2::mgt_hostname: marathon-lb.marathon.mesos
+wso2::hostname: marathon-lb.marathon.mesos
 
 # Clustering
 wso2::clustering:
