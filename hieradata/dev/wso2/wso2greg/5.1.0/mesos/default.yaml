@@ -18,8 +18,8 @@ classes:
 wso2::datasources::common::bps_default_auto_commit: 'true'
 
 wso2::service_name: wso2greg
-wso2::hostname: wso2greg-default
-wso2::mgt_hostname: wso2greg-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 # Clustering
 wso2::clustering:
@@ -54,21 +54,21 @@ wso2::ports:
 wso2::service_provider:
   store:
     issuer: store
-    acs: https://wso2greg-default:10103/store/acs
+    acs: https://marathon-lb.marathon.mesos:10103/store/acs
   social:
     issuer: social
-    acs: https://wso2greg-default:10103/social/acs
+    acs: https://marathon-lb.marathon.mesos:10103/social/acs
   publisher:
     issuer: publisher
-    acs: https://wso2greg-default:10103/publisher/acs
+    acs: https://marathon-lb.marathon.mesos:10103/publisher/acs
 
 wso2::identity_provider:
   store:
     issuer: store
-    identity_provider_url: https://wso2greg-default:10103/samlsso
+    identity_provider_url: https://marathon-lb.marathon.mesos:10103/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://wso2greg-default:10103/samlsso
+    identity_provider_url: https://marathon-lb.marathon.mesos:10103/samlsso
 
 wso2::social_app_url: https://wso2es-default:10103/social
 
