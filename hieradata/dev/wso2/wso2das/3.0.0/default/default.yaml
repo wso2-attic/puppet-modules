@@ -441,3 +441,8 @@ wso2::metrics_datasources:
 #    secret_alias: Axis2.Mailto.Parameter.Password
 #    secret_alias_value: repository/conf/axis2/axis2.xml//axisconfig/transportSender[@name='mailto']/parameter[@name='mail.smtp.password'],false
 #    password: wso2carbon
+#
+#  thrift_based_entitlement_config_key_store_password:
+#    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias_value: repository/conf/identity/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
+#    password: "%{hiera('wso2::key_stores::key_store::password')}"

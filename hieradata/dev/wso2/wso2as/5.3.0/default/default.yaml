@@ -21,7 +21,7 @@ wso2::hostname: as.dev.wso2.org
 wso2::mgt_hostname: as.dev.wso2.org
 
 wso2::template_list:
-  - repository/conf/identity.xml
+#  - repository/conf/identity.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -172,6 +172,11 @@ wso2::is_datasource: wso2_carbon_db
 #    secret_alias: Carbon.DeploymentSynchronizer.SvnPassword
 #    secret_alias_value: repository/conf/carbon.xml//Server/DeploymentSynchronizer/SvnPassword,true
 #    password: password
+#
+#  thrift_based_entitlement_config_key_store_password:
+#    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias_value: repository/conf/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
+#    password: "%{hiera('wso2::key_stores::key_store::password')}"
 
 ##Use below advanced secure vault configurations if the properties are used in corresponding files
 #  user_store_manager_connection_password:

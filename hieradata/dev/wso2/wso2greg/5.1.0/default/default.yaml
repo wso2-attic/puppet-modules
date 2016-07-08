@@ -314,3 +314,8 @@ wso2::social_datasources:
 #    secret_alias: Carbon.DeploymentSynchronizer.SvnPassword
 #    secret_alias_value: repository/conf/carbon.xml//Server/DeploymentSynchronizer/SvnPassword,true
 #    password: password
+#
+#  thrift_based_entitlement_config_key_store_password:
+#    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias_value: repository/conf/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
+#    password: "%{hiera('wso2::key_stores::key_store::password')}"
