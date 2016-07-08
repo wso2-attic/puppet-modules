@@ -16,9 +16,6 @@
 classes:
   - wso2das
 
-# This value is tightly coupled with Dockerfiles
-wso2::carbon_home_symlink: /mnt/carbon.das.symlink
-
 wso2::service_name: wso2das
 wso2::hostname: "%{::fqdn}"
 wso2::mgt_hostname: "%{::fqdn}"
@@ -45,6 +42,7 @@ wso2::directory_list:
 
 ## Comment out the following in a clustered setup
 wso2::spark:
+  master: local
   master_count: 1
   hostname: "%{::ipaddress}"
 
