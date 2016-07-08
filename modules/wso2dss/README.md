@@ -107,7 +107,19 @@ No changes to Hiera data are required to run the distributed deployment (`manage
 ## Running WSO2 Data Services Server with Secure Vault
 WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
->Please note that WSO2 Data Services Server 3.5.0 pack doesn't have the Cipher Tool feature installed. If you need to apply Secure Vault, please install the Cipher Tool feature and then use that product pack.
+>Please note that WSO2 Data Services Server 3.5.0 pack doesn't have the Cipher Tool feature installed. If you need to apply Secure Vault, either use Cipher Tool Feature installed DSS pack or install it via puppet by following below steps.
+>
+>- Create a directory named `lib` under `files/configs` and add the `org.wso2.ciphertool-1.0.0-wso2v3.jar` file to files/configs/lib and add below entries to default.yaml file.
+>     
+>    ```yaml
+>    wso2::directory_list:
+>      - lib
+>    
+>    wso2::file_list:
+>      - lib/org.wso2.ciphertool-1.0.0-wso2v3.jar
+>     ```
+>
+>- ciphertool.sh, cipher-text.properties and cipher-tool.properties files are added as templates to DSS puppet module.
 
 Uncomment and modify the below changes in Hiera file to apply Secure Vault.
 
