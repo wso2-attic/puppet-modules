@@ -17,8 +17,8 @@ classes:
   - wso2cep
 
 wso2::service_name: wso2cep
-wso2::hostname: wso2cep-default
-wso2::mgt_hostname: wso2cep-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 wso2::template_list:
   - repository/conf/cep/storm/storm.yaml
@@ -39,7 +39,7 @@ wso2::ports:
 
 # Clustering
 wso2::clustering:
-  enabled: true
+  enabled: false
   membership_scheme: mesos
 #  mesos:
 #    enable_marathon_basic_auth: true
