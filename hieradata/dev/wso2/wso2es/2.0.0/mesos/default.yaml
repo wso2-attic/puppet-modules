@@ -17,8 +17,8 @@ classes:
   - wso2es
 
 wso2::service_name: wso2es
-wso2::hostname: wso2es-default
-wso2::mgt_hostname: wso2es-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 # Clustering
 wso2::clustering:
@@ -52,23 +52,23 @@ wso2::ports:
 wso2::service_provider:
   store:
     issuer: store
-    acs: https://wso2es-default:10083/store/acs
+    acs: https://marathon-lb.marathon.mesos:10083/store/acs
   social:
     issuer: social
-    acs: https://wso2es-default:10083/social/acs
+    acs: https://marathon-lb.marathon.mesos:10083/social/acs
   publisher:
     issuer: publisher
-    acs: https://wso2es-default:10083/publisher/acs
+    acs: https://marathon-lb.marathon.mesos:10083/publisher/acs
 
 wso2::identity_provider:
   store:
     issuer: store
-    identity_provider_url: https://wso2es-default:10083/samlsso
+    identity_provider_url: https://marathon-lb.marathon.mesos:10083/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://wso2es-default:10083/samlsso
+    identity_provider_url: https://marathon-lb.marathon.mesos:10083/samlsso
 
-wso2::social_app_url: https://wso2es-default:10083/social
+wso2::social_app_url: https://marathon-lb.marathon.mesos:10083/social
 
 wso2::usermgt_datasource: wso2_user_db
 wso2::is_datasource: wso2_gov_db
