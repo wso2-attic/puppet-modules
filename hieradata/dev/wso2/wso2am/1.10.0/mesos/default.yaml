@@ -25,7 +25,6 @@ wso2::template_list:
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
-#  - password-tmp
 
 wso2::service_name: wso2am
 wso2::hostname: marathon-lb.marathon.mesos
