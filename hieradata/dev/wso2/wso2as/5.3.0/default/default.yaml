@@ -21,7 +21,7 @@ wso2::hostname: as.dev.wso2.org
 wso2::mgt_hostname: as.dev.wso2.org
 
 wso2::template_list:
-#  - repository/conf/identity.xml
+  - repository/conf/identity.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh

@@ -16,8 +16,8 @@ classes:
   - wso2is
 
 wso2::service_name: wso2is
-wso2::hostname: wso2is-default
-wso2::mgt_hostname: wso2is-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 wso2::template_list:
   - repository/conf/datasources/bps-datasources.xml
@@ -35,11 +35,11 @@ wso2::template_list:
 # Provide the server list for setting up sso
 #wso2::sso_service_providers:
 #    wso2esb:
-#      assertion_consumer_service_url: https://wso2esb-default:9443/acs
-#      default_assertion_consumer_service_url: https://wso2esb-default:9443/acs
+#      assertion_consumer_service_url: https://marathon-lb.marathon.mesos:9443/acs
+#      default_assertion_consumer_service_url: https://marathon-lb.marathon.mesos:9443/acs
 #    wso2as:
-#      assertion_consumer_service_url: https://wso2as-default:9443/acs
-#      default_assertion_consumer_service_url: https://wso2as-default:9443/acs
+#      assertion_consumer_service_url: https://marathon-lb.marathon.mesos:9443/acs
+#      default_assertion_consumer_service_url: https://marathon-lb.marathon.mesos:9443/acs
 
 
 # In Mesos proxy ports need to be configured to match with service ports.
