@@ -140,8 +140,9 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
       - repository/conf/security/cipher-text.properties
       - repository/conf/security/cipher-tool.properties
       - bin/ciphertool.sh
-      - password-tmp
     ```
+
+    Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
 
 ## Running WSO2 Business Rules Server on Kubernetes
 WSO2 BRS Puppet module ships Hiera data required to deploy WSO2 Business Rules Server on Kubernetes. 

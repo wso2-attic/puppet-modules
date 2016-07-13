@@ -141,8 +141,9 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
       - repository/conf/security/cipher-text.properties
       - repository/conf/security/cipher-tool.properties
       - bin/ciphertool.sh
-      - password-tmp
     ```
+
+    Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
 
 ## Running WSO2 Business Process Server on Kubernetes
 WSO2 Puppet Module ships Hiera data required to deploy WSO2 Business Process Server on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
