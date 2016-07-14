@@ -35,11 +35,11 @@ wso2::template_list:
 # Provide the server list for setting up sso
 #wso2::sso_service_providers:
 #    wso2esb:
-#      assertion_consumer_service_url: https://wso2esb-default:9443/acs
-#      default_assertion_consumer_service_url: https://wso2esb-default:9443/acs
+#      assertion_consumer_service_url: https://esb.dev.wso2.org:9443/acs
+#      default_assertion_consumer_service_url: https://esb.dev.wso2.org:9443/acs
 #    wso2as:
-#      assertion_consumer_service_url: https://wso2as-default:9443/acs
-#      default_assertion_consumer_service_url: https://wso2as-default:9443/acs
+#      assertion_consumer_service_url: https://as.dev.wso2.org:9443/acs
+#      default_assertion_consumer_service_url: https://as.dev.wso2.org:9443/acs
 
 # wso2::ports:
 #   proxyPort:
