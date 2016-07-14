@@ -15,6 +15,10 @@
 classes:
   - wso2is_km
 
+wso2::pack_filename: "wso2is-%{::product_version}.zip"
+wso2::pack_extracted_dir: "wso2is-%{::product_version}"
+wso2::carbon_home_symlink: "/mnt/wso2is-%{::product_version}"
+
 wso2::service_name: wso2is_km
 wso2::hostname: wso2is_km-default
 wso2::mgt_hostname: wso2is_km-default
