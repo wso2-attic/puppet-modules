@@ -14,8 +14,8 @@
 
 ---
 wso2::service_name: wso2es
-wso2::hostname: wso2es-publisher
-wso2::mgt_hostname: wso2es-publisher
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 # Clustering
 wso2::clustering:

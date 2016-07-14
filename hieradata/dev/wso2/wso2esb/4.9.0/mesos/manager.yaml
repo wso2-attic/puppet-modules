@@ -40,14 +40,14 @@ wso2::dep_sync:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10092
-    https: 10093
+    http: 10097
+    https: 10098
 
 # Defines WSDL EPR Prefix
 wso2::esb_wsdl_epr_prefix:
   http:
-    bind_address: wso2esb-worker
+    bind_address: marathon-lb.marathon.mesos
     prefix: http://marathon-lb.marathon.mesos:10094
   https:
-    bind_address: wso2esb-worker
+    bind_address: marathon-lb.marathon.mesos
     prefix: https://marathon-lb.marathon.mesos:10095

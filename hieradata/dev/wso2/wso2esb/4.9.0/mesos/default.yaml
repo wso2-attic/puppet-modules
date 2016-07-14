@@ -23,9 +23,7 @@ wso2::mgt_hostname: marathon-lb.marathon.mesos
 wso2::clustering:
   enabled: true
   membership_scheme: mesos
-  mesos:
-    member_discovery_scheme: Marathon
-    marathon_applications: wso2esb-default
+#  mesos:
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
 #    marathon_username: password
@@ -35,10 +33,6 @@ wso2::clustering:
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
 #  - password-tmp
-
-wso2::file_list:
-  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
-  - repository/components/dropins/mesos-membership-scheme-1.0.0-SNAPSHOT.jar
 
 # In Mesos proxy ports need to be configured to match with service ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
@@ -119,7 +113,6 @@ wso2::registry_mounts:
     registry_root: /
     enable_cache: true
 
-# Secure vault configuration
 # Secure vault configuration
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:

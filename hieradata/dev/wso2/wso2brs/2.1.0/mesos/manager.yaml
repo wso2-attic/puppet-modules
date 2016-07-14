@@ -11,40 +11,36 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 ---
-wso2::mgt_hostname: wso2cep-presenter
-wso2::hostname: wso2cep-presenter
-
-wso2::ports:
-  proxyPort:
-    http: 10052
-    https: 10053
-
-wso2::single_node_deployment:
-  enabled: false
-
-wso2::ha_deployment:
-  enabled: true
-  presenter_enabled: true
-  worker_enabled: false
-  eventSync:
-    hostName: 0.0.0.0
-    port: 11224
-  management:
-    hostName: 0.0.0.0
-    port: 10005
-  presentation:
-    hostName: 0.0.0.0
-    port: 11002
-
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 # Clustering
 wso2::clustering:
   enabled: true
   membership_scheme: mesos
   mesos:
-    marathon_applications: wso2cep-presenter,wso2cep-worker
+      marathon_applications: wso2brs-manager,wso2brs-worker
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
 #    marathon_username: password
+
+wso2::dep_sync:
+  enabled: false
+  auto_checkout: true
+  auto_commit: true
+  repository_type: svn
+  svn:
+    url: http://svnrepo.example.com/repos/
+    user: username
+    password: password
+    append_tenant_id: true
+
+# In mesos proxy ports need to be configured to match with service ports.
+# Following ports have been defined for servlet HTTP and HTTPS transports.
+wso2::ports:
+  proxyPort:
+    http: 10042
+    https: 10043
+
+

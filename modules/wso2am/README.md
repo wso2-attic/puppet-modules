@@ -1,6 +1,6 @@
 # WSO2 API Manager Puppet Module
 
-This repository contains the Puppet Module for installing and configuring WSO2 API Manager v1.10.0 on various environments. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
+This repository contains the Puppet Module for installing and configuring WSO2 API Manager 1.9.1 & 1.10.0 on various environments. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
 
 ## Supported Operating Systems
 
@@ -18,14 +18,14 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 
 Copy the following files to their corresponding locations.
 
-1. WSO2 API Manager distribution (v1.10.0) to `<PUPPET_HOME>/modules/wso2am/files`
+1. WSO2 API Manager distribution (1.10.0 or 1.9.1) to `<PUPPET_HOME>/modules/wso2am/files`
 2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running WSO2 API Manager in the `default` profile
 No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running WSO2 API Manager with clustering in specific profiles
-Hiera data sets matching the distributed profiles of WSO2 API Manager (`api-store`, `api-publisher`, `api-key-manager`, `gateway-manager`) are shipped with clustering related configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment. For more details refer the [WSO2 API Manager 1.10.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+API+Manager+1.10.0) and [WSO2 API Manager 1.10.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+API+Manager) clustering guides.
+Hiera data sets matching the distributed profiles of WSO2 API Manager (`api-store`, `api-publisher`, `api-key-manager`, `gateway-manager`) are shipped with clustering related configuration already enabled. Therefore, only a few changes are needed to setup a distributed deployment. For more details refer the [WSO2 API Manager 1.10.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+API+Manager+1.10.0) and [WSO2 API Manager 1.9.1](https://docs.wso2.com/display/CLUSTER420/Clustering+API+Manager) clustering guides.
 
 1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
@@ -132,6 +132,17 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
       key_store_password :
         secret_alias: Carbon.Security.KeyStore.Password
         secret_alias_value: repository/conf/carbon.xml//Server/Security/KeyStore/Password,false
+        password: wso2carbon
+    ```
+
+    For API Manager `1.9.1` which is based on WSO2 Carbon Kernel 4.2.0
+
+    Ex:
+    ```yaml
+    wso2::secure_vault_configs :
+      key_store_password :
+        secret_alias: Carbon.Security.KeyStore.Password
+        secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
         password: wso2carbon
     ```
 

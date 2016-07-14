@@ -18,14 +18,14 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 
 Copy the following files to their corresponding locations.
 
-1. WSO2 Business Rules Server distribution (v2.2.0) to `<PUPPET_HOME>/modules/wso2brs/files`
+1. WSO2 Business Rules Server distribution (2.1.0 or 2.2.0) to `<PUPPET_HOME>/modules/wso2brs/files`
 2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running WSO2 Business Rules Server in the `default` profile
 No changes to Hiera data are required to run the `default` profile.  Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running WSO2 Business Rules Server with clustering in specific profiles
-Do the below changes to relevant Business Rules Server profiles (`worker`, `manager`) Hiera YAML files to start the server in distributed setup. For more details refer [WSO2 Business Rules Server 2.2.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Business+Rules+Server) clustering guide.
+Do the below changes to relevant Business Rules Server profiles (`worker`, `manager`) Hiera YAML files to start the server in distributed setup. For more details refer [WSO2 Business Rules Server 2.2.0](https://docs.wso2.com/display/CLUSTER44x/Clustering+Business+Rules+Server) and [WSO2 Business Rules Server 2.1.0](https://docs.wso2.com/display/CLUSTER420/Clustering+Business+Rules+Server) clustering guide.
 
 1. If the Clustering Membership Scheme is `WKA`, add the Well Known Address list.
 
@@ -106,6 +106,13 @@ Do the below changes to relevant Business Rules Server profiles (`worker`, `mana
 ## Running WSO2 Business Rules Server with Secure Vault
 WSO2 Carbon products may contain sensitive information such as passwords in configuration files. [WSO2 Secure Vault](https://docs.wso2.com/display/Carbon444/Securing+Passwords+in+Configuration+Files) provides a solution for securing such information.
 
+>For WSO2 Business Rules Server 2.1.0, which is based on WSO2 Carbon Kernel 4.2.0, `org.wso2.ciphertool-1.0.0-wso2v2.jar` in Kernel patch [patch0010](http://dist.wso2.org/maven2/org/wso2/carbon/WSO2-CARBON-PATCH-4.2.0/0010/) has to be applied before enabling the Secure Vault. The `org.wso2.ciphertool-1.0.0-wso2v2.jar` in `WSO2-CARBON-PATCH-4.2.0-0009/lib` has to be copied to `wso2brs/files/configs/lib` folder and added to the `file_list` in hiera file as below:
+
+```yaml
+wso2::file_list :
+  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
+```
+
 Uncomment and modify the below changes in Hiera file to apply Secure Vault.
 
 1. Enable Secure Vault
@@ -133,6 +140,17 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
         password: wso2carbon
     ```
 
+    For Business Rules Server `2.1.0` which is based on WSO2 Carbon Kernel 4.2.0
+
+    Ex:
+    ```yaml
+    wso2::secure_vault_configs :
+      key_store_password :
+        secret_alias: Carbon.Security.KeyStore.Password
+        secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
+        password: wso2carbon
+    ```
+
 3. Add Cipher Tool configuration file templates to `template_list`
 
     ```yaml
@@ -144,5 +162,4 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
     ```
 
 ## Running WSO2 Business Rules Server on Kubernetes
-WSO2 BRS Puppet module ships Hiera data required to deploy WSO2 Business Rules Server on Kubernetes. 
-For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
+WSO2 BRS Puppet module ships Hiera data required to deploy WSO2 Business Rules Server on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
