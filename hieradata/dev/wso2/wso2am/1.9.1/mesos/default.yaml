@@ -19,13 +19,10 @@ classes:
 wso2::template_list:
   - repository/conf/datasources/am-datasources.xml
   - repository/conf/api-manager.xml
-  - repository/conf/identity/identity.xml
-  - repository/conf/identity/application-authentication.xml
-  - repository/conf/identity/EndpointConfig.properties
+#  - repository/conf/identity.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
-#  - password-tmp
 
 wso2::service_name: wso2am
 wso2::hostname: marathon-lb.marathon.mesos
@@ -293,7 +290,7 @@ wso2::master_datasources:
 #
 #  authenticator_config_trust_store_password:
 #    secret_alias: AuthenticatorConfig.TrustStore.Password
-#    secret_alias_value: repository/conf/identity/application-authentication.xml//ApplicationAuthentication/AuthenticatorConfigs/AuthenticatorConfig[@name='OpenIDAuthenticator']/Parameter[@name='TrustStorePassword'],false
+#    secret_alias_value: repository/conf/security/application-authentication.xml//ApplicationAuthentication/AuthenticatorConfigs/AuthenticatorConfig[@name='OpenIDAuthenticator']/Parameter[@name='TrustStorePassword'],false
 #    password: "%{hiera('wso2::key_stores::trust_store::password')}"
 #
 #  dep_sync_svn_password:

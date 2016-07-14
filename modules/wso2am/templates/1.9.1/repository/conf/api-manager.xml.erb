@@ -22,7 +22,7 @@
         key manager. This data source should be defined in the master-datasources.xml file
         in conf/datasources directory.
     -->
-    <DataSourceName>jdbc/WSO2AM_DB</DataSourceName>
+    <DataSourceName><%= @am_datasources[@am_datasource]['jndi_config'] %></DataSourceName>
 
     <!-- This parameter is used when adding api management capability to other products like GReg, AS, DSS etc.-->
     <GatewayType>Synapse</GatewayType>
@@ -138,43 +138,43 @@
 		     An API deployed on a 'sandbox' type gateway will only support sandbox keys
 		     An API deployed on a 'hybrid' type gateway will support both production and sandbox keys -->
                 <Environment type="hybrid" api-console="true">
-                    <Name>Production and Sandbox</Name>
-                    <Description>Default Gateway Environment</Description>
-			              <!--
-         	              Server URL of the API gateway.
-        		        -->
-                    <%- if @apim_gateway and @apim_gateway['host'] and @apim_gateway['port']-%>
-                      <ServerURL>https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['port'] %>/services/</ServerURL>
-                    <%- else -%>
-                      <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
-                    <%- end -%>
-                    <!--
-                        Admin username for the API gateway.
-                    -->
-                    <%- if @apim_gateway and @apim_gateway['username'] -%>
-                      <Username><%= @apim_gateway['username'] %></Username>
-                    <%- else -%>
-                      <Username>${admin.username}</Username>
-                    <%- end -%>
-                    <!--
-                        Admin password for the API gateway.
-                    -->
-                    <%- if @apim_gateway and @apim_gateway['password'] -%>
-                      <Password><%= @apim_gateway['password'] %></Password>
-                    <%- else -%>
-                       <Password>${admin.password}</Password>
-                    <%- end -%>
+                        <Name>Production and Sandbox</Name>
+                    <Description> Description of environment</Description>
+                        <!--
+                                Server URL of the API gateway.
+                        -->
+                        <%- if @apim_gateway and @apim_gateway['host'] and @apim_gateway['port']-%>
+                          <ServerURL>https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['port'] %>/services/</ServerURL>
+                        <%- else -%>
+                          <ServerURL>https://${carbon.local.ip}:${mgt.transport.https.port}${carbon.context}/services/</ServerURL>
+                        <%- end -%>
+                        <!--
+                            Admin username for the API gateway.
+                        -->
+                        <%- if @apim_gateway and @apim_gateway['username'] -%>
+                          <Username><%= @apim_gateway['username'] %></Username>
+                        <%- else -%>
+                          <Username>${admin.username}</Username>
+                        <%- end -%>
+                        <!--
+                            Admin password for the API gateway.
+                        -->
+                        <%- if @apim_gateway and @apim_gateway['password'] -%>
+                          <Password><%= @apim_gateway['password'] %></Password>
+                        <%- else -%>
+                           <Password>${admin.password}</Password>
+                        <%- end -%>
 
-			              <!--
-            			    Endpoint URLs for the APIs hosted in this API gateway.
-        		        -->
-        		        <%- if @apim_gateway and @apim_gateway['host'] and
-        		        @apim_gateway['api_endpoint_port'] and  @apim_gateway['secure_api_endpoint_port']-%>
-                      <GatewayEndpoint>http://<%= @apim_gateway['host'] %>:<%= @apim_gateway['api_endpoint_port'] %>,https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['secure_api_endpoint_port'] %></GatewayEndpoint>
-                    <%- else -%>
-                      <GatewayEndpoint>http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}</GatewayEndpoint>
-                    <%- end -%>
-                </Environment>
+    			              <!--
+                			    Endpoint URLs for the APIs hosted in this API gateway.
+            		        -->
+            		        <%- if @apim_gateway and @apim_gateway['api_endpoint_host'] and
+            		        @apim_gateway['api_endpoint_port'] and  @apim_gateway['secure_api_endpoint_port']-%>
+                          <GatewayEndpoint>http://<%= @apim_gateway['api_endpoint_host'] %>:<%= @apim_gateway['api_endpoint_port'] %>,https://<%= @apim_gateway['api_endpoint_host'] %>:<%= @apim_gateway['secure_api_endpoint_port'] %></GatewayEndpoint>
+                        <%- else -%>
+                          <GatewayEndpoint>http://${carbon.local.ip}:${http.nio.port},https://${carbon.local.ip}:${https.nio.port}</GatewayEndpoint>
+                        <%- end -%>
+                    </Environment>
         </Environments>
 
         <!--
@@ -341,20 +341,20 @@
 	-Gateway use this parameter to connect key validation thrift service. 
         -->
 
-	  <%- if @clustering['enabled'] -%>
-        <KeyValidatorClientType>WSClient</KeyValidatorClientType>
-    <%- else -%>
-        <KeyValidatorClientType>ThriftClient</KeyValidatorClientType>
-    <%- end -%>
-        <ThriftClientPort>10397</ThriftClientPort>
-        <ThriftClientConnectionTimeOut>10000</ThriftClientConnectionTimeOut>
-        <ThriftServerPort>10397</ThriftServerPort>
-	      <ThriftServerHost>0.0.0.0</ThriftServerHost>
-	  <%- if @clustering['enabled'] -%>
-        <EnableThriftServer>false</EnableThriftServer>
-    <%- else -%>
-        <EnableThriftServer>true</EnableThriftServer>
-    <%- end -%>
+        <%- if @clustering['enabled'] -%>
+          <KeyValidatorClientType>WSClient</KeyValidatorClientType>
+      <%- else -%>
+          <KeyValidatorClientType>ThriftClient</KeyValidatorClientType>
+      <%- end -%>
+          <ThriftClientPort>10397</ThriftClientPort>
+          <ThriftClientConnectionTimeOut>10000</ThriftClientConnectionTimeOut>
+          <ThriftServerPort>10397</ThriftServerPort>
+          <ThriftServerHost>0.0.0.0</ThriftServerHost>
+     <%- if @clustering['enabled'] -%>
+          <EnableThriftServer>false</EnableThriftServer>
+      <%- else -%>
+          <EnableThriftServer>true</EnableThriftServer>
+      <%- end -%>
 
         <!-- 
         Scope used for marking Application Tokens. If a token is generated with this scope, they will be treated as Application Access Tokens
@@ -388,8 +388,8 @@
 	     gateway https( /http, we recommend users to use 'https' endpoints for security purpose) url.
          Also please note that we should point gateway revoke service to key manager
 	-->
-	<%- if @apim_gateway and @apim_gateway['host'] and @apim_gateway['api_endpoint_port'] and  @apim_gateway['secure_api_endpoint_port']-%>
-    <RevokeAPIURL>https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['secure_api_endpoint_port'] %>/revoke</RevokeAPIURL>
+  <%- if @apim_gateway and @apim_gateway['api_endpoint_host'] and  @apim_gateway['secure_api_token_revoke_endpoint_port']-%>
+    <RevokeAPIURL>https://<%= @apim_gateway['api_endpoint_host'] %>:<%= @apim_gateway['secure_api_token_revoke_endpoint_port'] %>/revoke</RevokeAPIURL>
   <%- else -%>
     <RevokeAPIURL>https://${carbon.local.ip}:${https.nio.port}/revoke</RevokeAPIURL>
   <%- end -%>
