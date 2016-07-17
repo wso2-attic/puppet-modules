@@ -222,4 +222,4 @@ wso2::super_admin::password: 'admin'
 wso2::user_management:
     admin_role: admin
     admin_username: "%{hiera('wso2::super_admin::username')}"
-    admin_password: "%{hiera('wso2::super_admin::username')}"
+    admin_password: "%{hiera('wso2::super_admin::password')}"

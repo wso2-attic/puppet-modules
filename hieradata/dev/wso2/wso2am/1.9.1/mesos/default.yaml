@@ -50,7 +50,7 @@ wso2::apim_keymanager:
 # Therefore, admin service port should point to corresponding Mesos service target port
   port: 10203
   username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_gateway:
   host: marathon-lb.marathon.mesos
@@ -67,7 +67,7 @@ wso2::apim_gateway:
   api_token_revoke_endpoint_port: 10200
   secure_api_token_revoke_endpoint_port: 10201
   username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_store:
   host: marathon-lb.marathon.mesos
@@ -191,7 +191,7 @@ wso2::master_datasources:
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
@@ -236,22 +236,22 @@ wso2::master_datasources:
 #  auth_manager_password:
 #    secret_alias: AuthManager.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/AuthManager/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  api_gateway_password:
 #    secret_alias: APIGateway.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIGateway/Environments/Environment/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  api_key_validator_password:
 #    secret_alias: APIKeyValidator.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIKeyValidator/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  api_store_password:
 #    secret_alias: APIStore.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIStore/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  xmpp_password:
 #    secret_alias: MultifactorAuthentication.XMPPSettings.XMPPConfig.XMPPPassword

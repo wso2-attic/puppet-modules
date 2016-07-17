@@ -14,7 +14,7 @@
 ---
 classes:
   - wso2greg
-  
+
 wso2::datasources::common::bps_default_auto_commit: 'true'
 
 wso2::service_name: wso2greg
@@ -188,7 +188,7 @@ wso2::registry_mounts:
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
@@ -254,4 +254,3 @@ wso2::registry_mounts:
 #    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
 #    secret_alias_value: repository/conf/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
 #    password: "%{hiera('wso2::key_stores::key_store::password')}"
-
