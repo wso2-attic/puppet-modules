@@ -16,21 +16,9 @@
 # specific language governing permissions and limitations
 # under the License.
 %>
-      <%- if @clustering['aws'] and @clustering['aws']['access_key'] -%>
         <parameter name="accessKey"><%= @clustering['aws']['access_key'] %></parameter>
-      <%- end -%>
-      <%- if @clustering['aws'] and @clustering['aws']['secret_key'] -%>
         <parameter name="secretKey"><%= @clustering['aws']['secret_key'] %></parameter>
-      <%- end -%>
-      <%- if @clustering['aws'] and @clustering['aws']['security_group'] -%>
         <parameter name="securityGroup"><%= @clustering['aws']['security_group'] %></parameter>
-      <%- end -%>
-      <%- if @clustering['aws'] and @clustering['aws']['region'] -%>
         <parameter name="region"><%= @clustering['aws']['region'] %></parameter>
-      <%- end -%>
-      <%- if @clustering['aws'] and @clustering['aws']['tag_key'] -%>
         <parameter name="tagKey"><%= @clustering['aws']['tag_key'] %></parameter>
-      <%- end -%>
-      <%- if @clustering['aws'] and @clustering['aws']['tag_value'] -%>
         <parameter name="tagValue"><%= @clustering['aws']['tag_value'] %></parameter>
-      <%- end -%>
