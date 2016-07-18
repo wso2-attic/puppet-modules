@@ -18,6 +18,7 @@ wso2::clustering:
   domain: dss.wso2.domain
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
+# WKA membership scheme
   membership_scheme: wka
   sub_domain: worker
   wka:
@@ -28,6 +29,15 @@ wso2::clustering:
       -
         hostname: 192.168.100.72
         port: 4000
+# AWS membership scheme
+#   membership_scheme: aws
+#   aws:
+#     access_key: access-key
+#     secret_key: secret-key
+#     security_group: security-group
+#     region: region
+#     tag_key: tag-key
+#     tag_value: tag-value
 
 wso2::registry_mounts:
   wso2_config_db:

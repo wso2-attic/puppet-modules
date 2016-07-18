@@ -22,15 +22,25 @@ wso2::clustering:
   sub_domain: mgt
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
+# WKA membership scheme
   membership_scheme: wka
   wka:
     members:
       -
         hostname: 192.168.100.5
         port: 4000
-#      -
-#        hostname: 192.168.100.6
-#        port: 4000
+      -
+        hostname: 192.168.100.6
+        port: 4000
+# AWS membership scheme
+#   membership_scheme: aws
+#   aws:
+#     access_key: access-key
+#     secret_key: secret-key
+#     security_group: security-group
+#     region: region
+#     tag_key: tag-key
+#     tag_value: tag-value
 
 wso2::dep_sync:
   enabled: false

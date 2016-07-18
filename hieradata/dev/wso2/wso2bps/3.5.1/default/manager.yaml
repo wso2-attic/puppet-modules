@@ -23,6 +23,7 @@ wso2::clustering:
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
   sub_domain: mgt
+# WKA membership scheme
   membership_scheme: wka
   wka:
     members:
@@ -32,14 +33,7 @@ wso2::clustering:
       -
         hostname: 192.168.100.32
         port: 4000
-
-# Clustering configuration for AWS membership scheme
-# wso2::clustering:
-#   enabled: false
-#   domain: bps.wso2.domain
-#   local_member_host: "%{::ipaddress}"
-#   local_member_port: 4000
-#   sub_domain: mgt
+# AWS membership scheme
 #   membership_scheme: aws
 #   aws:
 #     access_key: access-key

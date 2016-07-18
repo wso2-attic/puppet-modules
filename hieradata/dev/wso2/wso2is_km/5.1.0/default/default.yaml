@@ -78,12 +78,22 @@ wso2::clustering:
   local_member_port: 4000
   domain: km.is.wso2.domain
   sub_domain: worker
+# WKA membership scheme
   membership_scheme: wka
   wka:
     members:
       -
         hostname: 192.168.100.111
         port: 4000
+# AWS membership scheme
+#   membership_scheme: aws
+#   aws:
+#     access_key: access-key
+#     secret_key: secret-key
+#     security_group: security-group
+#     region: region
+#     tag_key: tag-key
+#     tag_value: tag-value
 
 # Uncomment the following for a clustered setup
 #wso2::registry_mounts:
