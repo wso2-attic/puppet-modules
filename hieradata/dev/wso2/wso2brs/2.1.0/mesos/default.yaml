@@ -28,13 +28,14 @@ wso2::clustering:
 #    marathon_username: username
 #    marathon_username: password
 
+#wso2::file_list:
+#  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 
 wso2::template_list:
-  - repository/conf/identity/identity.xml
+  - repository/conf/identity.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
-#  - password-tmp
 
 # In mesos proxy ports need to be configured to match with service ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
@@ -153,7 +154,7 @@ wso2::registry_mounts:
 #
 #  xmpp_password:
 #    secret_alias: MultifactorAuthentication.XMPPSettings.XMPPConfig.XMPPPassword
-#    secret_alias_value: repository/conf/identity/identity.xml//MultifactorAuthentication/XMPPSettings/XMPPConfig/XMPPPassword,false
+#    secret_alias_value: repository/conf/identity.xml//MultifactorAuthentication/XMPPSettings/XMPPConfig/XMPPPassword,false
 #    password: wso2carbon
 #
 #  wso2_config_db_password:
@@ -178,5 +179,5 @@ wso2::registry_mounts:
 #
 #  thrift_based_entitlement_config_key_store_password:
 #    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
-#    secret_alias_value: repository/conf/identity/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
+#    secret_alias_value: repository/conf/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
 #    password: "%{hiera('wso2::key_stores::key_store::password')}"
