@@ -16,7 +16,7 @@
 # specific language governing permissions and limitations
 # under the License.
 %>
-        <parameter name="membershipSchemeClassName">org.wso2.carbon.membership.scheme.kubernetes.KubernetesMembershipScheme</parameter>
+      <parameter name="membershipSchemeClassName">org.wso2.carbon.membership.scheme.kubernetes.KubernetesMembershipScheme</parameter>
       <%- if @clustering['kubernetes'] and @clustering['kubernetes']['kubernetes_namespace'] -%>
         <parameter name="KUBERNETES_NAMESPACE"><%= @clustering['kubernetes']['kubernetes_namespace'] %></parameter>
       <%- end -%>
