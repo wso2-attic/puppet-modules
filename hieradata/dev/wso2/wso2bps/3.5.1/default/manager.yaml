@@ -16,6 +16,7 @@
 wso2::mgt_hostname: mgt.bps.dev.wso2.org
 wso2::hostname: bps.dev.wso2.org
 
+# Clustering configuration for WKA membership scheme
 wso2::clustering:
   enabled: true
   domain: bps.wso2.domain
@@ -31,6 +32,22 @@ wso2::clustering:
       -
         hostname: 192.168.100.32
         port: 4000
+
+# Clustering configuration for AWS membership scheme
+# wso2::clustering:
+#   enabled: false
+#   domain: bps.wso2.domain
+#   local_member_host: "%{::ipaddress}"
+#   local_member_port: 4000
+#   sub_domain: mgt
+#   membership_scheme: aws
+#   aws:
+#     accessKey: accessKey
+#     secretKey: secretKey
+#     securityGroup: securityGroup
+#     region: region
+#     tagKey: tagKey
+#     tagValue: tagValue
 
 #wso2::ports:
 #  proxyPort:
