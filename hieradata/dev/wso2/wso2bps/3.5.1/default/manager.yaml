@@ -42,12 +42,12 @@ wso2::clustering:
 #   sub_domain: mgt
 #   membership_scheme: aws
 #   aws:
-#     accessKey: accessKey
-#     secretKey: secretKey
-#     securityGroup: securityGroup
+#     access_key: access-key
+#     secret_key: secret-key
+#     security_group: security-group
 #     region: region
-#     tagKey: tagKey
-#     tagValue: tagValue
+#     tag_key: tag-key
+#     tag_value: tag-value
 
 #wso2::ports:
 #  proxyPort:
