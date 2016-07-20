@@ -72,7 +72,7 @@ class wso2base {
   # marathon-lb cert configs
   if ($::platform == "mesos") {
     $marathon_lb_cert_config = hiera('wso2::marathon_lb_cert_config')
-    $marathon_lb_cert_config_enabled = $marathon_lb_cert_config['enable']
+    $marathon_lb_cert_config_enabled = $marathon_lb_cert_config['enabled']
     if( $marathon_lb_cert_config_enabled == true){
       $trust_store_password   = $marathon_lb_cert_config['trust_store_password']
       $cert_file = $marathon_lb_cert_config['cert_file']
