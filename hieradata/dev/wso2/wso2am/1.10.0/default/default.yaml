@@ -83,20 +83,20 @@ wso2::apim_publisher:
 ## Uncomment the hosts mappings for a clustered setup
 #wso2::hosts_mapping:
 #  apim_keymanager:
-#    ip_address: 192.168.100.2
-#    hostname: km.dev.wso2.org
+#    ip: 192.168.100.2
+#    name: km.dev.wso2.org
 #  apim_store:
-#    ip_address: 192.168.100.3
-#    hostname: store.dev.wso2.org
+#    ip: 192.168.100.3
+#    name: store.dev.wso2.org
 #  apim_publisher:
-#    ip_address: 192.168.100.4
-#    hostname: pub.dev.wso2.org
+#    ip: 192.168.100.4
+#    name: pub.dev.wso2.org
 #  apim_gateway:
-#    ip_address: 192.168.100.5
-#    hostname: gw.dev.wso2.org
+#    ip: 192.168.100.5
+#    name: gw.dev.wso2.org
 #  svn:
-#    ip_address: 192.168.100.1
-#    hostname: svn.gw.am.dev.wso2.org
+#    ip: 192.168.100.1
+#    name: svn.gw.am.dev.wso2.org
 
 ## Uncomment the following for a clustered setup
 #wso2::apim_gateway:

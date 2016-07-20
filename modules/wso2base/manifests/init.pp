@@ -47,7 +47,6 @@ class wso2base {
   $patches_dir          = hiera('wso2::patches_dir')
   $service_name         = hiera('wso2::service_name')
   $service_template     = hiera('wso2::service_template')
-  $hosts_template       = hiera('wso2::hosts_template')
   $usermgt_datasource   = hiera('wso2::usermgt_datasource')
   $local_reg_datasource = hiera('wso2::local_reg_datasource')
   $clustering           = hiera('wso2::clustering')
@@ -91,7 +90,7 @@ class wso2base {
       wso2_user        => $wso2_user,
       service_name     => $service_name,
       service_template => $service_template,
-      hosts_template   => $hosts_template
+      hosts_mapping    => $hosts_mapping
     } ->
     class { '::wso2base::java':
       java_install_dir => $java_install_dir,
@@ -108,7 +107,7 @@ class wso2base {
       wso2_user        => $wso2_user,
       service_name     => $service_name,
       service_template => $service_template,
-      hosts_template   => $hosts_template
+      hosts_mapping    => $hosts_mapping
     }
   }
 
