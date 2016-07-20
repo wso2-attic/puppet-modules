@@ -34,7 +34,8 @@ wso2::mgt_hostname: marathon-lb.marathon.mesos
 wso2::clustering:
   enabled: true
   membership_scheme: mesos
-#  mesos:
+  mesos:
+    marathon_applications: wso2am-gateway-manager,wso2am-gateway-worker
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
 #    marathon_username: password

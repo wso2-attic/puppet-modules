@@ -36,16 +36,6 @@ wso2::apim_gateway:
   username: "%{hiera('wso2::super_admin::username')}"
   password: "%{hiera('wso2::super_admin::password')}"
 
-# Clustering
-wso2::clustering:
-  enabled: true
-  membership_scheme: mesos
-  mesos:
-    marathon_applications: wso2am-gateway-manager,wso2am-gateway-worker
-#    enable_marathon_basic_auth: true
-#    marathon_username: username
-#    marathon_username: password
-
 wso2::dep_sync:
   enabled: false
   auto_checkout: true
