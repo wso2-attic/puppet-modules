@@ -23,6 +23,6 @@ wso2::datasources::mysql::username: 'wso2carbon'
 wso2::datasources::mysql::password: 'wso2carbon'
 
 wso2::marathon_lb_cert_config:
-    enable : true
+    enabled : true
     cert_file: 'wso2demo.crt'
     trust_store_password: 'wso2carbon'
