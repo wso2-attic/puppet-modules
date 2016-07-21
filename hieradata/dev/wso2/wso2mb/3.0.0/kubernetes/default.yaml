@@ -173,11 +173,6 @@ wso2::registry_mounts:
 #    secret_alias_value: repository/conf/tomcat/catalina-server.xml//Server/Service/Connector[@keystorePass],true
 #    password: "%{hiera('wso2::key_stores::connector_key_store::password')}"
 #
-#  wso2_mb_store_db_password:
-#    secret_alias: Datasources.WSO2_MB_STORE_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_MB_STORE_DB']/definition/configuration/password,false
-#    password: "%{hiera('wso2::datasources::mysql::password')}"
-#
 #  wso2_metrics_db_password:
 #    secret_alias: Datasources.WSO2_METRICS_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/metrics-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_METRICS_DB']/definition[@type='RDBMS']/configuration/password,false

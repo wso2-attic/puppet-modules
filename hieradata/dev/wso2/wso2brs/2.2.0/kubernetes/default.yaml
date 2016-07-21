@@ -174,6 +174,6 @@ wso2::registry_mounts:
 #    password: password
 #
 #  thrift_based_entitlement_config_key_store_password:
-#    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias: EntitlementSettings.ThirftBasedEntitlementConfig.KeyStore.Password
 #    secret_alias_value: repository/conf/identity/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
 #    password: "%{hiera('wso2::key_stores::key_store::password')}"
