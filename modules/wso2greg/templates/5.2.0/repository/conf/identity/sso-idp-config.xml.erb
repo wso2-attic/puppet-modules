@@ -20,19 +20,28 @@
     <ServiceProviders>
         <ServiceProvider>
             <Issuer>store</Issuer>
-            <AssertionConsumerService><%= @service_provider['store']['acs'] %></AssertionConsumerService>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL><%= @service_provider['store']['acs'] %></AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9443/store/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/store/login.jag</CustomLoginPage>
         </ServiceProvider>
         <ServiceProvider>
             <Issuer>social</Issuer>
-            <AssertionConsumerService><%= @service_provider['social']['acs'] %></AssertionConsumerService>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL><%= @service_provider['social']['acs'] %></AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9443/social/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/social/login</CustomLoginPage>
         </ServiceProvider>
         <ServiceProvider>
             <Issuer>publisher</Issuer>
-            <AssertionConsumerService><%= @service_provider['publisher']['acs'] %></AssertionConsumerService>
+            <AssertionConsumerServiceURLs>
+                <AssertionConsumerServiceURL><%= @service_provider['publisher']['acs'] %></AssertionConsumerServiceURL>
+            </AssertionConsumerServiceURLs>
+            <DefaultAssertionConsumerServiceURL>https://localhost:9443/publisher/acs</DefaultAssertionConsumerServiceURL>
             <SignResponse>true</SignResponse>
             <CustomLoginPage>/publisher/controllers/login.jag</CustomLoginPage>
         </ServiceProvider>

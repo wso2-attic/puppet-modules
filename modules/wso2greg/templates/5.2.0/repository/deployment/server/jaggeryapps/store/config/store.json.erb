@@ -24,7 +24,7 @@
         "socialAppUrl": "../../../social/"
     },
     "authentication": {
-        "activeMethod": "sso",
+        "activeMethod": "basic",
         "methods": {
             "sso": {
                 "attributes": {
@@ -37,8 +37,15 @@
                 }
             },
             "basic": {
-                "attributes": {}
+                "attributes": {
+                                "loginURL":"%https.host%/store/pages/basic-auth-login"
+                              }
             }
         }
-    }
+    },
+    "metrics":{
+        "enabled":false,
+        "enableTraceLogs":false
+    },
+    "version": "5.2.0"
 }

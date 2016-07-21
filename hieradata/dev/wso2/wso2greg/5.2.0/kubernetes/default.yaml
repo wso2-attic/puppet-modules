@@ -33,6 +33,7 @@ wso2::template_list:
   - repository/conf/identity.xml
   - repository/conf/datasources/social-datasources.xml
   - repository/conf/datasources/bps-datasources.xml
+  - repository/conf/datasources/metrics-datasources.xml
   - repository/conf/identity/sso-idp-config.xml
   - repository/conf/identity/application-authentication.xml
   - repository/deployment/server/jaggeryapps/store/config/store.json
@@ -148,6 +149,22 @@ wso2::bps_datasources:
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit: "%{hiera('wso2::datasources::common::bps_default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+wso2::metrics_datasources:
+ wso2_metrics_db:
+    name : WSO2_METRICS_DB
+    description : The default datasource used for WSO2 Carbon Metrics
+    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+    url: jdbc:mysql://mysql-gregdb:3306/WSO2_METRICS_DB?autoReconnect=true
+    username: "%{hiera('wso2::datasources::mysql::username')}"
+    password: "%{hiera('wso2::datasources::mysql::password')}"
+    jndi_config: jdbc/WSO2MetricsDB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 

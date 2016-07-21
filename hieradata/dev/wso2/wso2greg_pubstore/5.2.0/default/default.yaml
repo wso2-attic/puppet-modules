@@ -13,21 +13,25 @@
 # limitations under the License.
 ---
 classes:
-  - wso2greg
+  - wso2greg_pubstore
+
+wso2::pack_filename: "wso2greg-%{::product_version}.zip"
+wso2::pack_extracted_dir: "wso2greg-%{::product_version}"
+wso2::carbon_home_symlink: "/mnt/wso2greg-%{::product_version}"
 
 wso2::datasources::common::bps_default_auto_commit: 'true'
 
-wso2::service_name: wso2greg
-wso2::hostname: greg.dev.wso2.org
-wso2::mgt_hostname: greg.dev.wso2.org
+wso2::service_name: wso2greg_pubstore
+wso2::hostname: greg.pubstore.dev.wso2.org
+wso2::mgt_hostname: greg.pubstore.dev.wso2.org
 
 wso2::template_list:
   - repository/conf/identity.xml
   - repository/conf/datasources/social-datasources.xml
   - repository/conf/datasources/bps-datasources.xml
-  - repository/conf/datasources/metrics-datasources.xml
   - repository/conf/identity/sso-idp-config.xml
   - repository/conf/identity/application-authentication.xml
+  - repository/conf/api-manager.xml
   - repository/deployment/server/jaggeryapps/store/config/store.json
   - repository/deployment/server/jaggeryapps/store/config/store-tenant.json
   - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
@@ -40,26 +44,45 @@ wso2::template_list:
 #wso2::file_list:
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
+wso2::apim_gateway:
+  host: am.dev.wso2.org
+  port: 9443
+  api_endpoint_host: am.dev.wso2.org
+  api_endpoint_port: 8280
+  secure_api_endpoint_port: 8243
+  api_token_revoke_endpoint_port: 8280
+  secure_api_token_revoke_endpoint_port: 8243
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
+
+wso2::apim_keymanager:
+  host: am.dev.wso2.org
+  port: 9443
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
+
+wso2::enableThriftServer: false
+
 wso2::service_provider:
   store:
     issuer: store
-    acs: https://greg.dev.wso2.org:9443/store/acs
+    acs: https://greg.pubstore.dev.wso2.org:9443/store/acs
   social:
     issuer: social
-    acs: https://greg.dev.wso2.org:9443/social/acs
+    acs: https://greg.pubstore.dev.wso2.org:9443/social/acs
   publisher:
     issuer: publisher
-    acs: https://greg.dev.wso2.org:9443/publisher/acs
+    acs: https://greg.pubstore.dev.wso2.org:9443/publisher/acs
 
 wso2::identity_provider:
   store:
     issuer: store
-    identity_provider_url: https://greg.dev.wso2.org:9443/samlsso
+    identity_provider_url: https://greg.pubstore.dev.wso2.org:9443/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://greg.dev.wso2.org:9443/samlsso
+    identity_provider_url: https://greg.pubstore.dev.wso2.org:9443/samlsso
 
-wso2::social_app_url: https://greg.dev.wso2.org:9443/social
+wso2::social_app_url: https://greg.pubstore.dev.wso2.org:9443/social
 
 # Uncomment the following for clustered setup
 #wso2::usermgt_datasource: wso2user_db
@@ -159,37 +182,6 @@ wso2::master_datasources:
 #    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::metrics_datasources :
-  wso2_metrics_db :
-    name: WSO2_METRICS_DB
-    description: The default datasource used for WSO2 Carbon Metrics
-    driver_class_name: "%{hiera('wso2::datasources::h2::driver_class_name')}"
-    url: jdbc:h2:repository/database/WSO2METRICS_DB;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
-    username: wso2carbon
-    password: wso2carbon
-    jndi_config: jdbc/WSO2MetricsDB
-    max_active: "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-    validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
-    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-#  metrics_datasources:
-#    name: BPS_DS
-#    description: The default datasource used for WSO2 Carbon Metrics
-#    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-#    url: jdbc:mysql://192.168.100.1:3306/WSO2_METRICS_DB?autoReconnect=true
-#    username: "%{hiera('wso2::datasources::mysql::username')}"
-#    password: "%{hiera('wso2::datasources::mysql::password')}"
-#    jndi_config: jdbc/WSO2MetricsDB
-#    max_active: "%{hiera('wso2::datasources::common::max_active')}"
-#    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-#    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-#    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
-#    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-#    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
 wso2::bps_datasources:
 # Comment the below h2 datasource for clustered setup and uncomment mysql datasource
   bps_ds:
@@ -275,6 +267,16 @@ wso2::social_datasources:
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
+#    password: "%{hiera('wso2::super_admin::password')}"
+#
+#  api_gateway_password:
+#    secret_alias: APIGateway.Password
+#    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIGateway/Environments/Environment/Password,false
+#    password: "%{hiera('wso2::super_admin::password')}"
+#
+#  api_key_validator_password:
+#    secret_alias: APIKeyValidator.Password
+#    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIKeyValidator/Password,false
 #    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  wso2_carbon_db_password:

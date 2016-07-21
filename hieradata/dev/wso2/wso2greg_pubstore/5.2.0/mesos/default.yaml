@@ -13,11 +13,15 @@
 # limitations under the License.
 ---
 classes:
-  - wso2greg
+  - wso2greg_pubstore
+
+wso2::pack_filename: "wso2greg-%{::product_version}.zip"
+wso2::pack_extracted_dir: "wso2greg-%{::product_version}"
+wso2::carbon_home_symlink: "/mnt/wso2greg-%{::product_version}"
 
 wso2::datasources::common::bps_default_auto_commit: 'true'
 
-wso2::service_name: wso2greg
+wso2::service_name: wso2greg_pubstore
 wso2::hostname: marathon-lb.marathon.mesos
 wso2::mgt_hostname: marathon-lb.marathon.mesos
 
@@ -34,9 +38,9 @@ wso2::template_list:
   - repository/conf/identity.xml
   - repository/conf/datasources/social-datasources.xml
   - repository/conf/datasources/bps-datasources.xml
-  - repository/conf/datasources/metrics-datasources.xml
   - repository/conf/identity/sso-idp-config.xml
   - repository/conf/identity/application-authentication.xml
+  - repository/conf/api-manager.xml
   - repository/deployment/server/jaggeryapps/store/config/store.json
   - repository/deployment/server/jaggeryapps/store/config/store-tenant.json
   - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
@@ -44,43 +48,77 @@ wso2::template_list:
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
 
+wso2::apim_gateway:
+  host: am.dev.wso2.org
+  port: 9443
+  api_endpoint_host: am.dev.wso2.org
+  api_endpoint_port: 8280
+  secure_api_endpoint_port: 8243
+  api_token_revoke_endpoint_port: 8280
+  secure_api_token_revoke_endpoint_port: 8243
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
+
+wso2::apim_keymanager:
+  host: am.dev.wso2.org
+  port: 9443
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
+
+wso2::enableThriftServer: false
+
 # In mesos proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10102
-    https: 10103
+    http: 10133
+    https: 10134
 
 wso2::service_provider:
   store:
     issuer: store
-    acs: https://marathon-lb.marathon.mesos:10103/store/acs
+    acs: https://marathon-lb.marathon.mesos:10134/store/acs
   social:
     issuer: social
-    acs: https://marathon-lb.marathon.mesos:10103/social/acs
+    acs: https://marathon-lb.marathon.mesos:10134/social/acs
   publisher:
     issuer: publisher
-    acs: https://marathon-lb.marathon.mesos:10103/publisher/acs
+    acs: https://marathon-lb.marathon.mesos:10134/publisher/acs
 
 wso2::identity_provider:
   store:
     issuer: store
-    identity_provider_url: https://marathon-lb.marathon.mesos:10103/samlsso
+    identity_provider_url: https://marathon-lb.marathon.mesos:10134/samlsso
   publisher:
     issuer: publisher
-    identity_provider_url: https://marathon-lb.marathon.mesos:10103/samlsso
+    identity_provider_url: https://marathon-lb.marathon.mesos:10134/samlsso
 
-wso2::social_app_url: https://wso2es-default:10103/social
+wso2::social_app_url: https://marathon-lb.marathon.mesos:10134/social
 
 wso2::usermgt_datasource: wso2_user_db
 wso2::is_datasource: wso2_gov_db
 
 wso2::master_datasources:
+  wso2am_db:
+    name: WSO2AM_DB
+    description: The datasource used for API Manager database
+    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+    url: jdbc:mysql://mysql-greg-apim-db.marathon.mesos:10132/GREG_APIM_DB?autoReconnect=true
+    username: "%{hiera('wso2::datasources::mysql::username')}"
+    password: "%{hiera('wso2::datasources::mysql::password')}"
+    jndi_config: jdbc/WSO2AM_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
   wso2_config_db:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10101/GREG_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10131/GREG_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_CONFIG_DB
@@ -126,7 +164,7 @@ wso2::social_datasources:
     name: WSO2_SOCIAL_DB
     description: The datasource used for social framework
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10101/GREG_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10131/GREG_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: jdbc/WSO2_SOCIAL_DB
@@ -142,7 +180,7 @@ wso2::bps_datasources:
     name: BPS_DS
     description: The datasource used for BPS database
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10101/GREG_DB?autoReconnect=true
+    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10131/GREG_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
     jndi_config: bpsds
@@ -150,22 +188,6 @@ wso2::bps_datasources:
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
     default_auto_commit: "%{hiera('wso2::datasources::common::bps_default_auto_commit')}"
-    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
-    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-
-wso2::metrics_datasources:
- wso2_metrics_db:
-    name : WSO2_METRICS_DB
-    description : The default datasource used for WSO2 Carbon Metrics
-    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10101/WSO2_METRICS_DB?autoReconnect=true
-    username: "%{hiera('wso2::datasources::mysql::username')}"
-    password: "%{hiera('wso2::datasources::mysql::password')}"
-    jndi_config: jdbc/WSO2MetricsDB
-    max_active: "%{hiera('wso2::datasources::common::max_active')}"
-    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
@@ -207,6 +229,16 @@ wso2::registry_mounts:
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
 #    password: "%{hiera('wso2::super_admin::password')}"
 #
+#  api_gateway_password:
+#    secret_alias: APIGateway.Password
+#    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIGateway/Environments/Environment/Password,false
+#    password: "%{hiera('wso2::super_admin::password')}"
+#
+#  api_key_validator_password:
+#    secret_alias: APIKeyValidator.Password
+#    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIKeyValidator/Password,false
+#    password: "%{hiera('wso2::super_admin::password')}"
+#
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
@@ -225,6 +257,11 @@ wso2::registry_mounts:
 #  bps_ds_db_password:
 #    secret_alias: Datasources.BPS_DS.Configuration.Password
 #    secret_alias_value: repository/conf/datasources/bps-datasources.xml//datasources-configuration/datasources/datasource[name='BPS_DS']/definition[@type='RDBMS']/configuration/password,false
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
+#
+#  wso2am_db_password:
+#    secret_alias: Datasource.WSO2AM_DB.configuration.password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  wso2_config_db_password:
