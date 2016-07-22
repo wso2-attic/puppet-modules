@@ -68,7 +68,7 @@ class wso2base {
   }
 
   # marathon-lb cert configs
-  if ($::platform == "mesos") {
+  if ($::platform == 'mesos') {
     $marathon_lb_cert_config = hiera('wso2::marathon_lb_cert_config')
     $marathon_lb_cert_config_enabled = $marathon_lb_cert_config['enabled']
     if ($marathon_lb_cert_config_enabled == true){

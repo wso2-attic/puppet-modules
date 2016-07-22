@@ -99,14 +99,14 @@ define wso2base::server (
   }
 
   # Import marathon-lb ceritficate
-  if ($::platform == "mesos" and $Wso2base::marathon_lb_cert_config_enabled == true) {
+  if ($::platform == 'mesos' and $Wso2base::marathon_lb_cert_config_enabled == true) {
     wso2base::import_cert{ $carbon_home:
-      carbon_home => $carbon_home,
-      wso2_module => $wso2_module,
-      java_home   => $Wso2base::java_home,
-      cert_file   => $Wso2base::cert_file,
+      carbon_home          => $carbon_home,
+      wso2_module          => $wso2_module,
+      java_home            => $Wso2base::java_home,
+      cert_file            => $Wso2base::cert_file,
       trust_store_password => $Wso2base::trust_store_password,
-      require     => Wso2base::Configure[$carbon_home]
+      require              => Wso2base::Configure[$carbon_home]
     }
   }
 

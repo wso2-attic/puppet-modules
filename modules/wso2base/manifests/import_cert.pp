@@ -29,6 +29,6 @@ define wso2base::import_cert ($carbon_home, $wso2_module, $java_home, $cert_file
       cwd       => "${carbon_home}/repository/resources/security",
       command   => "keytool -importcert -noprompt -alias marathon-lb -keystore client-truststore.jks -storepass ${trust_store_password} -file ${cert_file}",
       logoutput => 'on_failure',
-      require  => File["${carbon_home}/repository/resources/security/${cert_file}"]
+      require   => File["${carbon_home}/repository/resources/security/${cert_file}"]
     }
   }
