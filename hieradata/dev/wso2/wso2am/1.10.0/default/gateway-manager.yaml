@@ -68,3 +68,11 @@ wso2::registry_mounts:
    read_only: false
    registry_root: /
    enable_cache: true
+
+# SSO Configuration
+wso2::sso_authentication:
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2am-gw
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://gw.dev.wso2.org:9443/acs

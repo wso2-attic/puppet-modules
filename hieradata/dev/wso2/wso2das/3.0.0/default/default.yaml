@@ -321,6 +321,14 @@ wso2::metrics_datasources:
 #    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
+# SSO Configuration
+wso2::sso_authentication:
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2das
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://das.dev.wso2.org:9443/acs
+
 # Secure vault configuration
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:
@@ -392,12 +400,12 @@ wso2::metrics_datasources:
 #  analytics_data_config_password:
 #    secret_alias: Analytics.Data.Config.Password
 #    secret_alias_value: repository/conf/analytics/analytics-data-config.xml//AnalyticsDataConfiguration/Password,false
-#    password: wso2carbon
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  dep_sync_svn_password:
 #    secret_alias: Carbon.DeploymentSynchronizer.SvnPassword
 #    secret_alias_value: repository/conf/carbon.xml//Server/DeploymentSynchronizer/SvnPassword,true
-#    password: password
+#    password: "%{hiera('wso2::super_admin::password')}"
 
 ##Use below advanced secure vault configurations if the properties are used in corresponding files
 #  analytics_data_config_trust_store_password:
@@ -408,12 +416,12 @@ wso2::metrics_datasources:
 #  user_store_manager_connection_password:
 #    secret_alias: UserStoreManager.Property.ConnectionPassword
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='ConnectionPassword'],flase
-#    password: admin
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  user_store_manager_password:
 #    secret_alias: UserStoreManager.Property.password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/UserStoreManager/Property[@name='password'],false
-#    password: admin
+#    password: %{hiera('wso2::super_admin::password')}
 #
 #  axis2_https_listener_trust_store_password:
 #    secret_alias: Axis2.Https.Listener.TrustStore.Password

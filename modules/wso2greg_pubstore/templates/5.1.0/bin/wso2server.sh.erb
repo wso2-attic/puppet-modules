@@ -306,8 +306,8 @@ do
     -Djava.net.preferIPv4Stack=true \
     -Dcom.ibm.cacheLocalHost=true \
     -Dsetup \
-    -Djava.util.prefs.systemRoot=<%= @system_pref_dir[0] %> \
-    -Djava.util.prefs.userRoot=<%= @system_pref_dir[1] %> \
+    -Djava.util.prefs.systemRoot=<%= @java_system_pref_dir[0] %> \
+    -Djava.util.prefs.userRoot=<%= @java_system_pref_dir[1] %> \
     -DworkerNode=false \
     org.wso2.carbon.bootstrap.Bootstrap $*
     status=$?

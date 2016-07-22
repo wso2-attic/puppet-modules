@@ -19,6 +19,8 @@ wso2::service_name: wso2is
 wso2::hostname: is.dev.wso2.org
 wso2::mgt_hostname: is.dev.wso2.org
 
+wso2::enable_thrift_service: false
+
 #wso2::file_list:
 #  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
@@ -27,7 +29,7 @@ wso2::template_list:
   - repository/conf/datasources/bps-datasources.xml
   - repository/conf/datasources/metrics-datasources.xml
   - repository/conf/identity.xml
-  - repository/conf/identity/sso-idp-config.xml
+  - repository/conf/security/sso-idp-config.xml
   - repository/conf/identity/application-authentication.xml
   - repository/conf/datasources/am-datasources.xml
 #  - repository/conf/security/cipher-text.properties
@@ -91,6 +93,14 @@ wso2::clustering:
 
 #wso2::usermgt_datasource: wso2_user_db
 wso2::is_datasource: wso2_carbon_db
+
+# SSO Configuration
+wso2::sso_authentication:
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2is
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://is.dev.wso2.org:9443/acs
 
 #wso2::master_datasources:
 # wso2_config_db:

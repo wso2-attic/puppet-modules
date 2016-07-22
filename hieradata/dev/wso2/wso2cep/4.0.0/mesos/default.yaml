@@ -79,6 +79,14 @@ wso2::ha_deployment:
     hostName: 0.0.0.0
     port: 11002
 
+# SSO Configuration
+wso2::sso_authentication:
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2cep
+  sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
+  consumer_service_url: https://marathon-lb.marathon.mesos:10053/acs
+
 wso2::master_datasources:
   wso2_config_db:
     name: WSO2_CONFIG_DB

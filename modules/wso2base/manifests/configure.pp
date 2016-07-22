@@ -16,8 +16,6 @@
 
 define wso2base::configure ($template_list, $directory_list, $file_list, $system_file_list, $user, $group, $wso2_module) {
   $carbon_home  = $name
-  notice("Configuring WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
-
   if ($directory_list != undef and size($directory_list) > 0) {
     wso2base::ensure_directory_structures {
       $directory_list:

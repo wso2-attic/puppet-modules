@@ -30,35 +30,10 @@ wso2::mgt_hostname: greg.dev.wso2.org
 wso2::template_list:
   - repository/conf/identity.xml
   - repository/conf/datasources/bps-datasources.xml
-  - repository/conf/identity/sso-idp-config.xml
-  - repository/deployment/server/jaggeryapps/store/config/store.json
-  - repository/deployment/server/jaggeryapps/store/config/store-tenant.json
-  - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
 #  - password-tmp
-
-wso2::service_provider:
-  store:
-    issuer: store
-    acs: https://greg.dev.wso2.org:9443/store/acs
-  social:
-    issuer: social
-    acs: https://greg.dev.wso2.org:9443/social/acs
-  publisher:
-    issuer: publisher
-    acs: https://greg.dev.wso2.org:9443/publisher/acs
-
-wso2::identity_provider:
-  store:
-    issuer: store
-    identity_provider_url: https://greg.dev.wso2.org:9443/samlsso
-  publisher:
-    issuer: publisher
-    identity_provider_url: https://greg.dev.wso2.org:9443/samlsso
-
-wso2::social_app_url: https://greg.dev.wso2.org:9443/social
 
 # Uncomment the following for clustered setup
 #wso2::usermgt_datasource: wso2user_db
@@ -174,6 +149,14 @@ wso2::bps_datasources:
 #    default_auto_commit: "%{hiera('wso2::datasources::common::bps_default_auto_commit')}"
 #    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
+# SSO Configuration
+wso2::sso_authentication:
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2greg
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://greg.dev.wso2.org:9443/acs
 
 # Secure vault configuration
 #wso2::enable_secure_vault: true

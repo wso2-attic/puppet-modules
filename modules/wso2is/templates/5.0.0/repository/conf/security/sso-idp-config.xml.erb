@@ -37,36 +37,20 @@
 
     <%- @sso_service_providers.each do |server_name, server| -%>
     <ServiceProvider>
-          <Issuer><%= server_name %></Issuer>
-          <AssertionConsumerServiceURLs>
-              <AssertionConsumerServiceURL><%= server['assertion_consumer_service_url'] %></AssertionConsumerServiceURL>
-          </AssertionConsumerServiceURLs>
-          <DefaultAssertionConsumerServiceURL><%= server['default_assertion_consumer_service_url'] %></DefaultAssertionConsumerServiceURL>
-          <EnableSingleLogout>true</EnableSingleLogout>
-          <SLOResponseURL/>
-          <SLORequestURL/>
-          <SAMLDefaultSigningAlgorithmURI>http://www.w3.org/2000/09/xmldsig#rsa-sha1</SAMLDefaultSigningAlgorithmURI>
-          <SAMLDefaultDigestAlgorithmURI>http://www.w3.org/2000/09/xmldsig#sha1</SAMLDefaultDigestAlgorithmURI>
-          <SignResponse>true</SignResponse>
-          <ValidateSignatures>true</ValidateSignatures>
-          <EncryptAssertion>false</EncryptAssertion>
-          <CertAlias/>
-          <EnableAttributeProfile>true</EnableAttributeProfile>
-          <IncludeAttributeByDefault>true</IncludeAttributeByDefault>
-          <ConsumingServiceIndex/>
-          <EnableAudienceRestriction>false</EnableAudienceRestriction>
-          <AudiencesList>
-              <Audience/>
-          </AudiencesList>
-          <EnableRecipients>false</EnableRecipients>
-          <RecipientList>
-              <Recipient/>
-          </RecipientList>
-          <EnableIdPInitiatedSSO>false</EnableIdPInitiatedSSO>
-          <EnableIdPInitSLO>false</EnableIdPInitSLO>
-          <ReturnToURLList>
-              <ReturnToURL/>
-          </ReturnToURLList>
+      <Issuer><%= server_name %></Issuer>
+      <AssertionConsumerService><%= server['assertion_consumer_service_url'] %></AssertionConsumerService>
+      <SignAssertion>true</SignAssertion>
+      <SignResponse>true</SignResponse>
+      <EnableAttributeProfile>true</EnableAttributeProfile>
+      <IncludeAttributeByDefault>true</IncludeAttributeByDefault>
+      <EnableSingleLogout>true</EnableSingleLogout>
+      <SingleLogoutUrl></SingleLogoutUrl>
+      <LogoutUrl></LogoutUrl>
+      <EnableAudienceRestriction>false</EnableAudienceRestriction>
+      <AudiencesList>
+      	<Audience/>
+      </AudiencesList>
+      <ConsumingServiceIndex/>
     </ServiceProvider>
     <%- end -%>
 

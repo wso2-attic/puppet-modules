@@ -16,5 +16,4 @@
 
 define wso2base::deploy ($user, $group, $product_name, $product_version) {
   $carbon_home = $name
-  notice("Deploying artifacts for WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 }

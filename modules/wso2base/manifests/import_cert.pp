@@ -16,10 +16,6 @@
 
 # Add marathon-lb certificate to wso2 server's trust-store
 define wso2base::import_cert ($carbon_home, $wso2_module, $java_home, $cert_file, $trust_store_password) {
-
-    notice("Importing marathon-lb cert to WSO2 product [name] ${::product_name}, [version] ${::product_version},
-    [CARBON_HOME] ${carbon_home}")
-
     ensure_resource('file', "${carbon_home}/repository/resources/security/${cert_file}", {
       ensure  => file,
       owner   => $owner,
@@ -28,11 +24,11 @@ define wso2base::import_cert ($carbon_home, $wso2_module, $java_home, $cert_file
       source  => ["puppet:///modules/wso2base/${cert_file}"]
     })
 
-    exec { 'Importing marathon-lb cert':
+    exec {'Importing marathon-lb cert':
       path      => "${java_home}/bin",
       cwd       => "${carbon_home}/repository/resources/security",
       command   => "keytool -importcert -noprompt -alias marathon-lb -keystore client-truststore.jks -storepass ${trust_store_password} -file ${cert_file}",
       logoutput => 'on_failure',
-      require  => File["${carbon_home}/repository/resources/security/${cert_file}"]
+      require   => File["${carbon_home}/repository/resources/security/${cert_file}"]
     }
   }

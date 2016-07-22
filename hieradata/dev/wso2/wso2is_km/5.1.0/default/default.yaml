@@ -117,6 +117,14 @@ wso2::clustering:
 wso2::is_datasource: wso2am_db
 wso2::am_datasource: wso2am_db
 
+# SSO Configuration
+wso2::sso_authentication:
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2is-km
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://is.km.dev.wso2.org:9443/acs
+
 # Uncomment the following MySQL data sources for a clustered setup
 #wso2::master_datasources:
 #  wso2_config_db:
