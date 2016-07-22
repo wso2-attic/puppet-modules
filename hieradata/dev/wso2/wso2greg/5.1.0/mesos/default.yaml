@@ -50,6 +50,14 @@ wso2::ports:
     http: 10102
     https: 10103
 
+# SSO Configuration
+wso2::sso_authentication:
+    enabled : false
+    login_page: /carbon/admin/login.jsp
+    service_provider_id: wso2greg
+    sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
+    consumer_service_url: https://marathon-lb.marathon.mesos:10103/acs
+
 wso2::service_provider:
   store:
     issuer: store

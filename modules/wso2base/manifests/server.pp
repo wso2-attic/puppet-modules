@@ -14,7 +14,7 @@
 #  limitations under the License.
 #----------------------------------------------------------------------------
 #
-# Ochestrates a default WSO2 product installation
+# Orchestrates a default WSO2 product installation
 define wso2base::server (
   $maintenance_mode,
   $pack_filename,
@@ -36,32 +36,26 @@ define wso2base::server (
   $enable_secure_vault,
   $key_store_password
 ) {
-
   $carbon_home        = $name
   $patches_abs_dir    = "${carbon_home}/${patches_dir}"
+  notice("WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
 
-  notice("Starting WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
+  wso2base::clean { $carbon_home:
+    mode          => $maintenance_mode,
+    pack_filename => $pack_filename,
+    pack_dir      => $pack_dir
+  }
 
-  if $::wso2_patching_mode == undef or str2bool($::wso2_patching_mode) != true {
-      # Remove any existing installations
-      wso2base::clean { $carbon_home:
-        mode          => $maintenance_mode,
-        pack_filename => $pack_filename,
-        pack_dir      => $pack_dir
-      }
-
-      # Copy the WSO2 product pack, extract and set permissions
-      wso2base::install { $carbon_home:
-          mode          => $install_mode,
-          install_dir   => $install_dir,
-          pack_filename => $pack_filename,
-          pack_dir      => $pack_dir,
-          user          => $wso2_user,
-          group         => $wso2_group,
-          product_name  => $::product_name,
-          require       => Wso2base::Clean[$carbon_home],
-          notify        => Wso2base::Patch[$carbon_home]
-      }
+  # Copy the WSO2 product pack, extract and set permissions
+  wso2base::install { $carbon_home:
+    mode          => $install_mode,
+    install_dir   => $install_dir,
+    pack_filename => $pack_filename,
+    pack_dir      => $pack_dir,
+    user          => $wso2_user,
+    group         => $wso2_group,
+    product_name  => $::product_name,
+    require       => Wso2base::Clean[$carbon_home]
   }
 
   # Create a symlink to CARBON_HOME
@@ -74,54 +68,26 @@ define wso2base::server (
   }
 
   # Copy any patches to patch directory
-  if $::vm_type == 'docker' {
-    wso2base::patch { $carbon_home:
-      patches_abs_dir => $patches_abs_dir,
-      patches_dir     => $patches_dir,
-      user            => $wso2_user,
-      group           => $wso2_group,
-      product_name    => $::product_name,
-      product_version => $::product_version,
-    #   subscribe         => Wso2base::Install[$carbon_home]
-    }
-  } else {
-    wso2base::patch { $carbon_home:
-      patches_abs_dir => $patches_abs_dir,
-      patches_dir     => $patches_dir,
-      user            => $wso2_user,
-      group           => $wso2_group,
-      product_name    => $::product_name,
-      product_version => $::product_version,
-      notify          => Service[$service_name],
-    #   subscribe         => Wso2base::Install[$carbon_home]
-    }
+  wso2base::patch { $carbon_home:
+    patches_abs_dir => $patches_abs_dir,
+    patches_dir     => $patches_dir,
+    user            => $wso2_user,
+    group           => $wso2_group,
+    product_name    => $::product_name,
+    product_version => $::product_version,
+    require         => Wso2base::Install[$carbon_home]
   }
 
   # Populate templates and copy files provided
-  if $::vm_type == 'docker' {
-    wso2base::configure { $carbon_home:
-      template_list    => $template_list,
-      directory_list   => $directory_list,
-      file_list        => $file_list,
-      system_file_list => $system_file_list,
-      user             => $wso2_user,
-      group            => $wso2_group,
-      wso2_module      => $caller_module_name,
-      require          => Wso2base::Patch[$carbon_home]
-    }
-  }
-  else {
-    wso2base::configure { $carbon_home:
-      template_list    => $template_list,
-      directory_list   => $directory_list,
-      file_list        => $file_list,
-      system_file_list => $system_file_list,
-      user             => $wso2_user,
-      group            => $wso2_group,
-      wso2_module      => $caller_module_name,
-      notify           => Service[$service_name],
-      require          => Wso2base::Patch[$carbon_home]
-    }
+  wso2base::configure { $carbon_home:
+    template_list    => $template_list,
+    directory_list   => $directory_list,
+    file_list        => $file_list,
+    system_file_list => $system_file_list,
+    user             => $wso2_user,
+    group            => $wso2_group,
+    wso2_module      => $caller_module_name,
+    require          => Wso2base::Install[$carbon_home]
   }
 
   # Apply secure_vault
@@ -129,18 +95,18 @@ define wso2base::server (
     user                => $wso2_user,
     enable_secure_vault => $enable_secure_vault,
     key_store_password  => $key_store_password,
-    require             => Wso2base::Configure[$carbon_home]
+    require             => [Wso2base::Configure[$carbon_home], Wso2base::Patch[$carbon_home]]
   }
 
   # Import marathon-lb ceritficate
-  if ($::platform == "mesos" and $Wso2base::marathon_lb_cert_config_enabled == true) {
+  if ($::platform == 'mesos' and $Wso2base::marathon_lb_cert_config_enabled == true) {
     wso2base::import_cert{ $carbon_home:
-      carbon_home => $carbon_home,
-      wso2_module => $wso2_module,
-      java_home   => $Wso2base::java_home,
-      cert_file   => $Wso2base::cert_file,
+      carbon_home          => $carbon_home,
+      wso2_module          => $wso2_module,
+      java_home            => $Wso2base::java_home,
+      cert_file            => $Wso2base::cert_file,
       trust_store_password => $Wso2base::trust_store_password,
-      require     => Wso2base::Configure[$carbon_home]
+      require              => Wso2base::Configure[$carbon_home]
     }
   }
 
@@ -150,22 +116,22 @@ define wso2base::server (
     group           => $wso2_group,
     product_name    => $::product_name,
     product_version => $::product_version,
-    require         => Wso2base::Apply_secure_vault[$carbon_home]
+    require         => Wso2base::Install[$carbon_home]
   }
 
   # Start the service
+  # TODO: start the service only if configuration changes are applied that needs a restart to be effective
   if $::vm_type != 'docker' {
     service { $service_name:
       ensure     => running,
       hasstatus  => true,
       hasrestart => true,
       enable     => true,
-      require    => [Wso2base::Deploy[$carbon_home]],
+      require    => [Wso2base::Deploy[$carbon_home], Wso2base::Patch[$carbon_home],
+                     Wso2base::Configure[$carbon_home], Wso2base::Apply_secure_vault[$carbon_home]]
     }
-  }
 
-  if $::vm_type != 'docker' {
-    notify{ "Successfully started WSO2 service [name] ${service_name}, [CARBON_HOME] ${carbon_home}":
+    notify { "Successfully started WSO2 service [name] ${service_name}, [CARBON_HOME] ${carbon_home}":
       withpath => true,
       require  => Service[$service_name]
     }

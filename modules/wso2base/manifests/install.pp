@@ -19,8 +19,6 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
   $carbon_home = $name
   $pack_file_abs_path = "${pack_dir}/${pack_filename}"
 
-  notice("Installing WSO2 product [name] ${::product_name}, [version] ${::product_version}, [CARBON_HOME] ${carbon_home}")
-
   # create directories for installation if they do not exist
   # ensure_resource('file', [$install_dir, $pack_dir], { ensure => 'directory' })
   $install_dirs=[$install_dir, $pack_dir]
@@ -92,14 +90,15 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
     command            => 'chmod -R 754 ./',
     logoutput          => 'on_failure',
     timeout            => 0,
-    refreshonly        => true,
-    notify             => Exec['remove_product_pack']
+    refreshonly        => true
   })
 
-
-  # Remove wso2 product pack archive
-  exec { 'remove_product_pack':
-    path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
-    command => "rm -rf ${pack_file_abs_path}",
+  if $::vm_type == 'docker' {
+    # Remove wso2 product pack archive
+    exec { "remove_product_pack_${carbon_home}":
+      path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+      command => "rm -rf ${pack_file_abs_path}",
+      require =>  Exec["set_permissions_${carbon_home}"]
+    }
   }
 }

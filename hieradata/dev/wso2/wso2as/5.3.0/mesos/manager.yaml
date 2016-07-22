@@ -43,3 +43,11 @@ wso2::dep_sync:
     user: username
     password: password
     append_tenant_id: true
+
+# SSO Configuration
+wso2::sso_authentication:
+    enabled : false
+    login_page: /carbon/admin/login.jsp
+    service_provider_id: wso2as
+    sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
+    consumer_service_url: https://marathon-lb.marathon.mesos:10023/acs

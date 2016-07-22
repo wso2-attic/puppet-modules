@@ -45,6 +45,14 @@ wso2::clustering:
 #    marathon_username: username
 #    marathon_username: password
 
+# SSO Configuration
+wso2::sso_authentication:
+    enabled : false
+    login_page: /carbon/admin/login.jsp
+    service_provider_id: wso2mb
+    sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
+    consumer_service_url: https://marathon-lb.marathon.mesos:10123/acs
+
 wso2::usermgt_datasource: wso2_user_db
 
 wso2::master_datasources:

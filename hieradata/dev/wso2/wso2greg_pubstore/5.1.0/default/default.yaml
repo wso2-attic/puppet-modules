@@ -246,6 +246,14 @@ wso2::social_datasources:
 #    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
+# SSO Configuration
+wso2::sso_authentication:
+    enabled : false
+    login_page: /carbon/admin/login.jsp
+    service_provider_id: wso2greg-pubstore
+    sso_service_url: https://is.dev.wso2.org:9443/samlsso
+    consumer_service_url: https://greg.dev.wso2.org:9443/acs
+
 # Secure vault configuration
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:

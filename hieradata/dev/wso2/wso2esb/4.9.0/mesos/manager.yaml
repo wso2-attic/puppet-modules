@@ -51,3 +51,11 @@ wso2::esb_wsdl_epr_prefix:
   https:
     bind_address: marathon-lb.marathon.mesos
     prefix: https://marathon-lb.marathon.mesos:10093
+
+# SSO Configuration
+wso2::sso_authentication:
+    enabled : false
+    login_page: /carbon/admin/login.jsp
+    service_provider_id: wso2esb
+    sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
+    consumer_service_url: https://marathon-lb.marathon.mesos:10095/acs

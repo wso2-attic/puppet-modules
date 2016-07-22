@@ -46,11 +46,11 @@ wso2::file_list:
 # Provide the server list for setting up sso
 #wso2::sso_service_providers:
 #    wso2esb:
-#      assertion_consumer_service_url: https://wso2esb-default:9443/acs
-#      default_assertion_consumer_service_url: https://wso2esb-default:9443/acs
+#      assertion_consumer_service_url: https://wso2esb-default:32094/acs
+#      default_assertion_consumer_service_url: https://wso2esb-default:32094/acs
 #    wso2as:
-#      assertion_consumer_service_url: https://wso2as-default:9443/acs
-#      default_assertion_consumer_service_url: https://wso2as-default:9443/acs
+#      assertion_consumer_service_url: https://wso2as-default:32023/acs
+#      default_assertion_consumer_service_url: https://wso2as-default:32023/acs
 
 
 wso2::apim_gateway:

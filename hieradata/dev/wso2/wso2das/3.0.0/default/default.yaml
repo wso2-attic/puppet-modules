@@ -321,6 +321,14 @@ wso2::metrics_datasources:
 #    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
 #    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
+# SSO Configuration
+wso2::sso_authentication:
+    enabled : false
+    login_page: /carbon/admin/login.jsp
+    service_provider_id: wso2das
+    sso_service_url: https://is.dev.wso2.org:9443/samlsso
+    consumer_service_url: https://das.dev.wso2.org:9443/acs
+
 # Secure vault configuration
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:

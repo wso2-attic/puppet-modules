@@ -15,28 +15,29 @@
 #----------------------------------------------------------------------------
 
 define wso2base::clean ($mode, $pack_filename, $pack_dir) {
-  notice("Cleaning WSO2 product [name] ${::product_name}, [version] ${::product_version}, [mode] ${mode}")
+  # TODO: use Puppet RAL instead of commands. In other words, get Puppet to do this!
   if $mode == 'refresh' {
     exec {
       "Remove_lock_file_${name}":
         path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
         onlyif  => "test -f ${name}/wso2carbon.lck",
-        command => "rm ${name}/wso2carbon.lck";
+        command => "rm ${name}/wso2carbon.lck",
+        notify  =>  Exec["Stop_process_${name}"];
 
       "Stop_process_${name}":
-        path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/java/bin/',
-        command => "kill -9 `cat ${name}/wso2carbon.pid`; /bin/echo Killed",
-        require => Exec["Remove_lock_file_${name}"];
+        path        => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/java/bin/',
+        command     => "kill -9 `cat ${name}/wso2carbon.pid`",
+        refreshonly => true;
     }
   } elsif $mode == 'new' {
     exec { "Stop_process_and_remove_CARBON_HOME_${name}":
       path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/java/bin/',
-      command => "kill -9 `cat ${name}/wso2carbon.pid`; rm -rf ${name}";
+      command => "kill -9 `cat ${name}/wso2carbon.pid` && rm -rf ${name}";
     }
   } elsif $mode == 'zero' {
     exec { "Stop_process_remove_CARBON_HOME_and_pack_${name}":
       path    => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/java/bin/',
-      command => "kill -9 `cat ${name}/wso2carbon.pid`; rm -rf ${name}; rm -f ${pack_dir}/${pack_filename}";
+      command => "kill -9 `cat ${name}/wso2carbon.pid` && rm -rf ${name} && rm -f ${pack_dir}/${pack_filename}";
     }
   }
 }

@@ -13,8 +13,26 @@
 # limitations under the License.
 
 ---
-java_install_dir: /mnt/jdk-7u80
-java_source_file: jdk-7u80-linux-x64.tar.gz
+classes:
+  - "%{hiera('java_class')}"
+
+# class responsible for installing Java
+# Plugin any 3rd party class here as you wish
+java_class: wso2base::java
 
 # symlink to Java install directory
 java_home: /opt/java
+
+java_system_pref_dir:
+  - "/home/%{hiera('wso2::user')}/.java"
+  - "/home/%{hiera('wso2::user')}/.java/.systemPrefs"
+
+# wso2base::java class automatic parameter lookup
+wso2base::java::java_install_dir: /mnt/jdk-7u80
+wso2base::java::java_source_file: jdk-7u80-linux-x64.tar.gz
+wso2base::java::wso2_user: "%{hiera('wso2::user')}"
+wso2base::java::wso2_group: "%{hiera('wso2::group')}"
+wso2base::java::java_home: /opt/java
+wso2base::java::system_pref_dir:
+  - "%{hiera('java_system_pref_dir.0')}"
+  - "%{hiera('java_system_pref_dir.1')}"
