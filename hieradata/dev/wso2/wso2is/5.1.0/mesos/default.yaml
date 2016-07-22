@@ -36,11 +36,11 @@ wso2::enable_thrift_service: false
 # Provide the server list for setting up sso
 #wso2::sso_service_providers:
 #    wso2esb:
-#      assertion_consumer_service_url: https://marathon-lb.marathon.mesos:9443/acs
-#      default_assertion_consumer_service_url: https://marathon-lb.marathon.mesos:9443/acs
+#      assertion_consumer_service_url: https://marathon-lb.marathon.mesos:10093/acs
+#      default_assertion_consumer_service_url: https://marathon-lb.marathon.mesos:10093/acs
 #    wso2as:
-#      assertion_consumer_service_url: https://marathon-lb.marathon.mesos:9443/acs
-#      default_assertion_consumer_service_url: https://marathon-lb.marathon.mesos:9443/acs
+#      assertion_consumer_service_url: https://marathon-lb.marathon.mesos:10023/acs
+#      default_assertion_consumer_service_url: https://marathon-lb.marathon.mesos:10023/acs
 
 
 # In Mesos proxy ports need to be configured to match with service ports.
