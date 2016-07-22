@@ -17,8 +17,8 @@ classes:
   - wso2das
 
 wso2::service_name: wso2das
-wso2::hostname: "%{::fqdn}"
-wso2::mgt_hostname: "%{::fqdn}"
+wso2::hostname: das.dev.wso2.org
+wso2::mgt_hostname: das.dev.wso2.org
 
 wso2::file_list:
   - dbscripts/identity/h2.sql
