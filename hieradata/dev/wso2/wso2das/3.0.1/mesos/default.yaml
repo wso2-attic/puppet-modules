@@ -62,11 +62,11 @@ wso2::ha_deployment:
 
 # SSO Configuration
 wso2::sso_authentication:
-    enabled : false
-    login_page: /carbon/admin/login.jsp
-    service_provider_id: wso2das
-    sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
-    consumer_service_url: https://marathon-lb.marathon.mesos:10063/acs
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2das
+  sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
+  consumer_service_url: https://marathon-lb.marathon.mesos:10063/acs
 
 ## Uncomment the following when running Spark-Mesos framework
 # wso2::spark:

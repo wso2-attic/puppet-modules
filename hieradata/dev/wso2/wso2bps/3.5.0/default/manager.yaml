@@ -79,8 +79,8 @@ wso2::dep_sync:
 
 # SSO Configuration
 wso2::sso_authentication:
-    enabled : false
-    login_page: /carbon/admin/login.jsp
-    service_provider_id: wso2bps
-    sso_service_url: https://is.dev.wso2.org:9443/samlsso
-    consumer_service_url: https://bps.dev.wso2.org:9443/acs
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2bps
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://bps.dev.wso2.org:9443/acs

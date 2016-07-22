@@ -96,11 +96,11 @@ wso2::is_datasource: wso2_carbon_db
 
 # SSO Configuration
 wso2::sso_authentication:
-    enabled : false
-    login_page: /carbon/admin/login.jsp
-    service_provider_id: wso2is
-    sso_service_url: https://is.dev.wso2.org:9443/samlsso
-    consumer_service_url: https://is.dev.wso2.org:9443/acs
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2is
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://is.dev.wso2.org:9443/acs
 
 #wso2::master_datasources:
 # wso2_config_db:

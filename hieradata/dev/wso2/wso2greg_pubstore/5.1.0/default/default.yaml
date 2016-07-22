@@ -248,11 +248,11 @@ wso2::social_datasources:
 
 # SSO Configuration
 wso2::sso_authentication:
-    enabled : false
-    login_page: /carbon/admin/login.jsp
-    service_provider_id: wso2greg-pubstore
-    sso_service_url: https://is.dev.wso2.org:9443/samlsso
-    consumer_service_url: https://greg.dev.wso2.org:9443/acs
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2greg-pubstore
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://greg.dev.wso2.org:9443/acs
 
 # Secure vault configuration
 #wso2::enable_secure_vault: true
