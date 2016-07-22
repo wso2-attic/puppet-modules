@@ -95,7 +95,7 @@ define wso2base::server (
     user                => $wso2_user,
     enable_secure_vault => $enable_secure_vault,
     key_store_password  => $key_store_password,
-    require             => Wso2base::Patch[$carbon_home]
+    require             => [Wso2base::Configure[$carbon_home], Wso2base::Patch[$carbon_home]]
   }
 
   # Import marathon-lb ceritficate

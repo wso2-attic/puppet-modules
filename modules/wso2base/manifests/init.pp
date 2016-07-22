@@ -19,6 +19,7 @@
 # This class installs required system packages for WSO2 products and configures operating system parameters
 class wso2base {
   $java_class           = hiera('java_class')
+  $java_system_pref_dir = hiera_array('java_system_pref_dir')
   # symlink path to Java install directory
   $java_home            = hiera('java_home')
 
