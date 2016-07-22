@@ -84,8 +84,8 @@ wso2::registry_mounts:
 
 # SSO Configuration
 wso2::sso_authentication:
-    enabled : false
-    login_page: /carbon/admin/login.jsp
-    service_provider_id: wso2am-pub
-    sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
-    consumer_service_url: https://marathon-lb.marathon.mesos:10207/acs
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2am-pub
+  sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
+  consumer_service_url: https://marathon-lb.marathon.mesos:10207/acs
