@@ -73,7 +73,7 @@ wso2::apim_gateway:
 #     https: 443
 
 wso2::clustering:
-  enabled: true
+  enabled: false
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
   domain: km.is.wso2.domain
@@ -84,6 +84,9 @@ wso2::clustering:
     members:
       -
         hostname: 192.168.100.141
+        port: 4000
+      -
+        hostname: 192.168.100.142
         port: 4000
 # AWS membership scheme
 #   membership_scheme: aws
