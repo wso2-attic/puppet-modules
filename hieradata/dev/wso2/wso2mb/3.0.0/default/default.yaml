@@ -150,6 +150,14 @@ wso2::metrics_datasources:
 #wso2::file_list:
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
+# SSO Configuration
+wso2::sso_authentication:
+    enabled : false
+    login_page: /carbon/admin/login.jsp
+    service_provider_id: wso2mb
+    sso_service_url: https://is.dev.wso2.org:9443/samlsso
+    consumer_service_url: https://mb.dev.wso2.org:9443/acs
+
 # Set clustering enabled to true for a clustered setup
 wso2::clustering:
   enabled: false
