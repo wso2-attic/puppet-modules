@@ -71,7 +71,8 @@ wso2::clustering:
 #   aws:
 #     access_key: access-key
 #     secret_key: secret-key
-#     security_group: security-group
+#     security_group: security-group 
+#     host_header: host-header
 #     region: region
 #     tag_key: tag-key
 #     tag_value: tag-value
