@@ -36,10 +36,6 @@ wso2::file_list:
 wso2::template_list:
   - repository/conf/identity.xml
   - repository/conf/datasources/bps-datasources.xml
-  - repository/conf/identity/sso-idp-config.xml
-  - repository/deployment/server/jaggeryapps/store/config/store.json
-  - repository/deployment/server/jaggeryapps/store/config/store-tenant.json
-  - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -52,27 +48,6 @@ wso2::ports:
     http: 32101
     https: 32102
     
-wso2::service_provider:
-  store:
-    issuer: store
-    acs: https://wso2greg-default:32102/store/acs
-  social:
-    issuer: social
-    acs: https://wso2greg-default:32102/social/acs
-  publisher:
-    issuer: publisher
-    acs: https://wso2greg-default:32102/publisher/acs
-
-wso2::identity_provider:
-  store:
-    issuer: store
-    identity_provider_url: https://wso2greg-default:32102/samlsso
-  publisher:
-    issuer: publisher
-    identity_provider_url: https://wso2greg-default:32102/samlsso
-
-wso2::social_app_url: https://wso2es-default:32102/social
-
 wso2::usermgt_datasource: wso2_user_db
 
 wso2::is_datasource: wso2_gov_db
