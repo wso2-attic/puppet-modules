@@ -32,16 +32,11 @@ wso2::clustering:
 
 wso2::template_list:
   - repository/conf/identity.xml
-  - repository/conf/datasources/social-datasources.xml
   - repository/conf/datasources/bps-datasources.xml
-  - repository/conf/identity/sso-idp-config.xml
-  - repository/conf/identity/application-authentication.xml
-  - repository/deployment/server/jaggeryapps/store/config/store.json
-  - repository/deployment/server/jaggeryapps/store/config/store-tenant.json
-  - repository/deployment/server/jaggeryapps/publisher/config/publisher.json
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
+#  - password-tmp
 
 # In mesos proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
@@ -50,31 +45,25 @@ wso2::ports:
     http: 10102
     https: 10103
 
-wso2::service_provider:
-  store:
-    issuer: store
-    acs: https://marathon-lb.marathon.mesos:10103/store/acs
-  social:
-    issuer: social
-    acs: https://marathon-lb.marathon.mesos:10103/social/acs
-  publisher:
-    issuer: publisher
-    acs: https://marathon-lb.marathon.mesos:10103/publisher/acs
-
-wso2::identity_provider:
-  store:
-    issuer: store
-    identity_provider_url: https://marathon-lb.marathon.mesos:10103/samlsso
-  publisher:
-    issuer: publisher
-    identity_provider_url: https://marathon-lb.marathon.mesos:10103/samlsso
-
-wso2::social_app_url: https://wso2es-default:10103/social
-
 wso2::usermgt_datasource: wso2_user_db
 wso2::is_datasource: wso2_gov_db
 
 wso2::master_datasources:
+  wso2am_db:
+    name: WSO2AM_DB
+    description: The datasource used for API Manager database
+    driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+    url: jdbc:mysql://mysql-greg-db.marathon.mesos:10101/GREG_DB?autoReconnect=true
+    username: "%{hiera('wso2::datasources::mysql::username')}"
+    password: "%{hiera('wso2::datasources::mysql::password')}"
+    jndi_config: jdbc/WSO2AM_DB
+    max_active: "%{hiera('wso2::datasources::common::max_active')}"
+    max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+    test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+    default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+    validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+    validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+
   wso2_config_db:
     name: WSO2_CONFIG_DB
     description: The datasource used for config registry
@@ -251,6 +240,6 @@ wso2::registry_mounts:
 #    password: password
 #
 #  thrift_based_entitlement_config_key_store_password:
-#    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias: EntitlementSettings.ThirftBasedEntitlementConfig.KeyStore.Password
 #    secret_alias_value: repository/conf/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
 #    password: "%{hiera('wso2::key_stores::key_store::password')}"

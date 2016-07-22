@@ -16,8 +16,8 @@ classes:
   - wso2das
 
 wso2::service_name: wso2das
-wso2::hostname: wso2das-default
-wso2::mgt_hostname: wso2das-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 wso2::file_list:
   - dbscripts/identity/h2.sql
@@ -28,6 +28,9 @@ wso2::template_list:
   - repository/conf/datasources/analytics-datasources.xml
   - repository/conf/datasources/metrics-datasources.xml
   - repository/conf/analytics/spark/spark-defaults.conf
+  - repository/conf/data-bridge/data-bridge-config.xml
+  - repository/conf/event-processor.xml
+  - bin/load-spark-env-vars.sh
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
@@ -38,8 +41,7 @@ wso2::directory_list:
 ## Comment out the following when running Spark-Mesos framework
 wso2::spark:
   master: local
-  master_count: 1
-  hostname: "%{::ipaddress}"
+  master_count: 2
 
 wso2::single_node_deployment:
   enabled: true
@@ -86,8 +88,8 @@ wso2::ha_deployment:
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
   proxyPort:
-    http: 10062
-    https: 10063
+    http: 9763
+    https: 9443
 
 # Clustering
 wso2::clustering:
@@ -361,6 +363,6 @@ wso2::registry_mounts:
 #    password: wso2carbon
 #
 #  thrift_based_entitlement_config_key_store_password:
-#    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias: EntitlementSettings.ThirftBasedEntitlementConfig.KeyStore.Password
 #    secret_alias_value: repository/conf/identity/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
 #    password: "%{hiera('wso2::key_stores::key_store::password')}"

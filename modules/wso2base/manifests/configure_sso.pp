@@ -16,13 +16,13 @@
 
 define wso2base::configure_sso ($carbon_home, $owner, $group, $wso2_module) {
 
-  $template_path = '/repository/conf/identity/service-providers/'
+  $template_path = '/repository/conf/identity/service-providers'
 
   ensure_resource('file', "${carbon_home}/${template_path}/${name}.xml", {
     ensure  => file,
     owner   => $owner,
     group   => $group,
     mode    => '0754',
-    content => template("${wso2_module}/${::product_version}/${template_path}service_provider_template.xml.erb")
+    content => template("${wso2_module}/${::product_version}/${template_path}/service_provider_template.xml.erb")
   })
 }

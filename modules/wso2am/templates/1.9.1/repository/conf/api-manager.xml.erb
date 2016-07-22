@@ -139,7 +139,7 @@
 		     An API deployed on a 'hybrid' type gateway will support both production and sandbox keys -->
                 <Environment type="hybrid" api-console="true">
                         <Name>Production and Sandbox</Name>
-                    <Description> Description of environment</Description>
+                    <Description>Default Gateway Environment</Description>
                         <!--
                                 Server URL of the API gateway.
                         -->
@@ -251,7 +251,7 @@
         <BAMPassword>admin</BAMPassword>
 
         <!--
-            If below property set to true,then the response message size will be calculated and publish 
+            If below property set to true,then the response message size will be calculated and publish
             with each successful API invocation event.
         -->
         <PublishResponseMessageSize>false</PublishResponseMessageSize>
@@ -338,7 +338,7 @@
         -If you are at the Gateway node, you need to point "ThriftClientPort" value to the "ThriftServerPort" value given at KeyManager node.
         -If you need to start two API Manager instances in the same machine, you need to give different ports to "ThriftServerPort" value in two nodes.
         -ThriftServerHost - Allows to configure a hostname for the thrift server. It uses the carbon hostname by default.
-	-Gateway use this parameter to connect key validation thrift service. 
+	-Gateway use this parameter to connect key validation thrift service.
         -->
 
         <%- if @clustering['enabled'] -%>
@@ -356,16 +356,16 @@
           <EnableThriftServer>true</EnableThriftServer>
       <%- end -%>
 
-        <!-- 
+        <!--
         Scope used for marking Application Tokens. If a token is generated with this scope, they will be treated as Application Access Tokens
         -->
         <ApplicationTokenScope>am_application_scope</ApplicationTokenScope>
 
-        <!-- 
+        <!--
         Specifies the implementation to be used for KeyValidationHandler. Steps for validating a token can be controlled by plugging in a custom KeyValidation Handler
-        -->    
+        -->
         <KeyValidationHandlerClassName>org.wso2.carbon.apimgt.keymgt.handlers.DefaultKeyValidationHandler</KeyValidationHandlerClassName>
-	
+
         <!--
             Remove UserName from JWT Token
         -->
@@ -405,7 +405,7 @@
     Uncomment this section only if you are going to have an instance other than KeyValidator as your KeyManager.
     Unless a ThirdParty KeyManager is used, you don't need to configure this section.
     -->
-    
+
     <!--APIKeyManager>
         <KeyManagerClientImpl>org.wso2.carbon.apimgt.keymgt.AMDefaultKeyManagerImpl</KeyManagerClientImpl>
         <Configuration>

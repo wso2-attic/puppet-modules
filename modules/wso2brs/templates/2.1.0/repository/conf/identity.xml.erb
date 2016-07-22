@@ -26,14 +26,13 @@
 	<!-- Security configurations -->
 	<Security>
 		<UserTrustedRPStore>
-			<Location>${carbon.home}/repository/resources/security/userRP.jks
-			</Location>
+			<Location>${carbon.home}/<%= @key_stores['user_trusted_rp_store']['location'] %></Location>
 			<!-- Keystore type (JKS/PKCS12 etc.) -->
-			<Type>JKS</Type>
+			<Type><%= @key_stores['user_trusted_rp_store']['type'] %></Type>
 			<!-- Keystore password -->
-			<Password>wso2carbon</Password>
+			<Password><%= @key_stores['user_trusted_rp_store']['password'] %></Password>
 			<!-- Private Key password -->
-			<KeyPassword>wso2carbon</KeyPassword>
+			<KeyPassword><%= @key_stores['user_trusted_rp_store']['key_password'] %></KeyPassword>
 		</UserTrustedRPStore>
 
 		<!-- The directory under which all other KeyStore files will be stored -->
@@ -177,9 +176,9 @@
 			<ReceivePort>${Ports.ThriftEntitlementReceivePort}</ReceivePort>
 			<ClientTimeout>10000</ClientTimeout>
 			<KeyStore>
-                <Location>${carbon.home}/<%= @key_stores['key_store']['location'] %></Location>
-				<Password><%= @key_stores['key_store']['password'] %></Password>
-            </KeyStore>
+        <Location>${carbon.home}/<%= @key_stores['key_store']['location'] %></Location>
+        <Password><%= @key_stores['key_store']['password'] %></Password>
+			</KeyStore>
 		</ThirftBasedEntitlementConfig>
 	</EntitlementSettings>
 	<SCIMAuthenticators>
