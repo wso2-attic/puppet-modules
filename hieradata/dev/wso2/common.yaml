@@ -13,7 +13,7 @@
 # limitations under the License.
 
 ---
-wso2::maintenance_mode: zero
+wso2::maintenance_mode: refresh
 wso2::install_mode: file_bucket
 wso2::patches_dir: repository/components/patches
 wso2::install_dir: "/mnt/%{::ipaddress}"
@@ -59,9 +59,9 @@ wso2::system_file_list: []
 
 # JVM settings
 wso2::jvm:
-    xms: 256m
-    xmx: 1024m
-    max_perm_size: 256m
+  xms: 256m
+  xmx: 1024m
+  max_perm_size: 256m
 
 # Server ports configuration
 wso2::ports:
@@ -74,32 +74,32 @@ wso2::mgt_hostname: "%{::clientcert}"
 # Clustering configuration
 wso2::worker_node: false
 wso2::clustering:
-    enabled: false
-    membership_scheme: wka
-    domain: wso2.carbon.domain
-    local_member_host: 127.0.0.1
-    local_member_port: 4000
-    sub_domain: worker
-    wka:
-       members:
-         -
-           hostname: 127.0.0.1
-           port: 4000
-    # multicast:
-    # kubernetes:
-    # ppaas:
+  enabled: false
+  membership_scheme: wka
+  domain: wso2.carbon.domain
+  local_member_host: 127.0.0.1
+  local_member_port: 4000
+  sub_domain: worker
+  wka:
+     members:
+       -
+         hostname: 127.0.0.1
+         port: 4000
+  # multicast:
+  # kubernetes:
+  # ppaas:
 
 # Deployment synchronization configuration
 wso2::dep_sync:
-    enabled: false
-    auto_checkout: true
-    auto_commit: false
-    repository_type: svn
-    svn:
-       url: http://svnrepo.example.com/repos/
-       user: username
-       password: password
-       append_tenant_id: true
+  enabled: false
+  auto_checkout: true
+  auto_commit: false
+  repository_type: svn
+  svn:
+     url: http://svnrepo.example.com/repos/
+     user: username
+     password: password
+     append_tenant_id: true
 
 # Array of common packages to be installed to support WSO2 products
 packages: []
@@ -207,16 +207,16 @@ wso2::key_stores::user_trusted_rp_store::key_password: 'wso2carbon'
 wso2::enable_secure_vault: false
 
 wso2::sso_authentication:
-    enabled : false
-    login_page: /carbon/admin/login.jsp
-    service_provider_id: carbonServer
-    sso_service_url: https://localhost:9443/samlsso
-    consumer_service_url: https://localhost:9443/acs
+  enabled : false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: carbonServer
+  sso_service_url: https://localhost:9443/samlsso
+  consumer_service_url: https://localhost:9443/acs
 
 wso2::super_admin::username: 'admin'
 wso2::super_admin::password: 'admin'
 
 wso2::user_management:
-    admin_role: admin
-    admin_username: "%{hiera('wso2::super_admin::username')}"
-    admin_password: "%{hiera('wso2::super_admin::password')}"
+  admin_role: admin
+  admin_username: "%{hiera('wso2::super_admin::username')}"
+  admin_password: "%{hiera('wso2::super_admin::password')}"
