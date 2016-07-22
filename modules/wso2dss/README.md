@@ -33,7 +33,7 @@ No changes to Hiera data are required to run the distributed deployment (`manage
     ```yaml
     wso2::clustering :
         enabled: true
-        local_member_host: 192.168.100.13
+        local_member_host: "%{::ipaddress}"
         local_member_port: 4000
         membership_scheme: wka
         sub_domain: mgt
@@ -160,4 +160,4 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
     Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
 
 ## Running WSO2 Data Services Server on Kubernetes
-WSO2 Puppet Module ships Hiera data required to deploy WSO2 Data Services Server on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
+WSO2 Puppet Module ships Hiera data required to deploy WSO2 Data Services Server on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM210/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).

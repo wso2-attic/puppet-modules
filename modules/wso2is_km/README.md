@@ -57,20 +57,19 @@ No other changes to Hiera data are required to run the distributed deployment of
 
    Ex:
     ```yaml
-    wso2::clustering :
-        enabled: true
-        local_member_host: 192.168.100.13
-        local_member_port: 4000
-        membership_scheme: wka
-        sub_domain: mgt
-        wka:
-           members:
-             -
-               hostname: 192.168.100.113
-               port: 4000
-             -
-               hostname: 192.168.100.114
-               port: 4000
+    wso2::clustering:
+      enabled: true
+      local_member_host: "%{::ipaddress}"
+      local_member_port: 4000
+      domain: km.is.wso2.domain
+      sub_domain: worker
+    # WKA membership scheme
+      membership_scheme: wka
+      wka:
+        members:
+          -
+            hostname: 192.168.100.141
+            port: 4000
     ```
 
 2. Add external databases to master datasources
@@ -181,4 +180,4 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
     ```
 
 ## Running  WSO2 Identity Server Key Manager on Kubernetes
-WSO2 Puppet Module ships Hiera data required to deploy  WSO2 Identity Server Key Manager on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
+WSO2 Puppet Module ships Hiera data required to deploy  WSO2 Identity Server Key Manager on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM210/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).

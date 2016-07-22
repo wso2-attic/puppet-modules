@@ -1,6 +1,6 @@
 # WSO2 Business Process Server Puppet Module
 
-This repository contains the Puppet Module for installing and configuring WSO2 Business Process Server 3.5.0 on various environments. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
+This repository contains the Puppet Module for installing and configuring WSO2 Business Process Server on various environments. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
 
 ## Supported Operating Systems
 
@@ -18,7 +18,7 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 
 Copy the following files to their corresponding locations.
 
-1. WSO2 Business Process Server distribution (3.5.0) to `<PUPPET_HOME>/modules/wso2bps/files`
+1. WSO2 Business Process Server distribution (3.5.0 or 3.5.1) to `<PUPPET_HOME>/modules/wso2bps/files`
 2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running WSO2 Business Process Server in the `default` profile
@@ -146,4 +146,4 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
     Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
 
 ## Running WSO2 Business Process Server on Kubernetes
-WSO2 Puppet Module ships Hiera data required to deploy WSO2 Business Process Server on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
+WSO2 Puppet Module ships Hiera data required to deploy WSO2 Business Process Server on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM210/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).

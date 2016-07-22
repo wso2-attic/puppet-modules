@@ -1,6 +1,6 @@
 # WSO2 API Manager Puppet Module
 
-This repository contains the Puppet Module for installing and configuring WSO2 API Manager 1.9.1 & 1.10.0 on various environments. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
+This repository contains the Puppet Module for installing and configuring WSO2 API Manager on various environments. Configuration data is managed using [Hiera](http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a set of YAML files in a hierarchical manner.
 
 ## Supported Operating Systems
 
@@ -35,7 +35,7 @@ Hiera data sets matching the distributed profiles of WSO2 API Manager (`api-stor
        enabled: true
        domain: wso2.km.am.domain
        sub_domain: mgt
-       local_member_host: local.km.am.wso2.com
+       local_member_host: "%{::ipaddress}"
        local_member_port: 4000
        membership_scheme: wka
        members:
@@ -165,3 +165,6 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
     wso2::file_list:
       - repository/deployment/server/webapps/authenticationendpoint.war
     ```
+
+## Running WSO2 API Manager on Kubernetes
+WSO2 APIM Puppet module ships Hiera data required to deploy WSO2 API Manager on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM210/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).

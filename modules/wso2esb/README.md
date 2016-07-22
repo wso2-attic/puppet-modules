@@ -148,4 +148,4 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
 
 
 ## Running WSO2 Enterprise Service Bus on Kubernetes
-WSO2 ESB Puppet module ships Hiera data required to deploy WSO2 Enterprise Service Bus on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
+WSO2 ESB Puppet module ships Hiera data required to deploy WSO2 Enterprise Service Bus on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM210/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
