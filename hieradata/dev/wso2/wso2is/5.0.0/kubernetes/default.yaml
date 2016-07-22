@@ -22,6 +22,8 @@ wso2::mgt_hostname: wso2is-default
 #wso2::file_list:
 #  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
 
+wso2::enable_thrift_service: false
+
 wso2::template_list:
   - repository/conf/datasources/bps-datasources.xml
   - repository/conf/datasources/metrics-datasources.xml
@@ -32,6 +34,15 @@ wso2::template_list:
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
+
+# Provide the server list for setting up sso
+#wso2::sso_service_providers:
+#    wso2esb:
+#      assertion_consumer_service_url: https://wso2esb-default:32094/acs
+#      default_assertion_consumer_service_url: https://wso2esb-default:32094/acs
+#    wso2as:
+#      assertion_consumer_service_url: https://wso2as-default:32023/acs
+#      default_assertion_consumer_service_url: https://wso2as-default:32023/acs
 
 # In Kubernetes proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.

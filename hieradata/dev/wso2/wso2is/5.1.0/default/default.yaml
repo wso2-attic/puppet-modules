@@ -19,6 +19,8 @@ wso2::service_name: wso2is
 wso2::hostname: is.dev.wso2.org
 wso2::mgt_hostname: is.dev.wso2.org
 
+wso2::enable_thrift_service: false
+
 wso2::template_list:
   - repository/conf/datasources/bps-datasources.xml
   - repository/conf/datasources/metrics-datasources.xml
