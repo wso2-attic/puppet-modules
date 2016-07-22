@@ -26,6 +26,9 @@ wso2::file_list:
 ## Uncomment the following for a clustered setup
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
 
+wso2::portal:
+  hostname: das.dev.wso2.org
+
 wso2::template_list:
   - repository/conf/identity/identity.xml
   - repository/conf/datasources/analytics-datasources.xml
