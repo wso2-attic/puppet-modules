@@ -17,6 +17,7 @@
 # Manages WSO2 Governance Registry deployment
 class wso2greg inherits wso2base {
   $bps_datasources     = hiera('wso2::bps_datasources')
+  $metrics_datasources = hiera('wso2::metrics_datasources')
   $social_datasources  = hiera('wso2::social_datasources')
   $is_datasource       = hiera('wso2::is_datasource')
   $service_provider    = hiera('wso2::service_provider')
