@@ -31,7 +31,7 @@ wso2::mb_thrift_server : "%{::ipaddress}"
 wso2::mb_thrift_port: 7611
 
 # Uncomment the following for a clustered setup
-wso2::usermgt_datasource: wso2user_db
+#wso2::usermgt_datasource: wso2user_db
 
 wso2::master_datasources:
 # Comment the following h2 data source for a clustered setup
