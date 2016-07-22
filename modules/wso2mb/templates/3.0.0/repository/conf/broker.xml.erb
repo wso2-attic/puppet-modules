@@ -35,8 +35,8 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
         <nodeID>default</nodeID>
 
         <!-- Thrift is used to maintain and sync slot (message groups) ranges between MB nodes. -->
-        <thriftServerHost><%= @hostname %></thriftServerHost>
-        <thriftServerPort><%= @mb_thrift_port%></thriftServerPort>
+        <thriftServerHost><%= @mb_thrift_server %></thriftServerHost>
+        <thriftServerPort><%= @mb_thrift_port %></thriftServerPort>
         <!--Thrift server reconnect timeout. Value specified in SECONDS-->
         <thriftServerReconnectTimeout>5</thriftServerReconnectTimeout>
         <!-- Hazelcast reliable topics are used to share all notifications across the MB cluster (e.g. subscription
@@ -55,12 +55,12 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
 
             <sslConnection enabled="true" port="8672">
                 <keyStore>
-                     <location>repository/resources/security/wso2carbon.jks</location>
-                     <password>wso2carbon</password>
+                     <location><%= @key_stores['key_store']['location'] %></location>
+                     <password><%= @key_stores['key_store']['password'] %></password>
                 </keyStore>
                 <trustStore>
-                    <location>repository/resources/security/client-truststore.jks</location>
-                    <password>wso2carbon</password>
+                    <location><%= @key_stores['trust_store']['location'] %></location>
+                    <password><%= @key_stores['trust_store']['password'] %></password>
                 </trustStore>
             </sslConnection>
 
@@ -77,12 +77,12 @@ This file is ciphertool compliant. Refer PRODUCT_HOME/repository/conf/security/c
 
             <sslConnection enabled="true" port="8883">
                 <keyStore>
-                    <location>repository/resources/security/wso2carbon.jks</location>
-                    <password>wso2carbon</password>
+                     <location><%= @key_stores['key_store']['location'] %></location>
+                     <password><%= @key_stores['key_store']['password'] %></password>
                 </keyStore>
                 <trustStore>
-                    <location>repository/resources/security/client-truststore.jks</location>
-                    <password>wso2carbon</password>
+                    <location><%= @key_stores['trust_store']['location'] %></location>
+                    <password><%= @key_stores['trust_store']['password'] %></password>
                 </trustStore>
             </sslConnection>
 

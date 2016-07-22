@@ -163,7 +163,7 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
 
     Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
 
-4. Encrypting KeyStore and TrustStore passwords in `EndpointConfig.properties` using Cipher Tool fails to deploy `authenticationendpoint` web app. This is due to a class loading issue as reported in [JIRA: IDENTITY-4276](https://wso2.org/jira/browse/IDENTITY-4276). To fix this follow the below steps:
+4. For IS 5.1.0, encrypting KeyStore and TrustStore passwords in `EndpointConfig.properties` using Cipher Tool fails to deploy `authenticationendpoint` web app. This is due to a class loading issue as reported in [JIRA: IDENTITY-4276](https://wso2.org/jira/browse/IDENTITY-4276). To fix this follow the below steps:
    - get the `authenticationendpoint.war` in CARBON_HOME/repository/deployment/server/webapps folder, remove the `org.wso2.securevault-1.0.0-wso2v2.jar` from webapp's WEB_INF/lib folder and add it to `files/configs/repository/deployment/server` folder
    - Add the `authenticationendpoint.war` file path to `file_list` in default.yaml file
 

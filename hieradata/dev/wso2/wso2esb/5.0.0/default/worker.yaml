@@ -16,9 +16,10 @@ wso2::clustering:
   enabled: true
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
-  membership_scheme: wka
-  sub_domain: worker
   domain: esb.wso2.domain
+  sub_domain: worker
+# WKA membership scheme
+  membership_scheme: wka
   wka:
     members:
       -
@@ -27,6 +28,15 @@ wso2::clustering:
       -
         hostname: 192.168.100.92
         port: 4000
+# AWS membership scheme
+#   membership_scheme: aws
+#   aws:
+#     access_key: access-key
+#     secret_key: secret-key
+#     security_group: security-group
+#     region: region
+#     tag_key: tag-key
+#     tag_value: tag-value
 
 wso2::registry_mounts:
   wso2_config_db:

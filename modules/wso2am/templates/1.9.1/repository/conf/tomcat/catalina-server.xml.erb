@@ -59,7 +59,7 @@
                 proxyPort="<%= @ports['proxyPort']['https'] %>"
 <%- end -%>
                 bindOnInit="false"
-                sslProtocol="TLS"
+                sslEnabledProtocols="TLSv1,TLSv1.1,TLSv1.2"
                 maxHttpHeaderSize="8192"
                 acceptorThreadCount="2"
                 maxThreads="250"

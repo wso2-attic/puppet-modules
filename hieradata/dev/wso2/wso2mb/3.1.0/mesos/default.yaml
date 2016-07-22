@@ -16,8 +16,8 @@ classes:
   - wso2mb
 
 wso2::service_name: wso2mb
-wso2::hostname: wso2mb-default
-wso2::mgt_hostname: wso2mb-default
+wso2::hostname: marathon-lb.marathon.mesos
+wso2::mgt_hostname: marathon-lb.marathon.mesos
 
 wso2::template_list:
   - repository/conf/broker.xml
@@ -161,7 +161,7 @@ wso2::registry_mounts:
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password

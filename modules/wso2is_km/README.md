@@ -18,11 +18,8 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 
 Copy the following files to their corresponding locations.
 
-1. Get the WSO2 Identity Server 5.1.0 distribution with API Key Manager feature installed on it.
-2. If you are using the pre-packaged [WSO2 Identity Server 5.1.0 Key Manager pack](http://product-dist.wso2.com/downloads/api-manager/1.10.0/identity-server/wso2is-5.1.0.zip), remove the `.manager` hidden folder in `APIM_HOME/repository/components/default/configuration/org.eclipse.osgi` for Mesos platform.
-3. If Secure Vault is enabled, remove `authenticationendpoint` folder in `APIM_HOME/repository/deployment/server/webapps`. For more details, refer step 4 under `Running  WSO2 Identity Server Key Manager with Secure Vault`
-4. Rename the distribution as `wso2is_km-<version>` and copy to `<PUPPET_HOME>/modules/wso2is_km/files`
-5. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
+1. WSO2 Identity Server 5.1.0 distribution which has API Key Manager feature installed on it to `<PUPPET_HOME>/modules/wso2is_km/files`. If you are using the pre-packaged [WSO2 Identity Server 5.1.0 Key Manager pack](http://product-dist.wso2.com/downloads/api-manager/1.10.0/identity-server/wso2is-5.1.0.zip) with Secure Vault enabled, extract the product zip file, remove `authenticationendpoint` folder in `CARBON_HOME/repository/deployment/server/webapps`, compress the pack and then copy it to `<PUPPET_HOME>/modules/wso2is_km/files`. For more details, refer step 4 under `Running  WSO2 Identity Server Key Manager with Secure Vault`.
+2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running  WSO2 Identity Server Key Manager in the `default` profile
 By default `WSO2AM_DB` is configured to point to WSO2 API Manager's APIM_DB database. Make sure that APIM_DB database is created with all the tables before running WSO2 Identity Server Key Manager. Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
@@ -175,9 +172,9 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
     Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
 
 4. Encrypting KeyStore and TrustStore passwords in `EndpointConfig.properties` using Cipher Tool fails to deploy `authenticationendpoint` web app. This is due to a class loading issue as reported in [JIRA: IDENTITY-4276](https://wso2.org/jira/browse/IDENTITY-4276). To fix this follow the below steps:
-   - get the `authenticationendpoint.war` in CARBON_HOME/repository/deployment/server/webapps folder, remove the `org.wso2.securevault-1.0.0-wso2v2.jar` from webapp's WEB_INF/lib folder and add it to `files/configs/repository/deployment/server` folder
-   - Add the `authenticationendpoint.war` file path to `file_list` in default.yaml file
-
+  - Get the `authenticationendpoint.war` in CARBON_HOME/repository/deployment/server/webapps folder, remove the `org.wso2.securevault-1.0.0-wso2v2.jar` from webapp's WEB_INF/lib folder and add it to `files/configs/repository/deployment/server` folder
+  - Add the `authenticationendpoint.war` file path to `file_list` in default.yaml file
+   
     ```yaml
     wso2::file_list:
       - repository/deployment/server/webapps/authenticationendpoint.war

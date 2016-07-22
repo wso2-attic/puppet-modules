@@ -15,8 +15,6 @@
 ---
 classes:
   - wso2brs
-wso2::pack_filename: "%{::product_name}-%{::product_version}.zip"
-wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 
 wso2::service_name: wso2brs
 wso2::hostname: wso2brs-default
@@ -30,12 +28,14 @@ wso2::clustering:
     kubernetes_namespace: default
     kubernetes_services: wso2brs-default
 
+#wso2::file_list:
+#  - lib/org.wso2.ciphertool-1.0.0-wso2v2.jar
+
 wso2::template_list:
   - repository/conf/identity.xml
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
-#  - password-tmp
 
 # In Kubernetes proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
@@ -109,44 +109,70 @@ wso2::registry_mounts:
     enable_cache: true
 
 # Secure vault configuration
+# Secure vault configuration
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:
 #  key_store_password:
 #    secret_alias: Carbon.Security.KeyStore.Password
 #    secret_alias_value: carbon.xml//Server/Security/KeyStore/Password,true
-#    password: wso2carbon
+#    password: "%{hiera('wso2::key_stores::key_store::password')}"
 #
 #  key_store_key_password:
 #    secret_alias: Carbon.Security.KeyStore.KeyPassword
 #    secret_alias_value: carbon.xml//Server/Security/KeyStore/KeyPassword,true
-#    password: wso2carbon
+#    password: "%{hiera('wso2::key_stores::key_store::key_password')}"
 #
 #  trust_store_password:
 #    secret_alias: Carbon.Security.TrustStore.Password
 #    secret_alias_value: carbon.xml//Server/Security/TrustStore/Password,true
-#    password: wso2carbon
+#    password: "%{hiera('wso2::key_stores::trust_store::password')}"
 #
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,true
-#    password: admin
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
 #    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CARBON_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: "%{hiera('wso2::datasources::common::password')}"
+#
+#  registry_key_store_password:
+#    secret_alias: Carbon.Security.RegistryKeyStore.Password
+#    secret_alias_value: carbon.xml//Server/Security/RegistryKeyStore/Password,true
+#    password: "%{hiera('wso2::key_stores::registry_key_store::password')}"
+#
+#  registry_key_store_key_password:
+#    secret_alias: Carbon.Security.RegistryKeyStore.KeyPassword
+#    secret_alias_value: carbon.xml//Server/Security/RegistryKeyStore/KeyPassword,true
+#    password: "%{hiera('wso2::key_stores::registry_key_store::key_password')}"
+#
+#  xmpp_password:
+#    secret_alias: MultifactorAuthentication.XMPPSettings.XMPPConfig.XMPPPassword
+#    secret_alias_value: identity.xml//MultifactorAuthentication/XMPPSettings/XMPPConfig/XMPPPassword,false
 #    password: wso2carbon
 #
 #  wso2_config_db_password:
 #    secret_alias: Datasources.WSO2_CONFIG_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
+#    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_CONFIG_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  wso2_gov_db_password:
 #    secret_alias: Datasources.WSO2_GOV_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
+#    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  wso2_user_db_password:
 #    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
-#    password: wso2carbon
+#    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
+#    password: "%{hiera('wso2::datasources::mysql::password')}"
+#
+#  dep_sync_svn_password:
+#    secret_alias: Carbon.DeploymentSynchronizer.SvnPassword
+#    secret_alias_value: carbon.xml//Server/DeploymentSynchronizer/SvnPassword,true
+#    password: password
+#
+#  thrift_based_entitlement_config_key_store_password:
+#    secret_alias: EntitlementSettings.ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias_value: identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,true
+#    password: "%{hiera('wso2::key_stores::key_store::password')}"

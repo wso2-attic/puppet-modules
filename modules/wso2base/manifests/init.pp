@@ -47,7 +47,6 @@ class wso2base {
   $patches_dir          = hiera('wso2::patches_dir')
   $service_name         = hiera('wso2::service_name')
   $service_template     = hiera('wso2::service_template')
-  $hosts_template       = hiera('wso2::hosts_template')
   $usermgt_datasource   = hiera('wso2::usermgt_datasource')
   $local_reg_datasource = hiera('wso2::local_reg_datasource')
   $clustering           = hiera('wso2::clustering')
@@ -65,8 +64,18 @@ class wso2base {
   # secure_vault configurations
   $enable_secure_vault  = hiera('wso2::enable_secure_vault')
   if ($enable_secure_vault == true) {
-      $secure_vault_configs = hiera('wso2::secure_vault_configs')
-      $key_store_password   = $secure_vault_configs['key_store_password']['password']
+    $secure_vault_configs = hiera('wso2::secure_vault_configs')
+    $key_store_password   = $secure_vault_configs['key_store_password']['password']
+  }
+
+  # marathon-lb cert configs
+  if ($::platform == "mesos") {
+    $marathon_lb_cert_config = hiera('wso2::marathon_lb_cert_config')
+    $marathon_lb_cert_config_enabled = $marathon_lb_cert_config['enabled']
+    if( $marathon_lb_cert_config_enabled == true){
+      $trust_store_password   = $marathon_lb_cert_config['trust_store_password']
+      $cert_file = $marathon_lb_cert_config['cert_file']
+    }
   }
 
   $carbon_home          = "${install_dir}/${pack_extracted_dir}"
@@ -81,7 +90,7 @@ class wso2base {
       wso2_user        => $wso2_user,
       service_name     => $service_name,
       service_template => $service_template,
-      hosts_template   => $hosts_template
+      hosts_mapping    => $hosts_mapping
     } ->
     class { '::wso2base::java':
       java_install_dir => $java_install_dir,
@@ -98,7 +107,7 @@ class wso2base {
       wso2_user        => $wso2_user,
       service_name     => $service_name,
       service_template => $service_template,
-      hosts_template   => $hosts_template
+      hosts_mapping    => $hosts_mapping
     }
   }
 

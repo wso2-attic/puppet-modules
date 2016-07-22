@@ -150,6 +150,7 @@
                                 <exclude>**/*.log</exclude>
                                 <exclude>**/.gitmodules</exclude>
                                 <exclude>**/password-tmp.erb</exclude>
+                                <exclude>**/*.crt</exclude>
                             </excludes>
                             <excludeSubProjects>false</excludeSubProjects>
                         </configuration>

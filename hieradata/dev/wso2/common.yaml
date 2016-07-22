@@ -27,17 +27,14 @@ wso2::pack_extracted_dir: "%{::product_name}-%{::product_version}"
 # Host mapping to be made in etc/hosts
 wso2::hosts_mapping:
   localhost:
-    ip_address: 127.0.0.1
-    hostname: localhost
+    ip: 127.0.0.1
+    name: localhost
 
 wso2::ipaddress: "%{::ipaddress}"
 wso2::fqdn: "%{::fqdn}"
 
 # System service name
 wso2::service_template: wso2base/wso2service.erb
-
-# Host entry template
-wso2::hosts_template: wso2base/hosts.erb
 
 # Puppet template list to be populated
 wso2::template_list:
@@ -222,4 +219,4 @@ wso2::super_admin::password: 'admin'
 wso2::user_management:
     admin_role: admin
     admin_username: "%{hiera('wso2::super_admin::username')}"
-    admin_password: "%{hiera('wso2::super_admin::username')}"
+    admin_password: "%{hiera('wso2::super_admin::password')}"

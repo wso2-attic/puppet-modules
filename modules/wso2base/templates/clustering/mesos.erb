@@ -16,7 +16,7 @@
 # specific language governing permissions and limitations
 # under the License.
 %>
-        <parameter name="membershipSchemeClassName">org.wso2.carbon.clustering.mesos.MesosMembershipScheme</parameter>
+      <parameter name="membershipSchemeClassName">org.wso2.carbon.clustering.mesos.MesosMembershipScheme</parameter>
       <%- if @clustering['mesos'] and @clustering['mesos']['member_discovery_scheme'] -%>
         <parameter name="MESOS_MEMBER_DISCOVERY_SCHEME"><%= @clustering['mesos']['member_discovery_scheme'] %></parameter>
       <%- end -%>

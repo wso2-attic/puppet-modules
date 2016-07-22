@@ -49,13 +49,13 @@ wso2::apim_gateway:
   api_token_revoke_endpoint_port: 8280
   secure_api_token_revoke_endpoint_port: 8243
   username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_keymanager:
   host: am.dev.wso2.org
   port: 9443
   username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_store:
   host: am.dev.wso2.org
@@ -83,20 +83,20 @@ wso2::apim_publisher:
 ## Uncomment the hosts mappings for a clustered setup
 #wso2::hosts_mapping:
 #  apim_keymanager:
-#    ip_address: 192.168.100.2
-#    hostname: km.dev.wso2.org
+#    ip: 192.168.100.2
+#    name: km.dev.wso2.org
 #  apim_store:
-#    ip_address: 192.168.100.3
-#    hostname: store.dev.wso2.org
+#    ip: 192.168.100.3
+#    name: store.dev.wso2.org
 #  apim_publisher:
-#    ip_address: 192.168.100.4
-#    hostname: pub.dev.wso2.org
+#    ip: 192.168.100.4
+#    name: pub.dev.wso2.org
 #  apim_gateway:
-#    ip_address: 192.168.100.5
-#    hostname: gw.dev.wso2.org
+#    ip: 192.168.100.5
+#    name: gw.dev.wso2.org
 #  svn:
-#    ip_address: 192.168.100.1
-#    hostname: svn.gw.am.dev.wso2.org
+#    ip: 192.168.100.1
+#    name: svn.gw.am.dev.wso2.org
 
 ## Uncomment the following for a clustered setup
 #wso2::apim_gateway:
@@ -108,7 +108,7 @@ wso2::apim_publisher:
 #  api_token_revoke_endpoint_port: 8280
 #  secure_api_token_revoke_endpoint_port: 8243
 #  username: "%{hiera('wso2::super_admin::username')}"
-#  password: "%{hiera('wso2::super_admin::username')}"
+#  password: "%{hiera('wso2::super_admin::password')}"
 #
 #wso2::apim_keymanager:
 #  host: km.dev.wso2.org
@@ -255,7 +255,7 @@ wso2::master_datasources:
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
@@ -300,22 +300,22 @@ wso2::master_datasources:
 #  auth_manager_password:
 #    secret_alias: AuthManager.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/AuthManager/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  api_gateway_password:
 #    secret_alias: APIGateway.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIGateway/Environments/Environment/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  api_key_validator_password:
 #    secret_alias: APIKeyValidator.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIKeyValidator/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  api_store_password:
 #    secret_alias: APIStore.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIStore/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  xmpp_password:
 #    secret_alias: MultifactorAuthentication.XMPPSettings.XMPPConfig.XMPPPassword
@@ -363,7 +363,7 @@ wso2::master_datasources:
 #    password: password
 #
 #  thrift_based_entitlement_config_key_store_password:
-#    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias: EntitlementSettings.ThirftBasedEntitlementConfig.KeyStore.Password
 #    secret_alias_value: repository/conf/identity/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
 #    password: "%{hiera('wso2::key_stores::key_store::password')}"
 

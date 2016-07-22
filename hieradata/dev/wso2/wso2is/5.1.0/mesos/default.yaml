@@ -31,6 +31,8 @@ wso2::template_list:
 #  - repository/conf/security/cipher-tool.properties
 #  - bin/ciphertool.sh
 
+wso2::enable_thrift_service: false
+
 # Provide the server list for setting up sso
 #wso2::sso_service_providers:
 #    wso2esb:
@@ -190,7 +192,7 @@ wso2::am_datasources:
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
@@ -243,6 +245,6 @@ wso2::am_datasources:
 #    password: password
 #
 #  thrift_based_entitlement_config_key_store_password:
-#    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias: EntitlementSettings.ThirftBasedEntitlementConfig.KeyStore.Password
 #    secret_alias_value: repository/conf/identity/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
 #    password: "%{hiera('wso2::key_stores::key_store::password')}"

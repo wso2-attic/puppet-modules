@@ -16,7 +16,7 @@
 # specific language governing permissions and limitations
 # under the License.
 %>
-        <parameter name="membershipSchemeClassName">org.wso2.carbon.ppaas.PrivatePaaSBasedMembershipScheme</parameter>
+      <parameter name="membershipSchemeClassName">org.wso2.carbon.ppaas.PrivatePaaSBasedMembershipScheme</parameter>
       <%- if @clustering['private_paas'] and @clustering['private_paas']['cluster_ids'] -%>
         <parameter name="clusterIds"><%= @clustering['private_paas']['cluster_ids'] %></parameter>
       <%- end -%>

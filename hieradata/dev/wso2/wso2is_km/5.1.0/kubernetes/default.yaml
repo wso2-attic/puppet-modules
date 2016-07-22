@@ -15,6 +15,10 @@
 classes:
   - wso2is_km
 
+wso2::pack_filename: "wso2is-%{::product_version}.zip"
+wso2::pack_extracted_dir: "wso2is-%{::product_version}"
+wso2::carbon_home_symlink: "/mnt/wso2is-%{::product_version}"
+
 wso2::service_name: wso2is_km
 wso2::hostname: wso2is_km-default
 wso2::mgt_hostname: wso2is_km-default
@@ -58,7 +62,7 @@ wso2::apim_gateway:
   api_token_revoke_endpoint_port: 8280
   secure_api_token_revoke_endpoint_port: 8243
   username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
 
 # In Kubernetes proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
@@ -211,7 +215,7 @@ wso2::am_datasources:
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password
@@ -256,7 +260,7 @@ wso2::am_datasources:
 #  api_gateway_password:
 #    secret_alias: APIGateway.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIGateway/Environments/Environment/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  xmpp_password:
 #    secret_alias: MultifactorAuthentication.XMPPSettings.XMPPConfig.XMPPPassword
@@ -274,6 +278,6 @@ wso2::am_datasources:
 #    password: password
 #
 #  thrift_based_entitlement_config_key_store_password:
-#    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias: EntitlementSettings.ThirftBasedEntitlementConfig.KeyStore.Password
 #    secret_alias_value: repository/conf/identity/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
 #    password: "%{hiera('wso2::key_stores::key_store::password')}"

@@ -624,19 +624,7 @@
                     Service (GMS) using a TCP ping mechanism.
         -->
         <parameter name="membershipScheme"><%= @clustering['membership_scheme'] %></parameter>
-
-<%- if @clustering['membership_scheme'] == 'private-paas' -%>
-        <!-- private-paas membership scheme specific parameters -->
-        <parameter name="membershipSchemeClassName">org.wso2.carbon.ppaas.PrivatePaaSBasedMembershipScheme</parameter>
-        <parameter name="clusterIds"><%= @clustering['private_paas'] %></parameter>
-<%- end -%>
-
-<%- if @clustering['membership_scheme'] == 'kubernetes' -%>
-        <!-- kubernetes membership scheme specific parameters -->
-        <parameter name="membershipSchemeClassName">org.wso2.carbon.membership.scheme.kubernetes.KubernetesMembershipScheme</parameter>
-        <parameter name="KUBERNETES_NAMESPACE"><%= @clustering['kubernetes']['kubernetes_namespace'] %></parameter>
-        <parameter name="KUBERNETES_SERVICES"><%= @clustering['kubernetes']['kubernetes_services'] %></parameter>
-<%- end -%>
+        <%= scope.function_template(["wso2base/clustering/#{@clustering['membership_scheme']}.erb"]) %>
 
         <!--<parameter name="licenseKey">xxx</parameter>-->
         <!--<parameter name="mgtCenterURL">http://localhost:8081/mancenter/</parameter>-->

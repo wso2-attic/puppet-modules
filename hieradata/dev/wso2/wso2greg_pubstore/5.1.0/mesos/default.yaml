@@ -15,6 +15,10 @@
 classes:
   - wso2greg_pubstore
 
+wso2::pack_filename: "wso2greg-%{::product_version}.zip"
+wso2::pack_extracted_dir: "wso2greg-%{::product_version}"
+wso2::carbon_home_symlink: "/mnt/wso2greg-%{::product_version}"
+
 wso2::datasources::common::bps_default_auto_commit: 'true'
 
 wso2::service_name: wso2greg_pubstore
@@ -53,13 +57,13 @@ wso2::apim_gateway:
   api_token_revoke_endpoint_port: 8280
   secure_api_token_revoke_endpoint_port: 8243
   username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_keymanager:
   host: am.dev.wso2.org
   port: 9443
   username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::enableThriftServer: false
 
@@ -223,17 +227,17 @@ wso2::registry_mounts:
 #  user_manager_admin_password:
 #    secret_alias: UserManager.AdminUser.Password
 #    secret_alias_value: repository/conf/user-mgt.xml//UserManager/Realm/Configuration/AdminUser/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  api_gateway_password:
 #    secret_alias: APIGateway.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIGateway/Environments/Environment/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  api_key_validator_password:
 #    secret_alias: APIKeyValidator.Password
 #    secret_alias_value: repository/conf/api-manager.xml//APIManager/APIKeyValidator/Password,false
-#    password: "%{hiera('wso2::super_admin::username')}"
+#    password: "%{hiera('wso2::super_admin::password')}"
 #
 #  wso2_carbon_db_password:
 #    secret_alias: Datasources.WSO2_CARBON_DB.Configuration.Password

@@ -21,7 +21,7 @@ wso2::apim_keymanager:
 # Therefore, admin service port should point to corresponding K8S service target port
   port: 9443
   username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_gateway:
   host: wso2am-gateway-manager
@@ -34,7 +34,7 @@ wso2::apim_gateway:
   api_token_revoke_endpoint_port: 8280
   secure_api_token_revoke_endpoint_port: 8243
   username: "%{hiera('wso2::super_admin::username')}"
-  password: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::clustering:
   enabled: true
