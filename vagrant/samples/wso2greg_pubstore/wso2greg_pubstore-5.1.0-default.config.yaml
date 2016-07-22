@@ -16,28 +16,14 @@
 servers:
   -
     enabled: true
-    hostname: store.greg.dev.wso2.org
+    hostname: greg.dev.wso2.org
     facters:
-      product_name: wso2greg
+      product_name: wso2greg_pubstore
       product_version: 5.1.0
-      product_profile: store
+      product_profile: default
       environment: dev
       platform: default
     box: ubuntu/trusty64
-    ip: 192.168.100.101
-    ram: 2048
-    cpu: 1
-
-  -
-    enabled: true
-    hostname: pub.greg.dev.wso2.org
-    facters:
-      product_name: wso2greg
-      product_version: 5.1.0
-      product_profile: publisher
-      environment: dev
-      platform: default
-    box: ubuntu/trusty64
-    ip: 192.168.100.102
+    ip: 192.168.100.131
     ram: 2048
     cpu: 1
