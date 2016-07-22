@@ -26,7 +26,7 @@
         <!-- modules -->
         <fileSet>
             <directory>${project.basedir}/modules/</directory>
-            <outputDirectory>./modules/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/modules/</outputDirectory>
             <includes>
                 <include>wso2*/files/**</include>
                 <include>wso2*/manifests/**</include>
@@ -47,7 +47,7 @@
         <!-- hiera files -->
         <fileSet>
             <directory>${project.basedir}/hieradata</directory>
-            <outputDirectory>./hieradata/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/hieradata/</outputDirectory>
             <includes>
                 <include>**</include>
             </includes>
@@ -61,24 +61,24 @@
         <!-- site.pp file -->
         <file>
             <source>${project.basedir}/manifests/site.pp</source>
-            <outputDirectory>./manifests/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/manifests/</outputDirectory>
         </file>
 
         <!-- hiera.yaml file -->
         <file>
             <source>${project.basedir}/hiera.yaml</source>
-            <outputDirectory>./</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
         </file>
 
         <file>
             <source>${project.basedir}/LICENSE</source>
-            <outputDirectory>./</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
             <source>${project.basedir}/README.md</source>
-            <outputDirectory>./</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
