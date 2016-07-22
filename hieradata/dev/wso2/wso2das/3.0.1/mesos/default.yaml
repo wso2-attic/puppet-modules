@@ -19,9 +19,14 @@ wso2::service_name: wso2das
 wso2::hostname: marathon-lb.marathon.mesos
 wso2::mgt_hostname: marathon-lb.marathon.mesos
 
+wso2::portal:
+  hostname: marathon-lb.marathon.mesos
+
 wso2::file_list:
   - dbscripts/identity/h2.sql
   - dbscripts/identity/mysql.sql
+  - repository/deployment/server/jaggeryapps/portal/controllers/includes/common-scripts.jag
+  - repository/deployment/server/jaggeryapps/portal/extensions/components/gadget/index.js
 
 wso2::template_list:
   - repository/conf/identity/identity.xml
@@ -30,6 +35,7 @@ wso2::template_list:
   - repository/conf/analytics/spark/spark-defaults.conf
   - repository/conf/data-bridge/data-bridge-config.xml
   - repository/conf/event-processor.xml
+  - repository/deployment/server/jaggeryapps/portal/configs/designer.json
   - bin/load-spark-env-vars.sh
 #  - repository/conf/security/cipher-text.properties
 #  - repository/conf/security/cipher-tool.properties
@@ -41,7 +47,7 @@ wso2::directory_list:
 ## Comment out the following when running Spark-Mesos framework
 wso2::spark:
   master: local
-  master_count: 2
+  master_count: 1
 
 wso2::single_node_deployment:
   enabled: true
@@ -60,30 +66,6 @@ wso2::ha_deployment:
     hostName: "%{::ipaddress}"
     port: 11000
 
-## Uncomment the following when running Spark-Mesos framework
-# wso2::spark:
-#   # master should point to a list of Mesos slaves with a fixed driver process host port
-#   master: spark://192.168.65.111:12077,192.168.65.121:12077
-#   master_count: 2
-#   hostname: "%{::ipaddress}"
-#
-# wso2::single_node_deployment:
-#   enabled: false
-#
-# wso2::ha_deployment:
-#   enabled: true
-#   presenter_enabled: false
-#   worker_enabled: true
-#   eventSync:
-#     hostName: "%{::ipaddress}"
-#     port: 11224
-#   management:
-#     hostName: "%{::ipaddress}"
-#     port: 10005
-#   presentation:
-#     hostName: "%{::ipaddress}"
-#     port: 11002
-
 # In Mesos proxy ports need to be configured to match with node ports.
 # Following ports have been defined for servlet HTTP and HTTPS transports.
 wso2::ports:
@@ -93,7 +75,7 @@ wso2::ports:
 
 # Clustering
 wso2::clustering:
-  enabled: true
+  enabled: false
   membership_scheme: mesos
 #  mesos:
 #    enable_marathon_basic_auth: true
