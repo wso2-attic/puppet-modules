@@ -52,3 +52,11 @@ wso2::identity_provider:
     identity_provider_url: https://marathon-lb.marathon.mesos:10085/samlsso
 
 wso2::social_app_url: https://marathon-lb.marathon.mesos:10085/social
+
+# SSO Configuration
+wso2::sso_authentication:
+    enabled : false
+    login_page: /carbon/admin/login.jsp
+    service_provider_id: wso2es-pub
+    sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
+    consumer_service_url: https://marathon-lb.marathon.mesos:10083/acs
