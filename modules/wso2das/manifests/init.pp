@@ -25,6 +25,8 @@ class wso2das inherits wso2base {
   $single_node_deployment  = hiera('wso2::single_node_deployment')
   $ha_deployment           = hiera('wso2::ha_deployment')
 
+  $portal         = hiera('wso2::portal')
+
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,
     pack_filename       => $wso2base::pack_filename,

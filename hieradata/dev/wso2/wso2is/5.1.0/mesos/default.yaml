@@ -52,11 +52,11 @@ wso2::ports:
 
 # SSO Configuration
 wso2::sso_authentication:
-    enabled : false
-    login_page: /carbon/admin/login.jsp
-    service_provider_id: wso2is
-    sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
-    consumer_service_url: https://marathon-lb.marathon.mesos:10113/acs
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2is
+  sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
+  consumer_service_url: https://marathon-lb.marathon.mesos:10113/acs
 
 # Clustering
 wso2::clustering:

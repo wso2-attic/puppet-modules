@@ -207,7 +207,7 @@ wso2::key_stores::user_trusted_rp_store::key_password: 'wso2carbon'
 wso2::enable_secure_vault: false
 
 wso2::sso_authentication:
-  enabled : false
+  enabled: false
   login_page: /carbon/admin/login.jsp
   service_provider_id: carbonServer
   sso_service_url: https://localhost:9443/samlsso

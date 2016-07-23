@@ -52,8 +52,8 @@
             </excludes>
         </fileSet>
         <fileSet>
-            <directory>${project.basedir}/../../hieradata/dev/wso2/wso2greg-pubstore/</directory>
-            <outputDirectory>${pom.artifactId}-${pom.version}/hieradata/dev/wso2/wso2greg-pubstore/</outputDirectory>
+            <directory>${project.basedir}/../../hieradata/dev/wso2/wso2greg_pubstore/</directory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/hieradata/dev/wso2/wso2greg_pubstore/</outputDirectory>
         </fileSet>
 
     </fileSets>
@@ -76,13 +76,13 @@
         </file>
         <file>
             <source>${project.basedir}/../../LICENSE</source>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
             <source>README.md</source>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>

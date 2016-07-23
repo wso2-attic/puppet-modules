@@ -33,7 +33,7 @@ Do the below changes to relevant Business Rules Server profiles (`worker`, `mana
     ```yaml
     wso2::clustering :
         enabled: true
-        local_member_host: 192.168.100.13
+        local_member_host: "%{::ipaddress}"
         local_member_port: 4000
         membership_scheme: wka
         sub_domain: mgt
@@ -51,20 +51,20 @@ Do the below changes to relevant Business Rules Server profiles (`worker`, `mana
 
    Ex:
     ```yaml
-    wso2::master_datasources:
-     wso2_config_db:
-       name: WSO2_CONFIG_DB
-       description: The datasource used for config registry
-       driver_class_name: org.h2.Driver
-       url: jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-       username: "%{hiera('wso2::datasources::common::username')}"
-       password: "%{hiera('wso2::datasources::common::password')}"
-       jndi_config: jdbc/WSO2_CONFIG_DB
-       max_active: "%{hiera('wso2::datasources::common::max_active')}"
-       max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-       test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-       validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
-       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+    wso2_config_db:
+      name: WSO2_CONFIG_DB
+      description: The datasource used for config registry
+      driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+      url: jdbc:mysql://192.168.100.1:3306/WSO2CONFIG_DB?autoReconnect=true
+      username: "%{hiera('wso2::datasources::mysql::username')}"
+      password: "%{hiera('wso2::datasources::mysql::password')}"
+      jndi_config: jdbc/WSO2_CONFIG_DB
+      max_active: "%{hiera('wso2::datasources::common::max_active')}"
+      max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+      test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+      default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+      validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+      validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
     ```
 
@@ -163,4 +163,4 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
     Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
 
 ## Running WSO2 Business Rules Server on Kubernetes
-WSO2 BRS Puppet module ships Hiera data required to deploy WSO2 Business Rules Server on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
+WSO2 BRS Puppet module ships Hiera data required to deploy WSO2 Business Rules Server on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM210/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).

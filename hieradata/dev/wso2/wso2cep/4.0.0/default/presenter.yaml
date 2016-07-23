@@ -36,7 +36,8 @@ wso2::clustering:
 #   aws:
 #     access_key: access-key
 #     secret_key: secret-key
-#     security_group: security-group
+#     security_group: security-group 
+#     host_header: host-header
 #     region: region
 #     tag_key: tag-key
 #     tag_value: tag-value
@@ -93,8 +94,8 @@ wso2::dep_sync:
 
 # SSO Configuration
 wso2::sso_authentication:
-    enabled : false
-    login_page: /carbon/admin/login.jsp
-    service_provider_id: wso2cep
-    sso_service_url: https://is.dev.wso2.org:9443/samlsso
-    consumer_service_url: https://cep.dev.wso2.org:9443/acs
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2cep
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://cep.dev.wso2.org:9443/acs

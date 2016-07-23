@@ -18,7 +18,7 @@ Follow the steps mentioned in the [wiki](https://github.com/wso2/puppet-modules/
 
 Copy the following files to their corresponding locations.
 
-1. WSO2 Governance Registry distribution (v5.1.0) which has installed API Manager Publisher and Store features to `<PUPPET_HOME>/modules/wso2greg_pubstore/files`
+1. WSO2 Governance Registry distribution (5.1.0) which has installed API Manager Publisher and Store features to `<PUPPET_HOME>/modules/wso2greg_pubstore/files`
 2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running WSO2 Governance Registry in the `default` profile
@@ -34,17 +34,17 @@ For more details refer the [WSO2 Governance Registry 5.1.0](https://docs.wso2.co
     ```yaml
     wso2::clustering:
         enabled: true
-        local_member_host: 192.168.100.13
+        local_member_host: "%{::ipaddress}"
         local_member_port: 4000
         membership_scheme: wka
         sub_domain: mgt
         wka:
            members:
              -
-               hostname: 192.168.100.103
+               hostname: 192.168.100.133
                port: 4000
              -
-               hostname: 192.168.100.104
+               hostname: 192.168.100.134
                port: 4000
     ```
 
@@ -53,19 +53,20 @@ For more details refer the [WSO2 Governance Registry 5.1.0](https://docs.wso2.co
    Ex:
     ```yaml
     wso2::master_datasources:
-     wso2_config_db:
-       name: WSO2_CONFIG_DB
-       description: The datasource used for config registry
-       driver_class_name: org.h2.Driver
-       url: jdbc:h2:repository/database/WSO2_CONFIG_DB;DB_CLOSE_ON_EXIT=FALSE;LOCK_TIMEOUT=60000
-       username: "%{hiera('wso2::datasources::common::username')}"
-       password: "%{hiera('wso2::datasources::common::password')}"
-       jndi_config: jdbc/WSO2_CONFIG_DB
-       max_active: "%{hiera('wso2::datasources::common::max_active')}"
-       max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
-       test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
-       validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
-       validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
+      wso2_config_db:
+        name: WSO2_CONFIG_DB
+        description: The datasource used for config registry
+        driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
+        url: jdbc:mysql://192.168.100.1:3306/WSO2_GREG_DB?autoReconnect=true
+        username: "%{hiera('wso2::datasources::mysql::username')}"
+        password: "%{hiera('wso2::datasources::mysql::password')}"
+        jndi_config: jdbc/WSO2_CONFIG_DB
+        max_active: "%{hiera('wso2::datasources::common::max_active')}"
+        max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
+        test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
+        default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
+        validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
+        validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
     ```
 
@@ -130,4 +131,4 @@ Uncomment and modify the below changes in Hiera file to apply Secure Vault.
     Please add the `password-tmp` template also to `template_list` if the `vm_type` is not `docker` when you are running the server in `default` platform.
 
 ## Running WSO2 Governance Registry on Kubernetes
-WSO2 Puppet Module ships Hiera data required to deploy WSO2 Governance Registry on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM200/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).
+WSO2 Puppet Module ships Hiera data required to deploy WSO2 Governance Registry on Kubernetes. For more information refer to the documentation on [deploying WSO2 products on Kubernetes using WSO2 Puppet Modules](https://docs.wso2.com/display/PM210/Deploying+WSO2+Products+on+Kubernetes+Using+WSO2+Puppet+Modules).

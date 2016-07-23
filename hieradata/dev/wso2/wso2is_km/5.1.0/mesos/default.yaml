@@ -45,11 +45,11 @@ wso2::file_list:
 
 # SSO Configuration
 wso2::sso_authentication:
-    enabled : false
-    login_page: /carbon/admin/login.jsp
-    service_provider_id: wso2is-km
-    sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
-    consumer_service_url: https://marathon-lb.marathon.mesos:10143/acs
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2is-km
+  sso_service_url: https://marathon-lb.marathon.mesos:10113/samlsso
+  consumer_service_url: https://marathon-lb.marathon.mesos:10143/acs
 
 # Provide the server list for setting up sso
 #wso2::sso_service_providers:

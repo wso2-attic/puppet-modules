@@ -73,7 +73,7 @@ wso2::apim_gateway:
 #     https: 443
 
 wso2::clustering:
-  enabled: true
+  enabled: false
   local_member_host: "%{::ipaddress}"
   local_member_port: 4000
   domain: km.is.wso2.domain
@@ -83,14 +83,18 @@ wso2::clustering:
   wka:
     members:
       -
-        hostname: 192.168.100.111
+        hostname: 192.168.100.141
+        port: 4000
+      -
+        hostname: 192.168.100.142
         port: 4000
 # AWS membership scheme
 #   membership_scheme: aws
 #   aws:
 #     access_key: access-key
 #     secret_key: secret-key
-#     security_group: security-group
+#     security_group: security-group 
+#     host_header: host-header
 #     region: region
 #     tag_key: tag-key
 #     tag_value: tag-value
@@ -119,11 +123,11 @@ wso2::am_datasource: wso2am_db
 
 # SSO Configuration
 wso2::sso_authentication:
-    enabled : false
-    login_page: /carbon/admin/login.jsp
-    service_provider_id: wso2is-km
-    sso_service_url: https://is.dev.wso2.org:9443/samlsso
-    consumer_service_url: https://is.km.dev.wso2.org:9443/acs
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2is-km
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://is.km.dev.wso2.org:9443/acs
 
 # Uncomment the following MySQL data sources for a clustered setup
 #wso2::master_datasources:

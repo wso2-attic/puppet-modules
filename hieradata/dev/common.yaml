@@ -23,9 +23,9 @@ java_class: wso2base::java
 # symlink to Java install directory
 java_home: /opt/java
 
-java_system_pref_dir:
-  - "/home/%{hiera('wso2::user')}/.java"
-  - "/home/%{hiera('wso2::user')}/.java/.systemPrefs"
+# Java preferences storage location
+java_prefs_system_root: "/home/%{hiera('wso2::user')}/.java"
+java_prefs_user_root: "/home/%{hiera('wso2::user')}/.java/.systemPrefs"
 
 # wso2base::java class automatic parameter lookup
 wso2base::java::java_install_dir: /mnt/jdk-7u80
@@ -33,6 +33,5 @@ wso2base::java::java_source_file: jdk-7u80-linux-x64.tar.gz
 wso2base::java::wso2_user: "%{hiera('wso2::user')}"
 wso2base::java::wso2_group: "%{hiera('wso2::group')}"
 wso2base::java::java_home: /opt/java
-wso2base::java::system_pref_dir:
-  - "%{hiera('java_system_pref_dir.0')}"
-  - "%{hiera('java_system_pref_dir.1')}"
+wso2base::java::prefs_system_root: "%{hiera('java_prefs_system_root')}"
+wso2base::java::prefs_user_root: "%{hiera('java_prefs_user_root')}"

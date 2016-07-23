@@ -79,13 +79,13 @@
         </file>
         <file>
             <source>${project.basedir}/../../LICENSE</source>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>
         <file>
             <source>README.md</source>
-            <outputDirectory>/</outputDirectory>
+            <outputDirectory>${pom.artifactId}-${pom.version}/</outputDirectory>
             <filtered>true</filtered>
             <fileMode>644</fileMode>
         </file>

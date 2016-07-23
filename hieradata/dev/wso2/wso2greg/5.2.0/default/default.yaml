@@ -36,9 +36,47 @@ wso2::template_list:
 #  - bin/ciphertool.sh
 #  - password-tmp
 
+# wso2::ports:
+#   proxyPort:
+#     http: 80
+#     https: 443
+
+wso2::clustering:
+  enabled: false
+  local_member_host: "%{::ipaddress}"
+  local_member_port: 4000
+  domain: greg.wso2.domain
+# WKA membership scheme
+  membership_scheme: wka
+  wka:
+    members:
+      -
+        hostname: 192.168.100.101
+        port: 4000
+      -
+        hostname: 192.168.100.102
+        port: 4000
+# AWS membership scheme
+#   membership_scheme: aws
+#   aws:
+#     access_key: access-key
+#     secret_key: secret-key
+#     security_group: security-group
+#     region: region
+#     tag_key: tag-key
+#     tag_value: tag-value
+
 # Uncomment MySQL connector driver for a clustered setup
 #wso2::file_list:
 #  - "repository/components/lib/%{hiera('wso2::datasources::mysql::connector_jar')}"
+
+# SSO Configuration
+wso2::sso_authentication:
+  enabled: false
+  login_page: /carbon/admin/login.jsp
+  service_provider_id: wso2greg
+  sso_service_url: https://is.dev.wso2.org:9443/samlsso
+  consumer_service_url: https://greg.dev.wso2.org:9443/acs
 
 wso2::service_provider:
   store:
@@ -348,6 +386,6 @@ wso2::social_datasources:
 #    password: password
 #
 #  thrift_based_entitlement_config_key_store_password:
-#    secret_alias: ThirftBasedEntitlementConfig.KeyStore.Password
+#    secret_alias: EntitlementSettings.ThirftBasedEntitlementConfig.KeyStore.Password
 #    secret_alias_value: repository/conf/identity.xml//Server/EntitlementSettings/ThirftBasedEntitlementConfig/KeyStore/Password,false
 #    password: "%{hiera('wso2::key_stores::key_store::password')}"
