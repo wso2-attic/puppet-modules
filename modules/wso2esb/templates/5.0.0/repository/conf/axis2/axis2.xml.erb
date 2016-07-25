@@ -58,8 +58,8 @@
     <parameter name="ModulesDirectory">axis2modules</parameter>
 
     <!-- User agent and the server details to be used in the http communication -->
-    <parameter name="userAgent" locked="true">WSO2 ESB 4.9.0</parameter>
-    <parameter name="server" locked="true">WSO2 ESB 4.9.0</parameter>
+    <parameter name="userAgent" locked="true">WSO2 ESB 5.0.0</parameter>
+    <parameter name="server" locked="true">WSO2 ESB 5.0.0</parameter>
 
     <!-- During a fault, stacktrace can be sent with the fault message. The following flag -->
     <!-- will control that behaviour -->
@@ -86,6 +86,8 @@
     <parameter name="SynapseConfig.ResolveRoot" locked="false">.</parameter>
     <!-- Synapse Server name parameter -->
     <parameter name="SynapseConfig.ServerName" locked="false">localhost</parameter>
+    <!-- Returns 401 for UT secured scenario with incorrect/missing credentials -->
+    <parameter name="enableBasicAuth" locked="false">true</parameter>
 
     <!-- To override repository/services you need to uncomment following parameter and value -->
     <!-- SHOULD be absolute file path. -->
@@ -490,6 +492,9 @@
     <clustering class="org.wso2.carbon.core.clustering.hazelcast.HazelcastClusteringAgent"
                 enable="<%= @clustering['enabled'] %>">
 
+        <!-- Parameter to differentiate clustering mode, Default value will be "WorkerManager" in which
+         case the manager nodes of the cluster won't run schedule tasks-->
+        <parameter name="clusteringPattern">WorkerManager</parameter>
         <!--
            This parameter indicates whether the cluster has to be automatically initalized
            when the AxisConfiguration is built. If set to "true" the initialization will not be
