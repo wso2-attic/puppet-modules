@@ -27,9 +27,10 @@ Refer to the product specific README guides to get started with WSO2 Puppet Modu
 8. [WSO2 Enterprise Store](https://github.com/wso2/puppet-modules/tree/master/modules/wso2es)
 9. [WSO2 Enterprise Service Bus](https://github.com/wso2/puppet-modules/tree/master/modules/wso2esb)
 10. [WSO2 Governance Registry](https://github.com/wso2/puppet-modules/tree/master/modules/wso2greg)
-11. [WSO2 Identity Server](https://github.com/wso2/puppet-modules/tree/master/modules/wso2is)
-12. [WSO2 Identity Server Key Manager](https://github.com/wso2/puppet-modules/tree/master/modules/wso2is_km)
-13. [WSO2 Message Broker](https://github.com/wso2/puppet-modules/tree/master/modules/wso2mb)
+11. [WSO2 Governance Registry Publisher Store](https://github.com/wso2/puppet-modules/tree/master/modules/wso2greg_pubstore)
+12. [WSO2 Identity Server](https://github.com/wso2/puppet-modules/tree/master/modules/wso2is)
+13. [WSO2 Identity Server Key Manager](https://github.com/wso2/puppet-modules/tree/master/modules/wso2is_km)
+14. [WSO2 Message Broker](https://github.com/wso2/puppet-modules/tree/master/modules/wso2mb)
 
 ## How to Contribute
 1. Fork
