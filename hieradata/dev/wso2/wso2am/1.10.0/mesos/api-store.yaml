@@ -60,7 +60,7 @@ wso2::clustering:
     marathon_applications: wso2am-api-publisher,wso2am-api-store
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
-#    marathon_username: password
+#    marathon_password: password
 
 
 # In Mesos proxy ports need to be configured to match with node ports.

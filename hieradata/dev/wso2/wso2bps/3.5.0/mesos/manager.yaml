@@ -30,7 +30,7 @@ wso2::clustering:
     marathon_applications: wso2bps-manager,wso2bps-worker
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
-#    marathon_username: password
+#    marathon_password: password
 
 # Deployment synchronization
 wso2::dep_sync:

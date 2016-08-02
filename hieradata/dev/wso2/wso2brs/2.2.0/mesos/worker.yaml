@@ -23,7 +23,7 @@ wso2::clustering:
       marathon_applications: wso2brs-manager,wso2brs-worker
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
-#    marathon_username: password
+#    marathon_password: password
 
 wso2::ports:
   proxyPort:

@@ -43,7 +43,7 @@ wso2::clustering:
 #  mesos:
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
-#    marathon_username: password
+#    marathon_password: password
 
 # SSO Configuration
 wso2::sso_authentication:
