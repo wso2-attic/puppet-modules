@@ -25,4 +25,4 @@ wso2::datasources::mysql::password: 'wso2carbon'
 wso2::marathon_lb_cert_config:
     enabled : true
     cert_file: 'wso2demo.crt'
-    trust_store_password: 'wso2carbon'
+    trust_store_password: "%{hiera('wso2::key_stores::trust_store::password')}"
