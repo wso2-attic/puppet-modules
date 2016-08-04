@@ -62,3 +62,14 @@ wso2::sso_authentication:
   service_provider_id: wso2am-km
   sso_service_url: https://is.dev.wso2.org:9443/samlsso
   consumer_service_url: https://km.dev.wso2.org:9443/acs
+
+wso2::enable_thrift_server: false
+
+# Uncomment for a distributed setup without a load balancer (when using ThriftClient)
+#wso2::thrift_server_host: 192.168.100.2
+
+wso2::key_validator_client_type: WSClient
+
+## Uncomment the following in a clustered setup
+wso2::file_list:
+  - "repository/resources/security/%{hiera('wso2::key_store')}"

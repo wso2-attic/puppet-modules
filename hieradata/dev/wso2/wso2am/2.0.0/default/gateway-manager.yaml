@@ -77,3 +77,12 @@ wso2::sso_authentication:
   service_provider_id: wso2am-gw
   sso_service_url: https://is.dev.wso2.org:9443/samlsso
   consumer_service_url: https://gw.dev.wso2.org:9443/acs
+
+wso2::enable_thrift_server: false
+
+wso2::thrift_server_host: localhost
+
+wso2::key_validator_client_type: WSClient
+
+wso2::file_list:
+  - "repository/resources/security/%{hiera('wso2::trust_store')}"

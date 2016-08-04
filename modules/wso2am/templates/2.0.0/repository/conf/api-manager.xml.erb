@@ -310,12 +310,12 @@
              -If you need to start two API Manager instances in the same machine, you need to give different ports to "ThriftServerPort" value in two nodes.
              -ThriftServerHost - Allows to configure a hostname for the thrift server. It uses the carbon hostname by default.
 	         -The Gateway uses this parameter to connect to the key validation thrift service. -->
-        <KeyValidatorClientType>ThriftClient</KeyValidatorClientType>
+        <KeyValidatorClientType><%= @key_validator_client_type %></KeyValidatorClientType>
         <ThriftClientConnectionTimeOut>10000</ThriftClientConnectionTimeOut>
         <!--ThriftClientPort>10397</ThriftClientPort-->
 
-        <EnableThriftServer>true</EnableThriftServer>
-        <ThriftServerHost>localhost</ThriftServerHost>
+        <EnableThriftServer><%= @enable_thrift_server %></EnableThriftServer>
+        <ThriftServerHost><%= @thrift_server_host %></ThriftServerHost>
         <!--ThriftServerPort>10397</ThriftServerPort-->
 
         <!--ConnectionPool>
@@ -366,7 +366,11 @@
              In distributed deployment we should configure this property in key manager node by pointing
              gateway https( /http, we recommend users to use 'https' endpoints for security purpose) url.
              Also please note that we should point gateway revoke service to key manager -->
-        <RevokeAPIURL>https://${carbon.local.ip}:${https.nio.port}/revoke</RevokeAPIURL>
+        <%- if @apim_gateway and @apim_gateway['host'] and @apim_gateway['port']-%>
+            <RevokeAPIURL>https://<%= @apim_gateway['host'] %>:<%= @apim_gateway['secure_api_token_revoke_endpoint_port'] %>/revoke</RevokeAPIURL>
+        <%- else -%>
+            <RevokeAPIURL>https://${carbon.local.ip}:${https.nio.port}/revoke</RevokeAPIURL>
+        <%- end -%>
         <!-- Whether to encrypt tokens when storing in the Database
         Note: If changing this value to true, change the value of <TokenPersistenceProcessor> to
         org.wso2.carbon.identity.oauth.tokenprocessor.EncryptionDecryptionPersistenceProcessor in the identity.xml -->
@@ -616,7 +620,7 @@
         </WhiteListedURIs>
     </RESTAPI>
     <ThrottlingConfigurations>
-        <EnableAdvanceThrottling>true</EnableAdvanceThrottling>
+        <EnableAdvanceThrottling><%= @enable_advance_throttling %></EnableAdvanceThrottling>
         <DataPublisher>
             <Enabled>true</Enabled>
             <Type>Binary</Type>

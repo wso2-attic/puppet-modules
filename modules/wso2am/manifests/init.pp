@@ -23,6 +23,12 @@ class wso2am inherits wso2base {
   $apim_store         = hiera('wso2::apim_store')
   $is_datasource      = hiera('wso2::is_datasource')
   $am_datasource     = hiera('wso2::am_datasource')
+  $enable_advance_throttling = hiera('wso2::enable_advance_throttling', { })
+  $key_validator_client_type = hiera('wso2::key_validator_client_type', { })
+  $enable_thrift_server = hiera('wso2::enable_thrift_server', { })
+  $thrift_server_host = hiera('wso2::thrift_server_host', { })
+  $key_store = hiera('wso2::key_store', { })
+  $trust_store = hiera('wso2::trust_store', { })
 
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,
