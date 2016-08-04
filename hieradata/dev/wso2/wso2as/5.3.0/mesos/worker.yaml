@@ -30,7 +30,7 @@ wso2::clustering:
     marathon_applications: wso2as-manager,wso2as-worker
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
-#    marathon_username: password
+#    marathon_password: password
 
 # Registry mounts
 wso2::registry_mounts:

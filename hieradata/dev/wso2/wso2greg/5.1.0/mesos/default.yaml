@@ -28,7 +28,7 @@ wso2::clustering:
 #  mesos:
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
-#    marathon_username: password
+#    marathon_password: password
 
 wso2::template_list:
   - repository/conf/identity.xml

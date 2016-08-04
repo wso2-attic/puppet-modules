@@ -45,7 +45,7 @@ wso2::clustering:
 #  mesos:
 #    enable_marathon_basic_auth: true
 #    marathon_username: username
-#    marathon_username: password
+#    marathon_password: password
 
 # BPS configuration
 wso2::so_timeout: 600000
