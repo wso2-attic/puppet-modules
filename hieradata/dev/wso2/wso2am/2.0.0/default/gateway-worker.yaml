@@ -44,7 +44,7 @@ wso2::clustering:
 #     tag_value: tag-value
 
 wso2::dep_sync:
-  enabled: true
+  enabled: false
   auto_checkout: true
   auto_commit: false
   repository_type: svn
