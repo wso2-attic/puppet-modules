@@ -16,6 +16,16 @@
 wso2::mgt_hostname: pub.dev.wso2.org
 wso2::hostname: pub.dev.wso2.org
 
+wso2::template_list:
+  - repository/conf/jndi.properties
+
+wso2::apim_traffic_manager:
+  host: km.dev.wso2.org
+  port: 9443
+  jms_url_port: 5672
+  username: "%{hiera('wso2::super_admin::username')}"
+  password: "%{hiera('wso2::super_admin::password')}"
+
 wso2::clustering:
   enabled: true
   domain: pub.store.am.wso2.domain
@@ -66,4 +76,11 @@ wso2::sso_authentication:
   sso_service_url: https://is.dev.wso2.org:9443/samlsso
   consumer_service_url: https://pub.dev.wso2.org:9443/acs
 
+# Uncomment the following in a distributed setup, including the trust store with the certificate of the key manager
+wso2::file_list:
+  - "repository/resources/security/%{hiera('wso2::trust_store')}"
 wso2::enable_thrift_server: false
+wso2::enable_advance_throttling: true
+wso2::enable_data_publisher: false
+wso2::enable_block_condition: false
+wso2::enable_jms_connection_details: false

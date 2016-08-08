@@ -14,13 +14,15 @@
 
 ---
 servers:
+
+# Note : "km.dev.wso2.org" should have the "default" profile since it is acting as the keymanager and traffic manager
   -
     enabled: true
     hostname: km.dev.wso2.org
     facters:
       product_name: wso2am
       product_version: 2.0.0
-      product_profile: api-key-manager
+      product_profile: default
       environment: dev
       platform: default
     box: ubuntu/trusty64
