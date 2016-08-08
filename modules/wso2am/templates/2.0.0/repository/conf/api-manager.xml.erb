@@ -624,23 +624,23 @@
         <DataPublisher>
             <Enabled><%= @enable_data_publisher %></Enabled>
             <Type>Binary</Type>
-            <%- if @apim_trafficmanager and @apim_trafficmanager['host'] and @apim_trafficmanager['receiver_url_port'] -%>
-                <ReceiverUrlGroup>tcp://<%= @apim_trafficmanager['host'] %>:<%= @apim_trafficmanager['receiver_url_port'] %></ReceiverUrlGroup>
+            <%- if @apim_traffic_manager and @apim_traffic_manager['host'] and @apim_traffic_manager['receiver_url_port'] -%>
+                <ReceiverUrlGroup>tcp://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['receiver_url_port'] %></ReceiverUrlGroup>
             <%- else -%>
                 <ReceiverUrlGroup>tcp://${carbon.local.ip}:${receiver.url.port}</ReceiverUrlGroup>
             <%- end -%>
-            <%- if @apim_trafficmanager and @apim_trafficmanager['host'] and @apim_trafficmanager['auth_url_port'] -%>
-                <AuthUrlGroup>ssl://<%= @apim_trafficmanager['host'] %>:<%= @apim_trafficmanager['auth_url_port'] %></AuthUrlGroup>
+            <%- if @apim_traffic_manager and @apim_traffic_manager['host'] and @apim_traffic_manager['auth_url_port'] -%>
+                <AuthUrlGroup>ssl://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['auth_url_port'] %></AuthUrlGroup>
             <%- else -%>
                 <AuthUrlGroup>ssl://${carbon.local.ip}:${auth.url.port}</AuthUrlGroup>
             <%- end -%>
-            <%- if @apim_trafficmanager and @apim_trafficmanager['username'] -%>
-                <Username><%= @apim_trafficmanager['username'] %></Username>
+            <%- if @apim_traffic_manager and @apim_traffic_manager['username'] -%>
+                <Username><%= @apim_traffic_manager['username'] %></Username>
             <%- else -%>
                 <Username>${admin.username}</Username>
             <%- end -%>
-            <%- if @apim_trafficmanager and @apim_trafficmanager['password'] -%>
-                <Password><%= @apim_trafficmanager['password'] %></Password>
+            <%- if @apim_traffic_manager and @apim_traffic_manager['password'] -%>
+                <Password><%= @apim_traffic_manager['password'] %></Password>
             <%- else -%>
                 <Password>${admin.password}</Password>
             <%- end -%>
@@ -655,18 +655,18 @@
             </DataPublisherThreadPool>
         </DataPublisher>
         <PolicyDeployer>
-        <%- if @apim_trafficmanager and @apim_trafficmanager['host'] and @apim_trafficmanager['port'] -%>
-            <ServiceURL>https://<%= @apim_trafficmanager['host'] %>:<%= @apim_trafficmanager['port'] %>/services/</ServiceURL>
+        <%- if @apim_traffic_manager and @apim_traffic_manager['host'] and @apim_traffic_manager['port'] -%>
+            <ServiceURL>https://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['port'] %>/services/</ServiceURL>
         <%- else -%>
             <ServiceURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServiceURL>
         <%- end -%>
-        <%- if @apim_trafficmanager and @apim_trafficmanager['username'] -%>
-            <Username><%= @apim_trafficmanager['username'] %></Username>
+        <%- if @apim_traffic_manager and @apim_traffic_manager['username'] -%>
+            <Username><%= @apim_traffic_manager['username'] %></Username>
         <%- else -%>
             <Username>${admin.username}</Username>
         <%- end -%>
-        <%- if @apim_trafficmanager and @apim_trafficmanager['password'] -%>
-          <Password><%= @apim_trafficmanager['password'] %></Password>
+        <%- if @apim_traffic_manager and @apim_traffic_manager['password'] -%>
+          <Password><%= @apim_traffic_manager['password'] %></Password>
         <%- else -%>
             <Password>${admin.password}</Password>
         <%- end -%>
@@ -678,18 +678,18 @@
         </BlockCondition>
         <JMSConnectionDetails>
             <Enabled><%= @enable_jms_connection_details %></Enabled>
-            <%- if @apim_trafficmanager and @apim_trafficmanager['host'] and @apim_trafficmanager['jms_url_port'] -%>
-                <ServiceURL>tcp://<%= @apim_trafficmanager['host'] %>:<%= @apim_trafficmanager['jms_url_port'] %></ServiceURL>
+            <%- if @apim_traffic_manager and @apim_traffic_manager['host'] and @apim_traffic_manager['jms_url_port'] -%>
+                <ServiceURL>tcp://<%= @apim_traffic_manager['host'] %>:<%= @apim_traffic_manager['jms_url_port'] %></ServiceURL>
             <%- else -%>
                 <ServiceURL>tcp://${carbon.local.ip}:${jms.port}</ServiceURL>
             <%- end -%>
-            <%- if @apim_trafficmanager and @apim_trafficmanager['username'] -%>
-                <Username><%= @apim_trafficmanager['username'] %></Username>
+            <%- if @apim_traffic_manager and @apim_traffic_manager['username'] -%>
+                <Username><%= @apim_traffic_manager['username'] %></Username>
             <%- else -%>
                 <Username>${admin.username}</Username>
             <%- end -%>
-            <%- if @apim_trafficmanager and @apim_trafficmanager['password'] -%>
-                <Password><%= @apim_trafficmanager['password'] %></Password>
+            <%- if @apim_traffic_manager and @apim_traffic_manager['password'] -%>
+                <Password><%= @apim_traffic_manager['password'] %></Password>
             <%- else -%>
                 <Password>${admin.password}</Password>
             <%- end -%>

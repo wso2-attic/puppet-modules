@@ -16,7 +16,7 @@
 wso2::mgt_hostname: mgt.gw.dev.wso2.org
 wso2::hostname: gw.dev.wso2.org
 
-wso2::apim_trafficmanager:
+wso2::apim_traffic_manager:
   host: km.dev.wso2.org
   port: 9443
   receiver_url_port: 9611
@@ -83,9 +83,9 @@ wso2::enable_thrift_server: false
 wso2::thrift_server_host: localhost
 
 wso2::key_validator_client_type: WSClient
-# Uncomment the following in a distributed setup, including the trust store with the certificate of the key manager
+
 wso2::file_list:
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
-#Set 'apim_gateway_disble_jms_connection_parameters' to 'true' in order to commnet
-#JMS connection parameters in gateway, in disrtributed setup : Uncomment the following in a distributed setup
+
+#Set 'apim_gateway_disble_jms_connection_parameters' to 'true' to disable JMS connection parameters in gateway, in disrtributed setup
 wso2::apim_gateway_disble_jms_connection_parameters: true

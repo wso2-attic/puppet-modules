@@ -21,7 +21,7 @@ class wso2am inherits wso2base {
   $apim_keymanager    = hiera('wso2::apim_keymanager')
   $apim_publisher     = hiera('wso2::apim_publisher')
   $apim_store         = hiera('wso2::apim_store')
-  $apim_trafficmanager    = hiera('wso2::apim_trafficmanager', { })
+  $apim_traffic_manager    = hiera('wso2::apim_traffic_manager', { })
   $is_datasource      = hiera('wso2::is_datasource')
   $am_datasource     = hiera('wso2::am_datasource')
   $enable_advance_throttling = hiera('wso2::enable_advance_throttling', { })

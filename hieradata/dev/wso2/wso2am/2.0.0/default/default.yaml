@@ -43,7 +43,7 @@ wso2::service_name: wso2am
 wso2::hostname: am.dev.wso2.org
 wso2::mgt_hostname: am.dev.wso2.org
 
-wso2::apim_trafficmanager:
+wso2::apim_traffic_manager:
   host: km.dev.wso2.org
   port: 9443
   receiver_url_port: 9611
@@ -55,7 +55,6 @@ wso2::apim_trafficmanager:
 wso2::apim_gateway:
   host: gw.dev.wso2.org
   port: 9443
-#  api_endpoint_host: 192.168.100.5
   api_endpoint_host: gw.dev.wso2.org
   api_endpoint_port: 8280
   secure_api_endpoint_port: 8243
@@ -71,12 +70,10 @@ wso2::apim_keymanager:
   password: "%{hiera('wso2::super_admin::password')}"
 
 wso2::apim_store:
-#  host: 192.168.100.3
   host: store.dev.wso2.org
   port: 9443
 
 wso2::apim_publisher:
-#  host: 192.168.100.4
   host: pub.dev.wso2.org
   port: 9443
 
@@ -233,8 +230,7 @@ wso2::enable_data_publisher: false
 wso2::enable_block_condition: true
 # Uncomment the following for a clustered setup
 wso2::enable_jms_connection_details: false
-#Set 'apim_gateway_disble_jms_connection_parameters' to 'false' in order to uncommnet
-#JMS connection parameters in gateway, in disrtributed setup : Uncomment the following in a distributed setup
+#Set 'apim_gateway_disble_jms_connection_parameters' to 'false' to disable JMS connection parameters in gateway, in disrtributed setup
 wso2::apim_gateway_disble_jms_connection_parameters: false
 
 # Secure vault configuration
