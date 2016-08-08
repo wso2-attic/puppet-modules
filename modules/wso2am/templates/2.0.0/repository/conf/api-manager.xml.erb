@@ -622,12 +622,28 @@
     <ThrottlingConfigurations>
         <EnableAdvanceThrottling><%= @enable_advance_throttling %></EnableAdvanceThrottling>
         <DataPublisher>
-            <Enabled>true</Enabled>
+            <Enabled><%= @enable_data_publisher %></Enabled>
             <Type>Binary</Type>
-            <ReceiverUrlGroup>tcp://${carbon.local.ip}:${receiver.url.port}</ReceiverUrlGroup>
-            <AuthUrlGroup>ssl://${carbon.local.ip}:${auth.url.port}</AuthUrlGroup>
-            <Username>${admin.username}</Username>
-            <Password>${admin.password}</Password>
+            <%- if @apim_trafficmanager and @apim_trafficmanager['host'] and @apim_trafficmanager['receiver_url_port'] -%>
+                <ReceiverUrlGroup>tcp://<%= @apim_trafficmanager['host'] %>:<%= @apim_trafficmanager['receiver_url_port'] %></ReceiverUrlGroup>
+            <%- else -%>
+                <ReceiverUrlGroup>tcp://${carbon.local.ip}:${receiver.url.port}</ReceiverUrlGroup>
+            <%- end -%>
+            <%- if @apim_trafficmanager and @apim_trafficmanager['host'] and @apim_trafficmanager['auth_url_port'] -%>
+                <AuthUrlGroup>ssl://<%= @apim_trafficmanager['host'] %>:<%= @apim_trafficmanager['auth_url_port'] %></AuthUrlGroup>
+            <%- else -%>
+                <AuthUrlGroup>ssl://${carbon.local.ip}:${auth.url.port}</AuthUrlGroup>
+            <%- end -%>
+            <%- if @apim_trafficmanager and @apim_trafficmanager['username'] -%>
+                <Username><%= @apim_trafficmanager['username'] %></Username>
+            <%- else -%>
+                <Username>${admin.username}</Username>
+            <%- end -%>
+            <%- if @apim_trafficmanager and @apim_trafficmanager['password'] -%>
+                <Password><%= @apim_trafficmanager['password'] %></Password>
+            <%- else -%>
+                <Password>${admin.password}</Password>
+            <%- end -%>
             <DataPublisherPool>
                 <MaxIdle>1000</MaxIdle>
                 <InitIdleCapacity>200</InitIdleCapacity>
@@ -639,28 +655,64 @@
             </DataPublisherThreadPool>
         </DataPublisher>
         <PolicyDeployer>
+        <%- if @apim_trafficmanager and @apim_trafficmanager['host'] and @apim_trafficmanager['port'] -%>
+            <ServiceURL>https://<%= @apim_trafficmanager['host'] %>:<%= @apim_trafficmanager['port'] %>/services/</ServiceURL>
+        <%- else -%>
             <ServiceURL>https://localhost:${mgt.transport.https.port}${carbon.context}services/</ServiceURL>
+        <%- end -%>
+        <%- if @apim_trafficmanager and @apim_trafficmanager['username'] -%>
+            <Username><%= @apim_trafficmanager['username'] %></Username>
+        <%- else -%>
             <Username>${admin.username}</Username>
+        <%- end -%>
+        <%- if @apim_trafficmanager and @apim_trafficmanager['password'] -%>
+          <Password><%= @apim_trafficmanager['password'] %></Password>
+        <%- else -%>
             <Password>${admin.password}</Password>
+        <%- end -%>
         </PolicyDeployer>
         <BlockCondition>
-            <Enabled>true</Enabled>
+            <Enabled><%= @enable_block_condition %></Enabled>
             <!--InitDelay>300000</InitDelay>
             <Period>3600000</Period-->
         </BlockCondition>
         <JMSConnectionDetails>
-            <Enabled>true</Enabled>
-            <ServiceURL>tcp://${carbon.local.ip}:${jms.port}</ServiceURL>
-            <Username>${admin.username}</Username>
-            <Password>${admin.password}</Password>
+            <Enabled><%= @enable_jms_connection_details %></Enabled>
+            <%- if @apim_trafficmanager and @apim_trafficmanager['host'] and @apim_trafficmanager['jms_url_port'] -%>
+                <ServiceURL>tcp://<%= @apim_trafficmanager['host'] %>:<%= @apim_trafficmanager['jms_url_port'] %></ServiceURL>
+            <%- else -%>
+                <ServiceURL>tcp://${carbon.local.ip}:${jms.port}</ServiceURL>
+            <%- end -%>
+            <%- if @apim_trafficmanager and @apim_trafficmanager['username'] -%>
+                <Username><%= @apim_trafficmanager['username'] %></Username>
+            <%- else -%>
+                <Username>${admin.username}</Username>
+            <%- end -%>
+            <%- if @apim_trafficmanager and @apim_trafficmanager['password'] -%>
+                <Password><%= @apim_trafficmanager['password'] %></Password>
+            <%- else -%>
+                <Password>${admin.password}</Password>
+            <%- end -%>
             <Destination>throttleData</Destination>
             <!--InitDelay>300000</InitDelay-->
-            <JMSConnectionParameters>
-                <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
-                <transport.jms.DestinationType>topic</transport.jms.DestinationType>
-                <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
-                <connectionfactory.TopicConnectionFactory>amqp://${jms.username}:${jms.password}@clientid/carbon?brokerlist='${jms.url}'</connectionfactory.TopicConnectionFactory>
-            </JMSConnectionParameters>
+            <!-- JMSConnectionParameters must be commented in Gateway(s) in distributed setup -->
+            <%- if @apim_gateway_disble_jms_connection_parameters -%>
+                <!--
+                    <JMSConnectionParameters>
+                        <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
+                        <transport.jms.DestinationType>topic</transport.jms.DestinationType>
+                        <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
+                        <connectionfactory.TopicConnectionFactory>amqp://${jms.username}:${jms.password}@clientid/carbon?brokerlist='${jms.url}'</connectionfactory.TopicConnectionFactory>
+                    </JMSConnectionParameters>
+                -->
+            <%- else -%>
+                <JMSConnectionParameters>
+                    <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
+                    <transport.jms.DestinationType>topic</transport.jms.DestinationType>
+                    <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
+                    <connectionfactory.TopicConnectionFactory>amqp://${jms.username}:${jms.password}@clientid/carbon?brokerlist='${jms.url}'</connectionfactory.TopicConnectionFactory>
+                </JMSConnectionParameters>
+            <%- end -%>
             <JMSTaskManager>
                 <MinThreadPoolSize>20</MinThreadPoolSize>
                 <MaxThreadPoolSize>100</MaxThreadPoolSize>
