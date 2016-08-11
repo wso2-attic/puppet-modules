@@ -695,24 +695,12 @@
             <%- end -%>
             <Destination>throttleData</Destination>
             <!--InitDelay>300000</InitDelay-->
-            <!-- JMSConnectionParameters must be commented in Gateway(s) in distributed setup -->
-            <%- if @apim_gateway_disble_jms_connection_parameters -%>
-                <!--
-                    <JMSConnectionParameters>
-                        <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
-                        <transport.jms.DestinationType>topic</transport.jms.DestinationType>
-                        <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
-                        <connectionfactory.TopicConnectionFactory>amqp://${jms.username}:${jms.password}@clientid/carbon?brokerlist='${jms.url}'</connectionfactory.TopicConnectionFactory>
-                    </JMSConnectionParameters>
-                -->
-            <%- else -%>
-                <JMSConnectionParameters>
-                    <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
-                    <transport.jms.DestinationType>topic</transport.jms.DestinationType>
-                    <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
-                    <connectionfactory.TopicConnectionFactory>amqp://${jms.username}:${jms.password}@clientid/carbon?brokerlist='${jms.url}'</connectionfactory.TopicConnectionFactory>
-                </JMSConnectionParameters>
-            <%- end -%>
+            <JMSConnectionParameters>
+                <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
+                <transport.jms.DestinationType>topic</transport.jms.DestinationType>
+                <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
+                <connectionfactory.TopicConnectionFactory>amqp://${jms.username}:${jms.password}@clientid/carbon?brokerlist='${jms.url}'</connectionfactory.TopicConnectionFactory>
+            </JMSConnectionParameters>
             <JMSTaskManager>
                 <MinThreadPoolSize>20</MinThreadPoolSize>
                 <MaxThreadPoolSize>100</MaxThreadPoolSize>
@@ -720,14 +708,25 @@
                 <JobQueueSize>10</JobQueueSize>
             </JMSTaskManager>
         </JMSConnectionDetails>
-        <JMSEventPublisherParameters>
-                <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
-                <java.naming.provider.url>repository/conf/jndi.properties</java.naming.provider.url>
-                <transport.jms.DestinationType>topic</transport.jms.DestinationType>
-                <transport.jms.Destination>throttleData</transport.jms.Destination>
-                <transport.jms.ConcurrentPublishers>allow</transport.jms.ConcurrentPublishers>
-                <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
-        </JMSEventPublisherParameters>
+        <%- if @apim_gateway_disable_jms_event_parameters -%>
+            <!--JMSEventPublisherParameters>
+                    <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
+                    <java.naming.provider.url>repository/conf/jndi.properties</java.naming.provider.url>
+                    <transport.jms.DestinationType>topic</transport.jms.DestinationType>
+                    <transport.jms.Destination>throttleData</transport.jms.Destination>
+                    <transport.jms.ConcurrentPublishers>allow</transport.jms.ConcurrentPublishers>
+                    <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
+            </JMSEventPublisherParameters-->
+        <%- else -%>
+            <JMSEventPublisherParameters>
+                    <java.naming.factory.initial>org.wso2.andes.jndi.PropertiesFileInitialContextFactory</java.naming.factory.initial>
+                    <java.naming.provider.url>repository/conf/jndi.properties</java.naming.provider.url>
+                    <transport.jms.DestinationType>topic</transport.jms.DestinationType>
+                    <transport.jms.Destination>throttleData</transport.jms.Destination>
+                    <transport.jms.ConcurrentPublishers>allow</transport.jms.ConcurrentPublishers>
+                    <transport.jms.ConnectionFactoryJNDIName>TopicConnectionFactory</transport.jms.ConnectionFactoryJNDIName>
+            </JMSEventPublisherParameters>
+        <%- end -%>
         <!--DefaultLimits>
             <SubscriptionTierLimits>
                 <Gold>5000</Gold>
