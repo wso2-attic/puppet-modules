@@ -1,3 +1,6 @@
+<%- if @enable_traffic_manager_specific_registry_configurations -%>
+    <%= scope.function_template(["wso2am/2.0.0/repository/conf/registry_TM.xml.erb"]) %>
+<%- else -%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <!--
@@ -373,3 +376,5 @@
     </tasks-->
 
 </wso2registry>
+
+<%- end -%>

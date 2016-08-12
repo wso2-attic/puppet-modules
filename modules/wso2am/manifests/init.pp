@@ -33,7 +33,9 @@ class wso2am inherits wso2base {
   $enable_data_publisher = hiera('wso2::enable_data_publisher', { })
   $enable_block_condition = hiera('wso2::enable_block_condition', { })
   $enable_jms_connection_details = hiera('wso2::enable_jms_connection_details', { })
-  $apim_gateway_disble_jms_connection_parameters = hiera('wso2::apim_gateway_disble_jms_connection_parameters', "false")
+  $apim_gateway_disable_jms_event_parameters = hiera('wso2::apim_gateway_disable_jms_event_parameters', "false")
+  $enable_traffic_manager_specific_axis2_configurations = hiera('wso2::enable_traffic_manager_specific_axis2_configurations', "false")
+  $enable_traffic_manager_specific_registry_configurations = hiera('wso2::enable_traffic_manager_specific_registry_configurations', "false")
 
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,

@@ -1,3 +1,6 @@
+<%- if @enable_traffic_manager_specific_axis2_configurations -%>
+    <%= scope.function_template(["wso2am/2.0.0/repository/conf/axis2/axis2_TM.xml.erb"]) %>
+<%- else -%>
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
   ~  Copyright (c) 2016, WSO2 Inc. (http://wso2.com) All Rights Reserved.
@@ -946,3 +949,5 @@
     </phaseOrder>
 
 </axisconfig>
+
+<%- end -%>
