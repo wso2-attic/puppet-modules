@@ -16,10 +16,6 @@
 wso2::mgt_hostname: tm.dev.wso2.org
 wso2::hostname: tm.dev.wso2.org
 
-wso2::template_list:
-  - repository/conf/axis2/axis2.xml
-  - repository/conf/registry.xml
-
 wso2::file_list:
   - "repository/resources/security/%{hiera('wso2::key_store')}"
   - "repository/resources/security/%{hiera('wso2::trust_store')}"
