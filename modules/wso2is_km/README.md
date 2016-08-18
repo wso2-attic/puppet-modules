@@ -22,7 +22,7 @@ Copy the following files to their corresponding locations.
 2. JDK 1.7_80 distribution to `<PUPPET_HOME>/modules/wso2base/files`
 
 ## Running  WSO2 Identity Server Key Manager in the `default` profile
-By default `WSO2AM_DB` is configured to point to WSO2 API Manager's APIM_DB database. Make sure that APIM_DB database is created with all the tables before running WSO2 Identity Server Key Manager. Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
+No changes to Hiera data are required to run the `default` profile. Copy the above mentioned files to their corresponding locations and apply the Puppet Modules.
 
 ## Running  WSO2 Identity Server Key Manager with clustering in specific profiles
 When running WSO2 Identity Server Key Manager as Key Manager node with WSO2 API Manager distributed setup, do the following changes:

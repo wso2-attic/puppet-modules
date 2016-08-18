@@ -123,7 +123,7 @@ wso2::master_datasources:
     url: jdbc:mysql://mysql-user-db.marathon.mesos:10001/WSO2_USER_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
-    jndi_config: jdbc/WSO2USER_DB
+    jndi_config: jdbc/WSO2_USER_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -164,8 +164,8 @@ wso2::metrics_datasources:
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
 wso2::am_datasources:
-  wso2am_db:
-    name: WSO2AM_DB
+  wso2_am_db:
+    name: WSO2_AM_DB
     description: The datasource used for IS as Key Manager database
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-is-db.marathon.mesos:10111/IS_DB?autoReconnect=true
@@ -237,9 +237,9 @@ wso2::am_datasources:
 #    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
-#  wso2am_db_password:
-#    secret_alias: Datasource.WSO2AM_DB.configuration.password
-#    secret_alias_value: repository/conf/datasources/am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false
+#  wso2_am_db_password:
+#    secret_alias: Datasource.WSO2_AM_DB.configuration.password
+#    secret_alias_value: repository/conf/datasources/am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_AM_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  authenticator_config_trust_store_password:

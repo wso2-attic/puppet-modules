@@ -51,8 +51,8 @@ Hiera data sets matching the distributed profiles of WSO2 API Manager (`api-stor
 
    Ex:
     ```yaml
-    wso2am_db:
-      name: WSO2AM_DB
+    wso2_am_db:
+      name: WSO2_AM_DB
       description: The datasource used for API Manager database
       driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
       url: jdbc:mysql://192.168.100.1:3306/APIM_DB?autoReconnect=true

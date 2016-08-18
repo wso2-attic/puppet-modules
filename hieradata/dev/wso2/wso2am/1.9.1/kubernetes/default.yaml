@@ -97,13 +97,13 @@ wso2::registry_mounts:
     registry_root: /
     enable_cache: true
 
-wso2::usermgt_datasource: wso2user_db
-wso2::is_datasource: wso2am_db
-wso2::am_datasource: wso2am_db
+wso2::usermgt_datasource: wso2_user_db
+wso2::is_datasource: wso2_am_db
+wso2::am_datasource: wso2_am_db
 
 wso2::am_datasources:
-  wso2am_db:
-    name: WSO2AM_DB
+  wso2_am_db:
+    name: WSO2_AM_DB
     description: The datasource used for API Manager database
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-apim-db:3306/APIM_DB?autoReconnect=true
@@ -146,14 +146,14 @@ wso2::master_datasources:
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-  wso2user_db:
-    name: WSO2USER_DB
+  wso2_user_db:
+    name: WSO2_USER_DB
     description: The datasource is used for user mangement and userstore
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
-    jndi_config: jdbc/WSO2USER_DB
+    jndi_config: jdbc/WSO2_USER_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -220,9 +220,9 @@ wso2::master_datasources:
 #    secret_alias_value: identity.xml//Server/Security/UserTrustedRPStore/KeyPassword
 #    password: "%{hiera('wso2::key_stores::user_trusted_rp_store::key_password')}"
 #
-#  wso2am_db_password:
-#    secret_alias: Datasource.WSO2AM_DB.configuration.password
-#    secret_alias_value: am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2AM_DB']/definition[@type='RDBMS']/configuration/password,false
+#  wso2_am_db_password:
+#    secret_alias: Datasource.WSO2_AM_DB.configuration.password
+#    secret_alias_value: am-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_AM_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  wso2_config_db_password:
@@ -235,9 +235,9 @@ wso2::master_datasources:
 #    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_GOV_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
-#  wso2user_db_password:
-#    secret_alias: Datasources.WSO2USER_DB.Configuration.Password
-#    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2USER_DB']/definition[@type='RDBMS']/configuration/password,false
+#  wso2_user_db_password:
+#    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
+#    secret_alias_value: master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  auth_manager_password:

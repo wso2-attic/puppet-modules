@@ -57,8 +57,8 @@ wso2::sso_authentication:
   consumer_service_url: https://marathon-lb.marathon.mesos:10103/acs
 
 wso2::master_datasources:
-  wso2am_db:
-    name: WSO2AM_DB
+  wso2_am_db:
+    name: WSO2_AM_DB
     description: The datasource used for API Manager database
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-greg-db.marathon.mesos:10101/GREG_DB?autoReconnect=true

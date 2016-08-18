@@ -125,7 +125,7 @@ wso2::master_datasources:
     default_auto_commit: "%{hiera('wso2::datasources::common::default_auto_commit')}"
     validation_query: "%{hiera('wso2::datasources::h2::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
-#  wso2user_db:
+#  wso2_user_db:
 #    name: WSO2_USER_DB
 #    description: The datasource is used for user mangement and userstore
 #    driver_class_name: org.h2.Driver

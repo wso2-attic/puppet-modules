@@ -83,7 +83,7 @@ wso2::master_datasources:
     url: jdbc:mysql://mysql-user-db.marathon.mesos:10001/WSO2_USER_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
-    jndi_config: jdbc/WSO2USER_DB
+    jndi_config: jdbc/WSO2_USER_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"

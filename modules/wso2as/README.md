@@ -57,7 +57,7 @@ Hiera data sets matching the distributed profiles of WSO2 Application Server (`w
        name: WSO2_CONFIG_DB
        description: The datasource used for config registry
        driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
-       url: jdbc:mysql://192.168.100.1:3306/WSO2CONFIG_DB?autoReconnect=true
+       url: jdbc:mysql://192.168.100.1:3306/WSO2_CONFIG_DB?autoReconnect=true
        username: "%{hiera('wso2::datasources::mysql::username')}"
        password: "%{hiera('wso2::datasources::mysql::password')}"
        jndi_config: jdbc/WSO2_CONFIG_DB

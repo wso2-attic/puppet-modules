@@ -91,13 +91,13 @@ wso2::master_datasources:
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
   wso2_user_db:
-    name: WSO2USER_DB
+    name: WSO2_USER_DB
     description: The datasource is used for user mangement and userstore
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-userdb:3306/WSO2_USER_DB?autoReconnect=true
     username: "%{hiera('wso2::datasources::mysql::username')}"
     password: "%{hiera('wso2::datasources::mysql::password')}"
-    jndi_config: jdbc/WSO2USER_DB
+    jndi_config: jdbc/WSO2_USER_DB
     max_active: "%{hiera('wso2::datasources::common::max_active')}"
     max_wait: "%{hiera('wso2::datasources::common::max_wait')}"
     test_on_borrow: "%{hiera('wso2::datasources::common::test_on_borrow')}"
@@ -105,9 +105,9 @@ wso2::master_datasources:
     validation_query: "%{hiera('wso2::datasources::mysql::validation_query')}"
     validation_interval: "%{hiera('wso2::datasources::common::validation_interval')}"
 
-wso2::activity_datasources:
-  activity_db:
-    name: ACTIVITY_DB
+wso2::activiti_datasources:
+  activiti_db:
+    name: ACTIVITI_DB
     description: The datasource used for activiti engine
     driver_class_name: "%{hiera('wso2::datasources::mysql::driver_class_name')}"
     url: jdbc:mysql://mysql-bpsdb:3306/WSO2_BPS_DB?autoReconnect=true
@@ -199,13 +199,13 @@ wso2::registry_mounts:
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  wso2_user_db_password:
-#    secret_alias: Datasources.WSO2USER_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2USER_DB']/definition[@type='RDBMS']/configuration/password,false
+#    secret_alias: Datasources.WSO2_USER_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/master-datasources.xml//datasources-configuration/datasources/datasource[name='WSO2_USER_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  activiti_db_password:
-#    secret_alias: Datasources.ACTIVITY_DB.Configuration.Password
-#    secret_alias_value: repository/conf/datasources/activiti-datasources.xml//datasources-configuration/datasources/datasource[name='ACTIVITY_DB']/definition[@type='RDBMS']/configuration/password,false
+#    secret_alias: Datasources.ACTIVITI_DB.Configuration.Password
+#    secret_alias_value: repository/conf/datasources/activiti-datasources.xml//datasources-configuration/datasources/datasource[name='ACTIVITI_DB']/definition[@type='RDBMS']/configuration/password,false
 #    password: "%{hiera('wso2::datasources::mysql::password')}"
 #
 #  bps_ds_db_password:
