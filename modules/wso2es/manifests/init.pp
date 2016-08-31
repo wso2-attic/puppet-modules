@@ -17,6 +17,7 @@
 # Manages WSO2 Enterprise Store deployment
 class wso2es inherits wso2base {
   $social_datasources = hiera('wso2::social_datasources')
+  $metrics_datasources = hiera('wso2::metrics_datasources', { })
   $is_datasource      = hiera('wso2::is_datasource')
   $service_provider   = hiera('wso2::service_provider')
   $identity_provider  = hiera('wso2::identity_provider')

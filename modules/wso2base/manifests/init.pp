@@ -33,6 +33,7 @@ class wso2base {
 
   $master_datasources   = hiera_hash('wso2::master_datasources')
   $registry_mounts      = hiera_hash('wso2::registry_mounts', { })
+  $registry_mount_paths = hiera_hash('wso2::registry_mount_paths', { })
   $carbon_home_symlink  = hiera('wso2::carbon_home_symlink')
   $wso2_user            = hiera('wso2::user')
   $wso2_group           = hiera('wso2::group')
