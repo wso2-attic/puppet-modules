@@ -25,7 +25,9 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
   wso2base::ensure_directory_structures {
     $install_dirs:
       system      => true,
-      carbon_home => $carbon_home
+      carbon_home => $carbon_home,
+      owner       => $user,
+      group       => $group,
   }
 
   # download wso2 product pack archive
