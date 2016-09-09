@@ -78,7 +78,7 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
   ensure_resource('exec', "set_ownership_${carbon_home}", {
     path               => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     cwd                => $carbon_home,
-    command            => "chown -R ${user}:${group} ./",
+    command            => "chown -R ${user}:${group} ${install_dir}",
     logoutput          => 'on_failure',
     timeout            => 0,
     refreshonly        => true,
@@ -89,7 +89,7 @@ define wso2base::install ($mode, $install_dir, $pack_filename, $pack_dir, $user,
   ensure_resource('exec', "set_permissions_${carbon_home}", {
     path               => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
     cwd                => $carbon_home,
-    command            => 'chmod -R 754 ./',
+    command            => "chmod -R 754 ${install_dir}",
     logoutput          => 'on_failure',
     timeout            => 0,
     refreshonly        => true
