@@ -397,3 +397,29 @@ wso2::master_datasources:
 #    secret_alias: Identity.System.StorePass
 #    secret_alias_value: repository/conf/identity/identity.xml//Server/Identity/System/StorePass,false
 #    password: wso2carbon
+
+wso2::apim_analytics:
+  enabled: false
+  das_server: localhost
+  das_port: 9444
+  das_username: admin
+  das_password: admin
+  das_auth_server: localhost
+  das_auth_server: 7712
+  skip_event_receiver_connection: false
+  publish_response_message_size: false
+  das_cluster:
+    group1:
+      -
+        hostname: 192.168.61.33
+        port: 7611
+      -
+        hostname: 192.168.61.33
+        port: 7611
+    group2:
+      -
+        hostname: 192.168.61.33
+        port: 7611
+      -
+        hostname: 192.168.61.33
+        port: 7611

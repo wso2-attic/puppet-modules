@@ -254,7 +254,7 @@
             If you uncomment this property, analytics configurations added via admin-dashboard UI will
             get overwritten by tha configuration details provided below when you restart the server.
         -->
-        <!--Enabled><%- @apim_analytics['enabled'] -%></Enabled-->
+        <!--Enabled><%= @apim_analytics['enabled'] %></Enabled-->
 
         <!--
             Server URL of the remote DAS/CEP server used to collect statistics. Must
@@ -274,27 +274,28 @@
         <!--
             Administrator username to login to the remote DAS server.
         -->
-        <DASUsername>@apim_analytics['das_username']</DASUsername>
+        <DASUsername><%= @apim_analytics['das_username'] %></DASUsername>
 
         <!--
             Administrator password to login to the remote DAS server.
         -->
-        <DASPassword>@apim_analytics['das_password']</DASPassword>
+        <DASPassword><%= @apim_analytics['das_password'] %></DASPassword>
 
         <!--
             DAS REST API configuration
                 Set the values if .'org.wso2.carbon.apimgt.usage.client.impl.APIUsageStatisticsRestClientImpl'
                 is used as Statistic Client
         -->
-        <DASRestApiURL>https://@apim_analytics['das_server']:@apim_analytics['das_port']</DASRestApiURL>
-        <DASRestApiUsername>@apim_analytics['das_username']</DASRestApiUsername>
-        <DASRestApiPassword>@apim_analytics['das_password']</DASRestApiPassword>
+        <DASRestApiURL>https://<%= @apim_analytics['das_server'] %>:<%= @apim_analytics['das_port'] %></DASRestApiURL>
+        <DASRestApiUsername><%= @apim_analytics['das_username'] %></DASRestApiUsername>
+        <DASRestApiPassword><%= @apim_analytics['das_password'] %></DASRestApiPassword>
 
         <!--
             Below property is used to skip trying to connect to event receiver nodes when publishing events even if
             the stats enabled flag is set to true.
         -->
-        <SkipEventReceiverConnection>@apim_analytics['skip_event_receiver_connection']</SkipEventReceiverConnection>
+        <SkipEventReceiverConnection><%= @apim_analytics['skip_event_receiver_connection'] %>
+        </SkipEventReceiverConnection>
 
         <!--
             API Usage Data Publisher.
@@ -305,7 +306,7 @@
             If below property set to true,then the response message size will be calculated and publish
             with each successful API invocation event.
         -->
-        <PublishResponseMessageSize>@apim_analytics['publish_response_message_size']</PublishResponseMessageSize>
+        <PublishResponseMessageSize><%= @apim_analytics['publish_response_message_size'] %></PublishResponseMessageSize>
         <!--
                 Data publishing stream names and versions of API requests, responses and faults. If the default values
                 are changed, the toolbox also needs to be changed accordingly.
