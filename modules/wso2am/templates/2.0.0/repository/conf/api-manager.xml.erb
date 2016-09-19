@@ -197,7 +197,7 @@
     -->
     <Analytics>
         <!-- Enable Analytics for API Manager -->
-        <Enabled>false</Enabled>
+        <Enabled><%= @apim_analytics['enabled'] %></Enabled>
 
         <!-- Server URL of the remote DAS/CEP server used to collect statistics. Must
              be specified in protocol://hostname:port/ format.
@@ -209,31 +209,36 @@
 
              Ex - Multiple Receiver Groups with two receivers each
              {tcp://localhost:7612/,tcp://localhost:7613},{tcp://localhost:7712/,tcp://localhost:7713/} -->
-        <DASServerURL>{tcp://localhost:7612}</DASServerURL>
-        <!--DASAuthServerURL>{ssl://localhost:7712}</DASAuthServerURL-->
+        <DASServerURL><%- @apim_analytics['das_cluster'].each_with_index  do |(group,nodes),n| -%>{<%- nodes
+        .each_with_index do |node,i| -%>tcp://<%= node['hostname'] %>:<%= node['port'] %> <%= ',' if i <(node.size -
+        1) %><%- end -%>}<%= ',' if n <(@apim_analytics['das_cluster'].size - 1) %><%- end -%></DASServerURL>
+
+        <!--DASAuthServerURL>{ssl://<%= @apim_analytics['das_auth_server'] %>:<%= @apim_analytics['das_auth_port
+        '] %>}</DASAuthServerURL-->
         <!-- Administrator username to login to the remote DAS server. -->
-        <DASUsername>${admin.username}</DASUsername>
+        <DASUsername><%= @apim_analytics['das_username'] %></DASUsername>
         <!-- Administrator password to login to the remote DAS server. -->
-        <DASPassword>${admin.password}</DASPassword>
+        <DASPassword><%= @apim_analytics['das_password'] %></DASPassword>
 
         <!-- For APIM implemented Statistic client for RDBMS -->
         <StatsProviderImpl>org.wso2.carbon.apimgt.usage.client.impl.APIUsageStatisticsRdbmsClientImpl</StatsProviderImpl>
 
         <!-- DAS REST API configuration -->
-        <DASRestApiURL>https://localhost:9444</DASRestApiURL>
-        <DASRestApiUsername>${admin.username}</DASRestApiUsername>
-        <DASRestApiPassword>${admin.password}</DASRestApiPassword>
+        <DASRestApiURL>https://<%= @apim_analytics['das_server'] %>:<%= @apim_analytics['das_port'] %></DASRestApiURL>
+        <DASRestApiUsername><%= @apim_analytics['das_username'] %></DASRestApiUsername>
+        <DASRestApiPassword><%= @apim_analytics['das_password'] %></DASRestApiPassword>
 
         <!-- Below property is used to skip trying to connect to event receiver nodes when publishing events even if
             the stats enabled flag is set to true. -->
-        <SkipEventReceiverConnection>false</SkipEventReceiverConnection>
+        <SkipEventReceiverConnection><%=
+        @apim_analytics['skip_event_receiver_connection'] %></SkipEventReceiverConnection>
 
         <!-- API Usage Data Publisher. -->
         <PublisherClass>org.wso2.carbon.apimgt.usage.publisher.APIMgtUsageDataBridgeDataPublisher</PublisherClass>
 
         <!-- If below property set to true,then the response message size will be calculated and publish
              with each successful API invocation event. -->
-        <PublishResponseMessageSize>false</PublishResponseMessageSize>
+        <PublishResponseMessageSize><%= @apim_analytics['publish_response_message_size'] %></PublishResponseMessageSize>
         <!-- Data publishing stream names and versions of API requests, responses and faults. If the default values
             are changed, the toolbox also needs to be changed accordingly. -->
         <Streams>
