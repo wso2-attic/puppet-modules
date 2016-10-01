@@ -36,7 +36,8 @@ class wso2am inherits wso2base {
   $apim_gateway_disable_jms_event_parameters = hiera('wso2::apim_gateway_disable_jms_event_parameters', "false")
   $enable_traffic_manager_specific_axis2_configurations = hiera('wso2::enable_traffic_manager_specific_axis2_configurations', "false")
   $enable_traffic_manager_specific_registry_configurations = hiera('wso2::enable_traffic_manager_specific_registry_configurations', "false")
-  $apim_analytics     = hiera('wso2::apim_analytics')
+  $apim_analytics = hiera('wso2::apim_analytics')
+  $wso2::tenant_managers = hiear('wso2::tenant_managers')
 
   wso2base::server { $wso2base::carbon_home:
     maintenance_mode    => $wso2base::maintenance_mode,
