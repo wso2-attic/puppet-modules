@@ -210,7 +210,7 @@
              Ex - Multiple Receiver Groups with two receivers each
              {tcp://localhost:7612/,tcp://localhost:7613},{tcp://localhost:7712/,tcp://localhost:7713/} -->
         <DASServerURL><%- @apim_analytics['das_cluster'].each_with_index  do |(group,nodes),n| -%>{<%- nodes
-        .each_with_index do |node,i| -%>tcp://<%= node['hostname'] %>:<%= node['port'] %> <%= ',' if i <(node.size -
+        .each_with_index do |node,i| -%>tcp://<%= node['hostname'] %>:<%= node['port'] %> <%= ',' if i <(nodes.size -
         1) %><%- end -%>}<%= ',' if n <(@apim_analytics['das_cluster'].size - 1) %><%- end -%></DASServerURL>
 
         <!--DASAuthServerURL>{ssl://<%= @apim_analytics['das_auth_server'] %>:<%= @apim_analytics['das_auth_port
