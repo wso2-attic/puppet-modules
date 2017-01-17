@@ -16,7 +16,7 @@
 
 define wso2base::ensure_directory_structures ($system, $carbon_home, $owner, $group) {
   # system - true if path name is absolute, false if relative to $carbon_home
-  
+
   if ($system != undef and $system == true){
     exec { "create_directory_structure_${carbon_home}/${name}":
       command => "mkdir -p ${name}",
