@@ -1,5 +1,13 @@
 # WSO2 Puppet Modules
 
+---
+
+## Note
+
+We have moved WSO2 Puppet Modules to separate product specific repositories and as a result this repository has been deprecated. WSO2 Puppet base module has been moved to [puppet-base](https://github.com/wso2/puppet-base) repository and a new [puppet-common](https://github.com/wso2/puppet-common) repository has been introduced for setting up Puppet development environments. Please find the new repository list [here](https://github.com/wso2?utf8=%E2%9C%93&q=puppet).
+
+---
+
 This repository contains Puppet modules for installing and configuring WSO2 products on various environments. Each puppet module is designed to support multiple versions of a WSO2 product.
 
 Configuration data is managed using [Hiera] (http://docs.puppetlabs.com/hiera/1/). Hiera provides a mechanism for separating configuration data from Puppet scripts and managing them in a separate set of YAML files in a hierarchical manner.
