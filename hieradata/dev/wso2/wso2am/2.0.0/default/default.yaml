@@ -255,6 +255,21 @@ wso2::apim_analytics:
         hostname: 192.168.61.33
         port: 7611
 
+wso2::tenant_managers:
+  JDBCTenantManager:
+    class_name: org.wso2.carbon.user.core.tenant.JDBCTenantManager
+    properties:
+      MultiTenantRealmConfigBuilder: org.wso2.carbon.user.core.config.multitenancy.SimpleRealmConfigBuilder
+  CommonHybridLDAPTenantManager:
+    class_name: org.wso2.carbon.cloud.userstore.tenant.CloudTenantManager
+    properties:
+      MultiTenantRealmConfigBuilder: org.wso2.carbon.user.core.config.multitenancy.CommonLDAPRealmConfigBuilder
+      RootPartition: dc=wso2,dc=org
+      OrganizationalObjectClass: organizationalUnit
+      OrganizationalAttribute: ou
+      OrganizationalSubContextObjectClass: organizationalUnit
+      OrganizationalSubContextAttribute: ou
+
 # Secure vault configuration
 #wso2::enable_secure_vault: true
 #wso2::secure_vault_configs:
