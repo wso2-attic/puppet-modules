@@ -127,8 +127,7 @@ define wso2base::server (
       hasstatus  => true,
       hasrestart => true,
       enable     => true,
-      require    => [Wso2base::Deploy[$carbon_home], Wso2base::Patch[$carbon_home],
-                     Wso2base::Configure[$carbon_home], Wso2base::Apply_secure_vault[$carbon_home]]
+      require    => [Wso2base::Deploy[$carbon_home], Wso2base::Patch[$carbon_home], Wso2base::Configure[$carbon_home], Wso2base::Apply_secure_vault[$carbon_home]]
     }
 
     notify { "Successfully started WSO2 service [name] ${service_name}, [CARBON_HOME] ${carbon_home}":
