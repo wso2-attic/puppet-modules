@@ -56,6 +56,16 @@ class wso2base::system (
       mode    => '0755',
       content => template($service_template),
     }
+
+  if ($osfamily == 'RedHat') and ($operatingsystemmajrelease >= 7) {
+    file { "/etc/systemd/system/${service_name}.service":
+      ensure  => present,
+      owner   => root,
+      group   => root,
+      mode    => '0644',
+      content => template(wso2base/wso2unit.erb)
+      }
+    }
   }
 
   if $::vm_type != 'docker' {
